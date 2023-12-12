@@ -1,6 +1,6 @@
 
 const URL = 'http://localhost:7070/api/v1/'
-const HOTEL_ROUTE = "hotels"
+const PICTURE_ROUTE = "pictures"
 const AUTHENTICATION_ROUTE = 'auth/login'
 
 function apiFacade()
@@ -119,9 +119,10 @@ function apiFacade()
         }
     }
 
-    const storePictureSRC = (picture) =>
+    const savePicture = (picture) =>
     {
-        localStorage.setItem('pictureSRC', picture)
+        const options = makeOptions("POST", picture, true)
+        return fetch(URL + PICTURE_ROUTE, options).then(handleHttpErrors)
     }
 
     return {
@@ -133,7 +134,8 @@ function apiFacade()
         getUserRoles,
         hasUserAccess,
         fetchData,
-        getUserName
+        getUserName,
+        savePicture
     }
 
 }

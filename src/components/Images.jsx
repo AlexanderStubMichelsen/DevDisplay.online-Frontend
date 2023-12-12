@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Images.css';
+import facade from '../util/apiFacade';
 
 function Images() {
   const [imageList, setImageList] = useState([]);
+  const [image, setImage] = useState({});
 
   useEffect(() => {
     const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace 'YOUR_ACCESS_KEY' with your Unsplash access key
@@ -24,10 +26,26 @@ function Images() {
       });
   }, []); // Empty dependency array ensures this effect runs only once on mount
 
-    const HandleOnClick = (e) => {
-        console.log(e.target.src);
-        console.log(e.target.alt);
-    }
+  const HandleOnClick = (e) => {
+    const clickedUrl = e.target.src;
+    const clickedAlt = e.target.alt;
+  
+    const clickedImage = 
+    {
+      "url": clickedUrl,
+      "alt": clickedAlt 
+    };
+    setImage(clickedImage);
+    facade.fetchData('pictures', 'POST', clickedImage)
+  .then((response) => {
+    // Handle the response after the POST request
+    console.log('Picture saved:', response);
+  })
+  .catch((error) => {
+    // Handle errors if the request fails
+    console.error('Error saving picture:', error);
+  });
+  }
 
 return (
     <div>
