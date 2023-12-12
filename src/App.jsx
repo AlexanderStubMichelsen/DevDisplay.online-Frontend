@@ -50,7 +50,8 @@ function App({setIsLoggedIn, isLoggedIn}) {
                 <p key={hotel.id}>{hotel.hotelName}</p>
               ))}
               <div>
-                <Link to="/images" >Images</Link>
+                <Link to="/images" >Images <br/></Link>
+                <Link to="/savedImg" >Saved Images</Link>
                 </div>
             </div>
           ) : (

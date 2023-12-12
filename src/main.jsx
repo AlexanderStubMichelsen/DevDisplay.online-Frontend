@@ -5,6 +5,7 @@ import './index.css';
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
 import Images from './components/Images.jsx';
 import NoMatch from './components/NoMatch.jsx';
+import SavedImages from './components/SavedImages.jsx';
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -17,6 +18,7 @@ const Root = () => {
         {/* Conditional rendering of the Images route based on isLoggedIn */}
         {isLoggedIn && <Route path="images" element={<Images />} />}
         {/* Other routes */}
+        {isLoggedIn && <Route path="savedImg" element={<SavedImages />} />}
         <Route path="*" element={<NoMatch />} />
       </Route>
     )
