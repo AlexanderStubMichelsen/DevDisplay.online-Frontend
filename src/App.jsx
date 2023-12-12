@@ -3,10 +3,9 @@ import './App.css';
 import facade from './util/apiFacade';
 import { Link } from 'react-router-dom';
 
-function App() {
+function App({setIsLoggedIn, isLoggedIn}) {
   const init = { username: '', password: '' };
   const [loginCredentials, setLoginCredentials] = useState(init);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [dataFromServer, setDataFromServer] = useState('Loading...');
 
   useEffect(() => {
