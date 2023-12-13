@@ -1,3 +1,16 @@
+body {
+  background-color: #888;
+}
+
+.loginform {
+  background-color: #fff;
+  border-radius: 0.5em;
+  box-shadow: 0 0 2em #00000022;
+  padding: 2em;
+  margin: 2em auto;
+  max-width: 25em;
+}
+
 #root {
   max-width: 1280px;
   margin: 0 auto;
