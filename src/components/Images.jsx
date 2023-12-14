@@ -36,7 +36,7 @@ function Images() {
       "alt": clickedAlt 
     };
     setImage(clickedImage);
-    facade.fetchData('pictures', 'POST', clickedImage)
+    facade.fetchData('pictures/' + facade.getUserName(), 'POST', clickedImage)
   .then((response) => {
     // Handle the response after the POST request
     console.log('Picture saved:', response);

@@ -7,7 +7,7 @@ function SavedImages() {
     useEffect(() => {
         const fetchDataFromPictures = async () => {
             try {
-                const endpoint = 'pictures';
+                const endpoint = 'pictures/' + facade.getUserName();
                 const method = 'GET';
                 const response = await facade.fetchData(endpoint, method);
                 setPictures(response); // Update state with fetched data
@@ -20,7 +20,10 @@ function SavedImages() {
     }, []); // Empty dependency array to run once on component mount
 
     return (
+        <>
         <div>
+            
+            <h1>Saved Images</h1>
             {pictures ? (
                 <div>
                     {/* Render your pictures here */}
@@ -32,6 +35,7 @@ function SavedImages() {
                 <p>Loading...</p>
             )}
         </div>
+        </>
     );
 }
 
