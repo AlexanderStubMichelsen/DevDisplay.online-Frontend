@@ -1,16 +1,23 @@
 import Nav from 'react-bootstrap/Nav';
+import { LinkContainer } from 'react-router-bootstrap';
 
-function FillExample() {
+function NavBar() {
   return (
-    <Nav fill variant="tabs" defaultActiveKey="/home">
+    <Nav fill variant="tabs" defaultActiveKey="/home" className="sticky-top-navbar">
       <Nav.Item>
-        <Nav.Link href="/">Active</Nav.Link>
+        <LinkContainer to="/">
+          <Nav.Link>Home</Nav.Link>
+        </LinkContainer>
       </Nav.Item>
       <Nav.Item>
-      <Nav.Link href="/images">Images</Nav.Link>
+        <LinkContainer to="/images">
+          <Nav.Link>Images</Nav.Link>
+        </LinkContainer>
       </Nav.Item>
       <Nav.Item>
-        <Nav.Link eventKey="link-2">Link</Nav.Link>
+      <LinkContainer to="/savedImg">
+          <Nav.Link>Saved Images</Nav.Link>
+        </LinkContainer>
       </Nav.Item>
       <Nav.Item>
         <Nav.Link eventKey="disabled" disabled>
@@ -21,4 +28,4 @@ function FillExample() {
   );
 }
 
-export default FillExample;
+export default NavBar;

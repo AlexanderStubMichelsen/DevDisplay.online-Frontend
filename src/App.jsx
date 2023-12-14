@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import facade from './util/apiFacade';
 import { Link } from 'react-router-dom';
+import FillExample from './components/NavBar.jsx';
 
 const App = ({ setIsLoggedIn }) => {
   const init = { username: '', password: '' };
@@ -34,6 +35,7 @@ const App = ({ setIsLoggedIn }) => {
 
   return (
     <>
+    <FillExample />
       <body>
         <div>
           <h1>Login</h1>

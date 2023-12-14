@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import facade from "../util/apiFacade";
+import NavBar from "./NavBar";
 
 function SavedImages() {
     const [pictures, setPictures] = useState(null);
@@ -21,8 +22,9 @@ function SavedImages() {
 
     return (
         <>
-        <div>
-            
+        <NavBar />
+            <div>
+            <div>
             <h1>Saved Images</h1>
             {pictures ? (
                 <div>
@@ -35,6 +37,7 @@ function SavedImages() {
                 <p>Loading...</p>
             )}
         </div>
+            </div>
         </>
     );
 }

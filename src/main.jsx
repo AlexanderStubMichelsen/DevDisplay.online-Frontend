@@ -9,6 +9,7 @@ import SavedImages from './components/SavedImages.jsx';
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  
 
   const router = createBrowserRouter(
     createRoutesFromElements(
