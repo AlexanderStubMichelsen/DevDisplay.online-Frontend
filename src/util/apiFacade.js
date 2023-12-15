@@ -125,6 +125,12 @@ function apiFacade()
         return fetch(URL + PICTURE_ROUTE, options).then(handleHttpErrors)
     }
 
+    const  deletePicture = (id) =>
+    {
+        const options = makeOptions("DELETE", null, true)
+        return fetch(URL + PICTURE_ROUTE + "/" + getUserName + "/" + id, options).then(handleHttpErrors)
+    }
+
     return {
         makeOptions,
         setToken,

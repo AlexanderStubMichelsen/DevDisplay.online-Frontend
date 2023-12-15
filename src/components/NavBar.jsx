@@ -19,11 +19,6 @@ function NavBar() {
           <Nav.Link>Saved Images</Nav.Link>
         </LinkContainer>
       </Nav.Item>
-      <Nav.Item>
-        <Nav.Link eventKey="disabled" disabled>
-          Disabled
-        </Nav.Link>
-      </Nav.Item>
     </Nav>
   );
 }

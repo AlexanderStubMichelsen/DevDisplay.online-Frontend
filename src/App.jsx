@@ -36,7 +36,6 @@ const App = ({ setIsLoggedIn }) => {
   return (
     <>
     <FillExample />
-      <body>
         <div>
           <h1>Login</h1>
 
@@ -55,15 +54,14 @@ const App = ({ setIsLoggedIn }) => {
             ) : (
 
 <form className='loginform' onChange={onChange}>
-            <input placeholder="User Name" id="username" />
-            <input placeholder="Password" id="password" />
-            <button onClick={performLogin}>Login</button>
+            <input placeholder="User Name" id="username" className='input' />
+            <input placeholder="Password" id="password" className='input' />
+            <button onClick={performLogin} className='btn' >Login</button>
           </form>
 
             )}
           </div>
         </div>
-      </body>
     </>
   );
 };
