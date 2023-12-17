@@ -22,7 +22,7 @@ function SavedImages() {
 
     const deletePicture = async (id) => {
         try {
-            const endpoint = 'pictures/' + facade.getUserName() + '/' + id;
+            const endpoint = 'pictures/' + id;
             const method = 'DELETE';
             const response = await facade.fetchData(endpoint, method, true);
     
