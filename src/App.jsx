@@ -3,11 +3,12 @@ import './App.css';
 import facade from './util/apiFacade';
 import { Link } from 'react-router-dom';
 import FillExample from './components/NavBar.jsx';
+import { useEffect } from 'react';
 
 const App = ({ setIsLoggedIn }) => {
   const init = { username: '', password: '' };
   const [loginCredentials, setLoginCredentials] = useState(init);
-  const isLoggedInStored = localStorage.getItem('isLoggedIn') === 'true';
+  const [isLoggedInStored, setIsLoggedInStored] = useState(false); // State to track login status
 
   const performLogin = (evt) => {
     evt.preventDefault();
@@ -16,10 +17,16 @@ const App = ({ setIsLoggedIn }) => {
       loginCredentials.password,
       () => {
         setIsLoggedIn(true); // Set the application state to logged in
+        setIsLoggedInStored(true); // Update isLoggedInStored to true after successful login
         localStorage.setItem('isLoggedIn', 'true'); // Store in localStorage
       }
     );
   };
+
+  useEffect(() => {
+    // Check login status on each render and update isLoggedInStored accordingly
+    setIsLoggedInStored(localStorage.getItem('isLoggedIn') === 'true');
+  }, [setIsLoggedInStored]);
 
   const onChange = (evt) => {
     setLoginCredentials({
@@ -30,38 +37,38 @@ const App = ({ setIsLoggedIn }) => {
 
   const handleLogout = () => {
     setIsLoggedIn(false); // Set the application state to logged out
+    setIsLoggedInStored(false); // Update isLoggedInStored to false on logout
     localStorage.setItem('isLoggedIn', 'false'); // Update localStorage
   };
 
+  // Checking isLoggedInStored for conditional rendering
   return (
     <>
-    <FillExample />
+      <FillExample />
+      <div>
+        <h1>Login</h1>
         <div>
-          <h1>Login</h1>
-
-          <div>
-            {isLoggedInStored ? (
+          {isLoggedInStored ? (
+            // Logged-in view
+            <div>
+              <p>Du er logget ind, {facade.getUserName()}</p>
+              <button onClick={handleLogout}>Log out</button>
               <div>
-                <p>Du er logget ind, {facade.getUserName()}</p>
-                <button onClick={handleLogout}>
-                  Log out
-                </button>
-                <div>
-                  <Link to="/images" >Images <br/></Link>
-                  <Link to="/savedImg" >Saved Images</Link>
-                </div>
+                <Link to="/images">Images</Link>
+                <br />
+                <Link to="/savedImg">Saved Images</Link>
               </div>
-            ) : (
-
-<form className='loginform' onChange={onChange}>
-            <input placeholder="User Name" id="username" className='input' />
-            <input placeholder="Password" id="password" className='input' />
-            <button onClick={performLogin} className='btn' >Login</button>
-          </form>
-
-            )}
-          </div>
+            </div>
+          ) : (
+            // Login form
+            <form className='loginform' onChange={onChange}>
+              <input placeholder="User Name" id="username" className='input' />
+              <input placeholder="Password" id="password" className='input' />
+              <button onClick={performLogin} className='btn'>Login</button>
+            </form>
+          )}
         </div>
+      </div>
     </>
   );
 };
