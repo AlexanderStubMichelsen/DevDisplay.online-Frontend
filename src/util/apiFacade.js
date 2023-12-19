@@ -24,7 +24,6 @@ function apiFacade()
 
     const handleHttpErrors = (res) =>
     {
-
         if (!res.ok)
         {
             return Promise.reject({ status: res.status, fullError: res.json() })

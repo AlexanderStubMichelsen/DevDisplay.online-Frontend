@@ -20,25 +20,22 @@ function SavedImages() {
         fetchDataFromPictures(); // Call the async function within useEffect
     }, []); // Empty dependency array to run once on component mount
 
-    const deletePicture = async (id) => {
-        try {
+    const HandleOnClick = async (id) => {
             const endpoint = 'pictures/' + id;
             const method = 'DELETE';
-            const response = await facade.fetchData(endpoint, method, true);
-    
-            if (response.status === 200 || response.status === 204) {
-                // Deletion successful, update state
+            facade.fetchData(endpoint, method, true)
+            .then((response) => {
+                // Handle the response after the DELETE request
+                console.log('Picture deleted:', response);
                 setPictures(pictures.filter(picture => picture.id !== id));
-                console.log('Picture deleted successfully');
-            } else {
-                // Handle deletion failure or other statuses here,
-                setPictures(pictures.filter(picture => picture.id !== id));
-                console.error('Failed to delete picture:', response);
-            }
-        } catch (error) {
-            console.error('Error deleting picture:', error);
-        }
-    };
+            })
+            .catch((error) => {
+                // Handle errors if the request fails
+                console.error('Error deleting picture:', error);
+            }); 
+    }
+            
+        
     
 
     return (
@@ -52,7 +49,7 @@ function SavedImages() {
                             {/* Render your pictures here */}
                             {pictures.map((picture, index) => (
                                 <img
-                                    onClick={() => deletePicture(picture.id)}
+                                    onClick={() => HandleOnClick(picture.id)}
                                     key={index}
                                     src={picture.url}
                                     alt={`Picture ${index}`}
