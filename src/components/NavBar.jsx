@@ -1,8 +1,11 @@
 import Nav from 'react-bootstrap/Nav';
 import { LinkContainer } from 'react-router-bootstrap';
+import '../css/NavBar.css';
 
 function NavBar() {
   return (
+    <>
+    <div className="container">
     <Nav fill variant="tabs" defaultActiveKey="/home" className="sticky-top-navbar">
       <Nav.Item>
         <LinkContainer to="/">
@@ -20,6 +23,8 @@ function NavBar() {
         </LinkContainer>
       </Nav.Item>
     </Nav>
+    </div>
+    </>
   );
 }
 

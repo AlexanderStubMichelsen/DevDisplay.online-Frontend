@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './App.css';
 import facade from './util/apiFacade';
 import { Link } from 'react-router-dom';
-import FillExample from './components/NavBar.jsx';
+import NavBar from './components/NavBar.jsx';
 import { useEffect } from 'react';
 
 const App = ({ setIsLoggedIn }) => {
@@ -44,20 +44,14 @@ const App = ({ setIsLoggedIn }) => {
   // Checking isLoggedInStored for conditional rendering
   return (
     <>
-      <FillExample />
-      <div>
-        <h1>Login</h1>
+      <NavBar />
+      <div className='login'>
         <div>
           {isLoggedInStored ? (
             // Logged-in view
-            <div>
+            <div className='loginform'>
               <p>Du er logget ind, {facade.getUserName()}</p>
               <button onClick={handleLogout}>Log out</button>
-              <div>
-                <Link to="/images">Images</Link>
-                <br />
-                <Link to="/savedImg">Saved Images</Link>
-              </div>
             </div>
           ) : (
             // Login form
