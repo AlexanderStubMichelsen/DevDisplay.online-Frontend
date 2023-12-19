@@ -35,7 +35,12 @@ const App = ({ setIsLoggedIn }) => {
     });
   };
 
-  const handleLogout = () => {
+  const handleLogout = (evt) => {
+    evt.preventDefault();
+    facade.logout((result) => {
+      // Handle the result or any further actions after logout
+      console.log('User logged out:', result);
+  });
     setIsLoggedIn(false); // Set the application state to logged out
     setIsLoggedInStored(false); // Update isLoggedInStored to false on logout
     localStorage.setItem('isLoggedIn', 'false'); // Update localStorage
