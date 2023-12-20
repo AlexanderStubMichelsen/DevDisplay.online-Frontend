@@ -6,20 +6,31 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 import Images from './components/Images.jsx';
 import NoMatch from './components/NoMatch.jsx';
 import SavedImages from './components/SavedImages.jsx';
+import facade from './util/apiFacade.js';
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  
+  const userRoles = facade.getUserRoles(); // Assuming getUserRoles returns an array of roles
 
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route>
         {/* Pass setIsLoggedIn as a prop to the App component */}
         <Route path="/" element={<App setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
-        {/* Conditional rendering of the Images route based on isLoggedIn */}
-        {isLoggedIn && <Route path="images" element={<Images />} />}
-        {/* Other routes */}
-        {isLoggedIn && <Route path="savedImg" element={<SavedImages />} />}
+        {/* Conditional rendering of routes based on isLoggedIn */}
+        {isLoggedIn && (
+          <Route>
+            {/* Conditional rendering of 'Images' route */}
+            {userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager') ? (
+              <Route path="/images" element={<Images />} />
+            ) : null}
+            {/* Conditional rendering of 'SavedImages' route */}
+            <Route path="/savedImg" element={<SavedImages />} />
+            {/* Route for any other unmatched paths */}
+            <Route path="*" element={<NoMatch />} />
+          </Route>
+        )}
+        {/* Default route when not logged in */}
         <Route path="*" element={<NoMatch />} />
       </Route>
     )

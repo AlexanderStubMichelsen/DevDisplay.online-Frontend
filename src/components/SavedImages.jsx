@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import facade from "../util/apiFacade";
 import NavBar from "./NavBar";
+import StarRating from "./StarRating";
 
 function SavedImages() {
     const [pictures, setPictures] = useState(null);
@@ -21,22 +22,38 @@ function SavedImages() {
     }, []); // Empty dependency array to run once on component mount
 
     const HandleOnClick = async (id) => {
+        try {
             const endpoint = 'pictures/' + id;
             const method = 'DELETE';
-            facade.fetchData(endpoint, method, true)
+            const response = await facade.fetchData(endpoint, method, true);
+            // Handle the response after the DELETE request
+            console.log('Picture deleted:', response);
+            setPictures(pictures.filter(picture => picture.id !== id));
+        } catch (error) {
+            // Handle errors if the request fails
+            console.error('Error deleting picture:', error);
+        }
+    };
+            
+    const handleRate = (value, picture_id) => {
+        const updatedPictures = pictures.map((picture) => {
+            if (picture.id === picture_id) {
+                return { ...picture, rating: value }; // Update the rating for the specific picture
+            }
+            return picture;
+        });
+
+        setPictures(updatedPictures);
+
+        // Sample facade call to save the rating (adjust according to your API)
+        facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true)
             .then((response) => {
-                // Handle the response after the DELETE request
-                console.log('Picture deleted:', response);
-                setPictures(pictures.filter(picture => picture.id !== id));
+                console.log('Rating saved:', response);
             })
             .catch((error) => {
-                // Handle errors if the request fails
-                console.error('Error deleting picture:', error);
-            }); 
-    }
-            
-        
-    
+                console.error('Error saving rating:', error);
+            });
+    };
 
     return (
         <>
@@ -48,12 +65,14 @@ function SavedImages() {
                         <div>
                             {/* Render your pictures here */}
                             {pictures.map((picture, index) => (
-                                <img
-                                    onClick={() => HandleOnClick(picture.id)}
-                                    key={index}
-                                    src={picture.url}
-                                    alt={`Picture ${index}`}
-                                />
+                                <div key={index}>
+                                    <img
+                                        onClick={() => HandleOnClick(picture.id)}
+                                        src={picture.url}
+                                        alt={`Picture ${index}`}
+                                    />
+                                    <StarRating selectedStars={picture.rating || 0} onRate={(value) => handleRate(value, picture.id)} />
+                                </div>
                             ))}
                         </div>
                     ) : (

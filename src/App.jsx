@@ -55,7 +55,7 @@ const App = ({ setIsLoggedIn }) => {
           {isLoggedInStored ? (
             // Logged-in view
             <div className='loginform'>
-              <p>Du er logget ind, {facade.getUserName()}</p>
+              <p>Du er logget ind, {facade.getUserName()}, med rollen {facade.getUserRoles()}</p>
               <button onClick={handleLogout}>Log out</button>
             </div>
           ) : (

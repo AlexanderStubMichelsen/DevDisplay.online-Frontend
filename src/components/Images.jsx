@@ -2,22 +2,23 @@ import React, { useState, useEffect } from 'react';
 import '../css/Images.css';
 import facade from '../util/apiFacade';
 import NavBar from './NavBar';
+import StarRating from './StarRating';
 
 function Images() {
   const [imageList, setImageList] = useState([]);
   const [image, setImage] = useState({});
+  const [selectedStars, setSelectedStars] = useState(0);
 
   useEffect(() => {
-    const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace 'YOUR_ACCESS_KEY' with your Unsplash access key
+    const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
     const apiUrl = `https://api.unsplash.com/photos/?client_id=${accessKey}`;
 
     fetch(apiUrl)
       .then((response) => response.json())
       .then((data) => {
-        // Extracting image URLs from Unsplash API response
         const images = data.map((photo) => ({
           id: photo.id,
-          url: photo.urls.small, // You can use different sizes (e.g., raw, regular, thumb)
+          url: photo.urls.small,
           alt: photo.alt_description || 'Image',
         }));
         setImageList(images);
@@ -25,42 +26,60 @@ function Images() {
       .catch((error) => {
         console.error('Error fetching images:', error);
       });
-  }, []); // Empty dependency array ensures this effect runs only once on mount
+  }, []);
 
   const HandleOnClick = (e) => {
     const clickedUrl = e.target.src;
     const clickedAlt = e.target.alt;
   
-    const clickedImage = 
-    {
-      "url": clickedUrl,
-      "alt": clickedAlt 
+    const clickedImage = {
+      url: clickedUrl,
+      alt: clickedAlt,
     };
-    setImage(clickedImage);
-    facade.fetchData('pictures/' + facade.getUserName(), 'POST', clickedImage)
-  .then((response) => {
-    // Handle the response after the POST request
-    console.log('Picture saved:', response);
-  })
-  .catch((error) => {
-    // Handle errors if the request fails
-    console.error('Error saving picture:', error);
-  });
-  }
 
-return (
-  <>
-  <NavBar />
-    <div>
-      <h1>Images from Unsplash</h1>
-      <div className="image-grid">
-        {imageList.map((image) => (
-          <img onClick={HandleOnClick} key={image.id} src={image.url} alt={image.alt} className="image-item" />
-        ))}
+    setImage(clickedImage);
+
+    // Sample facade call to save the clicked image (adjust according to your API)
+    facade.fetchData('pictures/' + facade.getUserName(), 'POST', clickedImage)
+      .then((response) => {
+        console.log('Picture saved:', response);
+      })
+      .catch((error) => {
+        console.error('Error saving picture:', error);
+      });
+  };
+
+  const handleRate = (value, picture_id) => {
+    setSelectedStars(value);
+    console.log('Rated:', value);
+
+    // Sample facade call to save the rating (adjust according to your API)
+    facade.fetchData('rating/' + picture_id + "/" + value, 'POST', true)
+      .then((response) => {
+        console.log('Rating saved:', response);
+      })
+      .catch((error) => {
+        console.error('Error saving rating:', error);
+      });
+  };
+
+  return (
+    <>
+      <NavBar />
+      <div>
+        <h1>Images from Unsplash</h1>
+        <div className="image-grid">
+          {imageList.map((image) => (
+            <div key={image.id}>
+              <img onClick={HandleOnClick} src={image.url} alt={image.alt} className="image-item" />
+              {/* Pass a function reference to handleRate */}
+              <StarRating selectedStars={selectedStars} onRate={(value) => handleRate(value, image.id)} />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </>
   );
-        }
+}
 
 export default Images;
