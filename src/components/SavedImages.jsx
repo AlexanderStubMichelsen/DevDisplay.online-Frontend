@@ -5,21 +5,46 @@ import StarRating from "./StarRating";
 
 function SavedImages() {
     const [pictures, setPictures] = useState(null);
+    const [selectedStars, setSelectedStars] = useState(0); // Add selectedStars state
+
+    const totalStars = 5;
 
     useEffect(() => {
         const fetchDataFromPictures = async () => {
             try {
-                const endpoint = 'pictures/' + facade.getUserName();
-                const method = 'GET';
-                const response = await facade.fetchData(endpoint, method);
-                setPictures(response); // Update state with fetched data
+                const pictureEndpoint = 'pictures/' + facade.getUserName();
+                const pictureMethod = 'GET';
+                const pictureResponse = await facade.fetchData(pictureEndpoint, pictureMethod);
+                setPictures(pictureResponse); // Update state with fetched pictures
+    
+                // Fetch ratings for each picture by its ID
+                if (pictureResponse && pictureResponse.length > 0) {
+                    const ratingsPromises = pictureResponse.map(async (picture) => {
+                        try {
+                            const ratingsEndpoint = 'ratings/' + picture.id;
+                            const ratingsMethod = 'GET';
+                            const ratingsResponse = await facade.fetchData(ratingsEndpoint, ratingsMethod);
+                            // Assign fetched ratings to the respective picture
+                            picture.ratings = ratingsResponse; // Assuming 'ratings' is a property in the picture object
+                        } catch (error) {
+                            console.error('Error fetching ratings for picture ID:', picture.id, error);
+                        }
+                    });
+    
+                    // Wait for all rating fetches to complete
+                    await Promise.all(ratingsPromises);
+                    // Now, 'pictures' state should have ratings attached to each picture object
+                    setPictures([...pictureResponse]); // Update state with fetched ratings
+                }
             } catch (error) {
-                console.error('Error fetching data:', error);
+                console.error('Error fetching pictures:', error);
             }
         };
-
-        fetchDataFromPictures(); // Call the async function within useEffect
-    }, []); // Empty dependency array to run once on component mount
+    
+        fetchDataFromPictures();
+    }, []);
+    
+    
 
     const HandleOnClick = async (id) => {
         try {
@@ -32,10 +57,10 @@ function SavedImages() {
         } catch (error) {
             // Handle errors if the request fails
             console.error('Error deleting picture:', error);
-        }
+        } 
     };
             
-    const handleRate = (value, picture_id) => {
+    const handleOnRate = (value, picture_id) => {
         const updatedPictures = pictures.map((picture) => {
             if (picture.id === picture_id) {
                 return { ...picture, rating: value }; // Update the rating for the specific picture
@@ -45,7 +70,6 @@ function SavedImages() {
 
         setPictures(updatedPictures);
 
-        // Sample facade call to save the rating (adjust according to your API)
         facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true)
             .then((response) => {
                 console.log('Rating saved:', response);
@@ -54,6 +78,21 @@ function SavedImages() {
                 console.error('Error saving rating:', error);
             });
     };
+
+    useEffect(() => {
+        const fetchRatingsFromPictures = async (id) => {
+            try {
+                const endpoint = 'ratings/' + id;
+                const method = 'GET';
+                const response = await facade.fetchData(endpoint, method);
+                console.log(response); // Update state with fetched data
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        fetchRatingsFromPictures(); // Call the async function within useEffect
+    }, []); // Empty dependency array to run once on component mount
 
     return (
         <>
@@ -71,7 +110,24 @@ function SavedImages() {
                                         src={picture.url}
                                         alt={`Picture ${index}`}
                                     />
-                                    <StarRating selectedStars={picture.rating || 0} onRate={(value) => handleRate(value, picture.id)} />
+        <div>
+            {[...Array(totalStars)].map((_, index) => {
+                const ratingValue = index + 1;
+                    return (
+                        <span
+                        key={index}
+                        onClick={() => handleOnRate(ratingValue, picture.id)}
+                        style={{ color: ratingValue <= selectedStars ? 'yellow' : 'gray', cursor: 'pointer' }}
+                        >
+                        ★
+                        </span>
+                        );
+                        })}
+                    </div>
+                    <div>
+                        {/* <p>Rating: {getRating(picture.id)}</p> */}
+                    </div>
+                                    {/* <StarRating selectedStars={picture.rating || 0} onRate={(value) => handleRate(value, picture.id)} /> */}
                                 </div>
                             ))}
                         </div>
