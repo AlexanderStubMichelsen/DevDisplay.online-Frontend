@@ -1,8 +1,8 @@
-FROM node:14-alpine
+FROM node:18 as build-stage
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
-COPY package*.json ./
+COPY package*.json ./app/
 
 RUN npm install
 
@@ -10,8 +10,8 @@ COPY . .
 
 RUN npm run build
 
-RUN npm install -g serve
+FROM nginx:1.25
 
-EXPOSE 3000
+COPY --from=build-stage /app/dist /usr/share/nginx/html
 
-CMD ["serve", "dist", "-l", "3000"]
+COPY ./nginx.conf /etc/nginx/conf.d/default.conf

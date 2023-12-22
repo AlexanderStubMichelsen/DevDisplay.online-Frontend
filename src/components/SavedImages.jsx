@@ -89,7 +89,7 @@ function SavedImages() {
             <NavBar />
             <div>
                 <div>
-                    <h1>Saved Images</h1>
+                    <h1>Your Images</h1>
                     {picturesWithRatings ? (
                         <div>
                             {picturesWithRatings.map((picture, picIndex) => ( 

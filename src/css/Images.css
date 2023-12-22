@@ -6,6 +6,14 @@
   background-size: cover;
   background-repeat: repeat-y;
   }
+
+  h1 {
+    text-align: center;
+    font-size: 2rem;
+    margin: 0;
+    padding: 1rem;
+    color: #fff;
+  }
   
   .image-item {
     width: 100%;
