@@ -5,7 +5,6 @@ import StarRating from "./StarRating";
 
 function SavedImages() {
     const [picturesWithRatings, setPicturesWithRatings] = useState(null);
-    const [selectedStars, setSelectedStars] = useState(0);
     const [rateChanged, setRateChanged] = useState(false); // New state for triggering useEffect
     const totalStars = 5;
 
@@ -52,26 +51,38 @@ function SavedImages() {
         } 
     };
             
-    const handleOnRate = (value, picture_id) => {
+    const handleOnRate = async (value, picture_id) => {
         const updatedPictures = picturesWithRatings.map((picture) => {
             if (picture.id === picture_id) {
-                return { ...picture, rating: value };
+                // Update the picture's rating and include it in the response
+                const updatedPicture = { ...picture, rating: value };
+                return updatedPicture;
             }
             return picture;
         });
-
+    
         setPicturesWithRatings(updatedPictures);
-
-        facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true)
-            .then((response) => {
-                console.log('Rating saved:', response);
-                // Trigger useEffect by setting rateChanged to true
-                setRateChanged(true);
-            })
-            .catch((error) => {
-                console.error('Error saving rating:', error);
+    
+        try {
+            // Save the rating and retrieve the updated rating for the picture
+            const response = await facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true);
+            const updatedRatingResponse = await facade.fetchData('ratings/' + picture_id, 'GET');
+    
+            // Update the picture's rating directly with the new value
+            const updatedPictureWithRatings = picturesWithRatings.map((picture) => {
+                if (picture.id === picture_id) {
+                    return { ...picture, ratings: updatedRatingResponse }; // Assuming updatedRatingResponse is the new rating
+                }
+                return picture;
             });
-    };
+    
+            setPicturesWithRatings(updatedPictureWithRatings);
+    
+            console.log('Rating saved:', response);
+        } catch (error) {
+            console.error('Error saving rating:', error);
+        }
+    };    
 
     return (
         <>
@@ -79,37 +90,42 @@ function SavedImages() {
             <div>
                 <div>
                     <h1>Saved Images</h1>
-                    {picturesWithRatings ? (
-                        <div>
-                            {picturesWithRatings.map((picture, index) => (
-                                <div key={index}>
-                                    <img
-                                        onClick={() => handleOnClick(picture.id)}
-                                        src={picture.url}
-                                        alt={`Picture ${index}`}
-                                    />
-                                    <div>
-                                        {[...Array(totalStars)].map((_, index) => {
-                                            const ratingValue = index + 1;
-                                            return (
-                                                <span
-                                                    key={index}
-                                                    onClick={() => handleOnRate(ratingValue, picture.id)}
-                                                    style={{ color: ratingValue <= selectedStars ? 'yellow' : 'gray', cursor: 'pointer' }}
-                                                >
-                                                    ★
-                                                </span>
-                                            );
-                                        })}
-                                    </div>
-                                    <div>
-                                        <p>Average Rating: {picture.ratings.toFixed(2)}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    ) : (
-                        <p>Loading...</p>
+                    // Inside the component's return statement
+{picturesWithRatings ? (
+    <div>
+        {picturesWithRatings.map((picture, picIndex) => ( // Change the variable name here
+            <div key={picture.id}>
+                <img
+                    onClick={() => handleOnClick(picture.id)}
+                    src={picture.url}
+                    alt={`Picture ${picIndex}`} // Update variable name here
+                />
+                <div>
+                    {[...Array(totalStars)].map((_, starIndex) => { // Change the variable name here
+                        const ratingValue = starIndex + 1; // Update the way you calculate ratingValue
+                        return (
+                            <span
+                                key={starIndex}
+                                onClick={() => handleOnRate(ratingValue, picture.id)}
+                                style={{
+                                    color: ratingValue <= picture.ratings ? 'yellow' : 'gray',
+                                    cursor: 'pointer',
+                                }}
+                            >
+                                ★
+                            </span>
+                        );
+                    })}
+                </div>
+                <div>
+                    <p>Average Rating: {picture.ratings.toFixed(2)}</p>
+                </div>
+            </div>
+        ))}
+    </div>
+) : (
+    <p>Loading...</p>
+
                     )}
                 </div>
             </div>
