@@ -8,9 +8,13 @@ body {
   font-synthesis: none;
   color: #213547;
   background-image: url('./assets/SZdhPUH.webp');
+  background-size: cover;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
   margin: 0;
   display: flex;
   place-items: center;
+  height: 100%;
   min-width: 100vw;
   min-height: 100vh;
 }

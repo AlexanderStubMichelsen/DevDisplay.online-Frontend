@@ -5,12 +5,18 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
+  background-image: url('./assets/SZdhPUH.webp');
+  background-size: cover;
+  background-repeat: repeat-y;
+  background-attachment: fixed;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.html {
+  font-size: 16px;
 }
 
 a {

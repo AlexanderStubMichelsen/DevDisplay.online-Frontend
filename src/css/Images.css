@@ -2,6 +2,9 @@
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust width as needed */
     grid-gap: 10px; /* Adjust spacing between images */
+    background-image: url('./assets/SZdhPUH.webp');
+  background-size: cover;
+  background-repeat: repeat-y;
   }
   
   .image-item {
