@@ -20,6 +20,7 @@ body {
   justify-content: center;
   align-items: center;
   transform: translateY(+150%);
+  color: white;
 }
 
 .loginform {
@@ -35,6 +36,9 @@ body {
 
 .input {
   background-image: url('./assets/SZdhPUH.webp');
+  color: white;
+
+
 }
 
 .btn {
