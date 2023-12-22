@@ -18,31 +18,37 @@ function SavedImages() {
                 setPictures(pictureResponse); // Update state with fetched pictures
     
                 // Fetch ratings for each picture by its ID
-                if (pictureResponse && pictureResponse.length > 0) {
-                    const ratingsPromises = pictureResponse.map(async (picture) => {
-                        try {
-                            const ratingsEndpoint = 'ratings/' + picture.id;
-                            const ratingsMethod = 'GET';
-                            const ratingsResponse = await facade.fetchData(ratingsEndpoint, ratingsMethod);
-                            // Assign fetched ratings to the respective picture
-                            picture.ratings = ratingsResponse; // Assuming 'ratings' is a property in the picture object
-                        } catch (error) {
-                            console.error('Error fetching ratings for picture ID:', picture.id, error);
-                        }
-                    });
-    
-                    // Wait for all rating fetches to complete
-                    await Promise.all(ratingsPromises);
-                    // Now, 'pictures' state should have ratings attached to each picture object
-                    setPictures([...pictureResponse]); // Update state with fetched ratings
+                // Inside the useEffect
+        if (pictureResponse && pictureResponse.length > 0) {
+            const ratingsPromises = pictureResponse.map(async (picture) => {
+            try {
+                console.log('Pictures:', picture.id);
+                const ratingsEndpoint = 'ratings/' + picture.id; // Correctly uses picture.id instead of pictures.id
+                const ratingsMethod = 'GET';
+                const ratingsResponse = await facade.fetchData(ratingsEndpoint, ratingsMethod);
+                // Assign fetched ratings to the respective picture
+                return { ...picture, ratings: ratingsResponse }; // Assuming 'ratings' is a property in the picture object
+                } catch (error) {
+                console.error('Error fetching ratings for picture ID:', picture.id, error);
+                return picture;
                 }
+                });
+  
+                // Wait for all rating fetches to complete
+                const picturesWithRatings = await Promise.all(ratingsPromises);
+                setPictures(picturesWithRatings); // Update state with fetched ratings
+                console.log('Pictures with ratings:', picturesWithRatings);
+                }
+  
             } catch (error) {
-                console.error('Error fetching pictures:', error);
+                console.error('Error fetching data:', error);
             }
         };
+
+        fetchDataFromPictures(); // Call the async function within useEffect
+    }, []); // Empty dependency array to run once on component mount
     
-        fetchDataFromPictures();
-    }, []);
+        
     
     
 
@@ -78,21 +84,6 @@ function SavedImages() {
                 console.error('Error saving rating:', error);
             });
     };
-
-    useEffect(() => {
-        const fetchRatingsFromPictures = async (id) => {
-            try {
-                const endpoint = 'ratings/' + id;
-                const method = 'GET';
-                const response = await facade.fetchData(endpoint, method);
-                console.log(response); // Update state with fetched data
-            } catch (error) {
-                console.error('Error fetching data:', error);
-            }
-        };
-
-        fetchRatingsFromPictures(); // Call the async function within useEffect
-    }, []); // Empty dependency array to run once on component mount
 
     return (
         <>

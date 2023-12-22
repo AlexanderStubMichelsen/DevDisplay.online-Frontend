@@ -49,20 +49,6 @@ function Images() {
       });
   };
 
-  const handleRate = (value, picture_id) => {
-    setSelectedStars(value);
-    console.log('Rated:', value);
-
-    // Sample facade call to save the rating (adjust according to your API)
-    facade.fetchData('rating/' + picture_id + "/" + value, 'POST', true)
-      .then((response) => {
-        console.log('Rating saved:', response);
-      })
-      .catch((error) => {
-        console.error('Error saving rating:', error);
-      });
-  };
-
   return (
     <>
       <NavBar />
@@ -72,8 +58,6 @@ function Images() {
           {imageList.map((image) => (
             <div key={image.id}>
               <img onClick={HandleOnClick} src={image.url} alt={image.alt} className="image-item" />
-              {/* Pass a function reference to handleRate */}
-              <StarRating selectedStars={selectedStars} onRate={(value) => handleRate(value, image.id)} />
             </div>
           ))}
         </div>
