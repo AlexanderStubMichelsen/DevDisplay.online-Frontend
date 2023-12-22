@@ -6,6 +6,7 @@ import StarRating from "./StarRating";
 function SavedImages() {
     const [picturesWithRatings, setPicturesWithRatings] = useState(null);
     const [selectedStars, setSelectedStars] = useState(0);
+    const [rateChanged, setRateChanged] = useState(false); // New state for triggering useEffect
     const totalStars = 5;
 
     useEffect(() => {
@@ -37,7 +38,7 @@ function SavedImages() {
         };
 
         fetchDataFromPictures();
-    }, []);
+    }, [rateChanged]); // Include rateChanged in the dependency array
 
     const handleOnClick = async (id) => {
         try {
@@ -45,7 +46,7 @@ function SavedImages() {
             const method = 'DELETE';
             const response = await facade.fetchData(endpoint, method, true);
             console.log('Picture deleted:', response);
-            setPicturesWithRatings(picturesWithRatings.filter(picture => picture.id !== id));
+            setPicturesWithRatings(prevPictures => prevPictures.filter(picture => picture.id !== id));
         } catch (error) {
             console.error('Error deleting picture:', error);
         } 
@@ -64,6 +65,8 @@ function SavedImages() {
         facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true)
             .then((response) => {
                 console.log('Rating saved:', response);
+                // Trigger useEffect by setting rateChanged to true
+                setRateChanged(true);
             })
             .catch((error) => {
                 console.error('Error saving rating:', error);
@@ -100,7 +103,8 @@ function SavedImages() {
                                         })}
                                     </div>
                                     <div>
-                                    <p>Average Rating: {picture.ratings.toFixed(2)}</p>                                    </div>
+                                        <p>Average Rating: {picture.ratings.toFixed(2)}</p>
+                                    </div>
                                 </div>
                             ))}
                         </div>
