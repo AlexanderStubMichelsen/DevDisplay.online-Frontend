@@ -5,8 +5,6 @@ import NavBar from './NavBar';
 
 function Images() {
   const [imageList, setImageList] = useState([]);
-  const [image, setImage] = useState({});
-  const [selectedStars, setSelectedStars] = useState(0);
 
   useEffect(() => {
     const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key

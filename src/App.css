@@ -23,7 +23,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  transform: translateY(+70%);
+  transform: translateY(+50%);
   color: white;
 }
 
