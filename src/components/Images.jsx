@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import '../css/Images.css';
 import facade from '../util/apiFacade';
 import NavBar from './NavBar';
-import StarRating from './StarRating';
 
 function Images() {
   const [imageList, setImageList] = useState([]);
@@ -57,7 +56,10 @@ function Images() {
         <div className="image-grid">
           {imageList.map((image) => (
             <div key={image.id}>
-              <img onClick={HandleOnClick} src={image.url} alt={image.alt} className="image-item" />
+              <img onClick={HandleOnClick} src={image.url} alt={image.alt} className="image-item"
+              title={image.alt} // Display alt text as tooltip if available
+
+              />
             </div>
           ))}
         </div>

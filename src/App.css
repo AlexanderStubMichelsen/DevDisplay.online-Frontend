@@ -7,7 +7,7 @@ body {
   text-rendering: optimizeLegibility;
   font-synthesis: none;
   color: #213547;
-  background-image: url('./assets/SZdhPUH.webp');
+  background-image: url('./assets/tile-pattern-pastel-5k-93-1920x1080.jpg');
   background-size: cover;
   background-repeat: repeat-y;
   background-attachment: fixed;
@@ -28,19 +28,19 @@ body {
 }
 
 .loginform {
-  background-color: #fff;
+  background-color:darkkhaki;
   border-radius: 0.5em;
   box-shadow: 0 0 2em #00000022;
   padding: 2em;
   margin: 2em auto;
   max-width: 25em;
-  background-image: url('./assets/SZdhPUH.webp');
   color: white;
+
 }
 
 .input {
-  background-image: url('./assets/SZdhPUH.webp');
   color: white;
+  background-color: beige;
 
 
 }

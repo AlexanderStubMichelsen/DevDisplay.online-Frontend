@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import facade from "../util/apiFacade";
 import NavBar from "./NavBar";
-import StarRating from "./StarRating";
+import "../css/SavedImages.css";
 
 function SavedImages() {
     const [picturesWithRatings, setPicturesWithRatings] = useState(null);
@@ -98,10 +98,12 @@ function SavedImages() {
                                         onClick={() => handleOnClick(picture.id)}
                                         src={picture.url}
                                         alt={`Picture ${picIndex}`}
+                                        title={picture.alt ? picture.alt : `Picture ${picIndex}`} // Display alt text as tooltip if available
+
                                     />
                                     <div>
-                                        {[...Array(totalStars)].map((_, starIndex) => { // Change the variable name here
-                                            const ratingValue = starIndex + 1; // Update the way you calculate ratingValue
+                                        {[...Array(totalStars)].map((_, starIndex) => {
+                                            const ratingValue = starIndex + 1; 
                                             return (
                                                 <span
                                                     key={starIndex}
@@ -115,9 +117,6 @@ function SavedImages() {
                                                 </span>
                                             );
                                         })}
-                                    </div>
-                                    <div>
-                                        <p>Average Rating: {picture.ratings.toFixed(2)}</p>
                                     </div>
                                 </div>
                             ))}

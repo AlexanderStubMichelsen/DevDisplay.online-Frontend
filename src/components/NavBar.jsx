@@ -9,17 +9,17 @@ function NavBar() {
     <Nav fill variant="tabs" defaultActiveKey="/home" className="sticky-top-navbar">
       <Nav.Item>
         <LinkContainer to="/">
-          <Nav.Link>Home</Nav.Link>
+          <Nav.Link><p>Home</p></Nav.Link>
         </LinkContainer>
       </Nav.Item>
       <Nav.Item>
         <LinkContainer to="/images">
-          <Nav.Link>Images</Nav.Link>
+          <Nav.Link><p>Images</p></Nav.Link>
         </LinkContainer>
       </Nav.Item>
       <Nav.Item>
       <LinkContainer to="/savedImg">
-          <Nav.Link>Saved Images</Nav.Link>
+          <Nav.Link><p>Saved Images</p></Nav.Link>
         </LinkContainer>
       </Nav.Item>
     </Nav>

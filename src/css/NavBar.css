@@ -1,6 +1,15 @@
 .container {
-  
+  color: black;
   width: 100vw;
   top: 0;
+}
+
+p {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: red;
+  text-align: center;
+  margin: 0;
+  padding: 0;
 }
   

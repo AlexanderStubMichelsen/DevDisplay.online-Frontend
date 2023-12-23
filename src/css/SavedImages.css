@@ -1,0 +1,20 @@
+p {
+    color:black;
+}
+
+h1 {
+    color:black;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    /* Add any other styles for the image container */
+  }
+  
+  .tooltip:hover::after {
+    content: attr(alt);
+    display: block;
+    position: absolute;
+  }
+  
