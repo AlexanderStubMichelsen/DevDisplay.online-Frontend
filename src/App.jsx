@@ -62,7 +62,7 @@ const App = ({ setIsLoggedIn }) => {
             // Login form
             <form className='loginform' onChange={onChange}>
               <input placeholder="User Name" id="username" className='input' />
-              <input placeholder="Password" id="password" className='input' />
+              <input placeholder="Password" id="password" className='input2' />
               <button onClick={performLogin} className='btn'>Login</button>
             </form>
           )}

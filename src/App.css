@@ -24,7 +24,7 @@ body {
   justify-content: center;
   align-items: center;
   transform: translateY(+50%);
-  color: white;
+  color: black;
 }
 
 .loginform {
@@ -34,12 +34,19 @@ body {
   padding: 2em;
   margin: 2em auto;
   max-width: 25em;
-  color: white;
+  color: black;
 
 }
 
 .input {
-  color: white;
+  color: black;
+  background-color: beige;
+
+
+}
+
+.input2 {
+  color: black;
   background-color: beige;
 
 

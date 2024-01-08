@@ -94,6 +94,7 @@ function SavedImages() {
                         <div>
                             {picturesWithRatings.map((picture, picIndex) => ( 
                                 <div key={picture.id}>
+                                    <p>{picture.ratings.toFixed(2)}</p>
                                     <img
                                         onClick={() => handleOnClick(picture.id)}
                                         src={picture.url}
