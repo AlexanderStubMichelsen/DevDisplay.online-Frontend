@@ -34,8 +34,6 @@ function Images() {
       alt: clickedAlt,
     };
 
-    setImage(clickedImage);
-
     // Sample facade call to save the clicked image (adjust according to your API)
     facade.fetchData('pictures/' + facade.getUserName(), 'POST', clickedImage)
       .then((response) => {
