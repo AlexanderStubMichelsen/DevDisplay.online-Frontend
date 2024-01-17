@@ -26,6 +26,7 @@ function Images() {
   }, []);
 
   const HandleOnClick = (e) => {
+    e.preventDefault();
     const clickedUrl = e.target.src;
     const clickedAlt = e.target.alt;
   
