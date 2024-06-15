@@ -23,11 +23,6 @@ const App = ({ setIsLoggedIn }) => {
     );
   };
 
-  useEffect(() => {
-    // Check login status on each render and update isLoggedInStored accordingly
-    setIsLoggedInStored(localStorage.getItem('isLoggedIn') === 'true');
-  }, [setIsLoggedInStored]);
-
   const onChange = (evt) => {
     setLoginCredentials({
       ...loginCredentials,

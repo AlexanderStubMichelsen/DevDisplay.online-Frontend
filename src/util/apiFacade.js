@@ -58,6 +58,34 @@ function apiFacade()
             })
     }
 
+    const register = (user, password, role, callback) =>
+    {
+        console.log("Jeg er fanget inde i register funktion, user:", user, "password:", password)
+
+        const payload = { username: user, password: password, role: role}
+
+        const options = makeOptions("POST", payload)
+
+        return fetch(URL + "auth/register", options)
+            .then(handleHttpErrors)
+            .then((json) =>
+            {
+                callback(true)
+                setToken(json.token)
+            })
+            .catch((error) =>
+            {
+                if (error.status)
+                {
+                    error.fullError.then(e => console.log(JSON.stringify(e)))
+                } else
+                {
+                    console.log("seriøs fejl", error)
+                }
+            })
+    }
+        
+
     const fetchData = (endpoint, method, payload) =>
     {
         const options = makeOptions(method, payload, true); //True add's the token
@@ -124,6 +152,7 @@ function apiFacade()
         getToken,
         logout,
         login,
+        register,
         getUserRoles,
         hasUserAccess,
         fetchData,

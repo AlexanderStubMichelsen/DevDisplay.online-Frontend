@@ -22,6 +22,11 @@ function NavBar() {
           <Nav.Link><p>Saved Images</p></Nav.Link>
         </LinkContainer>
       </Nav.Item>
+      <Nav.Item>
+      <LinkContainer to="/SignUp">
+          <Nav.Link><p>Sign up</p></Nav.Link>
+        </LinkContainer>
+      </Nav.Item>
     </Nav>
     </div>
     </>

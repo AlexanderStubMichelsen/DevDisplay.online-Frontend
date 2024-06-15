@@ -7,7 +7,7 @@ body {
   text-rendering: optimizeLegibility;
   font-synthesis: none;
   color: #213547;
-  background-image: url('./assets/tile-pattern-pastel-5k-93-1920x1080.jpg');
+  background-image: url('./assets/818895-large-scenic-background-pictures-1920x1200-for-ipad-pro-3757913351.jpg');
   background-size: cover;
   background-repeat: repeat-y;
   background-attachment: fixed;
@@ -28,7 +28,7 @@ body {
 }
 
 .loginform {
-  background-color:darkkhaki;
+  background-color:rgb(122, 114, 241);
   border-radius: 0.5em;
   box-shadow: 0 0 2em #00000022;
   padding: 2em;
