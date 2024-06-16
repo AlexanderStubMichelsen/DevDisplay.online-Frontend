@@ -1,14 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './App.css';
 import facade from './util/apiFacade';
-import { Link } from 'react-router-dom';
 import NavBar from './components/NavBar.jsx';
-import { useEffect } from 'react';
 
 const App = ({ setIsLoggedIn }) => {
   const init = { username: '', password: '' };
   const [loginCredentials, setLoginCredentials] = useState(init);
-  const [isLoggedInStored, setIsLoggedInStored] = useState(false); // State to track login status
+  const [isLoggedInStored, setIsLoggedInStored] = useState(false);
+
+  useEffect(() => {
+    // Check if the token is present in localStorage on component mount
+    const token = facade.getToken();
+    if (token) {
+      setIsLoggedIn(true);
+      setIsLoggedInStored(true);
+    }
+  }, [setIsLoggedIn]);
 
   const performLogin = (evt) => {
     evt.preventDefault();
@@ -16,9 +23,8 @@ const App = ({ setIsLoggedIn }) => {
       loginCredentials.username,
       loginCredentials.password,
       () => {
-        setIsLoggedIn(true); // Set the application state to logged in
-        setIsLoggedInStored(true); // Update isLoggedInStored to true after successful login
-        localStorage.setItem('isLoggedIn', 'true'); // Store in localStorage
+        setIsLoggedIn(true);
+        setIsLoggedInStored(true);
       }
     );
   };
@@ -32,33 +38,40 @@ const App = ({ setIsLoggedIn }) => {
 
   const handleLogout = (evt) => {
     evt.preventDefault();
-    facade.logout((result) => {
-      // Handle the result or any further actions after logout
-      console.log('User logged out:', result);
-  });
-    setIsLoggedIn(false); // Set the application state to logged out
-    setIsLoggedInStored(false); // Update isLoggedInStored to false on logout
-    localStorage.setItem('isLoggedIn', 'false'); // Update localStorage
+    facade.logout(() => {
+      setIsLoggedIn(false);
+      setIsLoggedInStored(false);
+    });
   };
 
-  // Checking isLoggedInStored for conditional rendering
   return (
     <>
       <NavBar />
       <div className='login'>
         <div>
           {isLoggedInStored ? (
-            // Logged-in view
             <div className='loginform'>
               <p>Du er logget ind, {facade.getUserName()}, med rollen {facade.getUserRoles()}</p>
               <button onClick={handleLogout}>Log out</button>
             </div>
           ) : (
-            // Login form
-            <form className='loginform' onChange={onChange}>
-              <input placeholder="User Name" id="username" className='input' />
-              <input placeholder="Password" id="password" className='input2' />
-              <button onClick={performLogin} className='btn'>Login</button>
+            <form className='loginform' onSubmit={performLogin}>
+              <input 
+                placeholder="User Name" 
+                id="username" 
+                value={loginCredentials.username} 
+                onChange={onChange} 
+                className='input' 
+              />
+              <input 
+                type="password" 
+                placeholder="Password" 
+                id="password" 
+                value={loginCredentials.password} 
+                onChange={onChange} 
+                className='input2' 
+              />
+              <button type="submit" className='btn'>Login</button>
             </form>
           )}
         </div>

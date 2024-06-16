@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 import App from './App.jsx';
 import Images from './components/Images.jsx';
 import NoMatch from './components/NoMatch.jsx';
+import Admin from './components/Admin.jsx';
 import SavedImages from './components/SavedImages.jsx';
 import SignUp from './components/SignUp.jsx';
 import facade from './util/apiFacade.js';
@@ -28,9 +29,12 @@ const Root = () => {
               <Route path="/images" element={<Images />} />
             )}
             {/* Conditional rendering of 'SavedImages' route */}
+            (userRoles.includes('user')) && (
             <Route path="/savedImg" element={<SavedImages />} />
           </>
         )}
+        {/* Conditional rendering of 'Admin' route */}
+        {isLoggedIn && userRoles.includes('admin') && <Route path="/admin" element={<Admin />} />}
         {/* Route for any other unmatched paths */}
         <Route path="*" element={<NoMatch />} />
       </Route>
