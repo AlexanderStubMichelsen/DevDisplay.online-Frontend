@@ -22,24 +22,23 @@ function apiFacade() {
     return res.json();
   };
 
-  const login = (username, password, callback) => {
-    const payload = { username, password };
-    const options = makeOptions("POST", payload);
-
-    return fetch(URL + AUTHENTICATION_ROUTE, options)
-      .then(handleHttpErrors)
-      .then((json) => {
+    const login = async (username, password) => {
+      const payload = { username, password };
+      const options = makeOptions("POST", payload);
+  
+      try {
+        const response = await fetch(URL + AUTHENTICATION_ROUTE, options);
+        const json = await handleHttpErrors(response);
         setToken(json.token);
-        callback(true);
-      })
-      .catch((error) => {
+      } catch (error) {
         if (error.status) {
-          error.fullError.then(e => console.log(JSON.stringify(e)));
+          error.fullError.then(e => console.error(JSON.stringify(e)));
         } else {
-          console.log("Serious error:", error);
+          console.error("Serious error:", error);
         }
-      });
-  };
+        throw error; // Re-throw the error so it can be handled by the caller
+      }
+    };
 
   const fetchData = (endpoint, method, payload) => {
     const options = makeOptions(method, payload, true);

@@ -4,7 +4,8 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 import App from './App.jsx';
 import Images from './components/Images.jsx';
 import NoMatch from './components/NoMatch.jsx';
-import Admin from './components/Admin.jsx';
+import AdminPictures from './components/admin/AdminPictures.jsx';
+import AdminUsers from './components/admin/AdminUsers.jsx';
 import SavedImages from './components/SavedImages.jsx';
 import SignUp from './components/SignUp.jsx';
 import facade from './util/apiFacade.js';
@@ -26,15 +27,24 @@ const Root = () => {
           <>
             {/* Conditional rendering of 'Images' route */}
             {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && (
-              <Route path="/images" element={<Images />} />
+              <Route path="images" element={<Images />} />
             )}
             {/* Conditional rendering of 'SavedImages' route */}
-            (userRoles.includes('user')) && (
-            <Route path="/savedImg" element={<SavedImages />} />
+            {userRoles.includes('user') && (
+              <Route path="savedImg" element={<SavedImages />} />
+            )}
+            {/* Conditional rendering of 'AdminPictures' route */}
+            {userRoles.includes('admin') && (
+              <Route path="admin/pictures" element={<AdminPictures />} />
+            )}
+            {/* Conditional rendering of 'AdminUsers' route */}
+            {userRoles.includes('admin') && (
+              <Route path="admin/users" element={<AdminUsers />} />
+            )}
           </>
         )}
-        {/* Conditional rendering of 'Admin' route */}
-        {isLoggedIn && userRoles.includes('admin') && <Route path="/admin" element={<Admin />} />}
+       
+        {/* Conditional rendering of 'AdminRoles' route */}
         {/* Route for any other unmatched paths */}
         <Route path="*" element={<NoMatch />} />
       </Route>

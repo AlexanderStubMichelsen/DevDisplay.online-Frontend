@@ -1,15 +1,54 @@
-.container {
-  color: black;
-  width: 100vw;
-  top: 0;
+.navbar-container {
+  background-color: #343a40; /* Dark background color */
 }
 
-p {
-  font-size: 1.5rem;
-  font-weight: 500;
-  color: red;
-  text-align: center;
-  margin: 0;
-  padding: 0;
+.sticky-top-navbar {
+  padding: 8px 16px; /* Padding for Nav links */
+  display: flex;
+  justify-content: space-between; /* Space items evenly */
+  align-items: center; /* Center items vertically */
 }
-  
+
+.sticky-top-navbar.expanded {
+  flex-direction: column; /* Stack items vertically when expanded */
+  position: absolute;
+  top: 50px; /* Adjust as needed */
+  left: 0;
+  right: 0;
+  background-color: #343a40; /* Dark background color */
+  z-index: 1000; /* Ensure it's above other content */
+}
+
+.sticky-top-navbar .nav-link {
+  color: white; /* Text color */
+  padding: 8px 12px; /* Padding around Nav links */
+  text-decoration: none; /* Remove underline */
+}
+
+.sticky-top-navbar .nav-link:hover {
+  color: #ffc107; /* Change color on hover */
+}
+
+.burger-menu {
+  display: none; /* Initially hide burger menu on larger screens */
+  cursor: pointer;
+  color: white;
+  padding: 10px;
+}
+
+@media (max-width: 768px) {
+  .sticky-top-navbar {
+    flex-direction: column; /* Stack items vertically on smaller screens */
+    position: relative; /* Reset position */
+    padding: 0;
+  }
+
+  .burger-menu {
+    display: block; /* Display burger menu icon on smaller screens */
+  }
+
+  .sticky-top-navbar .nav-link {
+    flex: 1 1 100%; /* Full width for each link */
+    margin-bottom: 6px; /* Space between links */
+  }
+}

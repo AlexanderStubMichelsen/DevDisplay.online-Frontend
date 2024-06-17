@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import facade from '../util/apiFacade';
-import NavBar from '../components/NavBar.jsx';
+import facade from '../../util/apiFacade.js';
+import NavBar from '../NavBar.jsx';
 
 const Admin = () => {
     const [picturesWithRatings, setPicturesWithRatings] = useState(null);

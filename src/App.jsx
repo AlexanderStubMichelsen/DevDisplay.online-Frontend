@@ -17,16 +17,16 @@ const App = ({ setIsLoggedIn }) => {
     }
   }, [setIsLoggedIn]);
 
-  const performLogin = (evt) => {
+  const performLogin = async (evt) => {
     evt.preventDefault();
-    facade.login(
-      loginCredentials.username,
-      loginCredentials.password,
-      () => {
-        setIsLoggedIn(true);
-        setIsLoggedInStored(true);
-      }
-    );
+    try {
+      await facade.login(loginCredentials.username, loginCredentials.password);
+      setIsLoggedIn(true);
+      setIsLoggedInStored(true);
+    } catch (error) {
+      console.error('Login failed:', error);
+      // Handle login failure (e.g., show error message)
+    }
   };
 
   const onChange = (evt) => {
