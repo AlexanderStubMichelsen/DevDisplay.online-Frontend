@@ -15,12 +15,16 @@ function apiFacade() {
     callback(true);
   };
 
-  const handleHttpErrors = (res) => {
+  const handleHttpErrors = async (res) => {
     if (!res.ok) {
-      return Promise.reject({ status: res.status, fullError: res.json() });
+        const error = await res.json().catch(() => ({})); // Try to parse JSON, fallback to empty object
+        throw new Error(error.message || 'Unknown error');
+    }
+    if (res.status === 204 || res.headers.get('Content-Length') === '0') {
+        return {}; // Handle no content (204 No Content) response or empty response
     }
     return res.json();
-  };
+};
 
     const login = async (username, password) => {
       const payload = { username, password };
@@ -39,6 +43,33 @@ function apiFacade() {
         throw error; // Re-throw the error so it can be handled by the caller
       }
     };
+
+    const register = (user, password, role, callback) =>
+    {
+        console.log("Jeg er fanget inde i register funktion, user:", user, "password:", password)
+
+        const payload = { username: user, password: password, role: role}
+
+        const options = makeOptions("POST", payload)
+
+        return fetch(URL + "auth/register", options)
+            .then(handleHttpErrors)
+            .then((json) =>
+            {
+                callback(true)
+                setToken(json.token)
+            })
+            .catch((error) =>
+            {
+                if (error.status)
+                {
+                    error.fullError.then(e => console.log(JSON.stringify(e)))
+                } else
+                {
+                    console.log("seriøs fejl", error)
+                }
+            })
+    }
 
   const fetchData = (endpoint, method, payload) => {
     const options = makeOptions(method, payload, true);
@@ -93,6 +124,7 @@ function apiFacade() {
     getToken,
     logout,
     login,
+    register,
     fetchData,
     getUserRoles,
     getUserName

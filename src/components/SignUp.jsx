@@ -5,23 +5,23 @@ import NavBar from '../components/NavBar.jsx';
 const SignupPage = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('user');
-
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [role, setRole] = useState('user');
   const [errors, setErrors] = useState({});
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setErrors({});
+    setSuccessMessage('');
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
-      // Handle successful signup (e.g., send data to the server)
-      facade.register(username, password, role, (success, response) => {
-        if (success) {
-          console.log('User registered successfully');
-        } else {
-          setErrors({ apiError: response.message || 'Registration failed' });
-        }
-      });
+      try {
+        const response = await facade.register(username, password, role);
+        setSuccessMessage('User registered successfully');
+      } catch (error) {
+        setErrors({ apiError: error.message || 'Registration failed' });
+      }
     } else {
       setErrors(validationErrors);
     }
@@ -73,6 +73,7 @@ const SignupPage = () => {
           </div>
           <button type="submit">Sign Up</button>
           {errors.apiError && <p className="error">{errors.apiError}</p>}
+          {successMessage && <p className="success">{successMessage}</p>}
         </form>
       </div>
     </>
