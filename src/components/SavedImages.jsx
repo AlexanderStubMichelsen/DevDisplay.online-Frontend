@@ -41,7 +41,7 @@ function SavedImages() {
 
     const handleOnClick = async (id) => {
         try {
-            const endpoint = 'pictures/' + id;
+            const endpoint = 'pictures/picture/' + id;
             const method = 'DELETE';
             const response = await facade.fetchData(endpoint, method, true);
             console.log('Picture deleted:', response);
@@ -100,7 +100,6 @@ function SavedImages() {
                                         src={picture.url}
                                         alt={`Picture ${picIndex}`}
                                         title={picture.alt ? picture.alt : `Picture ${picIndex}`} // Display alt text as tooltip if available
-
                                     />
                                     <div>
                                         {[...Array(totalStars)].map((_, starIndex) => {

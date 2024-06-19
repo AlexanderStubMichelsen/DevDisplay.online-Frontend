@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import facade from "../../util/apiFacade";
 import NavBar from "../NavBar";
 
@@ -17,7 +18,7 @@ const AdminUsers = () => {
                 setUsers(userResponse); // Assuming userResponse is an array of users
             } catch (error) {
                 console.error('Error fetching users:', error);
-                setError('Failed to fetch users'); // Set error state
+                setError('Failed to fetch users. Please try again later.'); // Set error state
             } finally {
                 setLoading(false);
             }
@@ -34,7 +35,7 @@ const AdminUsers = () => {
             console.log(`Rating deleted for picture ${pictureId}`);
         } catch (error) {
             console.error('Error deleting rating:', error);
-            setError('Failed to delete rating');
+            setError('Failed to delete rating. Please try again.');
             throw error;
         }
     };
@@ -47,7 +48,7 @@ const AdminUsers = () => {
             console.log(`Pictures deleted for user ${username}`);
         } catch (error) {
             console.error('Error deleting pictures:', error);
-            setError('Failed to delete pictures');
+            setError('Failed to delete pictures. Please try again.');
             throw error;
         }
     };
@@ -65,7 +66,7 @@ const AdminUsers = () => {
             }
         } catch (error) {
             console.error('Error fetching pictures:', error);
-            setError('Failed to fetch pictures');
+            setError('Failed to fetch pictures. Please try again.');
             throw error;
         }
     };
@@ -80,7 +81,7 @@ const AdminUsers = () => {
             setUsers(prevUsers => prevUsers.filter(user => user.username !== username));
         } catch (error) {
             console.error('Error deleting user:', error);
-            setError('Failed to delete user');
+            setError('Failed to delete user. Please try again.');
         }
     };
 
@@ -99,6 +100,9 @@ const AdminUsers = () => {
                             <li key={user.username}>
                                 {user.username}
                                 <button onClick={() => deleteUser(user.username)}>Delete</button>
+                                <Link to={`/admin/users/${user.username}`}>
+                                    <button>View Pictures</button>
+                                </Link>
                             </li>
                         ))}
                     </ul>

@@ -39,7 +39,7 @@ const Admin = () => {
 
     const handleOnClick = async (id) => {
         try {
-            const endpoint = 'pictures/' + id;
+            const endpoint = 'pictures/picture/' + id;
             const method = 'DELETE';
             const response = await facade.fetchData(endpoint, method, true);
             console.log('Picture deleted:', response);

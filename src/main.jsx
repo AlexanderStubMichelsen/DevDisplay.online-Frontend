@@ -7,6 +7,7 @@ import NoMatch from './components/NoMatch.jsx';
 import AdminPictures from './components/admin/AdminPictures.jsx';
 import AdminUsers from './components/admin/AdminUsers.jsx';
 import SavedImages from './components/SavedImages.jsx';
+import AdminUserPictures from './components/admin/AdminUserPictures.jsx';
 import SignUp from './components/SignUp.jsx';
 import facade from './util/apiFacade.js';
 import './index.css';
@@ -40,6 +41,10 @@ const Root = () => {
             {/* Conditional rendering of 'AdminUsers' route */}
             {userRoles.includes('admin') && (
               <Route path="admin/users" element={<AdminUsers />} />
+            )}
+            {/* Conditional rendering of 'AdminUserPictures' route */}
+            {userRoles.includes('admin') && (
+              <Route path="admin/users/:username" element={<AdminUserPictures />} />
             )}
           </>
         )}
