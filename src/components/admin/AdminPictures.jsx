@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import facade from '../../util/apiFacade.js';
 import NavBar from '../NavBar.jsx';
+import '../../css/AdminPictures.css'; // Import the CSS file for styling
 
 const Admin = () => {
     const [picturesWithRatings, setPicturesWithRatings] = useState(null);
@@ -75,42 +76,36 @@ const Admin = () => {
     return (
         <>
             <NavBar />
-            <div>
-                <div>
-                    <h1>Your Images</h1>
+            <div className="admin-container">
+                <h1 className="admin-title">Your Images</h1>
+                <div className="image-grid">
                     {picturesWithRatings ? (
-                        <div>
-                            {picturesWithRatings.map((picture, picIndex) => (
-                                <div key={picture.id}>
-                                    <p>{picture.ratings.toFixed(2)}</p>
-                                    <img
-                                        onClick={() => handleOnClick(picture.id)}
-                                        src={picture.url}
-                                        alt={`Picture ${picIndex}`}
-                                        title={picture.alt ? picture.alt : `Picture ${picIndex}`}
-                                    />
-                                    <div>
-                                        {[...Array(totalStars)].map((_, starIndex) => {
-                                            const ratingValue = starIndex + 1;
-                                            return (
-                                                <span
-                                                    key={starIndex}
-                                                    onClick={() => handleOnRate(ratingValue, picture.id)}
-                                                    style={{
-                                                        color: ratingValue <= picture.ratings ? 'yellow' : 'gray',
-                                                        cursor: 'pointer',
-                                                    }}
-                                                >
-                                                    ★
-                                                </span>
-                                            );
-                                        })}
-                                    </div>
+                        picturesWithRatings.map((picture, picIndex) => (
+                            <div key={picture.id} className="image-card">
+                                <img
+                                    onClick={() => handleOnClick(picture.id)}
+                                    src={picture.url}
+                                    alt={`Picture ${picIndex}`}
+                                    title={picture.alt ? picture.alt : `Picture ${picIndex}`}
+                                />
+                                <div className="rating-section">
+                                    {[...Array(totalStars)].map((_, starIndex) => {
+                                        const ratingValue = starIndex + 1;
+                                        return (
+                                            <span
+                                                key={starIndex}
+                                                onClick={() => handleOnRate(ratingValue, picture.id)}
+                                                className={`rating-star ${ratingValue <= picture.ratings ? 'active' : ''}`}
+                                            >
+                                                ★
+                                            </span>
+                                        );
+                                    })}
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))
                     ) : (
-                        <p>Loading...</p>
+                        <p className="loading-message">Loading...</p>
                     )}
                 </div>
             </div>

@@ -1,54 +1,61 @@
-.navbar-container {
-  background-color: #343a40; /* Dark background color */
-}
+/* NavBar.css */
 
-.sticky-top-navbar {
-  padding: 8px 16px; /* Padding for Nav links */
+/* Reset CSS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   width: 100%;
-  justify-content: space-between; /* Space items evenly */
-  align-items: center; /* Center items vertically */
 }
 
-.sticky-top-navbar.expanded {
-  flex-direction: column; /* Stack items vertically when expanded */
-  position: absolute;
-  top: 50px; /* Adjust as needed */
-  left: 0;
-  right: 0;
-  background-color: #343a40; /* Dark background color */
-  z-index: 1000; /* Ensure it's above other content */
+.navbar {
+  width: 100%; /* Ensure the navbar takes the full width */
+  max-width: none !important; /* Remove any max-width restriction */
+}
+
+/* Navbar Styles */
+.sticky-top-navbar {
+  width: 100%;
+  background-color: #f8f9fa; /* Light background color */
+  border-bottom: 1px solid #dee2e6; /* Light border color */
+  z-index: 1000; /* Ensure navbar stays on top */
+}
+
+.sticky-top-navbar .navbar-brand {
+  font-weight: 500;
+}
+
+.sticky-top-navbar .navbar-toggler {
+  border: none;
 }
 
 .sticky-top-navbar .nav-link {
-  color: white; /* Text color */
-  padding: 8px 12px; /* Padding around Nav links */
-  text-decoration: none; /* Remove underline */
+  color: #212529; /* Dark text color */
+  padding: 8px 12px;
+  text-decoration: none;
 }
 
 .sticky-top-navbar .nav-link:hover {
-  color: #ffc107; /* Change color on hover */
+  color: #007bff; /* Primary hover color */
 }
 
-.burger-menu {
-  display: none; /* Initially hide burger menu on larger screens */
-  cursor: pointer;
-  color: white;
-  padding: 10px;
+.sticky-top-navbar .navbar-nav .nav-link.active {
+  font-weight: 600;
 }
 
-@media (max-width: 768px) {
-  .sticky-top-navbar {
-    flex-direction: column; /* Stack items vertically on smaller screens */
-    position: relative; /* Reset position */
-    padding: 0;
-  }
-
-  .burger-menu {
-    display: block; /* Display burger menu icon on smaller screens */
-  }
-
-  .sticky-top-navbar .nav-link {
-    flex: 1 1 100%; /* Full width for each link */
-    margin-bottom: 6px; /* Space between links */
-  }
+/* Modal Styles */
+.modal-header {
+  border-bottom: none;
+  padding-bottom: 0;
 }
+
+.modal-title {
+  font-weight: 600;
+}
+
+.modal-footer {
+  border-top: none;
+}
+

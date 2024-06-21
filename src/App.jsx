@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react';
-import './App.css';
+import React, { useState, useEffect } from 'react';
+import './App.css'; // Import the stylesheet
 import facade from './util/apiFacade';
 import NavBar from './components/NavBar.jsx';
 
@@ -48,33 +48,32 @@ const App = ({ setIsLoggedIn }) => {
     <>
       <NavBar />
       <div className='login'>
-        <div>
-          {isLoggedInStored ? (
-            <div className='loginform'>
-              <p>Du er logget ind, {facade.getUserName()}, med rollen {facade.getUserRoles()}</p>
-              <button onClick={handleLogout}>Log out</button>
-            </div>
-          ) : (
-            <form className='loginform' onSubmit={performLogin}>
-              <input 
-                placeholder="User Name" 
-                id="username" 
-                value={loginCredentials.username} 
-                onChange={onChange} 
-                className='input' 
-              />
-              <input 
-                type="password" 
-                placeholder="Password" 
-                id="password" 
-                value={loginCredentials.password} 
-                onChange={onChange} 
-                className='input2' 
-              />
-              <button type="submit" className='btn'>Login</button>
-            </form>
-          )}
-        </div>
+        {isLoggedInStored ? (
+          <div className='loginform'>
+            <p>You are logged in as {facade.getUserName()}, with role {facade.getUserRoles()}</p>
+            <button onClick={handleLogout} className='btn'>Log out</button>
+          </div>
+        ) : (
+          <form className='loginform' onSubmit={performLogin}>
+            <input 
+              type="text"
+              placeholder="Username"
+              id="username"
+              value={loginCredentials.username}
+              onChange={onChange}
+              className='input'
+            />
+            <input 
+              type="password"
+              placeholder="Password"
+              id="password"
+              value={loginCredentials.password}
+              onChange={onChange}
+              className='input2'
+            />
+            <button type="submit" className='btn'>Login</button>
+          </form>
+        )}
       </div>
     </>
   );

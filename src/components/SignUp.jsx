@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import facade from '../util/apiFacade';
-import NavBar from '../components/NavBar.jsx';
+import NavBar from '../components/NavBar';
+import '../css/SignUp.css'; // Ensure you import the stylesheet containing your CSS
 
 const SignupPage = () => {
   const [username, setUsername] = useState('');
@@ -17,7 +18,7 @@ const SignupPage = () => {
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length === 0) {
       try {
-        const response = await facade.register(username, password, role);
+        await facade.register(username, password, role);
         setSuccessMessage('User registered successfully');
       } catch (error) {
         setErrors({ apiError: error.message || 'Registration failed' });

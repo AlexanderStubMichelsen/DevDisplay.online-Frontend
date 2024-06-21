@@ -1,74 +1,96 @@
-:root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* Reset CSS */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-image: url('./assets/tile-pattern-pastel-5k-93-1920x1080.jpg');
-  background-size: cover;
-  background-repeat: repeat-y;
-  background-attachment: fixed;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
+/* Global Styles */
+:root {
+  --font-primary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --color-text: #213547; /* Main text color */
+  --color-background: #ffffff; /* Main background color */
+  --color-primary: #646cff; /* Primary accent color */
+  --color-primary-hover: #535bf2; /* Primary accent color on hover */
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-primary);
+  line-height: 1.5;
+  color: var(--color-text);
+  background-color: var(--color-background);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-.html {
-  font-size: 16px;
-}
-
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
-body {
-  margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 100vw;
-  min-height: 100vh;
+  flex-direction: column;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* Full Width Container */
+.full-width {
+  width: 100%;
+  max-width: 100%;
+  padding: 0 1rem; /* Adjust padding as needed */
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* Flexbox Utilities */
+.d-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Navbar Styles */
+.navbar-container {
+  background-color: #343a40;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sticky-top-navbar {
+  display: flex;
+  padding: 8px 16px;
+  width: 100%; /* Ensure the navbar takes the full width */
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky-top-navbar .nav-link {
+  color: white;
+  padding: 8px 12px;
+  text-decoration: none;
+}
+
+.sticky-top-navbar .nav-link:hover {
+  color: #ffc107;
+}
+
+.burger-menu {
+  display: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  color: white;
+  padding: 10px;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@media (max-width: 768px) {
+  .sticky-top-navbar {
+    flex-direction: column;
+    position: relative;
+    padding: 0;
   }
-  a:hover {
-    color: #747bff;
+
+  .burger-menu {
+    display: block;
   }
-  button {
-    background-color: #f9f9f9;
+
+  .sticky-top-navbar .nav-link {
+    flex: 1 1 100%;
+    margin-bottom: 6px;
   }
 }
