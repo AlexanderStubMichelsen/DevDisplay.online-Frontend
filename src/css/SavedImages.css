@@ -1,21 +1,71 @@
-p {
-    font-size:15px;
-    color:black;
+/* SavedImages.css */
+
+/* Overall page layout and styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
 }
 
-h1 {
-    color:black;
+.user-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.tooltip {
-    position: relative;
-    display: inline-block;
-    /* Add any other styles for the image container */
-  }
-  
-  .tooltip:hover::after {
-    content: attr(alt);
-    display: block;
-    position: absolute;
-  }
-  
+.user-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #213547;
+}
+
+.loading-message {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Styling for each image and its associated rating stars */
+.image-card {
+  width: 152px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.image-card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.image-card img {
+  width: 130px;
+  height: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-card img:hover {
+  transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+.rating-section {
+  margin-top: 10px;
+}
+
+.rating-star {
+  font-size: 24px;
+  color: gray;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.rating-star:hover,
+.rating-star.active {
+  color: yellow; /* Yellow color for active (rated) stars */
+}

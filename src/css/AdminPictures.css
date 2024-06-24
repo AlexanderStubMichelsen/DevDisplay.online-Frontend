@@ -42,7 +42,7 @@ h1 {
 }
 
 .image-container img {
-    width: 100%;
+    width: 130px;
     height: auto;
     border-radius: 5px;
     cursor: pointer;

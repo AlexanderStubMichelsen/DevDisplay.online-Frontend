@@ -1,21 +1,58 @@
-.image-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Adjust width as needed */
-    grid-gap: 10px; /* Adjust spacing between images */
-  background-size: cover;
-  background-repeat: repeat-y;
-  }
+/* Images.css */
 
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    margin: 0;
-    padding: 1rem;
-    color: #fff;
-  }
-  
-  .image-item {
-    width: 100%;
-    height: auto; 
-  }
-  
+/* Overall page layout and styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
+  margin: 0;
+  padding: 0;
+}
+
+.images-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.images-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #213547;
+}
+
+.image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.loading-message {
+  font-size: 18px;
+  color: #666;
+}
+
+/* Styling for each image */
+.image-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-card:hover {
+  transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+.image-item {
+  width: 130px;
+  height: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-item:hover {
+  transform: scale(1.05); /* Scale up slightly on hover */
+}

@@ -25,7 +25,7 @@ function Images() {
       });
   }, []);
 
-  const HandleOnClick = (e) => {
+  const handleOnClick = (e) => {
     e.preventDefault();
     const clickedUrl = e.target.src;
     const clickedAlt = e.target.alt;
@@ -35,7 +35,6 @@ function Images() {
       alt: clickedAlt,
     };
 
-    // Sample facade call to save the clicked image (adjust according to your API)
     facade.fetchData('pictures/' + facade.getUserName(), 'POST', clickedImage)
       .then((response) => {
         console.log('Picture saved:', response);
@@ -48,14 +47,17 @@ function Images() {
   return (
     <>
       <NavBar />
-      <div>
-        <h1>Images from Unsplash</h1>
+      <div className="images-container">
+        <h1 className="images-title">Images from Unsplash</h1>
         <div className="image-grid">
           {imageList.map((image) => (
-            <div key={image.id}>
-              <img onClick={HandleOnClick} src={image.url} alt={image.alt} className="image-item"
-              title={image.alt} // Display alt text as tooltip if available
-
+            <div key={image.id} className="image-card">
+              <img 
+                onClick={handleOnClick} 
+                src={image.url} 
+                alt={image.alt} 
+                className="image-item"
+                title={image.alt} // Display alt text as tooltip if available
               />
             </div>
           ))}

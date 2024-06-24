@@ -54,7 +54,6 @@ function SavedImages() {
     const handleOnRate = async (value, picture_id) => {
         const updatedPictures = picturesWithRatings.map((picture) => {
             if (picture.id === picture_id) {
-                // Update the picture's rating and include it in the response
                 const updatedPicture = { ...picture, rating: value };
                 return updatedPicture;
             }
@@ -64,14 +63,12 @@ function SavedImages() {
         setPicturesWithRatings(updatedPictures);
 
         try {
-            // Save the rating and retrieve the updated rating for the picture
             const response = await facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true);
             const updatedRatingResponse = await facade.fetchData('ratings/' + picture_id, 'GET');
 
-            // Update the picture's rating directly with the new value
             const updatedPictureWithRatings = picturesWithRatings.map((picture) => {
                 if (picture.id === picture_id) {
-                    return { ...picture, ratings: updatedRatingResponse }; // Assuming updatedRatingResponse is the new rating
+                    return { ...picture, ratings: updatedRatingResponse };
                 }
                 return picture;
             });
@@ -87,43 +84,37 @@ function SavedImages() {
     return (
         <>
             <NavBar />
-            <div>
-                <div>
-                    <h1>Your Images</h1>
+            <div className="user-container">
+                <h1 className="user-title">Your Images</h1>
+                <div className="image-grid">
                     {picturesWithRatings ? (
-                        <div>
-                            {picturesWithRatings.map((picture, picIndex) => ( 
-                                <div key={picture.id}>
-                                    <p>{picture.ratings.toFixed(2)}</p>
-                                    <img
-                                        onClick={() => handleOnClick(picture.id)}
-                                        src={picture.url}
-                                        alt={`Picture ${picIndex}`}
-                                        title={picture.alt ? picture.alt : `Picture ${picIndex}`} // Display alt text as tooltip if available
-                                    />
-                                    <div>
-                                        {[...Array(totalStars)].map((_, starIndex) => {
-                                            const ratingValue = starIndex + 1; 
-                                            return (
-                                                <span
-                                                    key={starIndex}
-                                                    onClick={() => handleOnRate(ratingValue, picture.id)}
-                                                    style={{
-                                                        color: ratingValue <= picture.ratings ? 'yellow' : 'gray',
-                                                        cursor: 'pointer',
-                                                    }}
-                                                >
-                                                    ★
-                                                </span>
-                                            );
-                                        })}
-                                    </div>
+                        picturesWithRatings.map((picture, picIndex) => (
+                            <div key={picture.id} className="image-card">
+                                <img
+                                    onClick={() => handleOnClick(picture.id)}
+                                    src={picture.url}
+                                    alt={`Picture ${picIndex}`}
+                                    title={picture.alt ? picture.alt : `Picture ${picIndex}`} // Display alt text as tooltip if available
+                                />
+                                <p>{picture.ratings.toFixed(2)}</p>
+                                <div className="rating-section">
+                                    {[...Array(totalStars)].map((_, starIndex) => {
+                                        const ratingValue = starIndex + 1;
+                                        return (
+                                            <span
+                                                key={starIndex}
+                                                onClick={() => handleOnRate(ratingValue, picture.id)}
+                                                className={`rating-star ${ratingValue <= picture.ratings ? 'active' : ''}`}
+                                            >
+                                                ★
+                                            </span>
+                                        );
+                                    })}
                                 </div>
-                            ))}
-                        </div>
+                            </div>
+                        ))
                     ) : (
-                        <p>Loading...</p>
-
+                        <p className="loading-message">Loading...</p>
                     )}
                 </div>
             </div>

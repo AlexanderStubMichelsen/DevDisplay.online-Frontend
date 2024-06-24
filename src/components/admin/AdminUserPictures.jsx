@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import facade from "../../util/apiFacade";
 import NavBar from "../NavBar";
+import "../../css/AdminUsersPictures.css";
 
 const totalStars = 5;
 
@@ -65,38 +66,36 @@ function AdminUsersPictures() {
     return (
         <>
             <NavBar />
-            <div>
-                <h1>{username}'s Images</h1>
+            <div className="admin-pictures-container">
+                <h1 className="admin-pictures-title">{username}'s Images</h1>
                 {loading ? (
-                    <p>Loading...</p>
+                    <p className="loading-message">Loading...</p>
                 ) : error ? (
-                    <p>Error: {error}</p>
+                    <p className="error-message">Error: {error}</p>
                 ) : picturesWithRatings.length > 0 ? (
-                    <div>
+                    <div className="admin-image-grid">
                         {picturesWithRatings.map((picture, picIndex) => {
                             const averageRating = Array.isArray(picture.ratings)
                                 ? picture.ratings.reduce((acc, { rating }) => acc + rating, 0) / picture.ratings.length
                                 : 0;
                             return (
-                                <div key={picture.id}>
-                                    <p>{averageRating.toFixed(2)}</p>
+                                <div key={picture.id} className="admin-image-card">
+                                    <p className="average-rating">{averageRating.toFixed(2)}</p>
                                     <img
                                         onClick={() => handleOnClick(picture.id)}
                                         src={picture.url}
                                         alt={`Picture ${picIndex}`}
-                                        title={picture.alt ? picture.alt : `Picture ${picIndex}`} // Display alt text as tooltip if available
+                                        title={picture.alt ? picture.alt : `Picture ${picIndex}`}
+                                        className="admin-image-item"
                                     />
-                                    <div>
+                                    <div className="rating-section">
                                         {[...Array(totalStars)].map((_, starIndex) => {
                                             const ratingValue = starIndex + 1;
                                             return (
                                                 <span
                                                     key={starIndex}
                                                     onClick={() => handleOnRate(ratingValue, picture.id)}
-                                                    style={{
-                                                        color: ratingValue <= averageRating ? 'yellow' : 'gray',
-                                                        cursor: 'pointer',
-                                                    }}
+                                                    className={`rating-star ${ratingValue <= averageRating ? 'active' : ''}`}
                                                 >
                                                     ★
                                                 </span>
@@ -108,7 +107,7 @@ function AdminUsersPictures() {
                         })}
                     </div>
                 ) : (
-                    <p>No pictures found.</p>
+                    <p className="no-pictures-message">No pictures found.</p>
                 )}
             </div>
         </>
