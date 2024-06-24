@@ -57,6 +57,11 @@ function NavBar() {
                 <Nav.Link>Sign up</Nav.Link>
               </LinkContainer>
             )}
+            {isLoggedIn && (
+              <LinkContainer to="/unsplash" onClick={() => setExpanded(false)}>
+                <Nav.Link>Unsplash</Nav.Link>
+              </LinkContainer>
+            )}
             {userRoles.includes('admin') && (
               <LinkContainer to="/admin/pictures" onClick={() => setExpanded(false)}>
                 <Nav.Link>Admin Pictures</Nav.Link>

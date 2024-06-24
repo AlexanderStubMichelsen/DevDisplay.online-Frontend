@@ -9,6 +9,7 @@ import AdminUsers from './components/admin/AdminUsers.jsx';
 import SavedImages from './components/SavedImages.jsx';
 import AdminUserPictures from './components/admin/AdminUserPictures.jsx';
 import SignUp from './components/SignUp.jsx';
+import Unsplash from './components/Unslpash/RecievePhotos.jsx';
 import facade from './util/apiFacade.js';
 import './index.css';
 
@@ -45,6 +46,9 @@ const Root = () => {
             {/* Conditional rendering of 'AdminUserPictures' route */}
             {userRoles.includes('admin') && (
               <Route path="admin/users/:username" element={<AdminUserPictures />} />
+            )}
+            {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && (
+              <Route path="Unsplash" element={<Unsplash />} />
             )}
           </>
         )}
