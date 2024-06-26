@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
-import facade from "../util/apiFacade";
-import NavBar from "./NavBar";
-import "../css/SavedImages.css";
+import React, { useState, useEffect } from 'react';
+import facade from '../util/apiFacade';
+import NavBar from './NavBar';
+import '../css/SavedImages.css';
 
 function SavedImages() {
     const [picturesWithRatings, setPicturesWithRatings] = useState(null);
     const [rateChanged, setRateChanged] = useState(false); // New state for triggering useEffect
+    const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
     const totalStars = 5;
 
     useEffect(() => {
@@ -30,6 +31,8 @@ function SavedImages() {
 
                     const picturesWithRatings = await Promise.all(ratingsPromises);
                     setPicturesWithRatings(picturesWithRatings);
+                } else {
+                    setPicturesWithRatings([]);
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -37,6 +40,7 @@ function SavedImages() {
         };
 
         fetchDataFromPictures();
+        console.log(picturesWithRatings);
     }, [rateChanged]); // Include rateChanged in the dependency array
 
     const handleOnClick = async (id) => {
@@ -110,6 +114,20 @@ function SavedImages() {
                                             </span>
                                         );
                                     })}
+                                </div>
+                                <div className="photographer-info">
+                                    {picture.pname ? (
+                                        <>
+                                            <p>Photographer: {picture.pname}</p>
+                                            <p><a href={picture.puserLink} target="_blank" rel="noreferrer">View Profile</a></p>
+                                        </>
+                                    ) : (
+                                        <p>Photographer information not available</p>
+                                    )}
+                                    <a href={`${picture.download_location}?client_id=${accessKey}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className='link-2-photo-g'>Link to download</a>
                                 </div>
                             </div>
                         ))

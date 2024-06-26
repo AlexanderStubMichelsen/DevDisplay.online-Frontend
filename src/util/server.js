@@ -7,12 +7,12 @@ import session from 'express-session';
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// MongoDB Atlas connection string
+const mongoURI = 'mongodb+srv://alexanderstubmichelsen:Pa22w0rd%21%22%23123@mini-project-mongodb.cqpalw1.mongodb.net/?retryWrites=true&w=majority&appName=Mini-Project-MongoDB';
+
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/user-auth-example', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true
-});
+mongoose.connect(mongoURI); 
+
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => console.log('Connected to MongoDB'));
@@ -28,7 +28,7 @@ const User = mongoose.model('User', userSchema);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(session({
-  secret: 'your-secret-key',
+  secret: 'your-secret-key', // Replace with an actual secret key
   resave: false,
   saveUninitialized: true
 }));
