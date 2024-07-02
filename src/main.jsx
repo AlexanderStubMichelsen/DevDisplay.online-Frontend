@@ -47,9 +47,6 @@ const Root = () => {
             {userRoles.includes('admin') && (
               <Route path="admin/users/:username" element={<AdminUserPictures />} />
             )}
-            {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && (
-              <Route path="Unsplash" element={<Unsplash />} />
-            )}
           </>
         )}
        

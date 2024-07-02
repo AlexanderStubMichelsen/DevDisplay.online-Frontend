@@ -126,6 +126,11 @@ function Images() {
                    target="_blank"
                    rel="noreferrer"
                    className='link-2-photo-g'>Link to download</a>
+                   <br/>
+                  <a href={`${image.url}?client_id=${accessKey}`}
+                   target="_blank"
+                   rel="noreferrer"
+                   className='link-2-photo-g'>Link to full size</a>
               </div>
             </div>
           ))}

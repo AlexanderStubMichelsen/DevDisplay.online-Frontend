@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from "react";
 import facade from '../util/apiFacade';
 import NavBar from './NavBar';
 import '../css/SavedImages.css';
 
 function SavedImages() {
-    const [picturesWithRatings, setPicturesWithRatings] = useState(null);
-    const [rateChanged, setRateChanged] = useState(false); // New state for triggering useEffect
+    const [picturesWithRatings, setPicturesWithRatings] = useState([]);
+    const [rateChanged, setRateChanged] = useState(false);
     const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
     const totalStars = 5;
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         const fetchDataFromPictures = async () => {
             try {
+                setLoading(true);
                 const pictureEndpoint = 'pictures/' + facade.getUserName();
-                const pictureMethod = 'GET';
-                const pictureResponse = await facade.fetchData(pictureEndpoint, pictureMethod);
+                const pictureResponse = await facade.fetchData(pictureEndpoint, 'GET');
 
                 if (pictureResponse && pictureResponse.length > 0) {
                     const ratingsPromises = pictureResponse.map(async (picture) => {
@@ -36,12 +38,14 @@ function SavedImages() {
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setError('Failed to fetch pictures. Please try again.');
+            } finally {
+                setLoading(false);
             }
         };
 
         fetchDataFromPictures();
-        console.log(picturesWithRatings);
-    }, [rateChanged]); // Include rateChanged in the dependency array
+    }, [rateChanged]);
 
     const handleOnClick = async (id) => {
         try {
@@ -56,30 +60,23 @@ function SavedImages() {
     };
 
     const handleOnRate = async (value, picture_id) => {
-        const updatedPictures = picturesWithRatings.map((picture) => {
-            if (picture.id === picture_id) {
-                const updatedPicture = { ...picture, rating: value };
-                return updatedPicture;
-            }
-            return picture;
-        });
-
-        setPicturesWithRatings(updatedPictures);
-
         try {
+            // Save the rating
             const response = await facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true);
+            console.log('Rating saved:', response);
+
+            // Retrieve the updated rating for the picture
             const updatedRatingResponse = await facade.fetchData('ratings/' + picture_id, 'GET');
 
-            const updatedPictureWithRatings = picturesWithRatings.map((picture) => {
+            // Update the picture's rating in state
+            const updatedPictures = picturesWithRatings.map((picture) => {
                 if (picture.id === picture_id) {
                     return { ...picture, ratings: updatedRatingResponse };
                 }
                 return picture;
             });
 
-            setPicturesWithRatings(updatedPictureWithRatings);
-
-            console.log('Rating saved:', response);
+            setPicturesWithRatings(updatedPictures);
         } catch (error) {
             console.error('Error saving rating:', error);
         }
@@ -88,19 +85,18 @@ function SavedImages() {
     return (
         <>
             <NavBar />
-            <div className="user-container">
-                <h1 className="user-title">Your Images</h1>
+            <div className="admin-container">
+                <h1 className="admin-title">Your Images</h1>
                 <div className="image-grid">
-                    {picturesWithRatings ? (
+                    {picturesWithRatings.length > 0 ? (
                         picturesWithRatings.map((picture, picIndex) => (
                             <div key={picture.id} className="image-card">
                                 <img
                                     onClick={() => handleOnClick(picture.id)}
                                     src={picture.url}
                                     alt={`Picture ${picIndex}`}
-                                    title={picture.alt ? picture.alt : `Picture ${picIndex}`} // Display alt text as tooltip if available
+                                    title={picture.alt ? picture.alt : `Picture ${picIndex}`}
                                 />
-                                <p>{picture.ratings.toFixed(2)}</p>
                                 <div className="rating-section">
                                     {[...Array(totalStars)].map((_, starIndex) => {
                                         const ratingValue = starIndex + 1;
@@ -114,20 +110,6 @@ function SavedImages() {
                                             </span>
                                         );
                                     })}
-                                </div>
-                                <div className="photographer-info">
-                                    {picture.pname ? (
-                                        <>
-                                            <p>Photographer: {picture.pname}</p>
-                                            <p><a href={picture.puserLink} target="_blank" rel="noreferrer">View Profile</a></p>
-                                        </>
-                                    ) : (
-                                        <p>Photographer information not available</p>
-                                    )}
-                                    <a href={`${picture.download_location}?client_id=${accessKey}`}
-                                        target="_blank"
-                                        rel="noreferrer"
-                                        className='link-2-photo-g'>Link to download</a>
                                 </div>
                             </div>
                         ))
