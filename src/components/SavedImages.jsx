@@ -17,6 +17,7 @@ function SavedImages() {
                 setLoading(true);
                 const pictureEndpoint = 'pictures/' + facade.getUserName();
                 const pictureResponse = await facade.fetchData(pictureEndpoint, 'GET');
+                console.log(pictureResponse);
 
                 if (pictureResponse && pictureResponse.length > 0) {
                     const ratingsPromises = pictureResponse.map(async (picture) => {
@@ -25,6 +26,7 @@ function SavedImages() {
                             const ratingsMethod = 'GET';
                             const ratingsResponse = await facade.fetchData(ratingsEndpoint, ratingsMethod);
                             return { ...picture, ratings: ratingsResponse };
+                            
                         } catch (error) {
                             console.error('Error fetching ratings for picture ID:', picture.id, error);
                             return picture;
@@ -96,7 +98,21 @@ function SavedImages() {
                                     src={picture.url}
                                     alt={`Picture ${picIndex}`}
                                     title={picture.alt ? picture.alt : `Picture ${picIndex}`}
+
                                 />
+                                <div className="photographer-info">
+                                    <p>Photographer: {picture.pname}</p>
+                                    <p><a href={picture.puserLink} target="_blank" rel="noreferrer">View Profile</a></p>
+                                    <a href={`${picture.pdownLink}?client_id=${accessKey}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className='link-2-photo-g'>Link to download</a>
+                                        <br/>
+                                        <a href={`${picture.url}?client_id=${accessKey}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className='link-2-photo-g'>Link to full size</a>
+                                    </div>
                                 <div className="rating-section">
                                     {[...Array(totalStars)].map((_, starIndex) => {
                                         const ratingValue = starIndex + 1;

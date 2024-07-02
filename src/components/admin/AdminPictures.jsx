@@ -5,6 +5,7 @@ import '../../css/AdminPictures.css'; // Import the CSS file for styling
 
 const Admin = () => {
     const [picturesWithRatings, setPicturesWithRatings] = useState(null);
+    const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
     const totalStars = 5;
 
     useEffect(() => {
@@ -88,6 +89,19 @@ const Admin = () => {
                                     alt={`Picture ${picIndex}`}
                                     title={picture.alt ? picture.alt : `Picture ${picIndex}`}
                                 />
+                                 <div className="photographer-info">
+                                    <p>Photographer: {picture.pname}</p>
+                                    <p><a href={picture.puserLink} target="_blank" rel="noreferrer">View Profile</a></p>
+                                    <a href={`${picture.pdownLink}?client_id=${accessKey}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className='link-2-photo-g'>Link to download</a>
+                                        <br/>
+                                        <a href={`${picture.url}?client_id=${accessKey}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className='link-2-photo-g'>Link to full size</a>
+                                    </div>
                                 <div className="rating-section">
                                     {[...Array(totalStars)].map((_, starIndex) => {
                                         const ratingValue = starIndex + 1;

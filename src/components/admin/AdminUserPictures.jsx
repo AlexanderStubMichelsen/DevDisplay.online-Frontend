@@ -10,6 +10,7 @@ function AdminUsersPictures() {
     const { username } = useParams();
     const [picturesWithRatings, setPicturesWithRatings] = useState([]);
     const [loading, setLoading] = useState(false);
+    const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
     const [error, setError] = useState(null);
 
     const fetchDataFromPictures = async (username) => {
@@ -84,7 +85,7 @@ function AdminUsersPictures() {
         <>
             <NavBar />
             <div className="admin-container">
-                <h1 className="admin-title">Your Images</h1>
+                <h1 className="admin-title">Your Images {username}</h1>
                 <div className="image-grid">
                     {picturesWithRatings ? (
                         picturesWithRatings.map((picture, picIndex) => (
@@ -95,6 +96,19 @@ function AdminUsersPictures() {
                                     alt={`Picture ${picIndex}`}
                                     title={picture.alt ? picture.alt : `Picture ${picIndex}`}
                                 />
+                                <div className="photographer-info">
+                                    <p>Photographer: {picture.pname}</p>
+                                    <p><a href={picture.puserLink} target="_blank" rel="noreferrer">View Profile</a></p>
+                                    <a href={`${picture.pdownLink}?client_id=${accessKey}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className='link-2-photo-g'>Link to download</a>
+                                        <br/>
+                                        <a href={`${picture.url}?client_id=${accessKey}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                        className='link-2-photo-g'>Link to full size</a>
+                                    </div>
                                 <div className="rating-section">
                                     {[...Array(totalStars)].map((_, starIndex) => {
                                         const ratingValue = starIndex + 1;
