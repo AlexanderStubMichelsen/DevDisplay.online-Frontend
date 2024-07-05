@@ -1,6 +1,5 @@
-/* SavedImages.css */
+/* AdminUsersPictures.css */
 
-/* Overall page layout and styling */
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
@@ -8,64 +7,102 @@ body {
   padding: 0;
 }
 
-.user-container {
+.admin-pictures-container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.user-title {
+.admin-pictures-title {
   font-size: 28px;
   margin-bottom: 20px;
   color: #213547;
+  text-align: center;
 }
 
-.loading-message {
+.loading-message, .error-message, .no-pictures-message {
   font-size: 18px;
   color: #666;
+  text-align: center;
+  margin-top: 20px;
 }
 
-/* Styling for each image and its associated rating stars */
-.image-card {
-  width: 152px;
+.admin-image-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.admin-image-card {
   background-color: #ffffff;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
-  margin-bottom: 20px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
 }
 
-.image-card p {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 10px;
+.admin-image-card:hover {
+  transform: scale(1.05);
 }
 
-.image-card img {
-  width: 130px;
+.admin-image-item {
+  width: 100%;
   height: auto;
   border-radius: 5px;
   cursor: pointer;
   transition: transform 0.2s ease-in-out;
 }
 
-.image-card img:hover {
-  transform: scale(1.05); /* Scale up slightly on hover */
+.admin-image-item:hover {
+  transform: scale(1.05);
+}
+
+.photographer-info {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}
+
+.photographer-info a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.photographer-info a:hover {
+  color: #0056b3;
 }
 
 .rating-section {
+  display: flex;
+  justify-content: center;
   margin-top: 10px;
 }
 
 .rating-star {
-  font-size: 24px;
-  color: gray;
+  font-size: 20px;
   cursor: pointer;
+  color: gray;
   transition: color 0.2s ease-in-out;
 }
 
-.rating-star:hover,
 .rating-star.active {
-  color: yellow; /* Yellow color for active (rated) stars */
+  color: yellow;
+}
+
+.rating-star:hover {
+  color: gold;
+}
+
+.link-2-photo-g {
+  font-size: 14px;
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+}
+
+.link-2-photo-g:hover {
+  color: #0056b3;
 }
