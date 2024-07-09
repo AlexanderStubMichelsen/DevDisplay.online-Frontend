@@ -6,7 +6,7 @@ import "../../css/SavedImages.css";
 
 const totalStars = 5;
 
-function AdminUsersPictures() {
+function AdminUserSavedImages() {
     const { username } = useParams();
     const [picturesWithRatings, setPicturesWithRatings] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -142,4 +142,4 @@ function AdminUsersPictures() {
     );
 }
 
-export default AdminUsersPictures;
+export default AdminUserSavedImages;

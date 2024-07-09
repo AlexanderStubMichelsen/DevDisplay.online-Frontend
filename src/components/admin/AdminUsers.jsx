@@ -37,7 +37,7 @@ const AdminUsers = () => {
     try {
       const endpoint = `ratings/${pictureId}`;
       const method = "DELETE";
-      await facade.fetchData(endpoint, method, true);
+      await facade.fetchData(endpoint, method);
       console.log(`Rating deleted for picture ${pictureId}`);
     } catch (error) {
       console.error("Error deleting rating:", error);
@@ -49,7 +49,7 @@ const AdminUsers = () => {
     try {
       const endpoint = `pictures/${username}`;
       const method = "DELETE";
-      await facade.fetchData(endpoint, method, true);
+      await facade.fetchData(endpoint, method);
       console.log(`Pictures deleted for user ${username}`);
     } catch (error) {
       console.error("Error deleting pictures:", error);
@@ -82,7 +82,7 @@ const AdminUsers = () => {
       await fetchDataFromPictures(username);
       const endpoint = `auth/delete/${username}`;
       const method = "DELETE";
-      await facade.fetchData(endpoint, method, true);
+      await facade.fetchData(endpoint, method);
       console.log(`User deleted: ${username}`);
       setUsers((prevUsers) =>
         prevUsers.filter((user) => user.username !== username)
@@ -149,7 +149,10 @@ const AdminUsers = () => {
                       Delete
                     </button>
                     <Link to={`/admin/users/${user.username}`}>
-                      <button className="view">View Pictures</button>
+                      <button className="view">View Images</button>
+                    </Link>
+                    <Link to={`/admin/images/${user.username}`}>
+                      <button className="view">Search Images</button>
                     </Link>
                   </div>
                   <div className="checkbox-group">
