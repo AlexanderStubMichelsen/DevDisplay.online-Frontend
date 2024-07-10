@@ -15,14 +15,14 @@ function SavedImages() {
             try {
                 setLoading(true);
                 setError(null); // Clear previous errors
-                const pictureEndpoint = 'pictures/' + facade.getUserName();
+                const pictureEndpoint = `pictures/${facade.getUserName()}`;
                 const pictureResponse = await facade.fetchData(pictureEndpoint, 'GET');
                 console.log(pictureResponse);
 
                 if (pictureResponse && pictureResponse.length > 0) {
                     const ratingsPromises = pictureResponse.map(async (picture) => {
                         try {
-                            const ratingsEndpoint = 'ratings/' + picture.id;
+                            const ratingsEndpoint = `ratings/${picture.id}`;
                             const ratingsResponse = await facade.fetchData(ratingsEndpoint, 'GET');
                             return { ...picture, ratings: ratingsResponse };
                         } catch (error) {
@@ -49,7 +49,7 @@ function SavedImages() {
 
     const handleOnClick = async (id) => {
         try {
-            const endpoint = 'pictures/picture/' + id;
+            const endpoint = `pictures/picture/${id}`;
             const response = await facade.fetchData(endpoint, 'DELETE', true);
             console.log('Picture deleted:', response);
             setPicturesWithRatings(prevPictures => prevPictures.filter(picture => picture.id !== id));
@@ -59,18 +59,15 @@ function SavedImages() {
         }
     };
 
-    const handleOnRate = async (value, picture_id) => {
+    const handleOnRate = async (value, pictureId) => {
         try {
-            // Save the rating
-            const response = await facade.fetchData('ratings/' + picture_id + "/" + value + "/" + facade.getUserName(), 'POST', true);
+            const response = await facade.fetchData(`ratings/${pictureId}/${value}/${facade.getUserName()}`, 'POST', true);
             console.log('Rating saved:', response);
 
-            // Retrieve the updated rating for the picture
-            const updatedRatingResponse = await facade.fetchData('ratings/' + picture_id, 'GET');
+            const updatedRatingResponse = await facade.fetchData(`ratings/${pictureId}`, 'GET');
 
-            // Update the picture's rating in state
             const updatedPictures = picturesWithRatings.map((picture) => {
-                if (picture.id === picture_id) {
+                if (picture.id === pictureId) {
                     return { ...picture, ratings: updatedRatingResponse };
                 }
                 return picture;
