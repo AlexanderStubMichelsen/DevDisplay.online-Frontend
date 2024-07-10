@@ -62,7 +62,7 @@ function SavedImages() {
     const handleOnRate = async (value, picture_id) => {
         try {
             // Save the rating
-            const response = await facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true);
+            const response = await facade.fetchData('ratings/' + picture_id + "/" + value + "/" + facade.getUserName(), 'POST', true);
             console.log('Rating saved:', response);
 
             // Retrieve the updated rating for the picture
