@@ -4,11 +4,13 @@ import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } 
 import App from './App.jsx';
 import Images from './components/Images.jsx';
 import NoMatch from './components/NoMatch.jsx';
+import AdminPictures from './components/admin/AdminSavedImages.jsx';
 import AdminUsers from './components/admin/AdminUsers.jsx';
 import SavedImages from './components/SavedImages.jsx';
 import AdminUserSavedImages from './components/admin/AdminUserSavedImages.jsx';
 import AdminUserImages from './components/admin/AdminUserImages.jsx';
 import SignUp from './components/SignUp.jsx';
+import Unsplash from './components/Unslpash/RecievePhotos.jsx';
 import facade from './util/apiFacade.js';
 import './index.css';
 
@@ -33,6 +35,10 @@ const Root = () => {
             {/* Conditional rendering of 'SavedImages' route */}
             {userRoles.includes('user') && (
               <Route path="savedImg" element={<SavedImages />} />
+            )}
+            {/* Conditional rendering of 'AdminPictures' route */}
+            {userRoles.includes('admin') && (
+              <Route path="admin/pictures" element={<AdminPictures />} />
             )}
             {/* Conditional rendering of 'AdminUsers' route */}
             {userRoles.includes('admin') && (
