@@ -53,9 +53,9 @@ function AdminUserSavedImages() {
 
     const handleOnClick = async (alt) => {
         try {
-            const endpoint = `pictures/picture/${alt}`;
+            const endpoint = `pictures/picture/${alt}/${username}`;
             const response = await facade.fetchData(endpoint, 'DELETE', true);
-            console.log('Picture deleted:', response);
+            console.log('Picture deleted for: ' + username + ' : ', response);
             setPicturesWithRatings(prevPictures => prevPictures.filter(picture => picture.alt !== alt));
         } catch (error) {
             console.error('Error deleting picture:', error);

@@ -27,7 +27,6 @@ function AdminUserImages() {
 
         const images = data.results ? // Check if it's a search result or normal photo list
           data.results.map((photo) => ({
-            id: photo.id,
             url: photo.urls.small,
             alt: photo.alt_description || 'Image',
             photographer: {
@@ -38,7 +37,6 @@ function AdminUserImages() {
             download_location: photo.links.download_location
           })) :
           data.map((photo) => ({
-            id: photo.id,
             url: photo.urls.small,
             alt: photo.alt_description || 'Image',
             photographer: {
