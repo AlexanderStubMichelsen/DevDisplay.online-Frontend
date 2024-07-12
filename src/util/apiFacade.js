@@ -17,7 +17,12 @@ function apiFacade() {
 
   const handleHttpErrors = async (res) => {
     if (!res.ok) {
-        const error = await res.json().catch(() => ({})); // Try to parse JSON, fallback to empty object
+        let error = { message: 'Unknown error' };
+        try {
+            error = await res.json();
+        } catch (e) {
+            // No-op, fallback to default error message
+        }
         throw new Error(error.message || 'Unknown error');
     }
     if (res.status === 204 || res.headers.get('Content-Length') === '0') {
@@ -25,6 +30,7 @@ function apiFacade() {
     }
     return res.json();
 };
+
 
     const login = async (username, password) => {
       const payload = { username, password };

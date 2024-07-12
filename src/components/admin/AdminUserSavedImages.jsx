@@ -23,27 +23,27 @@ function AdminUserSavedImages() {
             if (pictureResponse && pictureResponse.length > 0) {
                 const ratingsPromises = pictureResponse.map(async (picture) => {
                     try {
-                        const ratingsEndpoint = 'ratings/' + picture.id;
+                        const ratingsEndpoint = 'ratings/' + picture.alt;
                         const ratingsResponse = await facade.fetchData(ratingsEndpoint, 'GET');
                         return { ...picture, ratings: ratingsResponse };
                     } catch (error) {
-                        console.error('Error fetching ratings for picture ID:', picture.id, error);
-                        return picture;
-                    }
-                });
+                        console.error('Error fetching ratings for picture alt:', picture.alt, error);
+                        return { ...picture, ratings: null };
+                        }
+                    });
 
-                const picturesWithRatings = await Promise.all(ratingsPromises);
-                setPicturesWithRatings(picturesWithRatings);
-            } else {
-                setPicturesWithRatings([]);
+                    const picturesWithRatings = await Promise.all(ratingsPromises);
+                    setPicturesWithRatings(picturesWithRatings);
+                } else {
+                    setPicturesWithRatings([]);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setError('Failed to fetch pictures. Please try again.');
+            } finally {
+                setLoading(false);
             }
-        } catch (error) {
-            console.error('Error fetching data:', error);
-            setError('Error fetching data. Please try again later.');
-        } finally {
-            setLoading(false);
-        }
-    };
+        };
 
     useEffect(() => {
         if (username) {
@@ -51,28 +51,28 @@ function AdminUserSavedImages() {
         }
     }, [username]);
 
-    const handleOnClick = async (id) => {
+    const handleOnClick = async (alt) => {
         try {
-            const endpoint = 'pictures/picture/' + id;
-            const method = 'DELETE';
-            const response = await facade.fetchData(endpoint, method, true);
+            const endpoint = 'pictures/picture/${alt}';
+            const response = await facade.fetchData(endpoint, 'DELETE', true);
             console.log('Picture deleted:', response);
-            setPicturesWithRatings(prevPictures => prevPictures.filter(picture => picture.id !== id));
+            setPicturesWithRatings(prevPictures => prevPictures.filter(picture => picture.alt !== alt));
         } catch (error) {
             console.error('Error deleting picture:', error);
             setError('Error deleting picture. Please try again later.');
         }
     };
 
-    const handleOnRate = async (value, picture_id) => {
+    const handleOnRate = async (value, picture_alt) => {
         try {
-            const response = await facade.fetchData('ratings/' + picture_id + "/" + value, 'POST', true);
+            const response = await facade.fetchData(`ratings/${picture_alt}/${value}/${username}`, 'POST', true);
             console.log('Rating saved:', response);
 
-            const updatedRatingResponse = await facade.fetchData('ratings/' + picture_id, 'GET');
+            const updatedRatingResponse = await facade.fetchData('ratings/' + picture_alt, 'GET');
+            console.log(`Updated ratings for ${picture_alt}:`, updatedRatingResponse);
 
             const updatedPictures = picturesWithRatings.map((picture) => {
-                if (picture.id === picture_id) {
+                if (picture.alt === picture_alt) {
                     return { ...picture, ratings: updatedRatingResponse };
                 }
                 return picture;
@@ -81,7 +81,11 @@ function AdminUserSavedImages() {
             setPicturesWithRatings(updatedPictures);
         } catch (error) {
             console.error('Error saving rating:', error);
-            setError('Error saving rating. Please try again later.');
+            if (error.message === 'User has already rated this image.') {
+                setError('User has already rated this image.');
+            } else {
+                setError('Error saving rating. Please try again later.');
+            }
         }
     };
 
@@ -97,12 +101,13 @@ function AdminUserSavedImages() {
                 ) : picturesWithRatings.length > 0 ? (
                     <div className="admin-image-grid">
                         {picturesWithRatings.map((picture, picIndex) => (
-                            <div key={picture.id} className="admin-image-card">
+                            <div key={picture.alt} className="admin-image-card">
                                 <img
-                                    onClick={() => handleOnClick(picture.id)}
+                                    onClick={() => handleOnClick(picture.alt)}
                                     src={picture.url}
                                     alt={`Picture ${picIndex}`}
                                     title={picture.alt ? picture.alt : `Picture ${picIndex}`}
+                                    className="admin-image-item"
                                 />
                                 <div className="photographer-info">
                                     <p>Photographer: {picture.pname}</p>
@@ -123,7 +128,7 @@ function AdminUserSavedImages() {
                                         return (
                                             <span
                                                 key={starIndex}
-                                                onClick={() => handleOnRate(ratingValue, picture.id)}
+                                                onClick={() => handleOnRate(ratingValue, picture.alt)}
                                                 className={`rating-star ${ratingValue <= picture.ratings ? 'active' : ''}`}
                                             >
                                                 ★

@@ -17,16 +17,15 @@ function SavedImages() {
                 setError(null); // Clear previous errors
                 const pictureEndpoint = `pictures/${facade.getUserName()}`;
                 const pictureResponse = await facade.fetchData(pictureEndpoint, 'GET');
-                console.log(pictureResponse);
 
                 if (pictureResponse && pictureResponse.length > 0) {
                     const ratingsPromises = pictureResponse.map(async (picture) => {
                         try {
-                            const ratingsEndpoint = `ratings/${picture.id}`;
+                            const ratingsEndpoint = `ratings/${picture.alt}`;
                             const ratingsResponse = await facade.fetchData(ratingsEndpoint, 'GET');
                             return { ...picture, ratings: ratingsResponse };
                         } catch (error) {
-                            console.error('Error fetching ratings for picture ID:', picture.id, error);
+                            console.error('Error fetching ratings for picture alt:', picture.alt, error);
                             return { ...picture, ratings: null };
                         }
                     });
@@ -47,27 +46,28 @@ function SavedImages() {
         fetchDataFromPictures();
     }, []);
 
-    const handleOnClick = async (id) => {
+    const handleOnClick = async (alt) => {
         try {
-            const endpoint = `pictures/picture/${id}`;
+            const endpoint = `pictures/picture/${alt}`;
             const response = await facade.fetchData(endpoint, 'DELETE', true);
             console.log('Picture deleted:', response);
-            setPicturesWithRatings(prevPictures => prevPictures.filter(picture => picture.id !== id));
+            setPicturesWithRatings(prevPictures => prevPictures.filter(picture => picture.alt !== alt));
         } catch (error) {
             console.error('Error deleting picture:', error);
             setError('Error deleting picture. Please try again later.');
         }
     };
 
-    const handleOnRate = async (value, pictureId) => {
+    const handleOnRate = async (value, picture_alt) => {
         try {
-            const response = await facade.fetchData(`ratings/${pictureId}/${value}/${facade.getUserName()}`, 'POST', true);
+            const response = await facade.fetchData(`ratings/${picture_alt}/${value}/${facade.getUserName()}`, 'POST', true);
             console.log('Rating saved:', response);
 
-            const updatedRatingResponse = await facade.fetchData(`ratings/${pictureId}`, 'GET');
+            const updatedRatingResponse = await facade.fetchData(`ratings/${pictureAlt}`, 'GET');
+            console.log(`Updated ratings for ${pictureAlt}:`, updatedRatingResponse);
 
             const updatedPictures = picturesWithRatings.map((picture) => {
-                if (picture.id === pictureId) {
+                if (picture.alt === pictureAlt) {
                     return { ...picture, ratings: updatedRatingResponse };
                 }
                 return picture;
@@ -76,7 +76,11 @@ function SavedImages() {
             setPicturesWithRatings(updatedPictures);
         } catch (error) {
             console.error('Error saving rating:', error);
-            setError('Error saving rating. Please try again later.');
+            if (error.message === 'User has already rated this image.') {
+                setError('User has already rated this image.');
+            } else {
+                setError('Error saving rating. Please try again later.');
+            }
         }
     };
 
@@ -92,9 +96,9 @@ function SavedImages() {
                 ) : picturesWithRatings.length > 0 ? (
                     <div className="admin-image-grid">
                         {picturesWithRatings.map((picture, picIndex) => (
-                            <div key={picture.id} className="admin-image-card">
+                            <div key={picture.alt} className="admin-image-card">
                                 <img
-                                    onClick={() => handleOnClick(picture.id)}
+                                    onClick={() => handleOnClick(picture.alt)}
                                     src={picture.url}
                                     alt={`Picture ${picIndex}`}
                                     title={picture.alt ? picture.alt : `Picture ${picIndex}`}
@@ -107,8 +111,8 @@ function SavedImages() {
                                         target="_blank"
                                         rel="noreferrer"
                                         className='link-2-photo-g'>Link to download</a>
-                                    <br />
-                                    <a href={`${picture.url}?client_id=${accessKey}`}
+                                        <br/>
+                                        <a href={`${picture.url}?client_id=${accessKey}`}
                                         target="_blank"
                                         rel="noreferrer"
                                         className='link-2-photo-g'>Link to full size</a>
@@ -119,7 +123,7 @@ function SavedImages() {
                                         return (
                                             <span
                                                 key={starIndex}
-                                                onClick={() => handleOnRate(ratingValue, picture.id)}
+                                                onClick={() => handleOnRate(ratingValue, picture.alt)}
                                                 className={`rating-star ${ratingValue <= (picture.ratings || 0) ? 'active' : ''}`}
                                             >
                                                 ★
