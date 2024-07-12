@@ -63,11 +63,11 @@ function SavedImages() {
             const response = await facade.fetchData(`ratings/${picture_alt}/${value}/${facade.getUserName()}`, 'POST', true);
             console.log('Rating saved:', response);
 
-            const updatedRatingResponse = await facade.fetchData(`ratings/${pictureAlt}`, 'GET');
-            console.log(`Updated ratings for ${pictureAlt}:`, updatedRatingResponse);
+            const updatedRatingResponse = await facade.fetchData(`ratings/${picture_alt}`, 'GET');
+            console.log(`Updated ratings for ${picture_alt}:`, updatedRatingResponse);
 
             const updatedPictures = picturesWithRatings.map((picture) => {
-                if (picture.alt === pictureAlt) {
+                if (picture.alt === picture_alt) {
                     return { ...picture, ratings: updatedRatingResponse };
                 }
                 return picture;
