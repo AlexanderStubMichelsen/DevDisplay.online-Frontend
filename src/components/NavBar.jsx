@@ -58,11 +58,6 @@ function NavBar() {
               </LinkContainer>
             )}
             {userRoles.includes('admin') && (
-              <LinkContainer to="/admin/pictures" onClick={() => setExpanded(false)}>
-                <Nav.Link>Admin Pictures</Nav.Link>
-              </LinkContainer>
-            )}
-            {userRoles.includes('admin') && (
               <LinkContainer to="/admin/users" onClick={() => setExpanded(false)}>
                 <Nav.Link>Admin Users</Nav.Link>
               </LinkContainer>
