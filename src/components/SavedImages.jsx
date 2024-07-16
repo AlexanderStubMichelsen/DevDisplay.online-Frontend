@@ -76,10 +76,10 @@ function SavedImages() {
             setPicturesWithRatings(updatedPictures);
         } catch (error) {
             console.error('Error saving rating:', error);
-            if (error.message === 'User has already rated this image.') {
+            if (error.message === 'Unknown error') {
                 setError('User has already rated this image.');
             } else {
-                setError('Error saving rating. Please try again later.');
+                setError('Picture is already rated by you.');
             }
         }
     };
@@ -89,11 +89,9 @@ function SavedImages() {
             <NavBar />
             <div className="admin-pictures-container">
                 <h1 className="admin-pictures-title">Your Images {facade.getUserName()}</h1>
-                {loading ? (
-                    <p className="loading-message">Loading...</p>
-                ) : error ? (
-                    <p className="error-message">{error}</p>
-                ) : picturesWithRatings.length > 0 ? (
+                {loading && <p className="loading-message">Loading...</p>}
+                {error && <p className="error-message">{error}</p>}
+                {picturesWithRatings.length > 0 ? (
                     <div className="admin-image-grid">
                         {picturesWithRatings.map((picture, picIndex) => (
                             <div key={picture.alt} className="admin-image-card">

@@ -21,15 +21,28 @@ function apiFacade() {
         try {
             error = await res.json();
         } catch (e) {
-            // No-op, fallback to default error message
+            // Failed to parse error message from response, using default error message
         }
+        
+        // Handle specific error case for status 409
+        if (res.status === 409) {
+            throw new Error('Picture is already rated by you');
+        }
+
+        // Throw the parsed error message or the default message
         throw new Error(error.message || 'Unknown error');
     }
+
+    // Handle no content (204 No Content) or empty response
     if (res.status === 204 || res.headers.get('Content-Length') === '0') {
-        return {}; // Handle no content (204 No Content) response or empty response
+        return {};
     }
+
+    // Return response body as JSON for successful responses
     return res.json();
 };
+
+
 
 
     const login = async (username, password) => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useMemo } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import facade from "../../util/apiFacade";
 import NavBar from "../NavBar";
@@ -29,21 +29,21 @@ function AdminUserSavedImages() {
                     } catch (error) {
                         console.error('Error fetching ratings for picture alt:', picture.alt, error);
                         return { ...picture, ratings: null };
-                        }
-                    });
+                    }
+                });
 
-                    const picturesWithRatings = await Promise.all(ratingsPromises);
-                    setPicturesWithRatings(picturesWithRatings);
-                } else {
-                    setPicturesWithRatings([]);
-                }
-            } catch (error) {
-                console.error('Error fetching data:', error);
-                setError('Failed to fetch pictures. Please try again.');
-            } finally {
-                setLoading(false);
+                const picturesWithRatings = await Promise.all(ratingsPromises);
+                setPicturesWithRatings(picturesWithRatings);
+            } else {
+                setPicturesWithRatings([]);
             }
-        };
+        } catch (error) {
+            console.error('Error fetching data:', error);
+            setError('Failed to fetch pictures. Please try again.');
+        } finally {
+            setLoading(false);
+        }
+    };
 
     useEffect(() => {
         if (username) {
@@ -81,10 +81,10 @@ function AdminUserSavedImages() {
             setPicturesWithRatings(updatedPictures);
         } catch (error) {
             console.error('Error saving rating:', error);
-            if (error.message === 'User has already rated this image.') {
+            if (error.message === 'Unknown error') {
                 setError('User has already rated this image.');
             } else {
-                setError('Error saving rating. Please try again later.');
+                setError('Picture is already rated by you.');
             }
         }
     };
@@ -94,11 +94,9 @@ function AdminUserSavedImages() {
             <NavBar />
             <div className="admin-pictures-container">
                 <h1 className="admin-pictures-title">Your Images {username}</h1>
-                {loading ? (
-                    <p className="loading-message">Loading...</p>
-                ) : error ? (
-                    <p className="error-message">{error}</p>
-                ) : picturesWithRatings.length > 0 ? (
+                {loading && <p className="loading-message">Loading...</p>}
+                {error && <p className="error-message">{error}</p>}
+                {picturesWithRatings.length > 0 ? (
                     <div className="admin-image-grid">
                         {picturesWithRatings.map((picture, picIndex) => (
                             <div key={picture.alt} className="admin-image-card">
@@ -116,8 +114,8 @@ function AdminUserSavedImages() {
                                         target="_blank"
                                         rel="noreferrer"
                                         className='link-2-photo-g'>Link to download</a>
-                                        <br/>
-                                        <a href={`${picture.url}?client_id=${accessKey}`}
+                                    <br/>
+                                    <a href={`${picture.url}?client_id=${accessKey}`}
                                         target="_blank"
                                         rel="noreferrer"
                                         className='link-2-photo-g'>Link to full size</a>
@@ -140,7 +138,7 @@ function AdminUserSavedImages() {
                         ))}
                     </div>
                 ) : (
-                    <p className="no-pictures-message">No pictures available.</p>
+                    !loading && <p className="no-pictures-message">No pictures available.</p>
                 )}
             </div>
         </>
