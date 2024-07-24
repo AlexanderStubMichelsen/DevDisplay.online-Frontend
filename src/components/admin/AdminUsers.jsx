@@ -122,6 +122,18 @@ const AdminUsers = () => {
     );
   };
 
+  const deleteRatings = async (username) => {
+    try {
+      const endpoint = `ratings/${username}`;
+      const method = "DELETE";
+      await facade.fetchData(endpoint, method);
+      console.log(`Ratings deleted for user ${username}`);
+    } catch (error) {
+      console.error("Error deleting ratings:", error);
+      setError("Failed to delete ratings. Please try again.");
+    }
+  };
+
   const toggleRole = (roles, role) => {
     return {
       ...roles,
@@ -154,6 +166,7 @@ const AdminUsers = () => {
                     <Link to={`/admin/images/${user.username}`}>
                       <button className="view">Search Images</button>
                     </Link>
+                    <button className="view" onClick={() => deleteRatings(user.username)}>Delete Ratings</button>
                   </div>
                   <div className="checkbox-group">
                     <label>
