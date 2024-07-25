@@ -8,6 +8,7 @@ import AdminUsers from './components/admin/AdminUsers.jsx';
 import SavedImages from './components/SavedImages.jsx';
 import AdminUserSavedImages from './components/admin/AdminUserSavedImages.jsx';
 import AdminUserImages from './components/admin/AdminUserImages.jsx';
+import Login from './components/LogIn.jsx';
 import SignUp from './components/SignUp.jsx';
 import facade from './util/apiFacade.js';
 import './index.css';
@@ -21,6 +22,7 @@ const Root = () => {
       <Route>
         {/* Pass setIsLoggedIn as a prop to the App component */}
         <Route path="/" element={<App setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
+        <Route path="/login" element={<Login setIsLoggedIn={setIsLoggedIn} />} />
         {/* Route for sign-up, available whether logged in or not */}
         <Route path="/signup" element={<SignUp />} />
         {/* Conditional rendering of routes based on isLoggedIn */}

@@ -42,6 +42,9 @@ function NavBar() {
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/login" onClick={() => setExpanded(false)}>
+              <Nav.Link>Login</Nav.Link>
+            </LinkContainer>
             {isLoggedIn && (
               <LinkContainer to="/images" onClick={() => setExpanded(false)}>
                 <Nav.Link>Images</Nav.Link>
