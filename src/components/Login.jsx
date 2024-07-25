@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css'; // Import the stylesheet
+import '../css/Login.css'; // Import the stylesheet
 import facade from '../util/apiFacade';
 import NavBar from '../components/NavBar.jsx';
 
@@ -55,17 +55,18 @@ const Login = ({ setIsLoggedIn }) => {
           </div>
         ) : (
           <form className='loginform' onSubmit={performLogin}>
+            <h2>Login</h2>
+            <label htmlFor="username">Username:</label>
             <input 
               type="text"
-              placeholder="Username"
               id="username"
               value={loginCredentials.username}
               onChange={onChange}
               className='input'
             />
+            <label htmlFor="password">Password:</label>
             <input 
               type="password"
-              placeholder="Password"
               id="password"
               value={loginCredentials.password}
               onChange={onChange}
@@ -74,6 +75,9 @@ const Login = ({ setIsLoggedIn }) => {
             <button type="submit" className='btn'>Login</button>
           </form>
         )}
+      </div>
+      <div className='link'>
+        <p>Don't have an account? <a href="/signup">Sign up here</a></p>
       </div>
     </>
   );

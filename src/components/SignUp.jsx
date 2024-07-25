@@ -77,6 +77,9 @@ const SignupPage = () => {
           {successMessage && <p className="success">{successMessage}</p>}
         </form>
       </div>
+      <div className='link'>
+        <p>Don't have an account? <a href="/login">Login</a> here</p>
+      </div>
     </>
   );
 };
