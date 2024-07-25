@@ -79,6 +79,11 @@ body {
   color: #0056b3;
 }
 
+button.delete {
+  color: #213547;
+  background-color: white;
+}
+
 .rating-section {
   display: flex;
   justify-content: center;
