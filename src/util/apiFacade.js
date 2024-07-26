@@ -42,9 +42,6 @@ function apiFacade() {
     return res.json();
 };
 
-
-
-
     const login = async (username, password) => {
       const payload = { username, password };
       const options = makeOptions("POST", payload);
