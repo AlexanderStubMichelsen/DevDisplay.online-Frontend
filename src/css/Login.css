@@ -90,6 +90,11 @@ body {
     border-radius: 4px;
   }
 
+.welcome {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
   .error {
     color: red;
     font-size: 0.875em;

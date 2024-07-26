@@ -50,34 +50,34 @@ const Login = ({ setIsLoggedIn }) => {
       <div className='login'>
         {isLoggedInStored ? (
           <div className='loginform'>
-            <p>You are logged in as {facade.getUserName()}, with role {facade.getUserRoles()}</p>
+            <p className='welcome'>Hi {facade.getUserRoles()} {facade.getUserName()}!</p>
             <button onClick={handleLogout} className='btn'>Log out</button>
           </div>
         ) : (
-          <form className='loginform' onSubmit={performLogin}>
-            <h2>Login</h2>
-            <label htmlFor="username">Username:</label>
-            <input 
-              type="text"
-              id="username"
-              value={loginCredentials.username}
-              onChange={onChange}
-              className='input'
-            />
-            <label htmlFor="password">Password:</label>
-            <input 
-              type="password"
-              id="password"
-              value={loginCredentials.password}
-              onChange={onChange}
-              className='input2'
-            />
-            <button type="submit" className='btn'>Login</button>
-          </form>
+          <>
+            <form className='loginform' onSubmit={performLogin}>
+              <h2>Login</h2>
+              <label htmlFor="username">Username:</label>
+              <input 
+                type="text"
+                id="username"
+                value={loginCredentials.username}
+                onChange={onChange}
+                className='input'
+              />
+              <label htmlFor="password">Password:</label>
+              <input 
+                type="password"
+                id="password"
+                value={loginCredentials.password}
+                onChange={onChange}
+                className='input2'
+              />
+              <button type="submit" className='btn'>Login</button>
+            </form>
+            <p className='signup-link'>Don't have an account? <a href="/signup">Sign up here</a></p>
+          </>
         )}
-      </div>
-      <div className='link'>
-        <p>Don't have an account? <a href="/signup">Sign up here</a></p>
       </div>
     </>
   );
