@@ -5,30 +5,24 @@ import NavBar from "../NavBar";
 import "../../css/SavedImages.css";
 
 const totalStars = 5;
+const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
 
 const AdminUserSavedImages = () => {
     const { username } = useParams();
     const [picturesWithRatings, setPicturesWithRatings] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-    const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
-
-    useEffect(() => {
-        if (username) {
-            fetchDataFromPictures(username);
-        }
-    }, [username]);
 
     const fetchDataFromPictures = async (username) => {
-        setLoading(true);
-        setError(null);
-
         try {
+            setLoading(true);
+            setError(null);
+
             const pictureEndpoint = `pictures/${username}`;
             const pictureResponse = await facade.fetchData(pictureEndpoint, 'GET');
 
             if (pictureResponse && pictureResponse.length > 0) {
-                const picturesWithRatings = await Promise.all(pictureResponse.map(async (picture) => {
+                const ratingsPromises = pictureResponse.map(async (picture) => {
                     try {
                         const ratingsEndpoint = `ratings/${picture.alt}`;
                         const ratingsResponse = await facade.fetchData(ratingsEndpoint, 'GET');
@@ -37,8 +31,9 @@ const AdminUserSavedImages = () => {
                         console.error('Error fetching ratings for picture alt:', picture.alt, error);
                         return { ...picture, ratings: null };
                     }
-                }));
+                });
 
+                const picturesWithRatings = await Promise.all(ratingsPromises);
                 setPicturesWithRatings(picturesWithRatings);
             } else {
                 setPicturesWithRatings([]);
@@ -50,6 +45,12 @@ const AdminUserSavedImages = () => {
             setLoading(false);
         }
     };
+
+    useEffect(() => {
+        if (username) {
+            fetchDataFromPictures(username);
+        }
+    }, [username]);
 
     const handleOnClick = async (alt) => {
         try {
@@ -63,20 +64,27 @@ const AdminUserSavedImages = () => {
     };
 
     const handleOnRate = async (value, pictureAlt) => {
-        // Optimistically update the UI
-        setPicturesWithRatings(prevPictures =>
-            prevPictures.map(picture =>
-                picture.alt === pictureAlt ? { ...picture, ratings: value } : picture
-            )
-        );
-
         try {
-            await facade.fetchData(`ratings/${pictureAlt}/${value}/${username}`, 'POST', true);
+            const response = await facade.fetchData(`ratings/${pictureAlt}/${value}/${username}`, 'POST', true);
+            console.log('Rating saved:', response);
+
+            const updatedRatingResponse = await facade.fetchData(`ratings/${pictureAlt}`, 'GET');
+
+            const updatedPictures = picturesWithRatings.map(picture => {
+                if (picture.alt === pictureAlt) {
+                    return { ...picture, ratings: updatedRatingResponse };
+                }
+                return picture;
+            });
+
+            setPicturesWithRatings(updatedPictures);
         } catch (error) {
             console.error('Error saving rating:', error);
-            setError('Error saving rating. Please try again later.');
-            // Revert to previous state if API call fails
-            fetchDataFromPictures(username);
+            if (error.message === 'Unknown error') {
+                setError('User has already rated this image.');
+            } else {
+                setError('Picture is already rated by you.');
+            }
         }
     };
 
@@ -142,7 +150,7 @@ const AdminUserSavedImages = () => {
                                     {picture.ratings && (
                                         <button onClick={() => deleteRating(picture.alt)} className="delete">Delete Rating</button>
                                     )}
-                                    </div>
+                                </div>
                                 {renderRatingStars(picture)}
                             </div>
                         ))}

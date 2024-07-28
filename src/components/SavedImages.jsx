@@ -17,7 +17,6 @@ function SavedImages() {
                 setError(null); // Clear previous errors
                 const pictureEndpoint = `pictures/${facade.getUserName()}`;
                 const pictureResponse = await facade.fetchData(pictureEndpoint, 'GET');
-
                 if (pictureResponse && pictureResponse.length > 0) {
                     const ratingsPromises = pictureResponse.map(async (picture) => {
                         try {
