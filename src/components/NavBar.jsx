@@ -39,7 +39,7 @@ function NavBar() {
                 <Nav.Link>Login</Nav.Link>
               </LinkContainer>
             )}
-            {isLoggedIn && (
+            {userRoles.includes('user') && (
               <LinkContainer to="/images" onClick={() => setExpanded(false)}>
                 <Nav.Link>Images</Nav.Link>
               </LinkContainer>

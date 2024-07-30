@@ -29,7 +29,7 @@ const Root = () => {
         {isLoggedIn && (
           <>
             {/* Conditional rendering of 'Images' route */}
-            {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && (
+            {(userRoles.includes('admin') || userRoles.includes('user')) && (
               <Route path="images" element={<Images />} />
             )}
             {/* Conditional rendering of 'SavedImages' route */}
