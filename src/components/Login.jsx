@@ -7,6 +7,7 @@ const Login = ({ setIsLoggedIn }) => {
   const init = { username: '', password: '' };
   const [loginCredentials, setLoginCredentials] = useState(init);
   const [isLoggedInStored, setIsLoggedInStored] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(''); // State for error message
 
   useEffect(() => {
     // Check if the token is present in localStorage on component mount
@@ -23,9 +24,10 @@ const Login = ({ setIsLoggedIn }) => {
       await facade.login(loginCredentials.username, loginCredentials.password);
       setIsLoggedIn(true);
       setIsLoggedInStored(true);
+      setErrorMessage(''); // Clear any previous error messages on successful login
     } catch (error) {
       console.error('Login failed:', error);
-      // Handle login failure (e.g., show error message)
+      setErrorMessage('Login failed. Please check your username and password.'); // Set error message
     }
   };
 
@@ -57,6 +59,7 @@ const Login = ({ setIsLoggedIn }) => {
           <>
             <form className='loginform' onSubmit={performLogin}>
               <h2>Login</h2>
+              {errorMessage && <p className='error'>{errorMessage}</p>} {/* Display error message */}
               <label htmlFor="username">Username:</label>
               <input 
                 type="text"

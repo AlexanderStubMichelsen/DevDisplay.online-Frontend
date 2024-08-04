@@ -39,6 +39,11 @@ body {
     margin-bottom: 15px;
 }
 
+.error {
+    color: red;
+    font-size: 12px;
+}
+
 .loginform label {
     display: block;
     margin-bottom: 5px;
