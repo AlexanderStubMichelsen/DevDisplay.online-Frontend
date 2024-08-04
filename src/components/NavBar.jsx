@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import '../css/NavBar.css';
@@ -11,6 +12,7 @@ function NavBar() {
   const [expanded, setExpanded] = useState(false);
   const isLoggedIn = facade.getToken() !== null;
   const userRoles = facade.getUserRoles();
+  const navigate = useNavigate();
 
   const handleNavToggle = () => {
     setExpanded(!expanded);
@@ -18,7 +20,8 @@ function NavBar() {
 
   const handleLogout = () => {
     facade.logout(() => {
-      window.location.reload(); // Refresh page after logout
+      // window.location.reload(); // Refresh page after logout
+      navigate('/login');
     });
   };
 
