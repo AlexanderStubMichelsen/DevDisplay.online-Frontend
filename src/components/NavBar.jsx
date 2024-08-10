@@ -12,7 +12,6 @@ function NavBar() {
   const [expanded, setExpanded] = useState(false);
   const isLoggedIn = facade.getToken() !== null;
   const userRoles = facade.getUserRoles();
-  const [justLoggedOut, setJustLoggedOut] = useState(false);
   const navigate = useNavigate();
 
   const handleNavToggle = () => {
@@ -21,8 +20,7 @@ function NavBar() {
 
   const handleLogout = () => {
     facade.logout(() => {
-      setJustLoggedOut(true);
-      // Navigate to the login page and pass the justLoggedOut state
+      // Navigate to login with justLoggedOut state
       navigate('/login', { state: { justLoggedOut: true } });
     });
   };
