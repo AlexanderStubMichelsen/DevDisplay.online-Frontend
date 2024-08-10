@@ -12,9 +12,7 @@ const App = () => {
     <>
       <NavBar />
       {justLoggedIn && <p className='success'>You have successfully logged in.</p>}
-      <a href="https://unsplash.com" rel="noreferrer" target="_blank">
         <img src={img} alt="img" className='front-page-img' />
-      </a>
     </>
   );
 };
