@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { LinkContainer } from 'react-router-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import '../css/NavBar.css';
@@ -12,6 +12,7 @@ function NavBar() {
   const [expanded, setExpanded] = useState(false);
   const isLoggedIn = facade.getToken() !== null;
   const userRoles = facade.getUserRoles();
+  const [justLoggedOut, setJustLoggedOut] = useState(false);
   const navigate = useNavigate();
 
   const handleNavToggle = () => {
@@ -20,19 +21,20 @@ function NavBar() {
 
   const handleLogout = () => {
     facade.logout(() => {
-      // window.location.reload(); // Refresh page after logout
-      navigate('/login');
+      setJustLoggedOut(true);
+      // Navigate to the login page and pass the justLoggedOut state
+      navigate('/login', { state: { justLoggedOut: true } });
     });
   };
 
   return (
     <>
       <Navbar bg="light" variant="light" expand="lg" className="sticky-top-navbar">
-        <Navbar.Brand href="/">Mini Project</Navbar.Brand>
+        <Navbar.Brand href="/" className='title'>WebSave</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleNavToggle}>
           <FontAwesomeIcon icon={faBars} />
         </Navbar.Toggle>
-        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end" in={expanded}>
+        <Navbar.Collapse id="responsive-navbar-nav" className={`justify-content-end ${expanded ? 'show' : ''}`}>
           <Nav className="ml-auto">
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
@@ -58,7 +60,7 @@ function NavBar() {
               </LinkContainer>
             )}
             {isLoggedIn && (
-              <NavDropdown title="Logout" id="basic-nav-dropdown">
+              <NavDropdown title="Logout" id="basic-nav-dropdown" align="end">
                 <NavDropdown.Item onClick={handleLogout}>
                   Confirm logout
                 </NavDropdown.Item>

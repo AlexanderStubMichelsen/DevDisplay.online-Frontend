@@ -74,6 +74,7 @@ button {
 button:hover {
     background-color: #4da6ff; /* Blue background color on hover */
     color: white; /* Text color on hover */
+    transform: scale(1.50); /* Scale up slightly on hover */
 }
 
 /* Specific button styles */

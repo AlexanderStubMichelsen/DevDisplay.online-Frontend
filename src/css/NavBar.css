@@ -1,5 +1,3 @@
-/* NavBar.css */
-
 /* Reset CSS */
 *,
 *::before,
@@ -7,42 +5,100 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  width: 100%;
 }
 
+/* Navbar Styles */
 .navbar {
   width: 100%; /* Ensure the navbar takes the full width */
   max-width: none !important; /* Remove any max-width restriction */
 }
 
-/* Navbar Styles */
 .sticky-top-navbar {
   width: 100%;
   background-color: #f8f9fa; /* Light background color */
   border-bottom: 1px solid #dee2e6; /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
+  display: flex; /* Use Flexbox for alignment */
+  justify-content: space-between; /* Space between elements */
+  align-items: center; /* Center items vertically */
+  padding: 0.5rem 1rem; /* Add some padding */
 }
 
 .sticky-top-navbar .navbar-brand {
   font-weight: 500;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow */
 }
 
 .sticky-top-navbar .navbar-toggler {
-  border: none;
+  border: none; /* Remove border */
+  width: 40px; /* Set width */
+  background: none; /* Remove any default background */
+  outline: none; /* Remove default outline on focus */
+  box-shadow: none; /* Remove default shadow */
+  transition: transform 0.3s ease-in-out; /* Smooth transition for transform */
 }
 
+.sticky-top-navbar .navbar-toggler:hover {
+  transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+.sticky-top-navbar .navbar-toggler:focus {
+  outline: none; /* Ensure no outline on focus */
+  box-shadow: none; /* Ensure no shadow on focus */
+}
+
+/* Adjust the width of the expanded menu */
+.sticky-top-navbar .navbar-collapse {
+  position: absolute; /* Ensure it does not push other content */
+  right: 0; /* Align to the right side */
+  top: 100%; /* Position it below the navbar */
+  background-color: #f8f9fa; /* Ensure background matches the navbar */
+  border: 1px solid #dee2e6; /* Optional: Add a border for better visibility */
+  z-index: 999; /* Ensure it is above other content */
+  padding: 10px 0; /* Add some padding for better spacing */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow for better visibility */
+}
+
+@media (min-width: 992px) {
+  .sticky-top-navbar .navbar-collapse {
+    position: static; /* Reset to default position */
+    background-color: transparent; /* Remove background color */
+    border: none; /* Remove border */
+    box-shadow: none; /* Remove shadow */
+    width: auto; /* Allow automatic width */
+    padding: 0; /* Remove padding */
+    display: flex; /* Display as flexbox */
+    justify-content: flex-end; /* Align items to the end */
+  }
+}
+
+/* Add text shadow to nav links */
 .sticky-top-navbar .nav-link {
   color: #212529; /* Dark text color */
   padding: 8px 12px;
   text-decoration: none;
+  /* text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Add text shadow */
 }
 
 .sticky-top-navbar .nav-link:hover {
   color: #007bff; /* Primary hover color */
+  transform: scale(1.05); /* Scale up slightly on hover */
 }
 
 .sticky-top-navbar .navbar-nav .nav-link.active {
   font-weight: 600;
+}
+
+/* Dropdown Styles */
+.sticky-top-navbar .dropdown-menu {
+  right: 0;
+  left: auto; /* Reset left position */
+  min-width: 150px; /* Set a minimum width */
+  width: auto; /* Adjust width as needed */
+}
+
+.sticky-top-navbar .dropdown-menu .dropdown-item {
+  text-align: right; /* Align text to the right */
 }
 
 /* Modal Styles */
@@ -58,4 +114,3 @@
 .modal-footer {
   border-top: none;
 }
-

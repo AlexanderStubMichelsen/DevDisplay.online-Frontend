@@ -21,106 +21,72 @@ body {
 }
 
 .login {
-    width: 100%;
-    max-width: 400px;
-    margin: 50px auto;
-    padding: 20px;
-    background-color: #f9f9f9;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
 }
 
 .login h2 {
-    margin-bottom: 20px;
-    text-align: center;
-  }
+  margin-bottom: 20px;
+  text-align: center;
+}
 
 .loginform {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .error {
-    color: red;
-    font-size: 12px;
+  color: red;
+  font-size: 0.875em; /* Improved readability */
+}
+
+.success-message {
+  color: green;
+  font-size: 0.875em; /* Define success message style */
 }
 
 .loginform label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
-.input {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.input2 {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+.input, .input2 {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
 .btn {
-    width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: none;
-    border-radius: 5px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: none;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: grey;
 }
 
 .link {
-    text-align: center;
-    margin-top: 10px;
+  text-align: center;
+  margin-top: 10px;
 }
 
-.loginform label {
-    display: block;
-    margin-bottom: 5px;
-    font-weight: bold;
+/* Additional responsive design */
+@media (max-width: 600px) {
+  .login {
+    margin: 20px;
+    padding: 15px;
   }
-  
-.loginform input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-.welcome {
-    text-align: center;
-    margin-bottom: 20px;
-  }
-
-  .error {
-    color: red;
-    font-size: 0.875em;
-  }
-  
-  .success {
-    color: green;
-    font-size: 0.875em;
-  }
-  
-  button {
-    width: 100%;
-    padding: 10px;
-    background-color: #343a40;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-  
-  button:hover {
-    background-color: grey;
-  }
-  
+}
