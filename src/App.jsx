@@ -3,6 +3,7 @@ import './App.css'; // Import the stylesheet
 import facade from './util/apiFacade';
 import NavBar from './components/NavBar.jsx';
 import Images from './components/Images.jsx';
+import logo from './assets/react-native-UX-design.gif'
 
 const App = () => {
   // const init = { username: '', password: '' };
@@ -48,7 +49,7 @@ const App = () => {
   return (
     <>
       <NavBar />
-      <Images />
+      <img src={logo} alt='logo' className='logo' />
       {/* <div className='login'>
         {isLoggedInStored ? (
           <div className='loginform'>

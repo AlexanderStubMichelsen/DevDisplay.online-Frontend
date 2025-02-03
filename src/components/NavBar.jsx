@@ -42,17 +42,16 @@ function NavBar() {
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            {isLoggedIn && (
+            {/* {isLoggedIn && ( */}
               <LinkContainer to="/images" onClick={() => setExpanded(false)}>
                 <Nav.Link>Images</Nav.Link>
               </LinkContainer>
-            )}
-            {userRoles.includes('user') && (
+            {/* {userRoles.includes('user') && (
               <LinkContainer to="/savedImg" onClick={() => setExpanded(false)}>
                 <Nav.Link>Saved Images</Nav.Link>
               </LinkContainer>
-            )}
-            {!isLoggedIn && (
+            )} */}
+            {/* {!isLoggedIn && (
               <LinkContainer to="/signUp" onClick={() => setExpanded(false)}>
                 <Nav.Link>Sign up</Nav.Link>
               </LinkContainer>
@@ -66,10 +65,10 @@ function NavBar() {
               <LinkContainer to="/admin/users" onClick={() => setExpanded(false)}>
                 <Nav.Link>Admin Users</Nav.Link>
               </LinkContainer>
-            )}
-            {isLoggedIn && (
+            )} */}
+            {/* {isLoggedIn && (
               <Nav.Link onClick={() => setShowLogoutModal(true)}>Logout</Nav.Link>
-            )}
+            )} */}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

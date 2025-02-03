@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Images.css';
 import facade from '../util/apiFacade';
+import NavBar from './NavBar';
 
 function Images() {
   const [imageList, setImageList] = useState([]);
@@ -56,6 +57,7 @@ function Images() {
 
   return (
     <>
+      <NavBar />
       <div className="images-container">
         <h1 className="images-title">Images from Unsplash</h1>
         <div className="image-grid">

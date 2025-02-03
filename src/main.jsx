@@ -24,12 +24,12 @@ const Root = () => {
         {/* Route for sign-up, available whether logged in or not */}
         <Route path="/signup" element={<SignUp />} />
         {/* Conditional rendering of routes based on isLoggedIn */}
-        {isLoggedIn && (
+        {/* {isLoggedIn && ( */}
           <>
             {/* Conditional rendering of 'Images' route */}
-            {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && (
+            {/* {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && ( */}
               <Route path="images" element={<Images />} />
-            )}
+            {/* )} */}
             {/* Conditional rendering of 'SavedImages' route */}
             {userRoles.includes('user') && (
               <Route path="savedImg" element={<SavedImages />} />
