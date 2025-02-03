@@ -33,7 +33,7 @@ function NavBar() {
   return (
     <>
       <Navbar bg="light" variant="light" expand="lg" className="sticky-top-navbar">
-      <Navbar.Brand href="/">Mini Project</Navbar.Brand>
+      <Navbar.Brand href="/">Mini Project U. Login</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleNavToggle}>
           <FontAwesomeIcon icon={faBars} />
         </Navbar.Toggle>

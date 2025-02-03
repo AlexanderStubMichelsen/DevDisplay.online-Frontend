@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../css/Images.css';
 import facade from '../util/apiFacade';
-import NavBar from './NavBar';
 
 function Images() {
   const [imageList, setImageList] = useState([]);
@@ -16,6 +15,7 @@ function Images() {
         const images = data.map((photo) => ({
           id: photo.id,
           url: photo.urls.small,
+          urlRaw: photo.urls.full,
           alt: photo.alt_description || 'Image',
         }));
         setImageList(images);
@@ -25,35 +25,44 @@ function Images() {
       });
   }, []);
 
-  const handleOnClick = (e) => {
+  const handleOnClick = (e, id) => {
     e.preventDefault();
-    const clickedUrl = e.target.src;
-    const clickedAlt = e.target.alt;
-  
-    const clickedImage = {
-      url: clickedUrl,
-      alt: clickedAlt,
-    };
+    const clickedImage = imageList.find((image) => image.id === id);
 
-    facade.fetchData('pictures/' + facade.getUserName(), 'POST', clickedImage)
-      .then((response) => {
-        console.log('Picture saved:', response);
-      })
-      .catch((error) => {
-        console.error('Error saving picture:', error);
-      });
-  };
+    // open the picture in a new tab
+    window.open(clickedImage.urlRaw, '_blank');
+
+    console.log('Clicked image:', clickedImage);
+  }
+
+  // const handleOnClick = (e) => {
+  //   e.preventDefault();
+  //   const clickedUrl = e.target.src;
+  //   const clickedAlt = e.target.alt;
+  
+  //   const clickedImage = {
+  //     url: clickedUrl,
+  //     alt: clickedAlt,
+  //   };
+
+  //   facade.fetchData('pictures/' + facade.getUserName(), 'POST', clickedImage)
+  //     .then((response) => {
+  //       console.log('Picture saved:', response);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error saving picture:', error);
+  //     });
+  // };
 
   return (
     <>
-      <NavBar />
       <div className="images-container">
         <h1 className="images-title">Images from Unsplash</h1>
         <div className="image-grid">
           {imageList.map((image) => (
             <div key={image.id} className="image-card">
               <img 
-                onClick={handleOnClick} 
+                onClick={(e) => handleOnClick(e, image.id)} 
                 src={image.url} 
                 alt={image.alt} 
                 className="image-item"
