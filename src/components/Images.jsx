@@ -7,7 +7,7 @@ function Images() {
   const [imageList, setImageList] = useState([]);
 
   useEffect(() => {
-    const accessKey = '6txTsQqD6LOmxYEbY9XG7cawzA7_el54xcjdNeW-4AM'; // Replace with your Unsplash access key
+    const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
     const apiUrl = `https://api.unsplash.com/photos/?client_id=${accessKey}`;
 
     fetch(apiUrl)

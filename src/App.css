@@ -40,8 +40,8 @@
 .logo {
   display: block;
   margin: 0 auto;
-  width: 80%;
-  height: auto;
+  width: auto;
+  height: 100vh;
   margin-bottom: 20px;
   background-repeat: no-repeat;
 }
