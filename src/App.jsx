@@ -3,7 +3,7 @@ import './App.css'; // Import the stylesheet
 import facade from './util/apiFacade';
 import NavBar from './components/NavBar.jsx';
 import Images from './components/Images.jsx';
-import logo from './assets/giphy.gif';
+import logo from './assets/APIs.gif';
 
 const App = () => {
   // const init = { username: '', password: '' };

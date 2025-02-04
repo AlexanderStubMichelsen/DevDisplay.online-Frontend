@@ -46,6 +46,9 @@ function NavBar() {
               <LinkContainer to="/images" onClick={() => setExpanded(false)}>
                 <Nav.Link>Images</Nav.Link>
               </LinkContainer>
+              <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
+                <Nav.Link>Youtube</Nav.Link>
+              </LinkContainer>
             {/* {userRoles.includes('user') && (
               <LinkContainer to="/savedImg" onClick={() => setExpanded(false)}>
                 <Nav.Link>Saved Images</Nav.Link>
