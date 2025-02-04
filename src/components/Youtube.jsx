@@ -1,36 +1,62 @@
 import React, { useState } from "react";
-import NavBar from "./NavBar";
+import "../css/Youtube.css";
 
 function Youtube() {
-  const [videoUrl, setVideoUrl] = useState(""); // Store user input
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [nextPageToken, setNextPageToken] = useState(null);
   const [downloadLink, setDownloadLink] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const apiKey = import.meta.env.VITE_RAPIDAPI_KEY; // ✅ Secure API Key
+  const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
+  const rapidApiKey = import.meta.env.VITE_RAPIDAPI_KEY;
 
-  // Function to Extract Video ID from YouTube URL
-  const extractVideoId = (url) => {
-    const match = url.match(
-      /(?:youtube\.com\/(?:.*v=|.*\/|.*vi=)|youtu\.be\/|youtube\.com\/embed\/|youtube\.com\/v\/|youtube\.com\/watch\?v=|youtube\.com\/shorts\/)([0-9A-Za-z_-]{11})/
-    );
-    return match ? match[1] : null;
-  };
-
-  const fetchYoutubeData = async (id) => {
-    if (!id) {
-      setError("Please enter a valid YouTube URL.");
+  // 🔍 Fetch Videos from YouTube
+  const searchVideos = async (pageToken = "") => {
+    if (!searchQuery) {
+      setError("Please enter a search query.");
       return;
     }
 
     setLoading(true);
     setError(null);
 
+    const url = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+      searchQuery
+    )}&type=video&key=${youtubeApiKey}&maxResults=12&pageToken=${pageToken}`;
+
+    try {
+      const response = await fetch(url);
+      const data = await response.json();
+      console.log("Search Results:", data);
+
+      if (data.items) {
+        setSearchResults((prevResults) => [...prevResults, ...data.items]); // ✅ Append new results
+        setNextPageToken(data.nextPageToken || null);
+      } else {
+        setError("No videos found. Try another search.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Error fetching search results. Try again.");
+    }
+
+    setLoading(false);
+  };
+
+  // 🎵 Convert to MP3
+  const fetchYoutubeMp3 = async (id) => {
+    if (!id) return;
+    setLoading(true);
+    setError(null);
+    setDownloadLink(null);
+
     const url = `https://youtube-mp36.p.rapidapi.com/dl?id=${id}`;
     const options = {
       method: "GET",
       headers: {
-        "x-rapidapi-key": apiKey,
+        "x-rapidapi-key": rapidApiKey,
         "x-rapidapi-host": "youtube-mp36.p.rapidapi.com",
       },
     };
@@ -38,70 +64,86 @@ function Youtube() {
     try {
       const response = await fetch(url, options);
       const result = await response.json();
-      console.log("API Response:", result); // ✅ Debugging API response
+      console.log("MP3 Response:", result);
 
       if (result.link) {
         setDownloadLink(result.link);
       } else {
-        setError(result.msg || "Failed to retrieve download link. Try another video.");
+        setError(result.msg || "Failed to retrieve MP3 link.");
       }
     } catch (err) {
-      console.error("Error fetching data:", err);
-      setError("Error fetching data. Please try again later.");
+      console.error(err);
+      setError("Error fetching MP3 link. Try again.");
     }
 
     setLoading(false);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const videoIdExtracted = extractVideoId(videoUrl); // Extract ID from URL
-    if (videoIdExtracted) {
-      fetchYoutubeData(videoIdExtracted);
-    } else {
-      setError("Invalid YouTube URL. Please enter a correct one.");
-    }
-  };
-
   return (
-    <>
-    <NavBar />
-    <div style={{ textAlign: "center", padding: "20px" }}>
+    <div>
       <h2>YouTube MP3 Downloader</h2>
 
-      {/* Input Form for YouTube URL */}
-      <form onSubmit={handleSubmit}>
-        <label>
-          Enter YouTube URL:
-          <input
-            type="text"
-            value={videoUrl}
-            onChange={(e) => setVideoUrl(e.target.value)}
-            placeholder="https://www.youtube.com/watch?v=VIDEO_ID"
-            style={{ width: "80%", padding: "8px", margin: "10px" }}
-          />
-        </label>
-        <button type="submit" disabled={loading} style={{ padding: "8px 12px" }}>
-          {loading ? "Fetching..." : "Get MP3"}
+      {/* 🔍 Search Input */}
+      <div>
+        <input
+          type="text"
+          placeholder="Search YouTube videos..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
+        <button onClick={() => searchVideos()} disabled={loading} className="search">
+          {loading ? "Searching..." : "Search"}
         </button>
-      </form>
+      </div>
 
-      {/* Display Errors */}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {/* 🎥 Display Search Results */}
+      {searchResults.length > 0 && (
+        <div>
+          <h3>Select a Video:</h3>
+          <div className="video-results">
+            {searchResults.map((video) =>
+              video.id.videoId ? ( // ✅ Ensure videoId exists to prevent errors
+                <div key={video.id.videoId} className="video-item">
+                  <img
+                    src={video.snippet.thumbnails.high.url}
+                    alt={video.snippet.title}
+                    onClick={() => fetchYoutubeMp3(video.id.videoId)}
+                    className="video-thumbnail"
+                  />
+                  <p className="video-title">{video.snippet.title}</p>
+                  <button
+                    onClick={() => fetchYoutubeMp3(video.id.videoId)}
+                    className="download-button"
+                  >
+                    Convert to MP3
+                  </button>
+                </div>
+              ) : null
+            )}
+          </div>
 
-      {/* Display Download Link */}
-      {downloadLink && (
-        <div style={{ marginTop: "20px" }}>
-          <p>Click below to download:</p>
-          <a href={downloadLink} target="_blank" rel="noopener noreferrer">
-            <button style={{ padding: "10px", background: "green", color: "white" }}>
-              Download MP3
+          {/* 🔄 Load More Button */}
+          {nextPageToken && (
+            <button onClick={() => searchVideos(nextPageToken)} disabled={loading} className="load-more">
+              {loading ? "Loading..." : "Load More"}
             </button>
+          )}
+        </div>
+      )}
+
+      {/* ⚠️ Display Errors */}
+      {error && <p>{error}</p>}
+
+      {/* 🎵 Display Download Link */}
+      {downloadLink && (
+        <div>
+          <p>Click below to download MP3:</p>
+          <a href={downloadLink} target="_blank" rel="noopener noreferrer">
+            <button className="download-button">Download MP3</button>
           </a>
         </div>
       )}
     </div>
-    </>
   );
 }
 
