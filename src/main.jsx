@@ -12,6 +12,7 @@ import SignUp from './components/SignUp.jsx';
 import facade from './util/apiFacade.js';
 import './index.css';
 import Youtube from './components/Youtube.jsx';
+import Help from './components/Help.jsx';
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,6 +32,7 @@ const Root = () => {
             {/* {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && ( */}
               <Route path="images" element={<Images />} />
               <Route path="youtube" element={<Youtube />} />
+              <Route path="help" element={<Help />} />
             {/* )} */}
             {/* Conditional rendering of 'SavedImages' route */}
             {userRoles.includes('user') && (
