@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../css/Youtube.css";
+import NavBar from "./NavBar";
 
 function Youtube() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -80,6 +81,8 @@ function Youtube() {
   };
 
   return (
+    <>
+    <NavBar />
     <div>
       <h2>YouTube MP3 Downloader</h2>
 
@@ -144,6 +147,7 @@ function Youtube() {
         </div>
       )}
     </div>
+    </>
   );
 }
 

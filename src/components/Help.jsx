@@ -12,13 +12,21 @@ function Help() {
     script.setAttribute("data-id", "4933274562");
     script.id = "chatling-embed-script";
     document.body.appendChild(script);
+
+    // Cleanup on component unmount
+    return () => {
+      const widgetScript = document.getElementById("chatling-embed-script");
+      if (widgetScript) {
+        widgetScript.remove();
+      }
+    };
   }, []);
 
   return (
     <>
-    <NavBar />
-  <div className="help"></div>
-  </>
+      <NavBar />
+      <div className="help"></div>
+    </>
   );
 }
 
