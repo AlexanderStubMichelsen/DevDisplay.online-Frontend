@@ -1,3 +1,16 @@
+.youtube-container {
+  background-image: url("../assets/high-resolution-blue-background.jpg"); /* ✅ Update path if needed */
+  background-size: cover; /* ✅ Ensures the image covers the full area */
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh; /* ✅ Ensures full-page background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 .video-grid {
   width: 100%; /* ✅ Ensures full width */
   max-width: 1200px; /* ✅ Optional: Prevents it from being too wide */
@@ -121,5 +134,11 @@
   justify-content: center;
   align-items: center; /* ✅ Ensures vertical centering */
   margin: 0 auto 20px auto; /* ✅ Centers horizontally */
+}
+
+.youtube-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: blue;
 }
 

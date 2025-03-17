@@ -9,9 +9,16 @@ body {
 }
 
 .images-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  background-image: url("../assets/high-resolution-blue-background.jpg"); /* ✅ Update path if needed */
+  background-size: cover; /* ✅ Ensures the image covers the full area */
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh; /* ✅ Ensures full-page background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .images-title {
@@ -21,9 +28,13 @@ body {
 }
 
 .image-grid {
+  width: 100%; /* ✅ Ensures full width */
+  max-width: 1200px; /* ✅ Optional: Prevents it from being too wide */
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* ✅ Proper grid */
+  gap: 15px;
+  justify-content: center;
+  margin: 0 auto; /* ✅ Centers the grid */
 }
 
 .loading-message {

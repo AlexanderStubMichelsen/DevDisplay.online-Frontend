@@ -1,0 +1,12 @@
+.help {
+    background-image: url("../assets/high-resolution-blue-background.jpg"); /* ✅ Update path if needed */
+  background-size: cover; /* ✅ Ensures the image covers the full area */
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 100vh; /* ✅ Ensures full-page background */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
