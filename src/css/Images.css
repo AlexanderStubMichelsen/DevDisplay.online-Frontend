@@ -17,7 +17,7 @@ body {
 .images-title {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #213547;
+  color: blue;
 }
 
 .image-grid {
@@ -55,4 +55,26 @@ body {
 
 .image-item:hover {
   transform: scale(1.05); /* Scale up slightly on hover */
+}
+
+.search-form {
+  margin-bottom: 20px;
+  color: blue;
+  width: 700px
+}
+
+.search-input::placeholder {
+  margin-bottom: 20px;
+  color: blue;
+}
+
+.load-more-btn {
+  background-color: blue;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
 }

@@ -21,6 +21,8 @@
   background-color: #f8f9fa; /* Light background color */
   border-bottom: 1px solid #dee2e6; /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
+    background-color: blue !important; /* Sets navbar background to blue */
+
 }
 
 .sticky-top-navbar .navbar-brand {
@@ -45,17 +47,12 @@
   font-weight: 600;
 }
 
-/* Modal Styles */
-.modal-header {
-  border-bottom: none;
-  padding-bottom: 0;
+.sticky-top-navbar .navbar-brand,
+.sticky-top-navbar .nav-link {
+  color: white !important; /* Ensures text is white */
 }
 
-.modal-title {
-  font-weight: 600;
+.sticky-top-navbar .navbar-brand:hover,
+.sticky-top-navbar .nav-link:hover {
+  color: #f0f0f0 !important; /* Lighter white on hover */
 }
-
-.modal-footer {
-  border-top: none;
-}
-

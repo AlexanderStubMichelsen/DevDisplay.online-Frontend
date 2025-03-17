@@ -6,8 +6,10 @@ function Images() {
   const [imageList, setImageList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [page, setPage] = useState(1);
+  const [query, setQuery] = useState("");
 
-  useEffect(() => {
+  const fetchImages = (pageNum, searchQuery = "") => {
     const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
     if (!accessKey) {
       setError("Missing API Key. Please check your .env file.");
@@ -15,7 +17,9 @@ function Images() {
       return;
     }
 
-    const apiUrl = `https://api.unsplash.com/photos/?client_id=${accessKey}&per_page=30&page=1`;
+    const apiUrl = searchQuery
+      ? `https://api.unsplash.com/search/photos/?client_id=${accessKey}&per_page=30&page=${pageNum}&query=${searchQuery}`
+      : `https://api.unsplash.com/photos/?client_id=${accessKey}&per_page=30&page=${pageNum}`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -23,14 +27,14 @@ function Images() {
         return response.json();
       })
       .then((data) => {
-        const images = data.map((photo) => ({
+        const images = (searchQuery ? data.results : data).map((photo) => ({
           id: photo.id,
-          url: `${photo.urls.raw}&w=500&dpr=2`, // ✅ Optimized for hotlinking
+          url: `${photo.urls.raw}&w=500&dpr=2`,
           alt: photo.alt_description || "Image",
           photographer: photo.user.name,
           profileLink: photo.user.links.html,
         }));
-        setImageList(images);
+        setImageList(pageNum === 1 ? images : (prevImages) => [...prevImages, ...images]);
         setLoading(false);
       })
       .catch((error) => {
@@ -38,13 +42,33 @@ function Images() {
         setError(error.message);
         setLoading(false);
       });
-  }, []);
+  };
+
+  useEffect(() => {
+    fetchImages(page, query);
+  }, [page, query]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setPage(1);
+    fetchImages(1, query);
+  };
 
   return (
     <>
       <NavBar />
       <div className="images-container">
         <h1 className="images-title">Images from Unsplash</h1>
+
+        <form onSubmit={handleSearch} className="search-form">
+          <input
+            type="text"
+            placeholder="Search images..."
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            className="search-input"
+          />
+        </form>
 
         {loading && <p>Loading images...</p>}
         {error && <p className="error-message">Error: {error}</p>}
@@ -56,7 +80,7 @@ function Images() {
                 <img src={image.url} alt={image.alt} className="image-item" />
               </a>
               <p>
-                Photo by{" "}
+                Photo by {" "}
                 <a
                   href={image.profileLink}
                   target="_blank"
@@ -69,6 +93,10 @@ function Images() {
             </div>
           ))}
         </div>
+
+        <button className="load-more-btn" onClick={() => setPage(page + 1)}>
+          Get More
+        </button>
       </div>
     </>
   );
