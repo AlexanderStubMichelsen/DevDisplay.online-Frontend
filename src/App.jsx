@@ -20,13 +20,21 @@ const App = () => {
   const [signupData, setSignupData] = useState({ name: '', email: '', password: '' });
   const [loginDataForm, setLoginDataForm] = useState({ email: '', password: '' });
 
-  // ✅ Load login state from `localStorage` when the app starts
+  // ✅ Keep `isLoggedIn` updated based on localStorage changes
   useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('loginData'));
-    if (storedUser && storedUser.email) {
-      setIsLoggedIn(true);
-      setLoginData(storedUser);
-    }
+    const handleStorageChange = () => {
+      const storedUser = JSON.parse(localStorage.getItem('loginData'));
+      const loggedInState = JSON.parse(localStorage.getItem('isLoggedIn')) || false;
+      setIsLoggedIn(loggedInState);
+      setLoginData(storedUser || { email: '' });
+    };
+
+    // ✅ Listen for localStorage changes
+    window.addEventListener('storage', handleStorageChange);
+
+    return () => {
+      window.removeEventListener('storage', handleStorageChange);
+    };
   }, []);
 
   // Handle input changes
@@ -67,9 +75,10 @@ const App = () => {
         setIsLoggedIn(true);
         setLoginData({ email: loginDataForm.email });
 
-        // ✅ Store login state in `localStorage`
+        // ✅ Store login state in `localStorage` (this will trigger re-render)
         localStorage.setItem('isLoggedIn', JSON.stringify(true));
         localStorage.setItem('loginData', JSON.stringify({ email: loginDataForm.email }));
+        window.dispatchEvent(new Event('storage')); // ✅ Force re-render
       })
       .catch(error => {
         console.error('Login Error:', error);
@@ -85,6 +94,7 @@ const App = () => {
     // ✅ Remove login state from `localStorage`
     localStorage.removeItem('isLoggedIn');
     localStorage.removeItem('loginData');
+    window.dispatchEvent(new Event('storage')); // ✅ Force re-render
   };
 
   return (
@@ -98,7 +108,7 @@ const App = () => {
           Your browser does not support the video tag.
         </video>
 
-        {/* Show buttons only if NOT logged in */}
+        {/* ✅ Show buttons only if NOT logged in */}
         {!isLoggedIn && (
           <div className="auth-buttons">
             <button onClick={() => setShowSignup(true)}>Sign Up</button>
