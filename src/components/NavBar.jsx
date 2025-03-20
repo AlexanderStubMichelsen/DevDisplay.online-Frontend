@@ -5,11 +5,14 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import '../css/NavBar.css';
+import apiFacade from '../api/facade.js'; // ✅ Import API facade
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
   const [userEmail, setUserEmail] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const [loginDataForm, setLoginDataForm] = useState({ email: "", password: "" });
 
   // ✅ Function to check login status from localStorage
   const checkLoginStatus = () => {
@@ -42,13 +45,28 @@ function NavBar() {
     setExpanded(!expanded);
   };
 
-  // ✅ Logout function: Clears localStorage & updates state
+  // ✅ Handle Logout Using apiFacade
   const handleLogout = () => {
-    localStorage.removeItem('loginData');
-    localStorage.removeItem('isLoggedIn');
+    apiFacade.logout();
     setIsLoggedIn(false);
-    setUserEmail('');
-    window.dispatchEvent(new Event('storage')); // ✅ Notify other components about logout
+    setUserEmail("");
+  };
+
+  // ✅ Handle Login Using apiFacade
+  const handleLoginSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await apiFacade.login(loginDataForm);
+      setShowLogin(false);
+      setIsLoggedIn(true);
+      setUserEmail(loginDataForm.email);
+
+      localStorage.setItem("isLoggedIn", JSON.stringify(true));
+      localStorage.setItem("loginData", JSON.stringify({ email: loginDataForm.email }));
+      window.dispatchEvent(new Event("storage"));
+    } catch (error) {
+      alert("Login failed. Please check your email and password.");
+    }
   };
 
   return (
@@ -73,7 +91,14 @@ function NavBar() {
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
 
-            {/* ✅ Show "User Email Logout" only if logged in */}
+            {/* ✅ Show "Login" button only if user is NOT logged in */}
+            {!isLoggedIn && (
+              <Nav.Link onClick={() => setShowLogin(true)}>
+                Login
+              </Nav.Link>
+            )}
+
+            {/* ✅ Show "User Email Logout" if logged in */}
             {isLoggedIn && (
               <Nav.Link onClick={handleLogout}>
                 {userEmail || 'User'} Logout
@@ -82,6 +107,37 @@ function NavBar() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+
+      {/* ✅ Login Modal (Rendered Separately, NOT Inside <Nav.Link>) */}
+      {showLogin && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowLogin(false)}>
+              &times;
+            </span>
+            <h2>Login</h2>
+            <form onSubmit={handleLoginSubmit}>
+              <input 
+                type="email" 
+                name="email" 
+                placeholder="Email" 
+                value={loginDataForm.email} 
+                onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })} 
+                required 
+              />
+              <input 
+                type="password" 
+                name="password" 
+                placeholder="Password" 
+                value={loginDataForm.password} 
+                onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })} 
+                required 
+              />
+              <button type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 }
