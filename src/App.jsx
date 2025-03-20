@@ -1,114 +1,80 @@
-import React, { useState, useEffect } from 'react';
-import './App.css'; // Import the stylesheet
-import NavBar from './components/NavBar.jsx';
-import retroBikeVideo from './assets/retro-bike-ride.mp4';
+import React, { useEffect, useState } from "react";
+import { Outlet, useNavigate, useLocation } from "react-router-dom";
+import "./App.css";
+import NavBar from "./components/NavBar.jsx";
+import retroBikeVideo from "./assets/retro-bike-ride.mp4";
+import apiFacade from "./api/facade.js"; // ✅ Import API facade
 
-const App = () => {
-  // ✅ Check localStorage for stored login data
-  const [isLoggedIn, setIsLoggedIn] = useState(
-    JSON.parse(localStorage.getItem('isLoggedIn')) || false
-  );
-  const [loginData, setLoginData] = useState(
-    JSON.parse(localStorage.getItem('loginData')) || { email: '' }
-  );
+const App = ({ isLoggedIn, setIsLoggedIn }) => {
+  const [loginData, setLoginData] = useState(apiFacade.getUser());
+
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // State for modals
   const [showSignup, setShowSignup] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [signupData, setSignupData] = useState({ name: "", email: "", password: "" });
+  const [loginDataForm, setLoginDataForm] = useState({ email: "", password: "" });
 
-  // State for form inputs
-  const [signupData, setSignupData] = useState({ name: '', email: '', password: '' });
-  const [loginDataForm, setLoginDataForm] = useState({ email: '', password: '' });
-
-  // ✅ Keep `isLoggedIn` updated based on localStorage changes
   useEffect(() => {
     const handleStorageChange = () => {
-      const storedUser = JSON.parse(localStorage.getItem('loginData'));
-      const loggedInState = JSON.parse(localStorage.getItem('isLoggedIn')) || false;
-      setIsLoggedIn(loggedInState);
-      setLoginData(storedUser || { email: '' });
+      setIsLoggedIn(JSON.parse(localStorage.getItem("isLoggedIn")) || false);
+      setLoginData(apiFacade.getUser());
     };
 
-    // ✅ Listen for localStorage changes
-    window.addEventListener('storage', handleStorageChange);
+    window.addEventListener("storage", handleStorageChange);
+    return () => window.removeEventListener("storage", handleStorageChange);
+  }, [setIsLoggedIn]);
 
-    return () => {
-      window.removeEventListener('storage', handleStorageChange);
-    };
-  }, []);
+  useEffect(() => {
+    const protectedRoutes = ["/images", "/youtube", "/help"];
+    if (!isLoggedIn && protectedRoutes.includes(location.pathname)) {
+      navigate("/");
+    }
+  }, [isLoggedIn, navigate, location]);
 
-  // Handle input changes
-  const handleSignupChange = (e) => setSignupData({ ...signupData, [e.target.name]: e.target.value });
-  const handleLoginChange = (e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value });
-
-  // Handle sign-up submission
-  const handleSignupSubmit = (e) => {
+  // ✅ Handle Sign-Up Using apiFacade
+  const handleSignupSubmit = async (e) => {
     e.preventDefault();
-    fetch('http://localhost:5019/api/users', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(signupData),
-    })
-      .then(response => response.json())
-      .then(data => {
-        console.log('Sign-Up Success:', data);
-        setShowSignup(false);
-      })
-      .catch(error => console.error('Sign-Up Error:', error));
+    try {
+      await apiFacade.signUp(signupData);
+      setShowSignup(false);
+    } catch (error) {
+      alert("Sign-Up Failed");
+    }
   };
 
-  // Handle login submission
-  const handleLoginSubmit = (e) => {
+  // ✅ Handle Login Using apiFacade
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
-    fetch('http://localhost:5019/api/users/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(loginDataForm),
-    })
-      .then(response => {
-        if (!response.ok) throw new Error('Invalid email or password');
-        return response.json();
-      })
-      .then(data => {
-        console.log('Login Success:', data);
-        setShowLogin(false);
-        setIsLoggedIn(true);
-        setLoginData({ email: loginDataForm.email });
+    try {
+      await apiFacade.login(loginDataForm);
+      setShowLogin(false);
+      setIsLoggedIn(true);
+      setLoginData({ email: loginDataForm.email });
 
-        // ✅ Store login state in `localStorage` (this will trigger re-render)
-        localStorage.setItem('isLoggedIn', JSON.stringify(true));
-        localStorage.setItem('loginData', JSON.stringify({ email: loginDataForm.email }));
-        window.dispatchEvent(new Event('storage')); // ✅ Force re-render
-      })
-      .catch(error => {
-        console.error('Login Error:', error);
-        alert('Login failed. Please check your email and password.');
-      });
-  };
-
-  // ✅ Handle Logout
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setLoginData({ email: '' });
-
-    // ✅ Remove login state from `localStorage`
-    localStorage.removeItem('isLoggedIn');
-    localStorage.removeItem('loginData');
-    window.dispatchEvent(new Event('storage')); // ✅ Force re-render
+      localStorage.setItem("isLoggedIn", JSON.stringify(true));
+      localStorage.setItem("loginData", JSON.stringify({ email: loginDataForm.email }));
+      window.dispatchEvent(new Event("storage"));
+    } catch (error) {
+      alert("Login failed. Please check your email and password.");
+    }
   };
 
   return (
     <>
+      {/* ✅ Navbar */}
       <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} loginData={loginData} />
 
-      {/* Video Background */}
+      {/* ✅ Video Background */}
       <div className="video-container">
         <video autoPlay loop muted playsInline className="video-bg">
           <source src={retroBikeVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
-        {/* ✅ Show buttons only if NOT logged in */}
+        {/* ✅ Show Sign-Up / Login buttons only if NOT logged in */}
         {!isLoggedIn && (
           <div className="auth-buttons">
             <button onClick={() => setShowSignup(true)}>Sign Up</button>
@@ -116,37 +82,42 @@ const App = () => {
           </div>
         )}
 
-        {/* Sign-Up Modal */}
-        {showSignup && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={() => setShowSignup(false)}>&times;</span>
-              <h2>Sign Up</h2>
-              <form onSubmit={handleSignupSubmit}>
-                <input type="text" name="name" placeholder="Name" value={signupData.name} onChange={handleSignupChange} required />
-                <input type="email" name="email" placeholder="Email" value={signupData.email} onChange={handleSignupChange} required />
-                <input type="password" name="password" placeholder="Password" value={signupData.password} onChange={handleSignupChange} required />
-                <button type="submit">Sign Up</button>
-              </form>
-            </div>
-          </div>
-        )}
-
-        {/* Login Modal */}
-        {showLogin && (
-          <div className="modal">
-            <div className="modal-content">
-              <span className="close" onClick={() => setShowLogin(false)}>&times;</span>
-              <h2>Login</h2>
-              <form onSubmit={handleLoginSubmit}>
-                <input type="email" name="email" placeholder="Email" value={loginDataForm.email} onChange={handleLoginChange} required />
-                <input type="password" name="password" placeholder="Password" value={loginDataForm.password} onChange={handleLoginChange} required />
-                <button type="submit">Login</button>
-              </form>
-            </div>
-          </div>
-        )}
       </div>
+
+      {/* ✅ Sign-Up Modal */}
+      {showSignup && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowSignup(false)}>
+              &times;
+            </span>
+            <h2>Sign Up</h2>
+            <form onSubmit={handleSignupSubmit}>
+              <input type="text" name="name" placeholder="Name" value={signupData.name} onChange={(e) => setSignupData({ ...signupData, [e.target.name]: e.target.value })} required />
+              <input type="email" name="email" placeholder="Email" value={signupData.email} onChange={(e) => setSignupData({ ...signupData, [e.target.name]: e.target.value })} required />
+              <input type="password" name="password" placeholder="Password" value={signupData.password} onChange={(e) => setSignupData({ ...signupData, [e.target.name]: e.target.value })} required />
+              <button type="submit">Sign Up</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ✅ Login Modal */}
+      {showLogin && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowLogin(false)}>
+              &times;
+            </span>
+            <h2>Login</h2>
+            <form onSubmit={handleLoginSubmit}>
+              <input type="email" name="email" placeholder="Email" value={loginDataForm.email} onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })} required />
+              <input type="password" name="password" placeholder="Password" value={loginDataForm.password} onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })} required />
+              <button type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      )}
     </>
   );
 };
