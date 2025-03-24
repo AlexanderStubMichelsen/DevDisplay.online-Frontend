@@ -46,7 +46,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
         {/* ✅ Show Sign-Up / button only if NOT logged in */}
         {!isLoggedIn && (
           <div className="auth-buttons">
-            <button onClick={() => setShowSignup(true)}>Sign Up</button>
+            <button type="button" onClick={() => setShowSignup(true)}>Sign Up</button>
           </div>
         )}
       </div>
@@ -55,9 +55,9 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
       {showSignup && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={() => setShowSignup(false)}>
+            <button type="button" className="close" onClick={() => setShowSignup(false)} onKeyDown={(e) => { if (e.key === 'Enter') setShowSignup(false); }} tabIndex="0">
               &times;
-            </span>
+            </button>
             <h2>Sign Up</h2>
             <form onSubmit={handleSignupSubmit}>
               <input type="text" name="name" placeholder="Name" value={signupData.name} onChange={(e) => setSignupData({ ...signupData, [e.target.name]: e.target.value })} required />

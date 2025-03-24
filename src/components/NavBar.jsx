@@ -17,7 +17,7 @@ function NavBar() {
   // ✅ Function to check login status from localStorage
   const checkLoginStatus = () => {
     const storedUser = JSON.parse(localStorage.getItem('loginData'));
-    if (storedUser && storedUser.email) {
+    if (storedUser?.email) {
       setIsLoggedIn(true);
       setUserEmail(storedUser.email);
     } else {
@@ -112,7 +112,7 @@ function NavBar() {
       {showLogin && (
         <div className="modal">
           <div className="modal-content">
-            <span className="close" onClick={() => setShowLogin(false)}>
+            <span className="close" onClick={() => setShowLogin(false)} onKeyUp={(e) => { if (e.key === 'Enter') setShowLogin(false); }} >
               &times;
             </span>
             <h2>Login</h2>

@@ -76,6 +76,7 @@ function Youtube() {
               />
               <p className="video-title">{video.snippet.title}</p>
               <button
+                type="button"
                 onClick={() => fetchYoutubeMp3(video.id.videoId)}
                 className="download-button"
               >
