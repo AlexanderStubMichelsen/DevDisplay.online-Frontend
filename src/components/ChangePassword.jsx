@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import "../css/UserPage.css";
-import NavBar from "./NavBar";
 import apiFacade from "../api/facade";
-import { LinkContainer } from "react-router-bootstrap";
-import Nav from "react-bootstrap/Nav";
+import NavBar from "./NavBar";
 
-const UserPage = () => {
+const ChangePassword = () => {
   const [user, setUser] = useState({
-    name: "",
     email: "",
     password: "",
   });
+
+  const [newPassword, setNewPassword] = useState({
+    newpassword: "",
+    repassword: "",
+  });
+
   const [message, setMessage] = useState("");
 
   useEffect(() => {
@@ -22,7 +24,6 @@ const UserPage = () => {
           setUser((prevUser) => ({
             ...prevUser,
             email: storedUser.email || "",
-            name: storedUser.name || "",
           }));
         }
       } catch (error) {
@@ -42,14 +43,30 @@ const UserPage = () => {
     });
   };
 
+  const handleNewPasswordChange = (e) => {
+    const { name, value } = e.target;
+    setNewPassword({
+      ...newPassword,
+      [name]: value,
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (newPassword.newpassword !== newPassword.repassword) {
+      setMessage("Passwords do not match.");
+      return;
+    }
     try {
-      await apiFacade.updateUser(user);
-      setMessage("User updated successfully!");
+      await apiFacade.changePassword({
+        email: user.email,
+        oldPassword: user.password,
+        newPassword: newPassword.newpassword,
+      });
+      setMessage("Password updated successfully!");
     } catch (error) {
-      console.error("Update User Error:", error);
-      setMessage("Failed to update user.");
+      console.error("Update Password Error:", error);
+      setMessage("Failed to update password.");
     }
   };
 
@@ -62,27 +79,7 @@ const UserPage = () => {
           {message && <p className="feedback">{message}</p>}
           <form onSubmit={handleSubmit} className="user-form">
             <div className="form-group">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="text"
-                name="name"
-                value={user.name}
-                onChange={handleChange}
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email:</label>
-              <input
-                type="email"
-                name="email"
-                value={user.email}
-                readOnly
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="password">Password:</label>
+              <label htmlFor="oldpassword">Old Password:</label>
               <input
                 type="password"
                 name="password"
@@ -91,20 +88,34 @@ const UserPage = () => {
                 className="form-control"
               />
             </div>
+            <div className="form-group">
+              <label htmlFor="newpassword">New Password:</label>
+              <input
+                type="password"
+                name="newpassword"
+                value={newPassword.newpassword}
+                onChange={handleNewPasswordChange}
+                className="form-control"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="repassword">Re Enter New Password:</label>
+              <input
+                type="password"
+                name="repassword"
+                value={newPassword.repassword}
+                onChange={handleNewPasswordChange}
+                className="form-control"
+              />
+            </div>
             <button type="submit" className="btn btn-primary">
-              Update
+              Update Password
             </button>
           </form>
-          <LinkContainer
-            to="/changepassword"
-            onClick={() => setExpanded(false)}
-          >
-            <Nav.Link>Change Password</Nav.Link>
-          </LinkContainer>
         </div>
       </div>
     </>
   );
 };
 
-export default UserPage;
+export default ChangePassword;

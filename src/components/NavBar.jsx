@@ -56,15 +56,16 @@ function NavBar() {
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
-      await apiFacade.login(loginDataForm);
+      const Response = await apiFacade.login(loginDataForm);
+      console.log('Response:', Response);
       setShowLogin(false);
       setIsLoggedIn(true);
       setUserEmail(loginDataForm.email);
 
       localStorage.setItem("isLoggedIn", JSON.stringify(true));
-      localStorage.setItem("loginData", JSON.stringify({ email: loginDataForm.email }));
-      
+      localStorage.setItem("loginData", JSON.stringify({ email: loginDataForm.email, name: Response.name }));
       // save login data to localStorage
+      
       
 
       window.dispatchEvent(new Event("storage"));
@@ -105,6 +106,10 @@ function NavBar() {
 
             <LinkContainer to="/userpage" onClick={() => setExpanded(false)}>
               <Nav.Link>User Page</Nav.Link>
+            </LinkContainer>
+
+            <LinkContainer to="/changepassword" onClick={() => setExpanded(false)}>
+              <Nav.Link>Change Password</Nav.Link>
             </LinkContainer>
 
             {/* ✅ Show "User Email Logout" if logged in */}

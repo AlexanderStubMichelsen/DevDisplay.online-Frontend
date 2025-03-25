@@ -86,6 +86,27 @@ const apiFacade = {
       console.error("Update User Error:", error);
       throw error;
     }
+  },
+
+  changePassword: async ({ email, oldPassword, newPassword }) => {
+    try {
+      const response = await fetch(`${API_URL}/${email}/changepassword`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ oldPassword, newPassword })
+      });
+        
+      if (!response.ok) {
+        throw new Error('Password change failed');
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error('Change Password Error:', error);
+      throw error;
+    }
   }
 };
 

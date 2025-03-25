@@ -8,6 +8,7 @@ import './index.css';
 import Youtube from './components/Youtube.jsx';
 import Help from './components/Help.jsx';
 import UserPage from './components/UserPage.jsx';
+import ChangePassword from './components/ChangePassword.jsx';
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -24,6 +25,7 @@ const Root = () => {
               <Route path="youtube" element={<Youtube />} />
               <Route path="help" element={<Help />} />
               <Route path="userpage" element={<UserPage />} />
+              <Route path="changepassword" element={<ChangePassword />} />
               <Route path="*" element={<NoMatch />} />
             {/* )} */}
             
