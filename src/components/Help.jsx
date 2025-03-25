@@ -25,7 +25,7 @@ function Help() {
   return (
     <>
       <NavBar />
-      <div className="help"></div>
+      <div className="help" />
     </>
   );
 }

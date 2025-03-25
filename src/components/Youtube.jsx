@@ -87,7 +87,7 @@ function Youtube() {
         </div>
 
         {nextPageToken && (
-          <button className="load-more-btn" onClick={() => fetchVideos(nextPageToken)}>
+          <button type="button" className="load-more-btn" onClick={() => fetchVideos(nextPageToken)}>
             Load More
           </button>
         )}

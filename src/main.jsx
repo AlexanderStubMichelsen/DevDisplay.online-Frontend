@@ -20,18 +20,13 @@ const Root = () => {
         <Route path="/" element={<App setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
           <>
             {/* Conditional rendering of 'Images' route */}
-            {/* {(userRoles.includes('admin') || userRoles.includes('user') || userRoles.includes('manager')) && ( */}
               <Route path="images" element={<Images />} />
               <Route path="youtube" element={<Youtube />} />
               <Route path="help" element={<Help />} />
               <Route path="userpage" element={<UserPage />} />
               <Route path="changepassword" element={<ChangePassword />} />
               <Route path="*" element={<NoMatch />} />
-            {/* )} */}
-            
-          </>
-        {/* )} */}
-        
+          </>        
       </Route>
     )
   );

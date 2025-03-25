@@ -94,7 +94,7 @@ function Images() {
           ))}
         </div>
 
-        <button className="load-more-btn" onClick={() => setPage(page + 1)}>
+        <button type="button" className="load-more-btn" onClick={() => setPage(page + 1)}>
           Get More
         </button>
       </div>
