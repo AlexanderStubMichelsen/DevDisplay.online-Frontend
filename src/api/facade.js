@@ -28,12 +28,15 @@ const apiFacade = {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });
-
+  
       if (!response.ok) {
         throw new Error("Invalid email or password");
       }
-
-      return await response.json();
+  
+      const data = await response.json();
+      console.log("response:", data);
+  
+      return data;
     } catch (error) {
       console.error("Login Error:", error);
       throw error;
@@ -49,8 +52,41 @@ const apiFacade = {
 
   // ✅ Get Logged-In User
   getUser: () => {
-    return JSON.parse(localStorage.getItem("loginData")) || { email: "" };
+    const user = JSON.parse(localStorage.getItem('loginData'));
+    console.log('user:', user);
+    return {
+      email: user?.email || '',
+      name: user?.name || '',     // ✅ Make sure this is included!
+      
+      // optionally: other fields like `role`, `id`, etc.
+    };
   },
+
+  // ✅ Update User
+  updateUser: async (user) => {
+    try {
+      const response = await fetch(`${API_URL}/${user.email}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(user)
+      });
+  
+      if (!response.ok) {
+        throw new Error("Update failed");
+      }
+  
+      // Check if the response body is empty
+      const text = await response.text();
+      const data = text ? JSON.parse(text) : {};
+  
+      return data;
+    } catch (error) {
+      console.error("Update User Error:", error);
+      throw error;
+    }
+  }
 };
 
 export default apiFacade;

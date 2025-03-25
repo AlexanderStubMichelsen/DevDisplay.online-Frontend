@@ -7,6 +7,7 @@ import NoMatch from './components/NoMatch.jsx';
 import './index.css';
 import Youtube from './components/Youtube.jsx';
 import Help from './components/Help.jsx';
+import UserPage from './components/UserPage.jsx';
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -22,6 +23,7 @@ const Root = () => {
               <Route path="images" element={<Images />} />
               <Route path="youtube" element={<Youtube />} />
               <Route path="help" element={<Help />} />
+              <Route path="userpage" element={<UserPage />} />
               <Route path="*" element={<NoMatch />} />
             {/* )} */}
             

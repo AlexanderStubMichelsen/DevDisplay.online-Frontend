@@ -63,6 +63,10 @@ function NavBar() {
 
       localStorage.setItem("isLoggedIn", JSON.stringify(true));
       localStorage.setItem("loginData", JSON.stringify({ email: loginDataForm.email }));
+      
+      // save login data to localStorage
+      
+
       window.dispatchEvent(new Event("storage"));
     } catch (error) {
       alert("Login failed. Please check your email and password.");
@@ -90,6 +94,7 @@ function NavBar() {
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
+           
 
             {/* ✅ Show "Login" button only if user is NOT logged in */}
             {!isLoggedIn && (
@@ -97,6 +102,10 @@ function NavBar() {
                 Login
               </Nav.Link>
             )}
+
+            <LinkContainer to="/userpage" onClick={() => setExpanded(false)}>
+              <Nav.Link>User Page</Nav.Link>
+            </LinkContainer>
 
             {/* ✅ Show "User Email Logout" if logged in */}
             {isLoggedIn && (
