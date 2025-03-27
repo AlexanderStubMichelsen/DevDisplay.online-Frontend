@@ -28,14 +28,14 @@ const apiFacade = {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(loginData),
       });
-  
+
       if (!response.ok) {
         throw new Error("Invalid email or password");
       }
-  
+
       const data = await response.json();
       console.log("response:", data);
-  
+
       return data;
     } catch (error) {
       console.error("Login Error:", error);
@@ -45,19 +45,18 @@ const apiFacade = {
 
   // ✅ Handle Logout
   logout: () => {
-    localStorage.removeItem("isLoggedIn");
-    localStorage.removeItem("loginData");
+    sessionStorage.removeItem("isLoggedIn");
+    sessionStorage.removeItem("loginData");
     window.dispatchEvent(new Event("storage")); // ✅ Force re-render
   },
 
   // ✅ Get Logged-In User
   getUser: () => {
-    const user = JSON.parse(localStorage.getItem('loginData'));
-    console.log('user:', user);
+    const user = JSON.parse(sessionStorage.getItem("loginData"));
+    console.log("user:", user);
     return {
-      email: user?.email || '',
-      name: user?.name || '',     // ✅ Make sure this is included!
-      
+      email: user?.email || "",
+      name: user?.name || "",
       // optionally: other fields like `role`, `id`, etc.
     };
   },
@@ -65,22 +64,25 @@ const apiFacade = {
   // ✅ Update User
   updateUser: async (user) => {
     try {
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+
       const response = await fetch(`${API_URL}/${user.email}`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include the token
         },
-        body: JSON.stringify(user)
+        body: JSON.stringify(user),
       });
-  
+
       if (!response.ok) {
         throw new Error("Update failed");
       }
-  
+
       // Check if the response body is empty
       const text = await response.text();
       const data = text ? JSON.parse(text) : {};
-  
+
       return data;
     } catch (error) {
       console.error("Update User Error:", error);
@@ -88,26 +90,54 @@ const apiFacade = {
     }
   },
 
+  // ✅ Change Password
   changePassword: async ({ email, oldPassword, newPassword }) => {
     try {
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+
       const response = await fetch(`${API_URL}/${email}/changepassword`, {
-        method: 'PUT',
+        method: "PUT",
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include the token
         },
-        body: JSON.stringify({ oldPassword, newPassword })
+        body: JSON.stringify({ oldPassword, newPassword }),
       });
-        
+
       if (!response.ok) {
-        throw new Error('Password change failed');
+        throw new Error("Password change failed");
       }
-  
+
       return await response.json();
     } catch (error) {
-      console.error('Change Password Error:', error);
+      console.error("Change Password Error:", error);
       throw error;
     }
-  }
+  },
+
+  // ✅ Example of a Protected API Request
+  getProtectedData: async () => {
+    try {
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+
+      const response = await fetch(`${API_URL}/protected-endpoint`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, // Include the token
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch protected data");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Protected Data Error:", error);
+      throw error;
+    }
+  },
 };
 
 export default apiFacade;

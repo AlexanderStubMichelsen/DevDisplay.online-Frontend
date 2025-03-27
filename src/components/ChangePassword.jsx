@@ -19,7 +19,7 @@ const ChangePassword = () => {
 
   useEffect(() => {
     // Check if the user is logged in
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    const isLoggedIn = sessionStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
       navigate("/"); // Redirect to the home page if not logged in
       return;
