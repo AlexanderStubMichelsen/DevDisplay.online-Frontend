@@ -44,7 +44,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
         </video>
 
         {/* ✅ Show Sign-Up / button only if NOT logged in */}
-        {!isLoggedIn && (
+        {!sessionStorage.getItem("isLoggedIn") && (
           <div className="auth-buttons">
             <button type="button" onClick={() => setShowSignup(true)}>Sign Up</button>
           </div>
