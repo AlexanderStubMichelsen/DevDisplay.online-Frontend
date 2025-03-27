@@ -65,8 +65,8 @@ function NavBar() {
       localStorage.setItem("isLoggedIn", JSON.stringify(true));
       localStorage.setItem("loginData", JSON.stringify({ email: loginDataForm.email, name: Response.name }));
       // save login data to localStorage
-      
-      
+
+
 
       window.dispatchEvent(new Event("storage"));
     } catch (error) {
@@ -95,28 +95,23 @@ function NavBar() {
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
-           
-
-            {/* ✅ Show "Login" button only if user is NOT logged in */}
-            {!isLoggedIn && (
-              <Nav.Link onClick={() => setShowLogin(true)}>
-                Login
-              </Nav.Link>
-            )}
-
-            <LinkContainer to="/userpage" onClick={() => setExpanded(false)}>
-              <Nav.Link>User Page</Nav.Link>
-            </LinkContainer>
-
-            <LinkContainer to="/changepassword" onClick={() => setExpanded(false)}>
-              <Nav.Link>Change Password</Nav.Link>
-            </LinkContainer>
 
             {/* ✅ Show "User Email Logout" if logged in */}
-            {isLoggedIn && (
-              <Nav.Link onClick={handleLogout}>
-                {userEmail || 'User'} Logout
-              </Nav.Link>
+            {localStorage.getItem('isLoggedIn') && (
+              <>
+                <LinkContainer to="/userpage" onClick={() => setExpanded(false)}>
+                  <Nav.Link>User Page</Nav.Link>
+                </LinkContainer>
+                <Nav.Link onClick={handleLogout}>
+                  {userEmail || 'User'} Logout
+                </Nav.Link>
+              </>
+            )} {/* ✅ This closing parenthesis was missing! */}
+
+            {!localStorage.getItem('isLoggedIn') && (
+                <Nav.Link onClick={() => setShowLogin(true)}>
+                  Login
+                </Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>
@@ -131,21 +126,21 @@ function NavBar() {
             </span>
             <h2>Login</h2>
             <form onSubmit={handleLoginSubmit}>
-              <input 
-                type="email" 
-                name="email" 
-                placeholder="Email" 
-                value={loginDataForm.email} 
-                onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })} 
-                required 
+              <input
+                type="email"
+                name="email"
+                placeholder="Email"
+                value={loginDataForm.email}
+                onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })}
+                required
               />
-              <input 
-                type="password" 
-                name="password" 
-                placeholder="Password" 
-                value={loginDataForm.password} 
-                onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })} 
-                required 
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={loginDataForm.password}
+                onChange={(e) => setLoginDataForm({ ...loginDataForm, [e.target.name]: e.target.value })}
+                required
               />
               <button type="submit">Login</button>
             </form>

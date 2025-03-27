@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
 import "../css/UserPage.css";
 import NavBar from "./NavBar";
 import apiFacade from "../api/facade";
@@ -12,8 +13,16 @@ const UserPage = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate for redirection
 
   useEffect(() => {
+    // Check if the user is logged in
+    const isLoggedIn = localStorage.getItem("isLoggedIn");
+    if (!isLoggedIn) {
+      navigate("/"); // Redirect to the home page if not logged in
+      return;
+    }
+
     const fetchUserData = async () => {
       try {
         const storedUser = apiFacade.getUser();
@@ -32,7 +41,7 @@ const UserPage = () => {
     };
 
     fetchUserData();
-  }, []);
+  }, [navigate]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -95,10 +104,7 @@ const UserPage = () => {
               Update
             </button>
           </form>
-          <LinkContainer
-            to="/changepassword"
-            onClick={() => setExpanded(false)}
-          >
+          <LinkContainer to="/changepassword">
             <Nav.Link>Change Password</Nav.Link>
           </LinkContainer>
         </div>

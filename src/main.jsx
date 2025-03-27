@@ -23,6 +23,7 @@ const Root = () => {
               <Route path="images" element={<Images />} />
               <Route path="youtube" element={<Youtube />} />
               <Route path="help" element={<Help />} />
+              {/* show if localstorage contains an isLoggedIn */}
               <Route path="userpage" element={<UserPage />} />
               <Route path="changepassword" element={<ChangePassword />} />
               <Route path="*" element={<NoMatch />} />
