@@ -24,8 +24,32 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const handleSignupSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Sign up the user
       await apiFacade.signUp(signupData);
+  
+      // Log in the user immediately after sign-up
+      const response = await apiFacade.login({
+        email: signupData.email,
+        password: signupData.password, // Use the same password provided during sign-up
+      });
+  
+      console.log("Response:", response);
+  
       setShowSignup(false);
+      setIsLoggedIn(true);
+  
+      // Store login data and token in sessionStorage
+      sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
+      sessionStorage.setItem(
+        "loginData",
+        JSON.stringify({
+          email: response.userDto.email, // Use userDto.email
+          name: response.userDto.name,  // Use userDto.name if available
+          token: response.token,        // Store the token
+        })
+      );
+  
+      window.dispatchEvent(new Event("storage")); // Notify other components
     } catch (error) {
       alert("Sign-Up Failed");
     }

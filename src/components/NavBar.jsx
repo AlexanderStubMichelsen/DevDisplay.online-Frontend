@@ -64,17 +64,20 @@ function NavBar() {
     e.preventDefault();
     try {
       const response = await apiFacade.login(loginDataForm);
-      console.log("Response:", response);
 
       setShowLogin(false);
       setIsLoggedIn(true);
-      setUserEmail(response.email);
+      setUserEmail(response.userDto.email);
 
       // Store login data and token in sessionStorage
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
       sessionStorage.setItem(
         "loginData",
-        JSON.stringify({ email: response.email, name: response.name, token: response.token })
+        JSON.stringify({
+          email: response.userDto.email, // Use userDto.email
+          name: response.userDto.name, // Use userDto.name if available
+          token: response.token,
+        })
       );
 
       window.dispatchEvent(new Event("storage")); // Notify other components

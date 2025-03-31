@@ -9,11 +9,30 @@ const apiFacade = {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupData),
       });
-
+  
       if (!response.ok) {
         throw new Error("Sign-up failed");
       }
-      return await response.json();
+  
+      // If sign-up is successful, log the user in
+      const loginResponse = await apiFacade.login({
+        email: signupData.email,
+        password: signupData.password, // Use the same password provided during sign-up
+      });
+  
+      // Store login data and token in sessionStorage
+      sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
+      sessionStorage.setItem(
+        "loginData",
+        JSON.stringify({
+          email: loginResponse.email,
+          name: loginResponse.name,
+          token: loginResponse.token,
+        })
+      );
+  
+      window.dispatchEvent(new Event("storage")); // Notify other components
+      return loginResponse; // Return the login response
     } catch (error) {
       console.error("Sign-Up Error:", error);
       throw error;
@@ -34,7 +53,6 @@ const apiFacade = {
       }
 
       const data = await response.json();
-      console.log("response:", data);
 
       return data;
     } catch (error) {
