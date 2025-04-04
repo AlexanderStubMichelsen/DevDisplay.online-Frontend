@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../css/Images.css";
 import NavBar from "./NavBar";
+import ImageFacade from "../api/ImageFacade.js"; // ✅ Import ImageFacade
 
 function Images() {
   const [imageList, setImageList] = useState([]);
@@ -34,7 +35,9 @@ function Images() {
           photographer: photo.user.name,
           profileLink: photo.user.links.html,
         }));
-        setImageList(pageNum === 1 ? images : (prevImages) => [...prevImages, ...images]);
+        setImageList(
+          pageNum === 1 ? images : (prevImages) => [...prevImages, ...images]
+        );
         setLoading(false);
       })
       .catch((error) => {
@@ -55,32 +58,8 @@ function Images() {
   };
 
   const handleSaveImage = async (image) => {
-    const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-
-    if (!token) {
-      alert("You must be logged in to save images.");
-      return;
-    }
-
     try {
-      const response = await fetch("http://172.105.95.18:5019/api/images/save", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
-          imageUrl: image.url,
-          title: image.alt || "Untitled",
-          photographer: image.photographer,
-          sourceLink: image.profileLink,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to save image");
-      }
-
+      await ImageFacade.saveImage(image);
       alert("Image saved successfully!");
     } catch (error) {
       console.error("Save Image Error:", error);
@@ -124,12 +103,14 @@ function Images() {
                 </a>{" "}
                 on Unsplash
               </p>
-              <button
-                className="save-button"
-                onClick={() => handleSaveImage(image)}
-              >
-                Save Image to User
-              </button>
+              {sessionStorage.getItem("isLoggedIn") === "true" && (
+                <button
+                  className="save-button"
+                  onClick={() => handleSaveImage(image)}
+                >
+                  Save Image to User
+                </button>
+              )}
             </div>
           ))}
         </div>

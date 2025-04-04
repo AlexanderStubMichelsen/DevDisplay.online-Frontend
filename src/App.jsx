@@ -15,7 +15,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
 
   // ✅ Route protection
   useEffect(() => {
-    const protectedRoutes = ["/images", "/youtube", "/help"];
+    const protectedRoutes = ["/images", "/youtube", "/help", "/saved"];
     if (!isLoggedIn && protectedRoutes.includes(location.pathname)) {
       navigate("/");
     }

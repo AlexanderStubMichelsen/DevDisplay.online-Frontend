@@ -151,6 +151,7 @@ const apiFacade = {
       throw error;
     }
   },
+  
 };
 
 export default apiFacade;
