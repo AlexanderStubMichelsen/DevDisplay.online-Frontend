@@ -5,12 +5,12 @@ import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import "../css/NavBar.css";
-import apiFacade from "../api/facade.js"; // ✅ Import API facade
+import apiFacade from "../api/facade.js";
 import Dropdown from "react-bootstrap/Dropdown";
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
-  const [userEmail, setUserEmail] = useState("");
+  const [userName, setUserName] = useState(""); // ✅ Show name instead of email
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [loginDataForm, setLoginDataForm] = useState({
@@ -18,23 +18,22 @@ function NavBar() {
     password: "",
   });
 
-  // ✅ Function to check login status from sessionStorage
+  // ✅ Check sessionStorage on mount
   const checkLoginStatus = () => {
     const storedUser = JSON.parse(sessionStorage.getItem("loginData"));
-    if (storedUser?.email) {
+    if (storedUser?.name) {
       setIsLoggedIn(true);
-      setUserEmail(storedUser.email);
+      setUserName(storedUser.name);
     } else {
       setIsLoggedIn(false);
-      setUserEmail("");
+      setUserName("");
     }
   };
 
-  // ✅ Load login state when component mounts & listen for updates
+  // ✅ Listen for login/logout across tabs
   useEffect(() => {
-    checkLoginStatus(); // Check on mount
+    checkLoginStatus();
 
-    // ✅ Listen for login/logout events
     const handleStorageChange = () => {
       checkLoginStatus();
     };
@@ -49,17 +48,17 @@ function NavBar() {
     setExpanded(!expanded);
   };
 
-  // ✅ Handle Logout Using apiFacade
+  // ✅ Logout
   const handleLogout = () => {
     apiFacade.logout();
     setIsLoggedIn(false);
-    setUserEmail("");
+    setUserName("");
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("loginData");
-    window.dispatchEvent(new Event("storage")); // Notify other components
+    window.dispatchEvent(new Event("storage"));
   };
 
-  // ✅ Handle Login Using apiFacade
+  // ✅ Login
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -67,20 +66,20 @@ function NavBar() {
 
       setShowLogin(false);
       setIsLoggedIn(true);
-      setUserEmail(response.userDto.email);
+      setUserName(response.userDto.name);
 
-      // Store login data and token in sessionStorage
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
       sessionStorage.setItem(
         "loginData",
         JSON.stringify({
-          email: response.userDto.email, // Use userDto.email
-          name: response.userDto.name, // Use userDto.name if available
+          id: response.userDto.id,
+          email: response.userDto.email,
+          name: response.userDto.name,
           token: response.token,
         })
       );
 
-      window.dispatchEvent(new Event("storage")); // Notify other components
+      window.dispatchEvent(new Event("storage"));
     } catch (error) {
       alert("Login failed. Please check your email and password.");
     }
@@ -120,11 +119,11 @@ function NavBar() {
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
 
-            {/* ✅ Show "User Email Logout" if logged in */}
-            {sessionStorage.getItem("isLoggedIn") && (
+            {/* ✅ Show dropdown if logged in */}
+            {isLoggedIn && (
               <Dropdown>
                 <Dropdown.Toggle variant="light" id="dropdown-basic">
-                  {userEmail || "User"}
+                  {userName || "User"}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
@@ -139,14 +138,15 @@ function NavBar() {
               </Dropdown>
             )}
 
-            {!sessionStorage.getItem("isLoggedIn") && (
+            {/* ✅ Show login if not logged in */}
+            {!isLoggedIn && (
               <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
 
-      {/* ✅ Login Modal (Rendered Separately, NOT Inside <Nav.Link>) */}
+      {/* ✅ Login Modal */}
       {showLogin && (
         <div className="modal">
           <div className="modal-content">

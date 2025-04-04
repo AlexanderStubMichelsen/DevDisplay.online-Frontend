@@ -1,78 +1,38 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom";
 import apiFacade from "../api/facade";
 import NavBar from "./NavBar";
 
 const ChangePassword = () => {
-  const [user, setUser] = useState({
-    email: "",
-    password: "",
-  });
-
-  const [newPassword, setNewPassword] = useState({
-    newpassword: "",
-    repassword: "",
-  });
-
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate for redirection
+
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is logged in
     const isLoggedIn = sessionStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
-      navigate("/"); // Redirect to the home page if not logged in
-      return;
+      navigate("/");
     }
-
-    const fetchUserData = async () => {
-      try {
-        const storedUser = apiFacade.getUser();
-        console.log("Stored user:", storedUser);
-        if (storedUser?.email) {
-          setUser((prevUser) => ({
-            ...prevUser,
-            email: storedUser.email || "",
-          }));
-        }
-      } catch (error) {
-        console.error("Fetch User Error:", error);
-        setMessage("Failed to fetch user data.");
-      }
-    };
-
-    fetchUserData();
   }, [navigate]);
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUser({
-      ...user,
-      [name]: value,
-    });
-  };
-
-  const handleNewPasswordChange = (e) => {
-    const { name, value } = e.target;
-    setNewPassword({
-      ...newPassword,
-      [name]: value,
-    });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (newPassword.newpassword !== newPassword.repassword) {
+    if (newPassword !== rePassword) {
       setMessage("Passwords do not match.");
       return;
     }
     try {
       await apiFacade.changePassword({
-        email: user.email,
-        oldPassword: user.password,
-        newPassword: newPassword.newpassword,
+        oldPassword,
+        newPassword,
       });
       setMessage("Password updated successfully!");
+      setOldPassword("");
+      setNewPassword("");
+      setRePassword("");
     } catch (error) {
       console.error("Update Password Error:", error);
       setMessage("Failed to update password.");
@@ -88,33 +48,36 @@ const ChangePassword = () => {
           {message && <p className="feedback">{message}</p>}
           <form onSubmit={handleSubmit} className="user-form">
             <div className="form-group">
-              <label htmlFor="oldpassword">Old Password:</label>
+              <label htmlFor="oldPassword">Old Password:</label>
               <input
                 type="password"
-                name="password"
-                value={user.password}
-                onChange={handleChange}
+                name="oldPassword"
+                value={oldPassword}
+                onChange={(e) => setOldPassword(e.target.value)}
                 className="form-control"
+                required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="newpassword">New Password:</label>
+              <label htmlFor="newPassword">New Password:</label>
               <input
                 type="password"
-                name="newpassword"
-                value={newPassword.newpassword}
-                onChange={handleNewPasswordChange}
+                name="newPassword"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 className="form-control"
+                required
               />
             </div>
             <div className="form-group">
-              <label htmlFor="repassword">Re Enter New Password:</label>
+              <label htmlFor="rePassword">Re-enter New Password:</label>
               <input
                 type="password"
-                name="repassword"
-                value={newPassword.repassword}
-                onChange={handleNewPasswordChange}
+                name="rePassword"
+                value={rePassword}
+                onChange={(e) => setRePassword(e.target.value)}
                 className="form-control"
+                required
               />
             </div>
             <button type="submit" className="btn btn-primary">

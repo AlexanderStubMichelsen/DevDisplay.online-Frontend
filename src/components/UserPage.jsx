@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import { useNavigate } from "react-router-dom";
 import "../css/UserPage.css";
 import NavBar from "./NavBar";
 import apiFacade from "../api/facade";
@@ -8,39 +8,31 @@ import Nav from "react-bootstrap/Nav";
 
 const UserPage = () => {
   const [user, setUser] = useState({
+    id: "",
     name: "",
     email: "",
     password: "",
   });
   const [message, setMessage] = useState("");
-  const navigate = useNavigate(); // Initialize useNavigate for redirection
+  const navigate = useNavigate();
 
   useEffect(() => {
-    // Check if the user is logged in
     const isLoggedIn = sessionStorage.getItem("isLoggedIn");
     if (!isLoggedIn) {
-      navigate("/"); // Redirect to the home page if not logged in
+      navigate("/");
       return;
     }
 
-    const fetchUserData = async () => {
-      try {
-        const storedUser = apiFacade.getUser();
-        console.log("Stored user:", storedUser);
-        if (storedUser?.email) {
-          setUser((prevUser) => ({
-            ...prevUser,
-            email: storedUser.email || "",
-            name: storedUser.name || "",
-          }));
-        }
-      } catch (error) {
-        console.error("Fetch User Error:", error);
-        setMessage("Failed to fetch user data.");
-      }
-    };
-
-    fetchUserData();
+    const storedUser = apiFacade.getUser();
+    console.log("Stored user:", storedUser);
+    if (storedUser?.email) {
+      setUser((prevUser) => ({
+        ...prevUser,
+        id: storedUser.id,
+        email: storedUser.email,
+        name: storedUser.name,
+      }));
+    }
   }, [navigate]);
 
   const handleChange = (e) => {
@@ -54,8 +46,14 @@ const UserPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await apiFacade.updateUser(user);
+      // Only send the fields that are updateable (name, password)
+      const updateData = {
+        name: user.name,
+        password: user.password,
+      };
+      await apiFacade.updateUser(updateData);
       setMessage("User updated successfully!");
+      setUser({ ...user, password: "" }); // Clear password field after update
     } catch (error) {
       console.error("Update User Error:", error);
       setMessage("Failed to update user.");

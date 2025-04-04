@@ -1,3 +1,4 @@
+// const API_URL = "http://172.105.95.18:5019/api/users";
 const API_URL = "http://localhost:5019/api/users";
 
 const apiFacade = {
@@ -9,30 +10,30 @@ const apiFacade = {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupData),
       });
-  
+
       if (!response.ok) {
         throw new Error("Sign-up failed");
       }
-  
-      // If sign-up is successful, log the user in
+
       const loginResponse = await apiFacade.login({
         email: signupData.email,
-        password: signupData.password, // Use the same password provided during sign-up
+        password: signupData.password,
       });
-  
-      // Store login data and token in sessionStorage
+
+      // ✅ Save full user info including ID
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
       sessionStorage.setItem(
         "loginData",
         JSON.stringify({
-          email: loginResponse.email,
-          name: loginResponse.name,
+          id: loginResponse.userDto.id,
+          email: loginResponse.userDto.email,
+          name: loginResponse.userDto.name,
           token: loginResponse.token,
         })
       );
-  
-      window.dispatchEvent(new Event("storage")); // Notify other components
-      return loginResponse; // Return the login response
+
+      window.dispatchEvent(new Event("storage"));
+      return loginResponse;
     } catch (error) {
       console.error("Sign-Up Error:", error);
       throw error;
@@ -53,7 +54,6 @@ const apiFacade = {
       }
 
       const data = await response.json();
-
       return data;
     } catch (error) {
       console.error("Login Error:", error);
@@ -65,30 +65,29 @@ const apiFacade = {
   logout: () => {
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("loginData");
-    window.dispatchEvent(new Event("storage")); // ✅ Force re-render
+    window.dispatchEvent(new Event("storage"));
   },
 
   // ✅ Get Logged-In User
   getUser: () => {
     const user = JSON.parse(sessionStorage.getItem("loginData"));
-    console.log("user:", user);
     return {
+      id: user?.id || "",
       email: user?.email || "",
       name: user?.name || "",
-      // optionally: other fields like `role`, `id`, etc.
     };
   },
 
-  // ✅ Update User
+  // ✅ Update User (name/password)
   updateUser: async (user) => {
     try {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
 
-      const response = await fetch(`${API_URL}/${user.email}`, {
+      const response = await fetch(`${API_URL}/update`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include the token
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(user),
       });
@@ -97,11 +96,7 @@ const apiFacade = {
         throw new Error("Update failed");
       }
 
-      // Check if the response body is empty
-      const text = await response.text();
-      const data = text ? JSON.parse(text) : {};
-
-      return data;
+      return await response.json();
     } catch (error) {
       console.error("Update User Error:", error);
       throw error;
@@ -109,15 +104,15 @@ const apiFacade = {
   },
 
   // ✅ Change Password
-  changePassword: async ({ email, oldPassword, newPassword }) => {
+  changePassword: async ({ oldPassword, newPassword }) => {
     try {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
 
-      const response = await fetch(`${API_URL}/${email}/changepassword`, {
+      const response = await fetch(`${API_URL}/changepassword`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include the token
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({ oldPassword, newPassword }),
       });
@@ -142,7 +137,7 @@ const apiFacade = {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`, // Include the token
+          Authorization: `Bearer ${token}`,
         },
       });
 

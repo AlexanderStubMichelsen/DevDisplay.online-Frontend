@@ -54,6 +54,40 @@ function Images() {
     fetchImages(1, query);
   };
 
+  const handleSaveImage = async (image) => {
+    const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+
+    if (!token) {
+      alert("You must be logged in to save images.");
+      return;
+    }
+
+    try {
+      const response = await fetch("http://172.105.95.18:5019/api/images/save", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          imageUrl: image.url,
+          title: image.alt || "Untitled",
+          photographer: image.photographer,
+          sourceLink: image.profileLink,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to save image");
+      }
+
+      alert("Image saved successfully!");
+    } catch (error) {
+      console.error("Save Image Error:", error);
+      alert("Error saving image");
+    }
+  };
+
   return (
     <>
       <NavBar />
@@ -80,7 +114,7 @@ function Images() {
                 <img src={image.url} alt={image.alt} className="image-item" />
               </a>
               <p>
-                Photo by {" "}
+                Photo by{" "}
                 <a
                   href={image.profileLink}
                   target="_blank"
@@ -90,11 +124,21 @@ function Images() {
                 </a>{" "}
                 on Unsplash
               </p>
+              <button
+                className="save-button"
+                onClick={() => handleSaveImage(image)}
+              >
+                Save Image to User
+              </button>
             </div>
           ))}
         </div>
 
-        <button type="button" className="load-more-btn" onClick={() => setPage(page + 1)}>
+        <button
+          type="button"
+          className="load-more-btn"
+          onClick={() => setPage(page + 1)}
+        >
           Get More
         </button>
       </div>
