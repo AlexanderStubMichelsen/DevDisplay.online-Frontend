@@ -10,7 +10,7 @@ import Dropdown from "react-bootstrap/Dropdown";
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
-  const [userName, setUserName] = useState(""); // ✅ Show name instead of email
+  const [userEmail, setUserEmail] = useState(""); // ✅ Show email instead of name
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [loginDataForm, setLoginDataForm] = useState({
@@ -21,12 +21,12 @@ function NavBar() {
   // ✅ Check sessionStorage on mount
   const checkLoginStatus = () => {
     const storedUser = JSON.parse(sessionStorage.getItem("loginData"));
-    if (storedUser?.name) {
+    if (storedUser?.email) {
       setIsLoggedIn(true);
-      setUserName(storedUser.name);
+      setUserEmail(storedUser.email);
     } else {
       setIsLoggedIn(false);
-      setUserName("");
+      setUserEmail("");
     }
   };
 
@@ -52,7 +52,7 @@ function NavBar() {
   const handleLogout = () => {
     apiFacade.logout();
     setIsLoggedIn(false);
-    setUserName("");
+    setUserEmail("");
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("loginData");
     window.dispatchEvent(new Event("storage"));
@@ -66,7 +66,7 @@ function NavBar() {
 
       setShowLogin(false);
       setIsLoggedIn(true);
-      setUserName(response.userDto.name);
+      setUserEmail(response.userDto.email);
 
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
       sessionStorage.setItem(
@@ -128,7 +128,7 @@ function NavBar() {
             {isLoggedIn && (
               <Dropdown>
                 <Dropdown.Toggle variant="light" id="dropdown-basic">
-                  {userName || "User"}
+                  {userEmail || "User"}
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>

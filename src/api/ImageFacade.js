@@ -1,5 +1,5 @@
-// const API_URL = "http://172.105.95.18:5019/api/images";
-const API_URL = "http://localhost:5019/api/images";
+const API_URL = "http://172.105.95.18:5019/api/images";
+// const API_URL = "http://localhost:5019/api/images";
 
 const ImageFacade = {
 
@@ -45,9 +45,10 @@ const ImageFacade = {
         throw new Error("Not authenticated");
       }
   
-      const response = await fetch("http://localhost:5019/api/images/mine", {
+      const response = await fetch(`${API_URL}/mine`, {
         method: "GET",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
@@ -70,9 +71,10 @@ const ImageFacade = {
   
       if (!token) throw new Error("Not authenticated");
   
-      const response = await fetch(`http://localhost:5019/api/images/${imageId}`, {
+      const response = await fetch(`${API_URL}/${imageId}`, {
         method: "DELETE",
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
