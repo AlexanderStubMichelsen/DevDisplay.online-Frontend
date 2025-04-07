@@ -1,5 +1,5 @@
 // filepath: c:\Projekter\Maskinen\src\Root.jsx
-import React, { useState } from "react";
+import { useState } from "react";
 import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
 import App from "./App.jsx";
 import Images from "./components/Images.jsx";
