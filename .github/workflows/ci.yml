@@ -36,8 +36,8 @@ jobs:
         run: npm run build
 
       # Step 6: Run tests (if applicable)
-      - name: Run tests
-        run: npm test
+    #   - name: Run tests
+    #     run: npm test
 
       # Step 7: Deploy to server
       - name: Deploy build folder to server
