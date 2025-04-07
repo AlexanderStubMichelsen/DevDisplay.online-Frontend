@@ -1,44 +1,11 @@
-import React, { useState } from 'react';
-import ReactDOM from 'react-dom/client';
-import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from 'react-router-dom';
-import App from './App.jsx';
-import Images from './components/Images.jsx';
-import NoMatch from './components/NoMatch.jsx';
-import './index.css';
-import Youtube from './components/Youtube.jsx';
-import Help from './components/Help.jsx';
-import UserPage from './components/UserPage.jsx';
-import ChangePassword from './components/ChangePassword.jsx';
-import SavedImages from './components/SavedImages.jsx';
+// filepath: c:\Projekter\Maskinen\src\main.jsx
+import React from "react";
+import ReactDOM from "react-dom/client";
+import Root from "./Root.jsx"; // Import the Root component
+import "./index.css";
 
-const Root = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const router = createBrowserRouter(
-    createRoutesFromElements(
-      <Route>
-        {/* Pass setIsLoggedIn as a prop to the App component */}
-        <Route path="/" element={<App setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
-          <>
-            {/* Conditional rendering of 'Images' route */}
-              <Route path="images" element={<Images />} />
-              <Route path="youtube" element={<Youtube />} />
-              <Route path="help" element={<Help />} />
-              {/* show if localstorage contains an isLoggedIn */}
-              <Route path="userpage" element={<UserPage />} />
-              <Route path="saved" element={<SavedImages />} /> {/* Assuming this is the saved images route */}
-              <Route path="changepassword" element={<ChangePassword />} />
-              <Route path="*" element={<NoMatch />} />
-          </>        
-      </Route>
-    )
-  );
-
-  return (
-    <React.StrictMode>
-      <RouterProvider router={router} />
-    </React.StrictMode>
-  );
-};
-
-ReactDOM.createRoot(document.getElementById('root')).render(<Root />);
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <Root />
+  </React.StrictMode>
+);
