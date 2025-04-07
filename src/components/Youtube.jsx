@@ -45,6 +45,11 @@ function Youtube() {
     fetchVideos();
   };
 
+  const fetchYoutubeMp3 = (videoId) => {
+    console.log(`Converting video with ID ${videoId} to MP3...`);
+    // Add your logic for converting YouTube videos to MP3 here
+  };
+
   return (
     <>
       <NavBar />
