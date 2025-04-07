@@ -47,8 +47,8 @@ jobs:
             username: ${{ secrets.SERVER_USER }}
             key: ${{ secrets.SERVER_KEY }}
             script: |
-                rm -rf /var/www/html/*  # Clear the existing files
-                mkdir -p /var/www/html  # Ensure the target directory exists
+                rm -rf ../var/www/html/*  # Clear the existing files
+                mkdir -p ../var/www/html  # Ensure the target directory exists
                 exit
       - name: Upload build folder
         uses: appleboy/scp-action@v0.1.7
@@ -57,7 +57,7 @@ jobs:
             username: ${{ secrets.SERVER_USER }}
             key: ${{ secrets.SERVER_KEY }}
             source: dist/*
-            target: /var/www/html/
+            target: ../var/www/html/
       - name: Restart Apache
         uses: appleboy/ssh-action@v0.1.7
         with:
