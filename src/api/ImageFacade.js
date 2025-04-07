@@ -1,5 +1,8 @@
-// const API_URL = "http://172.105.95.18:5019/api/images";
-const API_URL = "http://localhost:5019/api/images";
+const API_URL_ENDPOINT = "api/images";
+const API_IP = import.meta.env.VITE_API_URL;
+const API_URL = `${API_IP}/${API_URL_ENDPOINT}`; // Use the environment variable for the API URL
+
+
 
 const ImageFacade = {
 
