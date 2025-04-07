@@ -45,11 +45,6 @@ function Youtube() {
     fetchVideos();
   };
 
-  const fetchYoutubeMp3 = (videoId) => {
-    console.log(`Converting video with ID ${videoId} to MP3...`);
-    // Add your logic for converting YouTube videos to MP3 here
-  };
-
   return (
     <>
       <NavBar />
@@ -78,13 +73,7 @@ function Youtube() {
                 className="video-thumbnail"
               />
               <p className="video-title">{video.snippet.title}</p>
-              <button
-                type="button"
-                onClick={() => fetchYoutubeMp3(video.id.videoId)}
-                className="download-button"
-              >
-                Convert to MP3
-              </button>
+              
             </div>
           ))}
         </div>
