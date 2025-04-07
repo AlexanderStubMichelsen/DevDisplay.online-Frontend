@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import "../css/Youtube.css";
 import NavBar from "./NavBar";
 
@@ -6,21 +6,19 @@ function Youtube() {
   const [searchQuery, setSearchQuery] = useState("trending music"); // ✅ Default query to load initial videos
   const [searchResults, setSearchResults] = useState([]);
   const [nextPageToken, setNextPageToken] = useState(null);
-  const [downloadLink, setDownloadLink] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-  const rapidApiKey = import.meta.env.VITE_RAPIDAPI_KEY;
 
-  const fetchVideos = (pageToken = "") => {
+  const fetchVideos = useCallback((pageToken = "") => {
     setLoading(true);
     setError(null);
-
+  
     const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
       searchQuery
     )}&type=video&key=${youtubeApiKey}&maxResults=12&pageToken=${pageToken}`;
-
+  
     fetch(apiUrl)
       .then((response) => {
         if (!response.ok) throw new Error("Failed to fetch videos");
@@ -36,11 +34,11 @@ function Youtube() {
         setError("Error fetching search results. Try again.");
         setLoading(false);
       });
-  };
+  }, [searchQuery, youtubeApiKey]);
 
   useEffect(() => {
-    fetchVideos(); // ✅ Load initial videos on component mount
-  }, []);
+    fetchVideos(); // Call fetchVideos on mount
+  }, [fetchVideos]);
 
   const handleSearch = (e) => {
     e.preventDefault();

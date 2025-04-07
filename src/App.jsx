@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar.jsx";
 import retroBikeVideo from "./assets/retro-bike-ride.mp4";
 import apiFacade from "./api/facade.js"; // ✅ Import API facade
+import PropTypes from "prop-types";
 
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -129,6 +130,12 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
       )}
     </>
   );
+};
+
+// ✅ Add PropTypes for props validation
+App.propTypes = {
+  isLoggedIn: PropTypes.bool.isRequired,
+  setIsLoggedIn: PropTypes.func.isRequired,
 };
 
 export default App;

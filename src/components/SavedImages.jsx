@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ImageFacade from "../api/ImageFacade.js";
 import NavBar from "./NavBar";
 import "../css/Images.css";
