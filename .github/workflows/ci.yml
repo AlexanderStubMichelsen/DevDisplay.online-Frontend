@@ -56,8 +56,9 @@ jobs:
             host: ${{ secrets.SERVER_HOST }}
             username: ${{ secrets.SERVER_USER }}
             key: ${{ secrets.SERVER_KEY }}
-            source: dist/*
+            source: dist/**
             target: ../var/www/html/
+            strip_components: 1
       - name: Restart Apache
         uses: appleboy/ssh-action@v0.1.7
         with:
