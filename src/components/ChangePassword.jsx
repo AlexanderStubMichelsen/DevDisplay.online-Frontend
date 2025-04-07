@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import apiFacade from "../api/facade";
+import apiFacade from "../util/api/UserFacade";
 import NavBar from "./NavBar";
 
 const ChangePassword = () => {

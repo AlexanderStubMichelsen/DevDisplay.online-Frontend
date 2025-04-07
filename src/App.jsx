@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar.jsx";
 import retroBikeVideo from "./assets/retro-bike-ride.mp4";
-import apiFacade from "./api/facade.js"; // ✅ Import API facade
+import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
 
 const App = ({ isLoggedIn, setIsLoggedIn }) => {

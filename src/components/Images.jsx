@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "../css/Images.css";
 import NavBar from "./NavBar";
-import ImageFacade from "../api/ImageFacade.js"; // ✅ Import ImageFacade
+import ImageFacade from "../util/api/ImageFacade.js"; // ✅ Import ImageFacade
 
 function Images() {
   const [imageList, setImageList] = useState([]);

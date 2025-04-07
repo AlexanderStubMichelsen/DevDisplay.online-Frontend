@@ -5,7 +5,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import "../css/NavBar.css";
-import apiFacade from "../api/facade.js";
+import apiFacade from "../util/api/UserFacade.js";
 import Dropdown from "react-bootstrap/Dropdown";
 
 function NavBar() {

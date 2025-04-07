@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../css/UserPage.css";
 import NavBar from "./NavBar";
-import apiFacade from "../api/facade";
+import apiFacade from "../util/api/UserFacade";
 import { LinkContainer } from "react-router-bootstrap";
 import Nav from "react-bootstrap/Nav";
 

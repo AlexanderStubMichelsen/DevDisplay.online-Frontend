@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import ImageFacade from "../api/ImageFacade.js";
+import ImageFacade from "../util/api/ImageFacade.js";
 import NavBar from "./NavBar";
 import "../css/Images.css";
 
