@@ -38,7 +38,6 @@ const spans = [
 export default function YouTubeTrends() {
   const [selectedCountry, setSelectedCountry] = useState("US");
   const [selectedCategory, setSelectedCategory] = useState("10");
-  const [selectedSpan, setSelectedSpan] = useState(30);
   const [videos, setVideos] = useState([]);
 
   useEffect(() => {
@@ -74,7 +73,7 @@ export default function YouTubeTrends() {
     };
 
     fetchTrendingVideos();
-  }, [selectedCountry, selectedCategory, selectedSpan]);
+  }, [selectedCountry, selectedCategory]);
 
   return (
     <div>
