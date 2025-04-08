@@ -52,12 +52,6 @@ export default function YouTubeTrends() {
         );
 
         const data = response.data.items
-          .filter(item => {
-            const publishedAt = new Date(item.snippet.publishedAt);
-            const now = new Date();
-            const diffInDays = (now - publishedAt) / (1000 * 60 * 60 * 24);
-            return diffInDays <= selectedSpan;
-          })
           .map((item) => ({
             rawDate: new Date(item.snippet.publishedAt),
             date: new Date(item.snippet.publishedAt).toLocaleDateString(),
