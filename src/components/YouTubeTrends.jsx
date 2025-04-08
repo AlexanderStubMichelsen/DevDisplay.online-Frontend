@@ -29,12 +29,6 @@ const categories = [
   { id: "1", name: "Film & Animation" },
 ];
 
-const spans = [
-  { label: "Last 1 month", value: 30 },
-  { label: "Last 3 months", value: 91 },
-  { label: "Last 6 months", value: 182 },
-];
-
 export default function YouTubeTrends() {
   const [selectedCountry, setSelectedCountry] = useState("US");
   const [selectedCategory, setSelectedCategory] = useState("10");
