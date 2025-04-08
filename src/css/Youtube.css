@@ -1,10 +1,11 @@
 .youtube-container {
-  background-image: url("../assets/high-resolution-blue-background.jpg"); /* ✅ Update path if needed */
-  background-size: cover; /* ✅ Ensures the image covers the full area */
+  background-image: url("../assets/photo-1435224668334-0f82ec57b605.jpg");
+  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100%;
-  min-height: 100vh; /* ✅ Ensures full-page background */
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;

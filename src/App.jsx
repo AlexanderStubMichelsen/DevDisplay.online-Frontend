@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar.jsx";
-import retroBikeVideo from "./assets/retro-bike-ride.mp4";
+import retroBikeVideo from "./assets/857134-hd_1280_720_24fps.mp4";
 import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
 

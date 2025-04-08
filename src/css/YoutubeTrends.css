@@ -1,9 +1,22 @@
 /* YoutubeTrends.css */
-.youtube-trends {
+
+.youtube-trends-bg {
+    background-image: url("../assets/photo-1435224668334-0f82ec57b605.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100vw;
+    min-height: 100vh;
+  }
+  
+  .youtube-trends {
     max-width: 960px;
     margin: 0 auto;
     padding: 2rem;
     font-family: 'Segoe UI', sans-serif;
+    color: white;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
   
   .youtube-trends h1 {
@@ -12,17 +25,36 @@
     margin-bottom: 1rem;
   }
   
-  .controls {
+  .flex {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
   }
   
-  .controls select {
-    padding: 0.5rem;
-    font-size: 1rem;
-    border-radius: 6px;
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  
+  .gap-4 {
+    gap: 1rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .mb-6 {
+    margin-bottom: 1.5rem;
+  }
+  
+  .border {
     border: 1px solid #ccc;
+  }
+  
+  .p-2 {
+    padding: 0.5rem;
+  }
+  
+  .rounded {
+    border-radius: 6px;
   }
   
   .chart-container {
