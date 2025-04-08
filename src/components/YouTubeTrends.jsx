@@ -112,18 +112,6 @@ export default function YouTubeTrends() {
               </option>
             ))}
           </select>
-
-          <select
-            className="border p-2 rounded"
-            value={selectedSpan}
-            onChange={(e) => setSelectedSpan(Number(e.target.value))}
-          >
-            {spans.map((span) => (
-              <option key={span.value} value={span.value}>
-                {span.label}
-              </option>
-            ))}
-          </select>
         </div>
 
         <ResponsiveContainer width="100%" height={300}>
