@@ -10,7 +10,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import "../css/YouTubeTrends.css"; // Import your CSS file
+import "../css/YoutubeTrends.css"; // Import your CSS file
 import NavBar from "./NavBar";
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
