@@ -120,6 +120,9 @@ function NavBar() {
             <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/youtubetrends" onClick={() => setExpanded(false)}>
+              <Nav.Link>Youtube Trends</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
