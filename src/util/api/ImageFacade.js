@@ -1,9 +1,11 @@
+import { getConfig } from '../../config.js';
+
 const API_URL_ENDPOINT = "api/images";
 
 const ImageFacade = {
   saveImage: async (image) => {
     try {
-      const config = await import('../../config.js').then(mod => mod.default);
+      const config = await getConfig(); // Must be inside an async function
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
@@ -37,7 +39,7 @@ const ImageFacade = {
 
   getSavedImages: async () => {
     try {
-      const config = await import('../../config.js').then(mod => mod.default);
+      const config = await getConfig(); // Must be inside an async function
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
@@ -65,7 +67,7 @@ const ImageFacade = {
 
   deleteSavedImage: async (imageId) => {
     try {
-      const config = await import('../../config.js').then(mod => mod.default);
+      const config = await getConfig(); // Must be inside an async function
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;

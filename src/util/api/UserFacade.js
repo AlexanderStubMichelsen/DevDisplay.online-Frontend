@@ -1,8 +1,10 @@
+import { getConfig } from '../../config.js';
+
 const API_URL_ENDPOINT = "api/users";
 
 const apiFacade = {
   signUp: async (signupData) => {
-    const config = await import('../../config.js').then(mod => mod.default);
+    const config = await getConfig(); // Must be inside an async function
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
     try {
@@ -36,7 +38,7 @@ const apiFacade = {
   },
 
   login: async (loginData) => {
-    const config = await import('../../config.js').then(mod => mod.default);
+    const config = await getConfig(); // Must be inside an async function
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
     try {
@@ -70,7 +72,7 @@ const apiFacade = {
   },
 
   updateUser: async (user) => {
-    const config = await import('../../config.js').then(mod => mod.default);
+    const config = await getConfig(); // Must be inside an async function
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
     try {
@@ -93,7 +95,7 @@ const apiFacade = {
   },
 
   changePassword: async ({ oldPassword, newPassword }) => {
-    const config = await import('../../config.js').then(mod => mod.default);
+    const config = await getConfig(); // Must be inside an async function
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
     try {
@@ -116,9 +118,9 @@ const apiFacade = {
   },
 
   getProtectedData: async () => {
-    const config = await import('../../config.js').then(mod => mod.default);
+    const config = await getConfig(); // Must be inside an async function
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
-
+    
     try {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
       const response = await fetch(`${API_URL}/protected-endpoint`, {
