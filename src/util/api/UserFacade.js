@@ -1,10 +1,10 @@
 const API_URL_ENDPOINT = "api/users";
-const API_IP = import.meta.env.VITE_API_URL;
-const API_URL = `${API_IP}/${API_URL_ENDPOINT}`; // Use the environment variable for the API URL
 
 const apiFacade = {
-  // ✅ Handle Sign Up
   signUp: async (signupData) => {
+    const config = await import('../../config.js').then(mod => mod.default);
+    const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
     try {
       const response = await fetch(`${API_URL}`, {
         method: "POST",
@@ -12,26 +12,20 @@ const apiFacade = {
         body: JSON.stringify(signupData),
       });
 
-      if (!response.ok) {
-        throw new Error("Sign-up failed");
-      }
+      if (!response.ok) throw new Error("Sign-up failed");
 
       const loginResponse = await apiFacade.login({
         email: signupData.email,
         password: signupData.password,
       });
 
-      // ✅ Save full user info including ID
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
-      sessionStorage.setItem(
-        "loginData",
-        JSON.stringify({
-          id: loginResponse.userDto.id,
-          email: loginResponse.userDto.email,
-          name: loginResponse.userDto.name,
-          token: loginResponse.token,
-        })
-      );
+      sessionStorage.setItem("loginData", JSON.stringify({
+        id: loginResponse.userDto.id,
+        email: loginResponse.userDto.email,
+        name: loginResponse.userDto.name,
+        token: loginResponse.token,
+      }));
 
       window.dispatchEvent(new Event("storage"));
       return loginResponse;
@@ -41,8 +35,10 @@ const apiFacade = {
     }
   },
 
-  // ✅ Handle Login
   login: async (loginData) => {
+    const config = await import('../../config.js').then(mod => mod.default);
+    const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
     try {
       const response = await fetch(`${API_URL}/login`, {
         method: "POST",
@@ -50,26 +46,20 @@ const apiFacade = {
         body: JSON.stringify(loginData),
       });
 
-      if (!response.ok) {
-        throw new Error("Invalid email or password");
-      }
-
-      const data = await response.json();
-      return data;
+      if (!response.ok) throw new Error("Invalid email or password");
+      return await response.json();
     } catch (error) {
       console.error("Login Error:", error);
       throw error;
     }
   },
 
-  // ✅ Handle Logout
   logout: () => {
     sessionStorage.removeItem("isLoggedIn");
     sessionStorage.removeItem("loginData");
     window.dispatchEvent(new Event("storage"));
   },
 
-  // ✅ Get Logged-In User
   getUser: () => {
     const user = JSON.parse(sessionStorage.getItem("loginData"));
     return {
@@ -79,11 +69,12 @@ const apiFacade = {
     };
   },
 
-  // ✅ Update User (name/password)
   updateUser: async (user) => {
+    const config = await import('../../config.js').then(mod => mod.default);
+    const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
     try {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-
       const response = await fetch(`${API_URL}/update`, {
         method: "PUT",
         headers: {
@@ -93,10 +84,7 @@ const apiFacade = {
         body: JSON.stringify(user),
       });
 
-      if (!response.ok) {
-        throw new Error("Update failed");
-      }
-
+      if (!response.ok) throw new Error("Update failed");
       return await response.json();
     } catch (error) {
       console.error("Update User Error:", error);
@@ -104,11 +92,12 @@ const apiFacade = {
     }
   },
 
-  // ✅ Change Password
   changePassword: async ({ oldPassword, newPassword }) => {
+    const config = await import('../../config.js').then(mod => mod.default);
+    const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
     try {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-
       const response = await fetch(`${API_URL}/changepassword`, {
         method: "PUT",
         headers: {
@@ -118,10 +107,7 @@ const apiFacade = {
         body: JSON.stringify({ oldPassword, newPassword }),
       });
 
-      if (!response.ok) {
-        throw new Error("Password change failed");
-      }
-
+      if (!response.ok) throw new Error("Password change failed");
       return await response.json();
     } catch (error) {
       console.error("Change Password Error:", error);
@@ -129,11 +115,12 @@ const apiFacade = {
     }
   },
 
-  // ✅ Example of a Protected API Request
   getProtectedData: async () => {
+    const config = await import('../../config.js').then(mod => mod.default);
+    const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
     try {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-
       const response = await fetch(`${API_URL}/protected-endpoint`, {
         method: "GET",
         headers: {
@@ -142,17 +129,13 @@ const apiFacade = {
         },
       });
 
-      if (!response.ok) {
-        throw new Error("Failed to fetch protected data");
-      }
-
+      if (!response.ok) throw new Error("Failed to fetch protected data");
       return await response.json();
     } catch (error) {
       console.error("Protected Data Error:", error);
       throw error;
     }
   },
-  
 };
 
 export default apiFacade;

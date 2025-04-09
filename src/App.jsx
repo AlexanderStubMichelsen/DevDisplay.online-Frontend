@@ -1,3 +1,4 @@
+import React from "react"; // ✅ Required for testing
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
@@ -12,7 +13,11 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
 
   // Modal state
   const [showSignup, setShowSignup] = useState(false);
-  const [signupData, setSignupData] = useState({ name: "", email: "", password: "" });
+  const [signupData, setSignupData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
 
   // ✅ Route protection
   useEffect(() => {
@@ -73,20 +78,24 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
         {/* ✅ Show Sign-Up Button if Not Logged In */}
         {!sessionStorage.getItem("isLoggedIn") && (
           <div className="auth-buttons">
-            <button type="button" onClick={() => setShowSignup(true)}>Sign Up</button>
+            <button type="button" onClick={() => setShowSignup(true)}>
+              Sign Up
+            </button>
           </div>
         )}
       </div>
 
       {/* ✅ Sign-Up Modal */}
       {showSignup && (
-        <div className="modal">
+        <div className="modal" role="dialog" aria-modal="true">
           <div className="modal-content">
             <button
               type="button"
               className="close"
               onClick={() => setShowSignup(false)}
-              onKeyDown={(e) => { if (e.key === "Enter") setShowSignup(false); }}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") setShowSignup(false);
+              }}
               tabIndex="0"
             >
               &times;
@@ -99,7 +108,10 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
                 placeholder="Name"
                 value={signupData.name}
                 onChange={(e) =>
-                  setSignupData({ ...signupData, [e.target.name]: e.target.value })
+                  setSignupData({
+                    ...signupData,
+                    [e.target.name]: e.target.value,
+                  })
                 }
                 required
               />
@@ -109,7 +121,10 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
                 placeholder="Email"
                 value={signupData.email}
                 onChange={(e) =>
-                  setSignupData({ ...signupData, [e.target.name]: e.target.value })
+                  setSignupData({
+                    ...signupData,
+                    [e.target.name]: e.target.value,
+                  })
                 }
                 required
               />
@@ -119,7 +134,10 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
                 placeholder="Password"
                 value={signupData.password}
                 onChange={(e) =>
-                  setSignupData({ ...signupData, [e.target.name]: e.target.value })
+                  setSignupData({
+                    ...signupData,
+                    [e.target.name]: e.target.value,
+                  })
                 }
                 required
               />
