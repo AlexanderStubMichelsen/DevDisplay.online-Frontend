@@ -25,6 +25,6 @@ module.exports = {
   plugins: ['react-refresh'],
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-    'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }], // 👈 optional: avoid breaking on unused props
+    'no-unused-vars': ['warn', { varsIgnorePattern: '^React$' }], // ✅ suppress React unused warning
   },
 };
