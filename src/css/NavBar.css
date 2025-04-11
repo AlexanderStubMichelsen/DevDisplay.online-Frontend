@@ -21,7 +21,7 @@
   background-color: #f8f9fa; /* Light background color */
   border-bottom: 1px solid #dee2e6; /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
-    background-color: blue !important; /* Sets navbar background to blue */
+    background-color: 'black' !important; /* Sets navbar background to blue */
 
 }
 

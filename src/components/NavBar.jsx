@@ -1,4 +1,4 @@
-import React from 'react'; // ✅ required for tests
+import React from "react"; // ✅ required for tests
 import { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
@@ -89,8 +89,8 @@ function NavBar() {
   return (
     <>
       <Navbar
-        bg="light"
-        variant="light"
+        bg="dark"
+        variant="dark"
         expand="lg"
         className="sticky-top-navbar"
       >
@@ -114,14 +114,17 @@ function NavBar() {
               <Nav.Link>Images</Nav.Link>
             </LinkContainer>
             {isLoggedIn && (
-            <LinkContainer to="/saved" onClick={() => setExpanded(false)}>
-            <Nav.Link>Saved Images</Nav.Link>
-            </LinkContainer>
-             )}
+              <LinkContainer to="/saved" onClick={() => setExpanded(false)}>
+                <Nav.Link>Saved Images</Nav.Link>
+              </LinkContainer>
+            )}
             <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/youtubetrends" onClick={() => setExpanded(false)}>
+            <LinkContainer
+              to="/youtubetrends"
+              onClick={() => setExpanded(false)}
+            >
               <Nav.Link>Youtube Trends</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
