@@ -10,6 +10,7 @@ import UserPage from "./components/UserPage.jsx";
 import ChangePassword from "./components/ChangePassword.jsx";
 import SavedImages from "./components/SavedImages.jsx";
 import YouTubeTrends from "./components/YouTubeTrends.jsx";
+import About from "./components/About.jsx";
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -26,6 +27,7 @@ const Root = () => {
           <Route path="userpage" element={<UserPage />} />
           <Route path="saved" element={<SavedImages />} />
           <Route path="changepassword" element={<ChangePassword />} />
+          <Route path="about" element={<About />} />
           <Route path="*" element={<NoMatch />} />
         </>
       </Route>

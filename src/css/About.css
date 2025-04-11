@@ -1,0 +1,21 @@
+/* filepath: c:\Projekter\Maskinen\src\components\About.css */
+.background-video {
+    width: 640px;
+    height: 360px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+
+.about {
+    background-image: url("../assets/7058.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
