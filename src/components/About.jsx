@@ -2,16 +2,8 @@ import React, { useRef } from "react";
 import "../css/About.css"; // Optional: Add a CSS file for styling
 import NavBar from "./NavBar"; // Import NavBar component
 import animationVideo from "../assets/animation.mp4"; // Import the video file
-import audioFile from "../assets/took-our-job-mp3cut.mp3"; // Import the MP3 file
 
 const About = () => {
-  const audioRef = useRef(null); // Create a ref for the audio element
-
-  const handlePlayAudio = () => {
-    if (audioRef.current) {
-      audioRef.current.play(); // Play the audio
-    }
-  };
 
   return (
     <>
@@ -42,7 +34,7 @@ const About = () => {
           <iframe width="110"
           height="200"
           src="https://www.myinstants.com/instant/south-park-they-took-our-job/embed/"
-          frameborder="0"
+          frameBorder="0"
           scrolling="no"
           title="South Park 'They Took Our Job' Sound Button">
           </iframe>
