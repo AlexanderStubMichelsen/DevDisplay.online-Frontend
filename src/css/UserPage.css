@@ -19,6 +19,8 @@
     background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
+
   }
   
   .user-page h1 {

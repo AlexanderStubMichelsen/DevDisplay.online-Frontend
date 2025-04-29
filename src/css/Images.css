@@ -26,6 +26,7 @@ body {
   font-size: 28px;
   margin-bottom: 20px;
   color: blue;
+  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 }
 
 .image-grid {
@@ -49,6 +50,8 @@ body {
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
+  overflow: hidden; /* Ensure content doesn't overflow */
+  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
 }
@@ -111,7 +114,8 @@ body {
   font-size: 28px;
   margin-top: 40px;
   margin-bottom: 20px;
-  color: #222;
+  color: blue;
+  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 }
 
 /* Override image-item size for saved view (optional) */
