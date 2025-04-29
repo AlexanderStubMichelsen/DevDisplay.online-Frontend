@@ -11,18 +11,24 @@ const ImageFacade = {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
       if (!token) throw new Error("Not authenticated");
 
+      const payload = {
+        imageUrl: image.url,
+        title: image.alt || "Untitled",
+        photographer: image.photographer,
+        sourceLink: image.profileLink,
+        // Ensure userId is included if required by the backend
+        userId: JSON.parse(sessionStorage.getItem("loginData"))?.id,
+      };
+
+      console.log("Saving image with payload:", payload);
+
       const response = await fetch(`${API_URL}/save`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          imageUrl: image.url,
-          title: image.alt || "Untitled",
-          photographer: image.photographer,
-          sourceLink: image.profileLink,
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
