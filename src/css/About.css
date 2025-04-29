@@ -23,5 +23,6 @@
 .audio-container {
   position: absolute; /* Position the audio container absolutely */
   bottom: 20px; /* Distance from the bottom */
+  right: 20px;
   width: 140px;
 }
