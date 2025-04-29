@@ -39,22 +39,13 @@ const About = () => {
 
         {/* Add a button for playing an MP3 file */}
         <div className="audio-container">
-          <audio ref={audioRef} src={audioFile} />
-          <button
-            onClick={handlePlayAudio}
-            style={{
-              padding: "10px 20px",
-              fontSize: "16px",
-              borderRadius: "100px",
-              backgroundColor: "yellow",
-              color: "black",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            they took ourrr drrr
-          </button>
-
+          <iframe width="110"
+          height="200"
+          src="https://www.myinstants.com/instant/south-park-they-took-our-job/embed/"
+          frameborder="0"
+          scrolling="no"
+          title="South Park 'They Took Our Job' Sound Button">
+          </iframe>
         </div>
       </div>
     </>
