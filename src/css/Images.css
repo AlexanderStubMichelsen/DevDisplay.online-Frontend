@@ -164,3 +164,11 @@ body {
   background-color: #c82333;
 }
 
+.non_saved {
+  font-size: 28px;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  color: blue;
+  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
+}
+

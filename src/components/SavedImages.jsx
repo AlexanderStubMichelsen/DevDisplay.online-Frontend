@@ -57,6 +57,7 @@ const SavedImages = () => {
               </a>
 
               <button
+                type="button"
                 className="delete-button"
                 onClick={() => handleDelete(image.id)}
               >
@@ -79,7 +80,7 @@ const SavedImages = () => {
             </div>
           ))}
           {!loading && savedImages.length === 0 && (
-            <p>You haven’t saved any images yet.</p>
+            <p className="non_saved">You haven’t saved any images yet.</p>
           )}
         </div>
       </div>
