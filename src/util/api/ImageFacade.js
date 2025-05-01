@@ -1,6 +1,6 @@
 import { getConfig } from '../../config.js';
 
-const API_URL_ENDPOINT = "api/images";
+const API_URL_ENDPOINT = "/images";
 
 const ImageFacade = {
   saveImage: async (image) => {

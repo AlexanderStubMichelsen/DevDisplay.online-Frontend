@@ -1,6 +1,6 @@
 import { getConfig } from '../../config.js';
 
-const API_URL_ENDPOINT = "api/users";
+const API_URL_ENDPOINT = "/users";
 
 const apiFacade = {
   signUp: async (signupData) => {
