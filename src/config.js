@@ -1,5 +1,5 @@
 export async function getConfig() {
-    const fallback = { API_URL: 'http://localhost:5019' }; // 👈 change if needed
+    const fallback = { API_URL: 'http://localhost:5020' }; // 👈 change if needed
   
     try {
       if (typeof import.meta !== 'undefined' && import.meta.env?.VITE_API_URL) {
