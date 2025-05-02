@@ -33,18 +33,18 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
     try {
       // Sign up the user
       await apiFacade.signUp(signupData);
-
+  
       // Log in the user right after sign-up
       const response = await apiFacade.login({
         email: signupData.email,
         password: signupData.password,
       });
-
+  
       console.log("Response:", response);
-
+  
       setShowSignup(false);
       setIsLoggedIn(true);
-
+  
       // ✅ Store login data including ID
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
       sessionStorage.setItem(
@@ -56,10 +56,15 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
           token: response.token,
         })
       );
-
+  
       window.dispatchEvent(new Event("storage")); // Notify other components
     } catch (error) {
-      alert("Sign-Up Failed");
+      // Check if the error is a 409 Conflict (email already taken)
+      if (error.response?.status === 409) {
+        alert("The email is already taken. Please use a different email.");
+      } else {
+        alert("Sign-Up Failed. Please try again.");
+      }
     }
   };
 
