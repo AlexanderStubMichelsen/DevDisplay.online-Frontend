@@ -8,7 +8,7 @@ const About = () => {
     <>
       <NavBar />
       <div className="about">
-        <video controls className="background-video">
+        <video controls className="video">
           <source src={animationVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>

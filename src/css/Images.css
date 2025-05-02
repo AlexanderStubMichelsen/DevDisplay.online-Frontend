@@ -39,6 +39,14 @@ body {
   margin: 0 auto; /* ✅ Centers the grid */
 }
 
+.image-grid img {
+  width: 100%; /* Ensures images take full width of their container */
+  height: auto; /* Maintains aspect ratio */
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
 .loading-message {
   font-size: 18px;
   color: #666;
@@ -46,12 +54,12 @@ body {
 
 /* Styling for each image */
 .image-card {
-  background-color: #ffffff;
+  background-color: blue;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;
   overflow: hidden; /* Ensure content doesn't overflow */
-  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
+  opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
 }
@@ -170,5 +178,6 @@ body {
   margin-bottom: 20px;
   color: blue;
   opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
+  float: left;
 }
 

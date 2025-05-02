@@ -1,11 +1,10 @@
 /* filepath: c:\Projekter\Maskinen\src\components\About.css */
-.background-video {
+.video {
     width: 640px;
     height: 360px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);    
-    opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
-
+    opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
   }
 
 .about {
@@ -27,4 +26,6 @@
   bottom: 20px; /* Distance from the bottom */
   right: 20px;
   width: 140px;
+  opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
+
 }

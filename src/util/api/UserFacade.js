@@ -6,21 +6,28 @@ const apiFacade = {
   signUp: async (signupData) => {
     const config = await getConfig(); // Must be inside an async function
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
-
+  
     try {
       const response = await fetch(`${API_URL}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(signupData),
       });
-
-      if (!response.ok) throw new Error("Sign-up failed");
-
+  
+      if (!response.ok) {
+        // Check if it's a conflict error (409)
+        if (response.status === 409) {
+          const responseData = await response.json();  // Now this will be a valid JSON response
+          throw new Error(responseData.message || "A user with this email already exists.");
+        }
+      }
+  
+      // Proceed with login if sign-up is successful
       const loginResponse = await apiFacade.login({
         email: signupData.email,
         password: signupData.password,
       });
-
+  
       sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
       sessionStorage.setItem("loginData", JSON.stringify({
         id: loginResponse.userDto.id,
@@ -28,14 +35,17 @@ const apiFacade = {
         name: loginResponse.userDto.name,
         token: loginResponse.token,
       }));
-
+  
       window.dispatchEvent(new Event("storage"));
       return loginResponse;
     } catch (error) {
       console.error("Sign-Up Error:", error);
+  
+      // Display a user-friendly message
+      alert(error.message);  // This could be a more styled alert or modal in your UI
       throw error;
     }
-  },
+  },  
 
   login: async (loginData) => {
     const config = await getConfig(); // Must be inside an async function

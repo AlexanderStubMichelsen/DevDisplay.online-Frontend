@@ -60,7 +60,7 @@ function Images() {
   const handleSaveImage = async (image) => {
     try {
       await ImageFacade.saveImage(image);
-      alert("Image saved successfully!");
+      console.log("Image saved successfully!");
     } catch (error) {
       console.error("Save Image Error:", error);
       alert("Error saving image");

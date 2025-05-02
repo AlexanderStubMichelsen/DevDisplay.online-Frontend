@@ -27,6 +27,7 @@ const SavedImages = () => {
     try {
       await ImageFacade.deleteSavedImage(id);
       setSavedImages((prev) => prev.filter((img) => img.id !== id));
+      console.log("Image deleted successfully");
     } catch (err) {
       alert("Failed to delete image.");
     }
@@ -36,7 +37,7 @@ const SavedImages = () => {
     <>
       <NavBar />
       <div className="images-container">
-        <h1 className="saved-title">Your Saved Images</h1>
+        <h1 className="images-title">Your Saved Images</h1>
 
         {loading && <p>Loading saved images...</p>}
         {error && <p className="error-message">{error}</p>}
@@ -80,7 +81,7 @@ const SavedImages = () => {
             </div>
           ))}
           {!loading && savedImages.length === 0 && (
-            <p className="non_saved">You haven’t saved any images yet.</p>
+            <p className="images-title">You haven’t saved any images yet.</p>
           )}
         </div>
       </div>
