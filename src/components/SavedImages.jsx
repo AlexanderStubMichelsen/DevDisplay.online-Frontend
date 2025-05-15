@@ -13,8 +13,13 @@ const SavedImages = () => {
       try {
         const data = await ImageFacade.getSavedImages();
         setSavedImages(data);
+        if (data.length === 0) {
+          setError("No saved images found.");
+        }
       } catch (err) {
-        setError("Failed to load saved images");
+        setError(
+          "Failed to load saved images. <br /> Please try to log in again. <br /> A session expires after 1 minute."
+        );
       } finally {
         setLoading(false);
       }
@@ -40,7 +45,12 @@ const SavedImages = () => {
         <h1 className="images-title">Your Saved Images</h1>
 
         {loading && <p>Loading saved images...</p>}
-        {error && <p className="error-message">{error}</p>}
+        {error && (
+          <p
+            className="error-message"
+            dangerouslySetInnerHTML={{ __html: error }}
+          ></p>
+        )}
 
         <div className="image-grid">
           {savedImages.map((image) => (

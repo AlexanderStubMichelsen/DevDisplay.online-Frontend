@@ -8,6 +8,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import "../css/NavBar.css";
 import apiFacade from "../util/api/UserFacade.js";
 import Dropdown from "react-bootstrap/Dropdown";
+import logo from "../assets/logo.svg"; // ✅ Add your logo path here
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
@@ -94,7 +95,16 @@ function NavBar() {
         expand="lg"
         className="sticky-top-navbar"
       >
-        <Navbar.Brand href="/">Maskinen</Navbar.Brand>
+        <Navbar.Brand href="/">
+        <img
+            src={logo} // Use the imported logo
+            alt="Logo"
+            style={{
+              height: "100px", // Adjust the height of the logo
+              width: "auto", // Maintain aspect ratio
+            }}
+          />
+        </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={handleNavToggle}

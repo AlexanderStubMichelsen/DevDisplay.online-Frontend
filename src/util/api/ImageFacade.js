@@ -45,11 +45,11 @@ const ImageFacade = {
 
   getSavedImages: async () => {
     try {
-      const config = await getConfig(); // Must be inside an async function
+      const config = await getConfig();
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-      if (!token) throw new Error("Not authenticated");
+      if (!token) throw new Error("Not authenticated. Token expired. Login again.");
 
       const response = await fetch(`${API_URL}/mine`, {
         method: "GET",
@@ -60,14 +60,19 @@ const ImageFacade = {
       });
 
       if (!response.ok) {
+        if (response.status === 401) {
+          // Handle token expiration
+          sessionStorage.clear(); // Clear session storage
+          throw new Error("Session expired. Please log in again.");
+        }
+
         const errorText = await response.text();
         throw new Error(errorText || "Failed to fetch saved images");
       }
 
       return await response.json();
     } catch (error) {
-      console.error("Get Saved Images Error:", error);
-      throw error;
+      throw error; // Re-throw the error to be handled by the caller
     }
   },
 
