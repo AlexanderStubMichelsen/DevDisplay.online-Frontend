@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import "../css/Help.css";
 import NavBar from "./NavBar";

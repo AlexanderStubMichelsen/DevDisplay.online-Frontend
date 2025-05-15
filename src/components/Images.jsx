@@ -1,3 +1,4 @@
+import React from "react";
 import { useState, useEffect } from "react";
 import "../css/Images.css";
 import NavBar from "./NavBar";
