@@ -44,36 +44,32 @@ const ImageFacade = {
   },
 
   getSavedImages: async () => {
-    try {
-      const config = await getConfig();
-      const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+    const config = await getConfig();
+    const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
-      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-      if (!token) throw new Error("Not authenticated. Token expired. Login again.");
+    const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+    if (!token) throw new Error("Not authenticated. Token expired. Login again.");
 
-      const response = await fetch(`${API_URL}/mine`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+    const response = await fetch(`${API_URL}/mine`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
-      if (!response.ok) {
-        if (response.status === 401) {
-          // Handle token expiration
-          sessionStorage.clear(); // Clear session storage
-          throw new Error("Session expired. Please log in again.");
-        }
-
-        const errorText = await response.text();
-        throw new Error(errorText || "Failed to fetch saved images");
+    if (!response.ok) {
+      if (response.status === 401) {
+        // Handle token expiration
+        sessionStorage.clear(); // Clear session storage
+        throw new Error("Session expired. Please log in again.");
       }
 
-      return await response.json();
-    } catch (error) {
-      throw error; // Re-throw the error to be handled by the caller
+      const errorText = await response.text();
+      throw new Error(errorText || "Failed to fetch saved images");
     }
+
+    return await response.json();
   },
 
   deleteSavedImage: async (imageId) => {
