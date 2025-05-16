@@ -95,15 +95,15 @@ function NavBar() {
         expand="lg"
         className="sticky-top-navbar"
       >
-        <Navbar.Brand href="/">
-        <img
+        <Navbar.Brand href="/"> DevDisplay
+        {/* <img
             src={logo} // Use the imported logo
             alt="Logo"
             style={{
               height: "100px", // Adjust the height of the logo
               width: "auto", // Maintain aspect ratio
             }}
-          />
+          /> */}
         </Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
