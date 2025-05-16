@@ -8,7 +8,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import "../css/NavBar.css";
 import apiFacade from "../util/api/UserFacade.js";
 import Dropdown from "react-bootstrap/Dropdown";
-import logo from "../assets/logo.svg"; // ✅ Add your logo path here
+// import logo from "../assets/logo.svg"; // ✅ Add your logo path here
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
