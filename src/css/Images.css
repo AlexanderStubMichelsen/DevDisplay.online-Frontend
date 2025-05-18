@@ -25,7 +25,7 @@ body {
 .images-title {
   font-size: 28px;
   margin-bottom: 20px;
-  color: black;
+  color: blue;
   opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 }
 
@@ -54,7 +54,7 @@ body {
 
 /* Styling for each image */
 .image-card {
-  background-color: black;
+  background-color: blue;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 10px;

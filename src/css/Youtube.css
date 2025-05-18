@@ -71,7 +71,7 @@
   font-weight: bold;
   color: #333;
   margin: 8px 0;
-  background-color: #f8f9fa;
+  background-color: black;
   border-radius: 5px;
   padding: 10px;
 }
@@ -117,7 +117,7 @@
 /* 🎞 Video Card Styling */
 .video-card {
   width: 280px; /* ✅ Matches .video-item */
-  background-color: #fff;
+  background-color: black;
   border: 1px solid #ddd;
   border-radius: 5px;
   padding: 12px;
