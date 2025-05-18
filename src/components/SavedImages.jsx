@@ -19,7 +19,7 @@ const SavedImages = () => {
         }
       } catch (err) {
         setError(
-          "Failed to load saved images. <br /> Please try to log in again. <br /> A session expires after 1 minute."
+          "Failed to load saved images. <br /> Please try to log in again. <br /> A session expires after 30 minutes."
         );
       } finally {
         setLoading(false);
