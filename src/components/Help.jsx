@@ -19,7 +19,7 @@ function Help() {
           <ol className="help-list">
             <li>Search for images using the search bar.</li>
             <li>Click on an image to view it in full size.</li>
-            <li>Click on the &quot;Save&quot; button to save an image.</li>
+            <li>Log in and click on the &quot;Save&quot; button to save an image.</li>
             <li>View your saved images in the &quot;Saved Images&quot; section.</li>
           </ol>
         </div>
