@@ -8,13 +8,15 @@
   width: 100vw;
   min-height: 100vh;
   display: flex;
-  align-items: center;    /* Vertical center */
-  justify-content: center; /* Horizontal center */
+  align-items: top;    /* Vertical center */
+  justify-content: left; /* Horizontal center */
   padding: 2rem;
 }
 
 .text-container {
   width: 100%;
   max-width: 800px;
-  text-align: center;
+  text-align: left;
+  /* // Move text right */
+  margin-left: 20%;
 }
