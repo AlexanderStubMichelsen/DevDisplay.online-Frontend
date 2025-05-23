@@ -16,8 +16,9 @@
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #f9f9f9;
+    background-color: black;
     border-radius: 8px;
+    color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 
