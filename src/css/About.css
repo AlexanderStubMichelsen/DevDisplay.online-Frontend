@@ -5,6 +5,8 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);    
     opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
+    align-items: center;
+    justify-content: center;
   }
 
 .about {
@@ -27,5 +29,38 @@
   right: 20px;
   width: 140px;
   opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
+}
 
+.github-link-container {
+  position: center; /* Position the audio container absolutely */
+  bottom: 20px; /* Distance from the bottom */
+  right: 20px;
+  width: 200x;
+  opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.github-links {
+  text-align: center;
+background-color: black;  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  width : 300px;
+}
+
+.github-links a {
+  color: white;
+  text-decoration: none;
+  margin: 0.25rem 0;
+  display: block;
+}
+
+.github-links a:hover {
+  color: #00bfff;
 }

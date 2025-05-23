@@ -8,13 +8,14 @@ const About = () => {
     <>
       <NavBar />
       <div className="about">
+        <div className="content-container">
         <video controls className="video">
           <source src={animationVideo} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
 
         {/* Add a button for playing an MP3 file */}
-        <div className="audio-container">
+        {/* <div className="audio-container">
           <iframe
             width="110"
             height="186"
@@ -22,8 +23,26 @@ const About = () => {
             title="South Park They Took Our Job Sound"
             style={{ border: "none", overflow: "hidden" }}
           />
-        </div>
+        </div> */}
+        
+           <div className="github-links">
+            <a href="https://github.com/AlexanderStubMichelsen" target="_blank" rel="noopener noreferrer">
+        Visit My GitHub Profile
+      </a>
+      <a href="https://www.linkedin.com/in/alexander-stub-michelsen-2a6a301a4/" target="_blank" rel="noopener noreferrer">
+        Visit My LinkedIn Profile
+      </a>
       </div>
+      <div className="github-links">
+      <a href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend" target="_blank" rel="noopener noreferrer">
+        Visit Frontend GitHub Repo
+      </a>
+      <a href="https://github.com/AlexanderStubMichelsen/MyPostgresApi" target="_blank" rel="noopener noreferrer">
+        Visit Backend GitHub Repo
+      </a>
+    </div>
+  </div>
+</div>
     </>
   );
 };
