@@ -27,14 +27,6 @@ const About = () => {
           />
         </div> */}
         
-           <div className="github-links">
-            <a href="https://github.com/AlexanderStubMichelsen" target="_blank" rel="noopener noreferrer">
-        Visit My GitHub Profile
-      </a>
-      <a href="https://www.linkedin.com/in/alexander-stub-michelsen-2a6a301a4/" target="_blank" rel="noopener noreferrer">
-        Visit My LinkedIn Profile
-      </a>
-      </div>
       <div className="github-links">
       <a href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend" target="_blank" rel="noopener noreferrer">
         Visit Frontend GitHub Repo
