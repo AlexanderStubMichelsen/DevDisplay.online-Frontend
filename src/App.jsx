@@ -6,6 +6,7 @@ import NavBar from "./components/NavBar.jsx";
 import retroBikeVideo from "./assets/28531-370317126.mp4";
 import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
+import Footer from "./components/Footer.jsx"; // ✅ Import Footer
 
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -72,6 +73,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
     <>
       {/* ✅ Navbar */}
       <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      <div className="page-content"> {/* Add this wrapper */}
 
       {/* ✅ Video Background */}
       <div className="video-container">
@@ -88,6 +90,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
             </button>
           </div>
         )}
+      </div>
       </div>
 
       {/* ✅ Sign-Up Modal */}
@@ -151,6 +154,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </div>
       )}
+      <Footer /> {/* <-- Add Footer here */}
     </>
   );
 };

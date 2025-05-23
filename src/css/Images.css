@@ -181,3 +181,8 @@ body {
   float: left;
 }
 
+.page-content {
+  flex: 1;
+}
+
+

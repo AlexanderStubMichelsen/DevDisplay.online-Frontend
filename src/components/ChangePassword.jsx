@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import apiFacade from "../util/api/UserFacade";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -43,6 +44,7 @@ const ChangePassword = () => {
   return (
     <>
       <NavBar />
+      <div className="user-page-wrapper">
       <div className="user-page-container">
         <div className="user-page">
           <h1>Change Password</h1>
@@ -87,6 +89,8 @@ const ChangePassword = () => {
           </form>
         </div>
       </div>
+      </div>
+      <Footer />
     </>
   );
 };

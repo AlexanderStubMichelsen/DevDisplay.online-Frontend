@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import "../css/Images.css";
 import NavBar from "./NavBar";
 import ImageFacade from "../util/api/ImageFacade.js"; // ✅ Import ImageFacade
+import Footer from "./Footer"; // ✅ Import Footer
 
 function Images() {
   const [imageList, setImageList] = useState([]);
@@ -71,6 +72,7 @@ function Images() {
   return (
     <>
       <NavBar />
+      <div className="images-wrapper">
       <div className="images-container">
         <h1 className="images-title">Images from Unsplash</h1>
 
@@ -125,6 +127,9 @@ function Images() {
           Get More
         </button>
       </div>
+      <Footer />
+    </div>
+
     </>
   );
 }

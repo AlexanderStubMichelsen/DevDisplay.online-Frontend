@@ -13,6 +13,7 @@ import {
 } from "recharts";
 import "../css/YoutubeTrends.css"; // Import your CSS file
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -71,8 +72,10 @@ export default function YouTubeTrends() {
   }, [selectedCountry, selectedCategory]);
 
   return (
+    <>
     <div className="youtube-trends-bg">
       <NavBar />
+      <div className="youtube-trends-wrapper">
       <div className="youtube-trends">
         <h1 className="text-2xl font-bold mb-4">YouTube Trends Analyzer</h1>
 
@@ -124,5 +127,8 @@ export default function YouTubeTrends() {
         </ResponsiveContainer>
       </div>
     </div>
+    </div>
+    <Footer />
+    </>
   );
 }

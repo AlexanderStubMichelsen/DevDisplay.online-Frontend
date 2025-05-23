@@ -1,11 +1,13 @@
 import React from "react";
 import "../css/Help.css";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 function Help() {
   return (
     <>
       <NavBar />
+      <div className="help-wrapper">
       <div className="help">
         <div className="text-container">
           <h1 className="help-title">Help</h1>
@@ -24,6 +26,8 @@ function Help() {
           </ol>
         </div>
       </div>
+      </div>
+      <Footer />
     </>
   );
 }

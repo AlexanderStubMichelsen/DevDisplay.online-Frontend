@@ -2,6 +2,7 @@ import React from "react";
 import { useState, useEffect, useCallback } from "react";
 import "../css/Youtube.css";
 import NavBar from "./NavBar";
+import Footer from "./Footer";
 
 function Youtube() {
   const [searchQuery, setSearchQuery] = useState("trending music"); // ✅ Default query to load initial videos
@@ -49,6 +50,7 @@ function Youtube() {
   return (
     <>
       <NavBar />
+      <div className="youtube-wrapper">
       <div className="youtube-container">
         <h1 className="youtube-title">YouTube MP3 Downloader</h1>
 
@@ -85,6 +87,8 @@ function Youtube() {
           </button>
         )}
       </div>
+      </div>
+      <Footer />
     </>
   );
 }

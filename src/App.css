@@ -158,3 +158,19 @@
   background: rgba(255, 255, 255, 0.3);
   border-color: #f0f0f0;
 }
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex: 1;
+}
+

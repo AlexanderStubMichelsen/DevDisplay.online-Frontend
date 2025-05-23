@@ -6,6 +6,7 @@ import NavBar from "./NavBar";
 import apiFacade from "../util/api/UserFacade";
 import { LinkContainer } from "react-router-bootstrap";
 import Nav from "react-bootstrap/Nav";
+import Footer from "./Footer";
 
 const UserPage = () => {
   const [user, setUser] = useState({
@@ -64,6 +65,7 @@ const UserPage = () => {
   return (
     <>
       <NavBar />
+      <div className="user-page-wrapper">
       <div className="user-page-container">
         <div className="user-page">
           <h1>User Information</h1>
@@ -108,6 +110,8 @@ const UserPage = () => {
           </LinkContainer>
         </div>
       </div>
+      </div>
+      <Footer />
     </>
   );
 };

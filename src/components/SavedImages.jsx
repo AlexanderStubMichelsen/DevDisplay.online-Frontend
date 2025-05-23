@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import ImageFacade from "../util/api/ImageFacade.js";
 import NavBar from "./NavBar";
 import "../css/Images.css";
+import Footer from "./Footer.jsx";
 
 const SavedImages = () => {
   const [savedImages, setSavedImages] = useState([]);
@@ -42,6 +43,7 @@ const SavedImages = () => {
   return (
     <>
       <NavBar />
+      <div className="images-wrapper">
       <div className="images-container">
         <h1 className="images-title">Your Saved Images</h1>
 
@@ -96,6 +98,8 @@ const SavedImages = () => {
           )}
         </div>
       </div>
+      </div>
+      <Footer />
     </>
   );
 };
