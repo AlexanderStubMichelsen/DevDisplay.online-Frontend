@@ -4,6 +4,7 @@
   color: white;
   padding: 2rem 1rem;
   font-size: 0.9rem;
+  margin-top: auto;
 }
 
 .footer-container {
@@ -22,28 +23,24 @@
   min-width: 180px;
 }
 
-.footer-section h4 {
+.footer-heading {
   margin-bottom: 0.5rem;
   color: #00bfff;
 }
 
-.footer-section ul {
+.footer-list {
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
-.footer-section li {
-  margin-bottom: 0.4rem;
-}
-
-.footer-section a {
+.footer-link {
   color: #ffffff;
   text-decoration: none;
   transition: color 0.2s;
 }
 
-.footer-section a:hover {
+.footer-link:hover {
   color: #00bfff;
   text-decoration: underline;
 }

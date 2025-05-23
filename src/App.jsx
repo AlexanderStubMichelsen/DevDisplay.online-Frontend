@@ -73,6 +73,8 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
     <>
       {/* ✅ Navbar */}
       <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+            <div className="app-container"> {/* ⬅️ This was missing */}
+
       <div className="page-content"> {/* Add this wrapper */}
 
       {/* ✅ Video Background */}
@@ -154,7 +156,8 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </div>
       )}
-      <Footer /> {/* <-- Add Footer here */}
+      <Footer className="footer" /> {/* <-- Add Footer here */}
+      </div>
     </>
   );
 };

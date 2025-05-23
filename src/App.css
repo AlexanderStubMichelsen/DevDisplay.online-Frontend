@@ -1,4 +1,37 @@
-/* Example styles for App component */
+/* Base layout for full height */
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page-content {
+  flex: 1;
+  position: relative;
+  z-index: 1;
+}
+
+/* Footer styling */
+footer {
+  background-color: #222;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  z-index: 1;
+}
+
+/* Login */
 .login {
   display: flex;
   justify-content: center;
@@ -6,6 +39,7 @@
   height: 100vh;
 }
 
+/* Form */
 .form {
   background-color: #f0f0f0;
   padding: 20px;
@@ -37,6 +71,7 @@
   background-color: #0056b3;
 }
 
+/* Logo */
 .logo {
   display: block;
   margin: 0 auto;
@@ -55,9 +90,10 @@
   height: 100vh;
   overflow: hidden;
   object-fit: cover;
+  z-index: -1;
 }
 
-/* Buttons to Open Modals */
+/* Auth Buttons */
 .auth-buttons {
   position: absolute;
   top: 50%;
@@ -70,13 +106,13 @@
 
 .auth-buttons button {
   padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.2); /* ✅ Transparent background */
+  background: rgba(255, 255, 255, 0.2);
   color: white;
   border: 2px solid white;
   border-radius: 8px;
   cursor: pointer;
   font-size: 18px;
-  backdrop-filter: blur(8px); /* ✅ Glass effect */
+  backdrop-filter: blur(8px);
   transition: 0.3s;
 }
 
@@ -85,29 +121,28 @@
   border-color: #f0f0f0;
 }
 
-/* Modal (Popup) Styles */
+/* Modal */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* ✅ Transparent overlay */
+  background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
 }
 
-/* Modal Content */
 .modal-content {
-  background: rgba(255, 255, 255, 0.1); /* ✅ More transparent */
+  background: rgba(255, 255, 255, 0.1);
   padding: 20px;
   border-radius: 10px;
   width: 340px;
   text-align: center;
   box-shadow: 0px 0px 15px rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(15px); /* ✅ Stronger glass effect */
+  backdrop-filter: blur(15px);
 }
 
 /* Close Button */
@@ -125,12 +160,12 @@
   color: red;
 }
 
-/* Form Inputs */
+/* Form inputs in modal */
 .form input {
   width: 100%;
   padding: 10px;
   margin: 10px 0;
-  background: rgba(255, 255, 255, 0.2); /* ✅ Transparent inputs */
+  background: rgba(255, 255, 255, 0.2);
   border: 1px solid white;
   border-radius: 5px;
   color: white;
@@ -141,11 +176,10 @@
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Submit Button */
 .form button {
   width: 100%;
   padding: 10px;
-  background: rgba(255, 255, 255, 0.2); /* ✅ Transparent button */
+  background: rgba(255, 255, 255, 0.2);
   border: 2px solid white;
   border-radius: 5px;
   color: white;
@@ -158,19 +192,3 @@
   background: rgba(255, 255, 255, 0.3);
   border-color: #f0f0f0;
 }
-
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-}
-
-.page-content {
-  flex: 1;
-}
-
