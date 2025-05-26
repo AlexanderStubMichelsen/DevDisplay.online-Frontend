@@ -5,6 +5,7 @@
   font-size: 0.9rem;
   margin-top: auto;
   z-index: 2;
+  border-top: 1px solid #dee2e6; /* Light border color */
 }
 
 .footer-container {
