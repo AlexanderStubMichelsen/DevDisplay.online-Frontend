@@ -17,10 +17,13 @@ const Footer = () => {
         <div className="footer-section footer-navigation">
           <h4 className="footer-heading">Navigation</h4>
           <ul className="footer-list">
-            <li><a href="/about" className="footer-link">About</a></li>
             <li><a href="/images" className="footer-link">Images</a></li>
-            <li><a href="/signup" className="footer-link">Sign Up</a></li>
-            <li><a href="/login" className="footer-link">Login</a></li>
+            <li><a href="/youtube" className="footer-link">Youtube</a></li>
+            <li><a href="/youtubetrends" className="footer-link">Youtube Trends</a></li>
+            <li><a href="/about" className="footer-link">About</a></li>
+            <li><a href="/help" className="footer-link">Help</a></li>
+            <li><a href="/" className="footer-link">Sign Up</a></li>
+            <li><a href="/" className="footer-link">Login</a></li>
           </ul>
         </div>
 
@@ -48,18 +51,18 @@ const Footer = () => {
               </a>
             </li>
             <li>
-              <a href="mailto:your-email@example.com" className="footer-link">Contact</a>
+              <a href="mailto:AlexanderStubMichelsen@gmail.com" className="footer-link">Contact</a>
             </li>
           </ul>
         </div>
 
-        <div className="footer-section footer-legal">
+        {/* <div className="footer-section footer-legal">
           <h4 className="footer-heading">Legal</h4>
           <ul className="footer-list">
             <li><a href="/terms" className="footer-link">Terms</a></li>
             <li><a href="/privacy" className="footer-link">Privacy</a></li>
           </ul>
-        </div>
+        </div> */}
       </div>
 
       <div className="footer-bottom">
