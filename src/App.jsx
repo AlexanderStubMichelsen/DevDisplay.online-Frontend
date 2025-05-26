@@ -156,8 +156,8 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         </div>
       )}
-      <Footer className="footer" /> {/* <-- Add Footer here */}
       </div>
+    <Footer className="footer" /> {/* <-- Add Footer here */}
     </>
   );
 };
