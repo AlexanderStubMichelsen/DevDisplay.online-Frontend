@@ -58,6 +58,36 @@ const Footer = () => {
               </a>
             </li>
             <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Github Frontend Repo
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/MyPostgresApi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Github Backend Repo
+              </a>
+            </li>
+            </ul>
+        </div>
+        <div className="footer-section footer-connect">
+            <ul className="footer-list">
+            <li>
+              <br />
+            </li>
+            <li>
+              <br />
+            </li>
+            <li>
               <a href="mailto:AlexanderStubMichelsen@gmail.com" className="footer-link">Contact</a>
             </li>
           </ul>
