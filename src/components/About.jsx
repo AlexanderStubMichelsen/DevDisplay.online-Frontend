@@ -26,15 +26,6 @@ const About = () => {
             style={{ border: "none", overflow: "hidden" }}
           />
         </div> */}
-        
-      <div className="github-links">
-      <a href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend" target="_blank" rel="noopener noreferrer">
-        Visit Frontend GitHub Repo
-      </a>
-      <a href="https://github.com/AlexanderStubMichelsen/MyPostgresApi" target="_blank" rel="noopener noreferrer">
-        Visit Backend GitHub Repo
-      </a>
-    </div>
   </div>
 </div>
 </div>
