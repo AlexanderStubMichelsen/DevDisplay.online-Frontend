@@ -111,6 +111,14 @@ export default function YouTubeTrends() {
             <XAxis dataKey="date" />
             <YAxis />
             <Tooltip
+              contentStyle={{
+                background: "rgba(0,0,0,0.0)",
+                border: "none",
+                color: "#fff",
+              }}
+              itemStyle={{
+                color: "#fff",
+              }}
               formatter={(value) => [
                 `${value.toLocaleString()} views`,
                 "Views",
