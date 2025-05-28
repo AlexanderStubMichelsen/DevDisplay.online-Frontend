@@ -21,10 +21,17 @@ const Footer = () => {
             <li><a href="/youtube" className="footer-link">Youtube</a></li>
             <li><a href="/youtubetrends" className="footer-link">Youtube Trends</a></li>
             <li><a href="/about" className="footer-link">About</a></li>
-            <li><a href="/help" className="footer-link">Help</a></li>
-            <li><a href="/" className="footer-link">Sign Up</a></li>
-            <li><a href="/" className="footer-link">Login</a></li>
           </ul>
+        </div>
+          <div className="footer-section footer-navigation">
+            <h4 className="footer-heading"></h4>
+            <ul className="footer-list">
+              <li><a href="/help" className="footer-link">Help</a></li>
+              <li><a href="/" className="footer-link">Sign Up</a></li>
+              <li><a href="/" className="footer-link">Login</a></li>
+              <li><a href="/userpage" className="footer-link">User Page</a></li>
+              <li><a href="/changepassword" className="footer-link">Change Password</a></li>
+            </ul>
         </div>
 
         <div className="footer-section footer-connect">
