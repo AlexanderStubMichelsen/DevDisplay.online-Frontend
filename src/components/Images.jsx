@@ -64,8 +64,16 @@ function Images() {
       await ImageFacade.saveImage(image);
       console.log("Image saved successfully!");
     } catch (error) {
+      // If error is a Response object, extract the message
+      if (error instanceof Response) {
+        const errorMsg = await error.text();
+        alert(errorMsg);
+      } else if (error.message) {
+        alert(error.message);
+      } else {
+        alert("Error saving image.");
+      }
       console.error("Save Image Error:", error);
-      alert("Error saving image");
     }
   };
 
