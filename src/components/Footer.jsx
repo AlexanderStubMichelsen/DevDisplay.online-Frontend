@@ -24,13 +24,12 @@ const Footer = () => {
           </ul>
         </div>
           <div className="footer-section footer-navigation">
-            <h4 className="footer-heading"></h4>
+            <h4 className="footer-heading"><br /></h4>
             <ul className="footer-list">
               <li><a href="/help" className="footer-link">Help</a></li>
               <li><a href="/" className="footer-link">Sign Up</a></li>
               <li><a href="/" className="footer-link">Login</a></li>
               <li><a href="/userpage" className="footer-link">User Page</a></li>
-              <li><a href="/changepassword" className="footer-link">Change Password</a></li>
             </ul>
         </div>
 
@@ -50,16 +49,6 @@ const Footer = () => {
                 LinkedIn
               </a>
             </li>
-            </ul>
-        </div>
-        <div className="footer-section footer-connect">
-            <ul className="footer-list">
-            <li>
-              <br />
-            </li>
-            <li>
-              <br />
-            </li>
             <li>
               <a
                 href="https://github.com/AlexanderStubMichelsen"
@@ -70,6 +59,11 @@ const Footer = () => {
                 GitHub
               </a>
             </li>
+            </ul>
+        </div>
+        <div className="footer-section footer-connect">
+            <h4 className="footer-heading">Code</h4>
+            <ul className="footer-list">
             <li>
               <a
                 href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend"
