@@ -37,15 +37,8 @@ const Footer = () => {
         <div className="footer-section footer-connect">
           <h4 className="footer-heading">Connect</h4>
           <ul className="footer-list">
-            <li>
-              <a
-                href="https://github.com/AlexanderStubMichelsen"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                GitHub
-              </a>
+             <li>
+              <a href="mailto:AlexanderStubMichelsen@gmail.com" className="footer-link">Contact</a>
             </li>
             <li>
               <a
@@ -55,26 +48,6 @@ const Footer = () => {
                 className="footer-link"
               >
                 LinkedIn
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                Github Frontend Repo
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/AlexanderStubMichelsen/MyPostgresApi"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                Github Backend Repo
               </a>
             </li>
             </ul>
@@ -88,7 +61,34 @@ const Footer = () => {
               <br />
             </li>
             <li>
-              <a href="mailto:AlexanderStubMichelsen@gmail.com" className="footer-link">Contact</a>
+              <a
+                href="https://github.com/AlexanderStubMichelsen"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                GitHub
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Frontend Code
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/MyPostgresApi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Backend Code
+              </a>
             </li>
           </ul>
         </div>
