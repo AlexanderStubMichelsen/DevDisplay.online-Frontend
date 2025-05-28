@@ -82,13 +82,20 @@ body {
 
 .search-form {
   margin-bottom: 20px;
-  color: blue;
-  width: 700px
+  color: white;
+  width: 700px;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
 }
 
 .search-input::placeholder {
   margin-bottom: 20px;
-  color: blue;
+  color: white;
+  background-color: black;
+}
+
+.search-input {
+  color: white;
+  background-color: blue; /* Set background color to black */
 }
 
 .load-more-btn {

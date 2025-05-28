@@ -52,7 +52,7 @@ function Youtube() {
       <NavBar />
       <div className="youtube-wrapper">
       <div className="youtube-container">
-        <h1 className="youtube-title">YouTube MP3 Downloader</h1>
+        <h1 className="youtube-title">YouTube Search</h1>
 
         <form onSubmit={handleSearch} className="search-form">
           <input
