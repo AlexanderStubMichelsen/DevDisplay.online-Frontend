@@ -131,7 +131,7 @@ function NavBar() {
               <Nav.Link>Youtube</Nav.Link>
             </LinkContainer>
             <LinkContainer
-              to="/youtubetrends"
+              to="/trends"
               onClick={() => setExpanded(false)}
             >
               

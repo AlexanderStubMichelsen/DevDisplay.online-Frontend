@@ -19,7 +19,7 @@ const Footer = () => {
           <ul className="footer-list">
             <li><a href="/images" className="footer-link">Images</a></li>
             <li><a href="/youtube" className="footer-link">Youtube</a></li>
-            <li><a href="/youtubetrends" className="footer-link">Youtube Trends</a></li>
+            <li><a href="/trends" className="footer-link">Trends</a></li>
             <li><a href="/about" className="footer-link">About</a></li>
           </ul>
         </div>
