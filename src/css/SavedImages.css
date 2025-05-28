@@ -11,6 +11,11 @@
     color: blue;
   }
 
+  .no-images p {
+    text-align: left;
+    color : white;
+  }
+
   .saved-title {
     font-size: 28px;
     margin-top: 40px;

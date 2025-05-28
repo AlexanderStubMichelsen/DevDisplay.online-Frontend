@@ -8,7 +8,7 @@ import Youtube from "./components/Youtube.jsx";
 import Help from "./components/Help.jsx";
 import UserPage from "./components/UserPage.jsx";
 import ChangePassword from "./components/ChangePassword.jsx";
-import SavedImages from "./components/SavedImages.jsx";
+import Saved from "./components/Saved.jsx";
 import Trends from "./components/Trends.jsx";
 import About from "./components/About.jsx";
 
@@ -25,7 +25,7 @@ const Root = () => {
           <Route path="trends" element={<Trends />} />
           <Route path="help" element={<Help />} />
           <Route path="userpage" element={<UserPage />} />
-          <Route path="saved" element={<SavedImages />} />
+          <Route path="saved" element={<Saved />} />
           <Route path="changepassword" element={<ChangePassword />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoMatch />} />

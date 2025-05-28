@@ -124,7 +124,7 @@ function NavBar() {
             </LinkContainer>
             {isLoggedIn && (
               <LinkContainer to="/saved" onClick={() => setExpanded(false)}>
-                <Nav.Link>Saved Images</Nav.Link>
+                <Nav.Link>Saved</Nav.Link>
               </LinkContainer>
             )}
             <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
