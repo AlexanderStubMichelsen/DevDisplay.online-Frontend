@@ -85,6 +85,26 @@ const Footer = () => {
                 Backend Code
               </a>
             </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/Android-Java-Note-App"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                ONotes(Android App)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/Tetris"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Tetris(Android App)
+              </a>
+            </li>
           </ul>
         </div>
 

@@ -6,6 +6,7 @@
   margin-top: auto;
   z-index: 2;
   border-top: 1px solid #dee2e6; /* Light border color */
+  background-color: #52514D; /* Dark background color */
 }
 
 .footer-container {

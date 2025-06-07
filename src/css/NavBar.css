@@ -17,7 +17,7 @@
 /* Navbar Styles */
 .sticky-top-navbar {
   width: 100%;
-  background-color: #000 !important; /* Use hex or rgb, no quotes */
+  background-color: #52514D !important; /* Use hex or rgb, no quotes */
   border-bottom: 1px solid #dee2e6; /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
 }
