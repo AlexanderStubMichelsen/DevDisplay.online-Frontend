@@ -11,7 +11,7 @@ import ChangePassword from "./components/ChangePassword.jsx";
 import Saved from "./components/Saved.jsx";
 import Trends from "./components/Trends.jsx";
 import About from "./components/About.jsx";
-import Privacy from "./components/Privacy.jsx"; // Import Privacy Policy component
+import PrivacyPolicyTetris from "./components/PrivacyPolicyTetris.jsx"; // Import Privacy Policy component
 import PrivacyPolicyOrganizedNotes from "./components/PrivacyPolicyOrganized.jsx";
 
 const Root = () => {
@@ -31,8 +31,8 @@ const Root = () => {
           <Route path="changepassword" element={<ChangePassword />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoMatch />} />
-          <Route path="privacypolicy" element={<Privacy />} />
-          <Route path="privacyPolicyON" element={<PrivacyPolicyOrganizedNotes />} />
+          <Route path="PrivacyPolicy" element={<PrivacyPolicyTetris />} />
+          <Route path="privacyPolicyOrganizedNotes" element={<PrivacyPolicyOrganizedNotes />} />
         </>
       </Route>
     )
