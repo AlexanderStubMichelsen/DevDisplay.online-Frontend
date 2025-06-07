@@ -12,6 +12,7 @@ import Saved from "./components/Saved.jsx";
 import Trends from "./components/Trends.jsx";
 import About from "./components/About.jsx";
 import Privacy from "./components/Privacy.jsx"; // Import Privacy Policy component
+import PrivacyPolicyOrganizedNotes from "./components/PrivacyPolicyOrganized.jsx";
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -31,6 +32,7 @@ const Root = () => {
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoMatch />} />
           <Route path="privacypolicy" element={<Privacy />} />
+          <Route path="privacyPolicyON" element={<PrivacyPolicyOrganizedNotes />} />
         </>
       </Route>
     )
