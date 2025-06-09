@@ -87,12 +87,12 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="https://github.com/AlexanderStubMichelsen/Android-Java-Note-App"
+                href="https://play.google.com/store/apps/details?id=online.devdisplay.tetris"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="footer-link"
               >
-                ONotes(Android App)
+                Tetris(Google Play Store)
               </a>
             </li>
             <li>
@@ -102,7 +102,27 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="footer-link"
               >
-                Tetris(Android App)
+                Tetris(Android App GitHub)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://play.google.com/store/apps/details?id=dk.komputerkomputer.helloworld"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                ONotes(Google Play Store)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/ONotes"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                ONotes(Android App GitHub)
               </a>
             </li>
           </ul>
