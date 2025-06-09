@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import apiFacade from "../util/api/UserFacade";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
+import { Container, Button } from "react-bootstrap";
+import { LinkContainer, Nav } from "react-router-bootstrap";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -45,50 +47,55 @@ const ChangePassword = () => {
     <>
       <NavBar />
       <div className="user-page-wrapper">
-      <div className="user-page-container">
-        <div className="user-page">
-          <h1>Change Password</h1>
-          {message && <p className="feedback">{message}</p>}
-          <form onSubmit={handleSubmit} className="user-form">
-            <div className="form-group">
-              <label htmlFor="oldPassword">Old Password:</label>
-              <input
-                type="password"
-                name="oldPassword"
-                value={oldPassword}
-                onChange={(e) => setOldPassword(e.target.value)}
-                className="form-control"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="newPassword">New Password:</label>
-              <input
-                type="password"
-                name="newPassword"
-                value={newPassword}
-                onChange={(e) => setNewPassword(e.target.value)}
-                className="form-control"
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="rePassword">Re-enter New Password:</label>
-              <input
-                type="password"
-                name="rePassword"
-                value={rePassword}
-                onChange={(e) => setRePassword(e.target.value)}
-                className="form-control"
-                required
-              />
-            </div>
-            <button type="submit" className="btn btn-primary">
-              Update Password
-            </button>
-          </form>
+        <div className="user-page-container">
+          <div className="user-page">
+            <h1>Change Password</h1>
+            {message && <p className="feedback">{message}</p>}
+            <form onSubmit={handleSubmit} className="user-form">
+              <div className="form-group">
+                <label htmlFor="oldPassword">Old Password:</label>
+                <input
+                  type="password"
+                  name="oldPassword"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="newPassword">New Password:</label>
+                <input
+                  type="password"
+                  name="newPassword"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="rePassword">Re-enter New Password:</label>
+                <input
+                  type="password"
+                  name="rePassword"
+                  value={rePassword}
+                  onChange={(e) => setRePassword(e.target.value)}
+                  className="form-control"
+                  required
+                />
+              </div>
+              <button type="submit" className="btn btn-primary">
+                Update Password
+              </button>
+            </form>
+            <Container className="my-4">
+              <LinkContainer to="/userpage">
+                <Button variant="outline-primary">Return</Button>
+              </LinkContainer>
+            </Container>
+          </div>
         </div>
-      </div>
       </div>
       <Footer />
     </>

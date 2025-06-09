@@ -13,6 +13,7 @@ import Trends from "./components/Trends.jsx";
 import About from "./components/About.jsx";
 import PrivacyPolicyTetris from "./components/PrivacyPolicyTetris.jsx"; // Import Privacy Policy component
 import PrivacyPolicyOrganizedNotes from "./components/PrivacyPolicyOrganized.jsx";
+import DeleteUser from "./components/DeleteUser.jsx";
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -29,6 +30,7 @@ const Root = () => {
           <Route path="userpage" element={<UserPage />} />
           <Route path="saved" element={<Saved />} />
           <Route path="changepassword" element={<ChangePassword />} />
+          <Route path="deleteuser" element={<DeleteUser />} />
           <Route path="about" element={<About />} />
           <Route path="*" element={<NoMatch />} />
           <Route path="PrivacyPolicy" element={<PrivacyPolicyTetris />} />

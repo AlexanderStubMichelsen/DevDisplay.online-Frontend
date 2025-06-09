@@ -148,6 +148,36 @@ const apiFacade = {
       throw error;
     }
   },
+
+  // Make a delete request to the API for a user and prompt them for email and password
+  deleteUser: async (email, password) => {
+    const config = await getConfig(); // Must be inside an async function
+    const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
+    try {
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+      const response = await fetch(`${API_URL}/delete`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      if (response.ok) {
+        // Clear session storage if delete is successful
+        sessionStorage.removeItem("isLoggedIn");
+        sessionStorage.removeItem("loginData");
+        window.dispatchEvent(new Event("storage"));
+        return { message: "User deleted successfully" };
+      }
+      if (!response.ok) throw new Error("Delete failed");
+      return await response.json();
+    } catch (error) {
+      console.error("Delete User Error:", error);
+      throw error;
+    }
+  },
 };
 
 export default apiFacade;
