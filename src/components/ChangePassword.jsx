@@ -5,7 +5,7 @@ import apiFacade from "../util/api/UserFacade";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import { Container, Button } from "react-bootstrap";
-import { LinkContainer, Nav } from "react-router-bootstrap";
+import { LinkContainer } from "react-router-bootstrap";
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");

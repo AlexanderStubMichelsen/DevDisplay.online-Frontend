@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import apiFacade from "../util/api/UserFacade";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
