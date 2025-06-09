@@ -53,3 +53,78 @@
   color: #f0f0f0 !important;
 }
 
+#dropdown-basic {
+  background-color: #007bff;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85); /* black semi-transparent */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  color: #fff; /* white text */
+}
+
+.modal-content {
+  background-color: rgba(30, 30, 30, 0.95); /* dark background */
+  padding: 2rem;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+  position: relative;
+  color: #fff;
+}
+
+.modal-content h2 {
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #fff;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #222;
+  color: #fff;
+}
+
+.modal-content input::placeholder {
+  color: #aaa;
+}
+
+.modal-content button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+.modal-content .close {
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #fff;
+}
+
