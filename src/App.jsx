@@ -99,7 +99,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
       {showSignup && (
         <div className="modal" role="dialog" aria-modal="true">
           <div className="modal-content">
-            <button
+            <span
               type="button"
               className="close"
               onClick={() => setShowSignup(false)}
@@ -109,7 +109,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
               tabIndex="0"
             >
               &times;
-            </button>
+            </span>
             <h2>Sign Up</h2>
             <form onSubmit={handleSignupSubmit}>
               <input
