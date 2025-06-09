@@ -53,6 +53,10 @@
   color: #f0f0f0 !important;
 }
 
+#dropdown-basic {
+  background-color: #007bff;
+}
+
 .modal {
   position: fixed;
   top: 0;
@@ -123,3 +127,4 @@
   cursor: pointer;
   color: #fff;
 }
+

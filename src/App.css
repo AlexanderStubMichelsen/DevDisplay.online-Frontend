@@ -104,18 +104,19 @@ footer {
 }
 
 .auth-buttons button {
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.2);
+  padding: 12px 30px;
+  background: #52514D;
   color: white;
-  border: 2px solid white;
-  border-radius: 8px;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
-  font-size: 18px;
-  backdrop-filter: blur(8px);
-  transition: 0.3s;
+  font-size: 20px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
+  transition: background 0.4s ease, box-shadow 0.3s ease;
 }
 
 .auth-buttons button:hover {
-  background: rgba(255, 255, 255, 0.3);
-  border-color: #f0f0f0;
+  background: #52514D;
+  box-shadow: 0 6px 20px rgba(0, 13, 255, 0.9);
 }
