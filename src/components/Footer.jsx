@@ -31,6 +31,9 @@ const Footer = () => {
               <li><a href="/" className="footer-link">Sign Up</a></li>
               <li><a href="/" className="footer-link">Login</a></li>
               <li><a href="/userpage" className="footer-link">User Page</a></li>
+              <li><a href="/changepassword" className="footer-link">Change Password</a></li>
+              <li><a href="/deleteuser" className="footer-link">Delete User</a></li>
+
             </ul>
         </div>
 
@@ -87,26 +90,6 @@ const Footer = () => {
             </li>
             <li>
               <a
-                href="https://play.google.com/store/apps/details?id=online.devdisplay.tetris"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                Tetris(Google Play Store)
-              </a>
-            </li>
-            <li>
-              <a
-                href="https://github.com/AlexanderStubMichelsen/Tetris"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                Tetris(Android App GitHub)
-              </a>
-            </li>
-            <li>
-              <a
                 href="https://play.google.com/store/apps/details?id=dk.komputerkomputer.helloworld"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -123,6 +106,26 @@ const Footer = () => {
                 className="footer-link"
               >
                 ONotes(Android App GitHub)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://play.google.com/store/apps/details?id=online.devdisplay.tetris"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Tetris(Google Play Store)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/Tetris"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Tetris(Android App GitHub)
               </a>
             </li>
           </ul>
