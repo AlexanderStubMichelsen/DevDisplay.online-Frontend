@@ -54,15 +54,15 @@ body {
 
 /* Styling for each image */
 .image-card {
-  background-color: black;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 10px;
-  overflow: hidden; /* Ensure content doesn't overflow */
-  opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
+  position: relative; /* Allows absolutely positioned buttons */
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  box-shadow: none;
+  opacity: 1;
 }
+
 
 .image-card:hover {
   transform: scale(1.05); /* Scale up slightly on hover */
@@ -110,18 +110,22 @@ body {
 }
 
 .save-button {
-  background-color: #007bff;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: rgba(0, 123, 255, 0.7); /* Semi-transparent blue */
   color: white;
   padding: 6px 12px;
   border: none;
   border-radius: 4px;
-  margin-top: 8px;
   cursor: pointer;
+  font-size: 12px;
   transition: background-color 0.2s ease;
+  z-index: 2;
 }
 
 .save-button:hover {
-  background-color: #0056b3;
+  background-color: rgba(0, 86, 179, 0.9);
 }
 
 /* Section heading for saved images */
@@ -165,18 +169,22 @@ body {
 }
 
 .delete-button {
-  background-color: #dc3545;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: rgba(220, 53, 69, 0.7); /* Semi-transparent red */
   color: white;
-  border: none;
   padding: 6px 12px;
-  margin-top: 6px;
+  border: none;
   border-radius: 4px;
   cursor: pointer;
+  font-size: 12px;
   transition: background-color 0.2s ease;
+  z-index: 2;
 }
 
 .delete-button:hover {
-  background-color: #c82333;
+  background-color: rgba(200, 35, 51, 0.9);
 }
 
 .non_saved {

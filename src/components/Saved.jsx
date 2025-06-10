@@ -46,7 +46,7 @@ const SavedImages = () => {
       {sessionStorage.getItem("isLoggedIn") === "true" ? (
         <div className="images-wrapper">
           <div className="images-container">
-            <h1 className="images-title">Your Saved Images</h1>
+            <h1 className="images-title"></h1>
 
             {loading && <p>Loading saved images...</p>}
             {error && (

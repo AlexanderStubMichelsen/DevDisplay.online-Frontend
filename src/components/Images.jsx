@@ -1,9 +1,8 @@
-import React from "react";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "../css/Images.css";
 import NavBar from "./NavBar";
-import ImageFacade from "../util/api/ImageFacade.js"; // ✅ Import ImageFacade
-import Footer from "./Footer"; // ✅ Import Footer
+import ImageFacade from "../util/api/ImageFacade.js";
+import Footer from "./Footer";
 
 function Images() {
   const [imageList, setImageList] = useState([]);
@@ -30,12 +29,16 @@ function Images() {
         return response.json();
       })
       .then((data) => {
+        const thumbWidth = 500;
         const images = (searchQuery ? data.results : data).map((photo) => ({
           id: photo.id,
-          url: `${photo.urls.raw}&w=500&dpr=2`,
+          url: `${photo.urls.raw}&w=${thumbWidth}&dpr=2`,
           alt: photo.alt_description || "Image",
           photographer: photo.user.name,
           profileLink: photo.user.links.html,
+          width: photo.width,
+          height: photo.height,
+          thumbHeight: Math.round(thumbWidth * (photo.height / photo.width)), // Add this
         }));
         setImageList(
           pageNum === 1 ? images : (prevImages) => [...prevImages, ...images]
@@ -64,7 +67,6 @@ function Images() {
       await ImageFacade.saveImage(image);
       console.log("Image saved successfully!");
     } catch (error) {
-      // If error is a Response object, extract the message
       if (error instanceof Response) {
         const errorMsg = await error.text();
         alert(errorMsg);
@@ -81,63 +83,57 @@ function Images() {
     <>
       <NavBar />
       <div className="images-wrapper">
-      <div className="images-container">
-        <h1 className="images-title">Images from Unsplash</h1>
+        <div className="images-container">
+          <h1 className="images-title"></h1>
 
-        <form onSubmit={handleSearch} className="search-form">
-          <input
-            type="text"
-            placeholder="Search images..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="search-input"
-          />
-        </form>
+          <form onSubmit={handleSearch} className="search-form">
+            <input
+              type="text"
+              placeholder="Search images..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="search-input"
+            />
+          </form>
 
-        {loading && <p>Loading images...</p>}
-        {error && <p className="error-message">Error: {error}</p>}
+          {loading && <p>Loading images...</p>}
+          {error && <p className="error-message">Error: {error}</p>}
 
-        <div className="image-grid">
-          {imageList.map((image) => (
-            <div key={image.id} className="image-card">
-              <a href={image.url} target="_blank" rel="noopener noreferrer">
-                <img src={image.url} alt={image.alt} className="image-item" />
-              </a>
-              <p>
-                Photo by{" "}
-                <a
-                  href={image.profileLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {image.photographer}
-                </a>{" "}
-                on Unsplash
-              </p>
-              {sessionStorage.getItem("isLoggedIn") === "true" && (
-                <button
-                  type="button"
-                  className="save-button"
-                  onClick={() => handleSaveImage(image)}
-                >
-                  Save Image to User
-                </button>
-              )}
-            </div>
-          ))}
+          <div className="image-grid">
+            {[...imageList]
+              .sort((a, b) => b.thumbHeight - a.thumbHeight) // Sort by displayed (thumbnail) height
+              .map((image) => (
+                <div key={image.id} className="image-card">
+                  <a href={image.url} target="_blank" rel="noopener noreferrer">
+                    <img
+                      src={image.url}
+                      alt={image.alt}
+                      className="image-item"
+                    />
+                  </a>
+                  {sessionStorage.getItem("isLoggedIn") === "true" && (
+                    <button
+                      type="button"
+                      className="save-button"
+                      onClick={() => handleSaveImage(image)}
+                    >
+                      Save
+                    </button>
+                  )}
+                </div>
+              ))}
+          </div>
+
+          <button
+            type="button"
+            className="load-more-btn"
+            onClick={() => setPage(page + 1)}
+          >
+            Get More
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="load-more-btn"
-          onClick={() => setPage(page + 1)}
-        >
-          Get More
-        </button>
+        <Footer />
       </div>
-      <Footer />
-    </div>
-
     </>
   );
 }
