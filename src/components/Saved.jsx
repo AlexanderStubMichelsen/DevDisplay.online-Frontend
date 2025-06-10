@@ -9,6 +9,7 @@ const SavedImages = () => {
   const [savedImages, setSavedImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -47,6 +48,19 @@ const SavedImages = () => {
         <div className="images-wrapper">
           <div className="images-container">
             <h1 className="images-title"></h1>
+            <form
+              onSubmit={(e) => e.preventDefault()}
+              className="search-form"
+              style={{ marginBottom: "2rem" }}
+            >
+              <input
+                type="text"
+                placeholder="Search saved images..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="search-input"
+              />
+            </form>
 
             {loading && <p>Loading saved images...</p>}
             {error && (
@@ -57,43 +71,51 @@ const SavedImages = () => {
             )}
 
             <div className="image-grid">
-              {savedImages.map((image) => (
-                <div key={image.id} className="image-card">
-                  <a
-                    href={image.imageUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <img
-                      src={image.imageUrl}
-                      alt={image.title}
-                      className="saved-image-item"
-                    />
-                  </a>
-
-                  <button
-                    type="button"
-                    className="delete-button"
-                    onClick={() => handleDelete(image.id)}
-                  >
-                    Delete
-                  </button>
-
-                  <p>
-                    <strong>{image.title}</strong>
-                  </p>
-                  <p>
-                    Saved from{" "}
+              {savedImages
+                .filter(
+                  (image) =>
+                    image.title?.toLowerCase().includes(search.toLowerCase()) ||
+                    image.photographer
+                      ?.toLowerCase()
+                      .includes(search.toLowerCase())
+                )
+                .map((image) => (
+                  <div key={image.id} className="image-card">
                     <a
-                      href={image.sourceLink}
+                      href={image.imageUrl}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {image.photographer}
+                      <img
+                        src={image.imageUrl}
+                        alt={image.title}
+                        className="saved-image-item"
+                      />
                     </a>
-                  </p>
-                </div>
-              ))}
+
+                    <button
+                      type="button"
+                      className="delete-button"
+                      onClick={() => handleDelete(image.id)}
+                    >
+                      Delete
+                    </button>
+
+                    <p>
+                      <strong>{image.title}</strong>
+                    </p>
+                    <p>
+                      Saved from{" "}
+                      <a
+                        href={image.sourceLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {image.photographer}
+                      </a>
+                    </p>
+                  </div>
+                ))}
               {!loading && savedImages.length === 0 && (
                 <p className="no-images" style={{ color: "white" }}>
                   You haven’t saved any images yet.
