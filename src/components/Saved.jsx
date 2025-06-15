@@ -95,7 +95,7 @@ const SavedImages = () => {
 
                     <button
                       type="button"
-                      className="delete-button"
+                      className="action-button"
                       onClick={() => handleDelete(image.id)}
                     >
                       Delete

@@ -114,7 +114,7 @@ function Images() {
                   {sessionStorage.getItem("isLoggedIn") === "true" && (
                     <button
                       type="button"
-                      className="save-button"
+                      className="action-button"
                       onClick={() => handleSaveImage(image)}
                     >
                       Save
