@@ -138,6 +138,7 @@ body {
   font-size: 12px;
   transition: background-color 0.2s ease;
   z-index: 2;
+  border-radius: 5px; /* Rounded corners for the button */
 }
 
 .action-button:hover {
