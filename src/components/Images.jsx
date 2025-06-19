@@ -111,6 +111,23 @@ function Images() {
                       className="image-item"
                     />
                   </a>
+
+                  {/* Title below the image */}
+                  <p className="image-title">{image.alt}</p>
+
+                  {/* Photographer link */}
+                  <p className="photographer">
+                    From{" "}
+                    <a
+                      href={image.profileLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="photographer-link"
+                    >
+                      {image.photographer}
+                    </a>
+                  </p>
+
                   {sessionStorage.getItem("isLoggedIn") === "true" && (
                     <button
                       type="button"
@@ -129,7 +146,7 @@ function Images() {
             className="load-more-btn"
             onClick={() => setPage(page + 1)}
           >
-            Get More
+            Load More
           </button>
         </div>
         <Footer />
