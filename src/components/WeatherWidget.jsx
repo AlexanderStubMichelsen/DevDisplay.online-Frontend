@@ -7,7 +7,7 @@ const WeatherWidget = ({ apiKey }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load coordinates from sessionStorage or ask user
+  // Load coordinates from sessionStorage or ask user f
   useEffect(() => {
     const savedCoords = sessionStorage.getItem("coords");
     if (savedCoords) {
