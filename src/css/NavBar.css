@@ -16,6 +16,8 @@
 
 /* Navbar Styles */
 .sticky-top-navbar {
+  position: sticky;   /* Make it sticky */
+  top: 0;             /* Stick to the top */
   width: 100%;
   background-color: #52514D !important; /* Use hex or rgb, no quotes */
   border-bottom: 1px solid #dee2e6; /* Light border color */
