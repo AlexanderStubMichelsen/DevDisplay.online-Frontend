@@ -45,9 +45,11 @@ const WeatherWidget = ({ apiKey }) => {
         if (!res.ok) throw new Error("Weather fetch failed.");
         const data = await res.json();
         setWeather(data);
+        console.log("API-KEY:", apiKey);
       } catch (err) {
         console.error(err);
         setError("☁️ Could not load weather.");
+        console.log("API-KEY:", apiKey);
       } finally {
         setLoading(false);
       }
