@@ -1,17 +1,16 @@
-import React from "react"; // ✅ required for tests
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
+import Dropdown from "react-bootstrap/Dropdown";
 import "../css/NavBar.css";
 import apiFacade from "../util/api/UserFacade.js";
-import Dropdown from "react-bootstrap/Dropdown";
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
-  const [userEmail, setUserEmail] = useState(""); // ✅ Show email instead of name
+  const [userEmail, setUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [loginDataForm, setLoginDataForm] = useState({
@@ -19,10 +18,9 @@ function NavBar() {
     password: "",
   });
 
-  // ✅ Check sessionStorage on mount
   const checkLoginStatus = () => {
     const storedUser = JSON.parse(sessionStorage.getItem("loginData"));
-    if (storedUser?.email) {
+    if (storedUser?.email && storedUser?.token) {
       setIsLoggedIn(true);
       setUserEmail(storedUser.email);
     } else {
@@ -31,17 +29,19 @@ function NavBar() {
     }
   };
 
-  // ✅ Listen for login/logout across tabs
   useEffect(() => {
     checkLoginStatus();
 
-    const handleStorageChange = () => {
-      checkLoginStatus();
+    const handleStorageChange = () => checkLoginStatus();
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") closeLoginModal();
     };
 
     window.addEventListener("storage", handleStorageChange);
+    window.addEventListener("keydown", handleKeyDown);
     return () => {
       window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
 
@@ -49,27 +49,19 @@ function NavBar() {
     setExpanded(!expanded);
   };
 
-  // ✅ Logout
   const handleLogout = () => {
     apiFacade.logout();
+    sessionStorage.removeItem("loginData");
     setIsLoggedIn(false);
     setUserEmail("");
-    sessionStorage.removeItem("isLoggedIn");
-    sessionStorage.removeItem("loginData");
     window.dispatchEvent(new Event("storage"));
   };
 
-  // ✅ Login
   const handleLoginSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await apiFacade.login(loginDataForm);
 
-      setShowLogin(false);
-      setIsLoggedIn(true);
-      setUserEmail(response.userDto.email);
-
-      sessionStorage.setItem("isLoggedIn", JSON.stringify(true));
       sessionStorage.setItem(
         "loginData",
         JSON.stringify({
@@ -80,33 +72,28 @@ function NavBar() {
         })
       );
 
+      setIsLoggedIn(true);
+      setUserEmail(response.userDto.email);
+      closeLoginModal();
       window.dispatchEvent(new Event("storage"));
     } catch (error) {
       alert("Login failed. Please check your email and password.");
     }
   };
 
+  const closeLoginModal = () => {
+    setShowLogin(false);
+    setLoginDataForm({ email: "", password: "" });
+  };
+
   return (
     <>
-      <Navbar
-        bg="dark"
-        variant="dark"
-        expand="md"
-        className="sticky-top-navbar"
-      >
-        <Navbar.Brand href="/"> DevDisplay
-        </Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="responsive-navbar-nav"
-          onClick={handleNavToggle}
-        >
+      <Navbar bg="dark" variant="dark" expand="md" className="sticky-top-navbar">
+        <Navbar.Brand href="/">DevDisplay</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleNavToggle}>
           <FontAwesomeIcon icon={faBars} />
         </Navbar.Toggle>
-        <Navbar.Collapse
-          id="responsive-navbar-nav"
-          className="justify-content-end"
-          in={expanded}
-        >
+        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end" in={expanded}>
           <Nav className="ml-auto">
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
@@ -122,11 +109,7 @@ function NavBar() {
             <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link>
             </LinkContainer>
-            <LinkContainer
-              to="/trends"
-              onClick={() => setExpanded(false)}
-            >
-              
+            <LinkContainer to="/trends" onClick={() => setExpanded(false)}>
               <Nav.Link>Trends</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/about" onClick={() => setExpanded(false)}>
@@ -136,44 +119,29 @@ function NavBar() {
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
 
-            {/* ✅ Show dropdown if logged in */}
-            {isLoggedIn && (
-              <Dropdown>
+            {isLoggedIn ? (
+              <Dropdown align="end">
                 <Dropdown.Toggle variant="light" id="dropdown-basic">
-                  {userEmail || "User"}
+                  {userEmail}
                 </Dropdown.Toggle>
-
                 <Dropdown.Menu>
-                  <LinkContainer
-                    to="/userpage"
-                    onClick={() => setExpanded(false)}
-                  >
+                  <LinkContainer to="/userpage" onClick={() => setExpanded(false)}>
                     <Dropdown.Item>User Page</Dropdown.Item>
                   </LinkContainer>
                   <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
-            )}
-
-            {/* ✅ Show login if not logged in */}
-            {!isLoggedIn && (
+            ) : (
               <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
             )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
 
-      {/* ✅ Login Modal */}
       {showLogin && (
-        <div className="modal">
+        <div className="modal" role="dialog" aria-modal="true">
           <div className="modal-content">
-            <span
-              className="close"
-              onClick={() => setShowLogin(false)}
-              onKeyUp={(e) => {
-                if (e.key === "Enter") setShowLogin(false);
-              }}
-            >
+            <span className="close" onClick={closeLoginModal}>
               &times;
             </span>
             <h2>Login</h2>
@@ -184,10 +152,7 @@ function NavBar() {
                 placeholder="Email"
                 value={loginDataForm.email}
                 onChange={(e) =>
-                  setLoginDataForm({
-                    ...loginDataForm,
-                    [e.target.name]: e.target.value,
-                  })
+                  setLoginDataForm((prev) => ({ ...prev, email: e.target.value }))
                 }
                 required
               />
@@ -197,10 +162,7 @@ function NavBar() {
                 placeholder="Password"
                 value={loginDataForm.password}
                 onChange={(e) =>
-                  setLoginDataForm({
-                    ...loginDataForm,
-                    [e.target.name]: e.target.value,
-                  })
+                  setLoginDataForm((prev) => ({ ...prev, password: e.target.value }))
                 }
                 required
               />
