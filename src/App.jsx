@@ -12,6 +12,7 @@ import WeatherWidget from "./components/WeatherWidget.jsx"; // ✅ Add this at t
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const location = useLocation();
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   // Modal state
   const [showSignup, setShowSignup] = useState(false);
@@ -87,10 +88,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
               Your browser does not support the video tag.
             </video>
             <div className="weather-overlay">
-              <WeatherWidget
-                city="Copenhagen"
-                apiKey={import.meta.env.VITE_WEATHER_API_KEY}
-              />
+              <WeatherWidget apiKey={apiKey} />
             </div>
             {/* ✅ Show Sign-Up Button if Not Logged In */}
             {!sessionStorage.getItem("isLoggedIn") && (

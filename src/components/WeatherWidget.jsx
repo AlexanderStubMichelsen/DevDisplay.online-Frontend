@@ -7,34 +7,34 @@ const WeatherWidget = ({ apiKey }) => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Load coordinates from sessionStorage or ask user f
+  // Try to load coordinates from sessionStorage or ask user for location
   useEffect(() => {
     const savedCoords = sessionStorage.getItem("coords");
+
     if (savedCoords) {
       setCoords(JSON.parse(savedCoords));
-      return;
+    } else {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const userCoords = {
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
+          };
+          sessionStorage.setItem("coords", JSON.stringify(userCoords));
+          setCoords(userCoords);
+        },
+        (err) => {
+          console.error(err);
+          setError("🌍 Location access denied. Showing default or no weather.");
+          setLoading(false);
+        }
+      );
     }
-
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const userCoords = {
-          lat: position.coords.latitude,
-          lon: position.coords.longitude,
-        };
-        sessionStorage.setItem("coords", JSON.stringify(userCoords));
-        setCoords(userCoords);
-      },
-      (err) => {
-        console.error(err);
-        setError("🌍 Location denied. Unable to fetch local weather.");
-        setLoading(false);
-      }
-    );
   }, []);
 
-  // Fetch weather once coords are available
+  // Fetch weather from API when coords are available
   useEffect(() => {
-    if (!coords) return;
+    if (!coords || !apiKey) return;
 
     const fetchWeather = async () => {
       try {
@@ -45,14 +45,11 @@ const WeatherWidget = ({ apiKey }) => {
         if (!res.ok) throw new Error("Weather fetch failed.");
         const data = await res.json();
         setWeather(data);
-console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
       } catch (err) {
         console.error(err);
         setError("☁️ Could not load weather.");
-console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
       } finally {
         setLoading(false);
-console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
       }
     };
 
@@ -66,7 +63,7 @@ console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
       {!loading && error && <div className="error">{error}</div>}
 
       {!loading && weather && (
-        <>
+        <div>
           <h4>Weather in {weather.name}</h4>
           <p>
             {Math.round(weather.main.temp)}°C,{" "}
@@ -76,7 +73,7 @@ console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
             src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
             alt="weather icon"
           />
-        </>
+        </div>
       )}
     </div>
   );
