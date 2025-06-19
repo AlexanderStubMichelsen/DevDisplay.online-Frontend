@@ -45,14 +45,14 @@ const WeatherWidget = ({ apiKey }) => {
         if (!res.ok) throw new Error("Weather fetch failed.");
         const data = await res.json();
         setWeather(data);
-        console.log("API-KEY:", apiKey);
+console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
       } catch (err) {
         console.error(err);
         setError("☁️ Could not load weather.");
-        console.log("API-KEY:", apiKey);
+console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
       } finally {
         setLoading(false);
-        console.log("API-KEY:", apiKey);
+console.log("API KEY:", import.meta.env.VITE_WEATHER_API_KEY);
       }
     };
 
