@@ -1,0 +1,31 @@
+/* WeatherWidget.css */
+
+.weather-overlay {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.85);
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  font-family: sans-serif;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  max-width: 300px;
+  text-align: center;
+}
+
+.weather-overlay img {
+  width: 50px;
+  height: 50px;
+}
+
+.spinner {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.error {
+  color: #c00;
+  font-size: 0.9rem;
+}

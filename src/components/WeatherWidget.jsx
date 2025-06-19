@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
+import "../css/WeatherWidget.css";
 
-const WeatherWidget = ({ apiKey }) => {
+const WeatherWidget = () => {
   const [weather, setWeather] = useState(null);
   const [coords, setCoords] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
+  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
+
 
   // Try to load coordinates from sessionStorage or ask user for location
   useEffect(() => {
@@ -57,30 +59,25 @@ const WeatherWidget = ({ apiKey }) => {
   }, [coords, apiKey]);
 
   return (
-    <div className="weather-widget">
-      {loading && <div className="spinner">Loading...</div>}
+  <div className="weather-overlay">
+    {loading && <div className="spinner">Loading...</div>}
 
-      {!loading && error && <div className="error">{error}</div>}
+    {!loading && error && <div className="error">{error}</div>}
 
-      {!loading && weather && (
-        <div>
-          <h4>Weather in {weather.name}</h4>
-          <p>
-            {Math.round(weather.main.temp)}°C,{" "}
-            {weather.weather[0].description}
-          </p>
-          <img
-            src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-            alt="weather icon"
-          />
-        </div>
-      )}
-    </div>
-  );
-};
-
-WeatherWidget.propTypes = {
-  apiKey: PropTypes.string.isRequired,
+    {!loading && weather && (
+      <>
+        <h4>Weather in {weather.name}</h4>
+        <p>
+          {Math.round(weather.main.temp)}°C, {weather.weather[0].description}
+        </p>
+        <img
+          src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+          alt="weather icon"
+        />
+      </>
+    )}
+  </div>
+);
 };
 
 export default WeatherWidget;

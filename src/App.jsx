@@ -87,9 +87,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
               <source src={retroBikeVideo} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-            <div className="weather-overlay">
               <WeatherWidget apiKey={apiKey} />
-            </div>
             {/* ✅ Show Sign-Up Button if Not Logged In */}
             {!sessionStorage.getItem("isLoggedIn") && (
               <div className="auth-buttons">
