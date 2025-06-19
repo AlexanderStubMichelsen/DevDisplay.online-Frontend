@@ -37,6 +37,7 @@ jobs:
           echo "VITE_RAPIDAPI_KEY=${{ secrets.VITE_RAPIDAPI_KEY }}" >> .env.production
           echo "VITE_UNSPLASH_ACCESS_KEY=${{ secrets.VITE_UNSPLASH_ACCESS_KEY }}" >> .env.production
           echo "VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }}" >> .env.production
+          echo "VITE_WEATHER_API_KEY=${{ secrets.VITE_WEATHER_API_KEY }}" >> .env.production
 
       # Step 5: Build the project
       - name: Build the project
