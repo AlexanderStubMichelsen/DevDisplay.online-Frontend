@@ -15,7 +15,16 @@ const SavedImages = () => {
     const fetchImages = async () => {
       try {
         const data = await ImageFacade.getSavedImages();
-        setSavedImages(data);
+        // Calculate thumbHeight for each image
+        const thumbWidth = 500;
+        const imagesWithThumb = data.map((img) => ({
+          ...img,
+          thumbHeight:
+            img.width && img.height
+              ? Math.round(thumbWidth * (img.height / img.width))
+              : 0,
+        }));
+        setSavedImages(imagesWithThumb);
         if (data.length === 0) {
           setError("No saved images found.");
         }
@@ -75,10 +84,9 @@ const SavedImages = () => {
                 .filter(
                   (image) =>
                     image.title?.toLowerCase().includes(search.toLowerCase()) ||
-                    image.photographer
-                      ?.toLowerCase()
-                      .includes(search.toLowerCase())
+                    image.photographer?.toLowerCase().includes(search.toLowerCase())
                 )
+                .sort((a, b) => (b.height / b.width) - (a.height / a.width)) // Sort by height/width ratio, highest first
                 .map((image) => (
                   <div key={image.id} className="image-card">
                     <a
@@ -92,15 +100,13 @@ const SavedImages = () => {
                         className="saved-image-item"
                       />
                     </a>
-
                     <button
                       type="button"
-                      className="delete-button"
+                      className="action-button"
                       onClick={() => handleDelete(image.id)}
                     >
                       Delete
                     </button>
-
                     <p>
                       <strong>{image.title}</strong>
                     </p>
