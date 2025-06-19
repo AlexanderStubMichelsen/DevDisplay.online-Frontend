@@ -52,6 +52,7 @@ const WeatherWidget = ({ apiKey }) => {
         console.log("API-KEY:", apiKey);
       } finally {
         setLoading(false);
+        console.log("API-KEY:", apiKey);
       }
     };
 
