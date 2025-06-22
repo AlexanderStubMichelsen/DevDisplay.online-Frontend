@@ -73,6 +73,7 @@ function NavBar() {
       );
 
       setIsLoggedIn(true);
+      sessionStorage.setItem("isLoggedIn", "true");
       setUserEmail(response.userDto.email);
       closeLoginModal();
       window.dispatchEvent(new Event("storage"));
