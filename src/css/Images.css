@@ -128,7 +128,7 @@ body {
 
 .action-button {
   background-color: rgba(85, 75, 75, 0.6);
-  box-shadow: 3px 3px rgb(121, 116, 116);
+  box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
   position: absolute;
   top: 8px;
   left: 8px;
@@ -144,10 +144,10 @@ body {
 }
 
 .action-button:hover {
-  background-color: rgb(104, 100, 100);
+  background-color: rgb(46, 13, 134);
   color: white;
   border: 1px solid black(104, 100, 100);
-  box-shadow: 3px 3px rgb(104, 100, 100);
+  box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
 }
 
 /* Section heading for saved images */
