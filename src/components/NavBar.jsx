@@ -89,13 +89,33 @@ function NavBar() {
 
   return (
     <>
-      <Navbar bg="dark" variant="dark" expand="md" className="sticky-top-navbar">
+      <Navbar
+        bg="dark"
+        variant="dark"
+        expand="md"
+        className="sticky-top-navbar"
+      >
         <Navbar.Brand href="/">DevDisplay</Navbar.Brand>
-        <Navbar.Toggle aria-controls="responsive-navbar-nav" onClick={handleNavToggle}>
+        <Navbar.Toggle
+          aria-controls="responsive-navbar-nav"
+          onClick={handleNavToggle}
+        >
           <FontAwesomeIcon icon={faBars} />
         </Navbar.Toggle>
-        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end" in={expanded}>
+        <Navbar.Collapse
+          id="responsive-navbar-nav"
+          className="justify-content-end"
+          in={expanded}
+        >
           <Nav className="ml-auto">
+            <Nav.Link
+              href="https://skraafoto.devdisplay.online"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setExpanded(false)}
+            >
+              Skraafoto
+            </Nav.Link>
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
@@ -126,7 +146,10 @@ function NavBar() {
                   {userEmail}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
-                  <LinkContainer to="/userpage" onClick={() => setExpanded(false)}>
+                  <LinkContainer
+                    to="/userpage"
+                    onClick={() => setExpanded(false)}
+                  >
                     <Dropdown.Item>User Page</Dropdown.Item>
                   </LinkContainer>
                   <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
@@ -153,7 +176,10 @@ function NavBar() {
                 placeholder="Email"
                 value={loginDataForm.email}
                 onChange={(e) =>
-                  setLoginDataForm((prev) => ({ ...prev, email: e.target.value }))
+                  setLoginDataForm((prev) => ({
+                    ...prev,
+                    email: e.target.value,
+                  }))
                 }
                 required
               />
@@ -163,7 +189,10 @@ function NavBar() {
                 placeholder="Password"
                 value={loginDataForm.password}
                 onChange={(e) =>
-                  setLoginDataForm((prev) => ({ ...prev, password: e.target.value }))
+                  setLoginDataForm((prev) => ({
+                    ...prev,
+                    password: e.target.value,
+                  }))
                 }
                 required
               />

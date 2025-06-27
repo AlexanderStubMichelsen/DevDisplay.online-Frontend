@@ -9,14 +9,16 @@ const Footer = () => {
         <div className="footer-section footer-about">
           <h4 className="footer-heading">About</h4>
           <p className="footer-text">
-            <strong>DevDisplay.online</strong> helps developers showcase
-            projects and fetch design inspiration from Unsplash.
+            <strong>DevDisplay.online</strong> helps me as a developer showcase
+            projects and users fetch design inspiration from Unsplash and other sources.
           </p>
         </div>
 
         <div className="footer-section footer-navigation">
           <h4 className="footer-heading">Navigation</h4>
           <ul className="footer-list">
+            <li><a href="https://skraafoto.devdisplay.online" target="_blank" rel="noopener noreferrer" className="footer-link">Skraafoto</a></li>
+            <li><a href="/" className="footer-link">Home</a></li>
             <li><a href="/images" className="footer-link">Images</a></li>
             <li><a href="/saved" className="footer-link">Saved</a></li>
             <li><a href="/youtube" className="footer-link">Youtube</a></li>
