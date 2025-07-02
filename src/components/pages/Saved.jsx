@@ -2,7 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../NavBar.jsx";
-import "../css/Images.css";
+import "../../css/Images.css";
 import Footer from "../Footer.jsx";
 
 const SavedImages = () => {

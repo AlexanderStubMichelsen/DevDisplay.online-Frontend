@@ -11,7 +11,7 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import "../css/YoutubeTrends.css"; // Import your CSS file
+import "../../css/YoutubeTrends.css"; // Import your CSS file
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 
