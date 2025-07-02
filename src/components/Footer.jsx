@@ -10,7 +10,7 @@ const Footer = () => {
           <h4 className="footer-heading">About</h4>
           <p className="footer-text">
             <strong>DevDisplay.online</strong> helps me as a developer showcase
-            projects and users fetch design inspiration from Unsplash and other sources.
+            projects..
           </p>
         </div>
 
@@ -70,6 +70,16 @@ const Footer = () => {
         <div className="footer-section footer-connect">
             <h4 className="footer-heading">Code</h4>
             <ul className="footer-list">
+              <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/skraafoto.devdisplay"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Skraafoto
+              </a>
+            </li>
             <li>
               <a
                 href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend"
@@ -77,7 +87,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="footer-link"
               >
-                Frontend Code
+                Frontend
               </a>
             </li>
             <li>
@@ -87,7 +97,7 @@ const Footer = () => {
                 rel="noopener noreferrer"
                 className="footer-link"
               >
-                Backend Code
+                Backend
               </a>
             </li>
             <li>
