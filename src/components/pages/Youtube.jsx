@@ -1,8 +1,8 @@
 import React from "react";
 import { useState, useEffect, useCallback } from "react";
 import "../css/Youtube.css";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
 
 function Youtube() {
   const [searchQuery, setSearchQuery] = useState("trending music"); // ✅ Default query to load initial videos
