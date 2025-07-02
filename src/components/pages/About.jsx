@@ -1,8 +1,8 @@
 import React from "react";
-import "../css/About.css"; // Optional: Add a CSS file for styling
-import NavBar from "./NavBar"; // Import NavBar component
-import animationVideo from "../assets/animation.mp4"; // Import the video file
-import Footer from "./Footer";
+import "../../css/about"; // Optional: Add a CSS file for styling
+import NavBar from "../NavBar"; // Import NavBar component
+import animationVideo from "../../assets/animation.mp4"; // Import the video file
+import Footer from "../Footer";
 
 const About = () => {
   return (

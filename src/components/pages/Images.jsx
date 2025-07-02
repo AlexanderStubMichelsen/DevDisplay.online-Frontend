@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import "../css/Images.css";
-import NavBar from "./NavBar";
-import ImageFacade from "../util/api/ImageFacade.js";
-import Footer from "./Footer";
+import "../../css/Images.css";
+import NavBar from "../NavBar.jsx";
+import ImageFacade from "../../util/api/ImageFacade.js";
+import Footer from "../Footer.jsx";
 
 function Images() {
   const [imageList, setImageList] = useState([]);

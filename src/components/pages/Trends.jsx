@@ -12,8 +12,8 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "../css/YoutubeTrends.css"; // Import your CSS file
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 

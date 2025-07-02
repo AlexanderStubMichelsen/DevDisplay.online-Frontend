@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import apiFacade from "../util/api/UserFacade";
-import NavBar from "./NavBar";
-import Footer from "./Footer";
+import apiFacade from "../../util/api/UserFacade";
+import NavBar from "../NavBar";
+import Footer from "../Footer";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button } from "react-bootstrap";
 

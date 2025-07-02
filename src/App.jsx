@@ -8,6 +8,7 @@ import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
 import Footer from "./components/Footer.jsx"; // ✅ Import Footer
 import WeatherWidget from "./components/WeatherWidget.jsx"; // ✅ Add this at the top
+import ScrollIndicator from "./components/ScrollIndicator.jsx"; // ✅ Import ScrollIndicator
 
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -69,6 +70,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
         alert("Sign-Up Failed. Please try again.");
       }
     }
+
   };
 
   return (
@@ -87,7 +89,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
               <source src={retroBikeVideo} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-              <WeatherWidget apiKey={apiKey} />
+            <WeatherWidget apiKey={apiKey} />
             {/* ✅ Show Sign-Up Button if Not Logged In */}
             {!sessionStorage.getItem("isLoggedIn") && (
               <div className="auth-buttons">
@@ -160,6 +162,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
           </div>
         )}
       </div>
+      <ScrollIndicator /> {/* <-- Add ScrollIndicator here */}
       <Footer className="footer" /> {/* <-- Add Footer here */}
     </>
   );
