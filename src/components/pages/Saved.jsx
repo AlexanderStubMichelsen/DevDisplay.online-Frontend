@@ -138,6 +138,7 @@ const SavedImages = () => {
               )}
             </div>
           </div>
+          <Footer />
         </div>
       ) : (
         <div className="images-wrapper">
@@ -148,7 +149,6 @@ const SavedImages = () => {
           </div>
         </div>
       )}
-      <Footer />
     </>
   );
 };

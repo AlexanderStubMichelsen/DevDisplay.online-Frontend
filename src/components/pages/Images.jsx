@@ -108,7 +108,7 @@ function Images() {
 
           <div className="image-grid">
             {[...imageList]
-              .sort((a, b) => b.thumbHeight - a.thumbHeight) // Sort by displayed (thumbnail) height
+              .sort((a, b) => b.thumbHeight - a.thumbHeight)
               .map((image) => (
                 <div key={image.id} className="image-card">
                   <a href={image.url} target="_blank" rel="noopener noreferrer">
@@ -119,10 +119,8 @@ function Images() {
                     />
                   </a>
 
-                  {/* Title below the image */}
                   <p className="image-title">{image.alt}</p>
 
-                  {/* Photographer link */}
                   <p className="photographer">
                     From{" "}
                     <a

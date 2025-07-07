@@ -1,22 +1,39 @@
 .help-wrapper {
-  position: relative;
   width: 100vw;
-  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh + 100px); /* Force extra height */
 }
 
 .help {
-  position: relative;
   color: white;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100vw;
-  min-height: 100vh;
+  min-height: calc(100vh + 200px); /* Make content taller */
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
   padding: 2rem;
-  overflow: hidden;
+  padding-bottom: 300px; /* Huge bottom padding */
+  position: relative;
 }
 
-/* Add these styles for the video */
+.text-container {
+  width: 100%;
+  max-width: 800px;
+  text-align: left;
+  margin-left: 20%;
+  position: relative;
+  z-index: 2;
+  background: rgba(0,0,0,0.6);
+  padding: 2rem;
+  border-radius: 8px;
+  margin-bottom: 4rem; /* Increase bottom margin */
+}
+
 .video-bg {
   position: absolute;
   top: 0;
@@ -24,18 +41,12 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: 1; /* Change from -1 to 1 */
+  z-index: 1;
 }
 
-.text-container {
-  position: relative;
-  z-index: 2; /* Higher than video */
+/* Force footer to appear after content */
+.help-wrapper::after {
+  content: '';
+  height: 200px; /* Add invisible spacer */
   width: 100%;
-  max-width: 800px;
-  text-align: left;
-  /* // Move text right */
-  margin-left: 20%;
-  background: rgba(0,0,0,0.5); /* Add semi-transparent background to see text */
-  padding: 2rem;
-  border-radius: 8px;
 }
