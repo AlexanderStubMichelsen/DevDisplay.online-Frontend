@@ -9,9 +9,10 @@ on:
       - main
 
 jobs:
-  build:
+  # Job 1: Test and Build
+  test:
     runs-on: ubuntu-latest
-
+    
     steps:
       # Step 1: Check out the code
       - name: Checkout code
@@ -47,7 +48,28 @@ jobs:
       - name: Build the project
         run: npm run build
 
-      # Step 8: Deploy to server (only runs if all previous steps pass)
+      # Step 8: Upload build artifacts for deployment job
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: dist-files
+          path: dist/
+
+  # Job 2: Deploy (only runs if test job succeeds AND on main branch)
+  deploy:
+    needs: test  # Wait for test job to complete successfully
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Only deploy on main branch pushes
+    
+    steps:
+      # Step 1: Download build artifacts
+      - name: Download build artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: dist-files
+          path: dist/
+
+      # Step 2: Deploy to server
       - name: Deploy build folder to server
         uses: appleboy/ssh-action@v0.1.7
         with:
@@ -57,8 +79,8 @@ jobs:
             script: |
                 rm -rf ../var/www/html/*  # Clear the existing files
                 mkdir -p ../var/www/html  # Ensure the target directory exists
-                exit
       
+      # Step 3: Upload build folder
       - name: Upload build folder
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -69,6 +91,7 @@ jobs:
             target: ../var/www/html/
             strip_components: 1
       
+      # Step 4: Restart Apache
       - name: Restart Apache
         uses: appleboy/ssh-action@v0.1.7
         with:
