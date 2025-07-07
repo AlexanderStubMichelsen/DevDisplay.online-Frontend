@@ -36,11 +36,11 @@ function Help() {
                 </li>
                 <li>
                   <strong>Save Favorites:</strong> Create an account and click the
-                  "Save" button to bookmark images for later.
+                  &quot;Save&quot; button to bookmark images for later.
                 </li>
                 <li>
                   <strong>Manage Collection:</strong> View and organize your saved
-                  images in the "Saved Images" section.
+                  images in the &quot;Saved Images&quot; section.
                 </li>
               </ol>
             </section>
@@ -83,8 +83,6 @@ function Help() {
           </div>
         </div>
       </div>
-      {/* Add this spacer div */}
-      <div style={{ height: '300px', backgroundColor: 'transparent' }}></div>
       <Footer />
     </>
   );
