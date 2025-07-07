@@ -14,32 +14,37 @@ function Youtube() {
 
   const youtubeApiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
 
-  const fetchVideos = useCallback((pageToken = "") => {
-    setLoading(true);
-    setError(null);
+  const fetchVideos = useCallback(
+    (pageToken = "") => {
+      setLoading(true);
+      setError(null);
 
-    const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
-      searchQuery
-    )}&type=video&key=${youtubeApiKey}&maxResults=12&pageToken=${pageToken}`;
+      const apiUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${encodeURIComponent(
+        searchQuery
+      )}&type=video&key=${youtubeApiKey}&maxResults=12&pageToken=${pageToken}`;
 
-    fetch(apiUrl)
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch videos");
-        return response.json();
-      })
-      .then((data) => {
-        setSearchResults(
-          pageToken === "" ? data.items : (prevResults) => [...prevResults, ...data.items]
-        );
-        setNextPageToken(data.nextPageToken || null);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error(err);
-        setError("Error fetching search results. Try again.");
-        setLoading(false);
-      });
-  }, [searchQuery, youtubeApiKey]);
+      fetch(apiUrl)
+        .then((response) => {
+          if (!response.ok) throw new Error("Failed to fetch videos");
+          return response.json();
+        })
+        .then((data) => {
+          setSearchResults(
+            pageToken === ""
+              ? data.items
+              : (prevResults) => [...prevResults, ...data.items]
+          );
+          setNextPageToken(data.nextPageToken || null);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error(err);
+          setError("Error fetching search results. Try again.");
+          setLoading(false);
+        });
+    },
+    [searchQuery, youtubeApiKey]
+  );
 
   useEffect(() => {
     fetchVideos(); // Call fetchVideos on mount
@@ -55,19 +60,12 @@ function Youtube() {
       <NavBar />
       <div className="youtube-wrapper">
         <div className="youtube-container">
-          <video 
-            autoPlay 
-            loop 
-            muted 
-            playsInline 
-            className="video-bg"
-            onLoadStart={() => console.log("Video loading started")}
-            onCanPlay={() => console.log("Video can play")}
-            onError={(e) => console.log("Video error:", e)}
-          >
-            <source src={abstractbackground} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="video-container">
+            <video autoPlay loop muted playsInline className="video-bg">
+              <source src={abstractbackground} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h1 className="youtube-title"></h1>
 
           <form onSubmit={handleSearch} className="search-form">

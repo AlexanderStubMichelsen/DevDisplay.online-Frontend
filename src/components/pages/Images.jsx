@@ -85,19 +85,12 @@ function Images() {
       <NavBar />
       <div className="images-wrapper">
         <div className="images-container">
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="video-bg"
-            onLoadStart={() => console.log("Video loading started")}
-            onCanPlay={() => console.log("Video can play")}
-            onError={(e) => console.log("Video error:", e)}
-          >
-            <source src={abstractbackground} type="video/mp4" />
-            Your browser does not support the video tag.
-          </video>
+          <div className="video-container">
+            <video autoPlay loop muted playsInline className="video-bg">
+              <source src={abstractbackground} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <h1 className="images-title"></h1>
 
           <form onSubmit={handleSearch} className="search-form">
