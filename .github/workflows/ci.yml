@@ -31,7 +31,11 @@ jobs:
       - name: Run lint
         run: npm run lint
 
-        # Step 4.5: Inject .env.production from GitHub secrets
+      # Step 5: Run tests (REQUIRED before deployment)
+      - name: Run tests
+        run: npm test
+
+      # Step 6: Inject .env.production from GitHub secrets
       - name: Create .env.production file
         run: |
           echo "VITE_RAPIDAPI_KEY=${{ secrets.VITE_RAPIDAPI_KEY }}" >> .env.production
@@ -39,15 +43,11 @@ jobs:
           echo "VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }}" >> .env.production
           echo "VITE_WEATHER_API_KEY=${{ secrets.VITE_WEATHER_API_KEY }}" >> .env.production
 
-      # Step 5: Build the project
+      # Step 7: Build the project
       - name: Build the project
         run: npm run build
 
-      # Step 6: Run tests (if applicable)
-    #   - name: Run tests
-    #     run: npm test
-
-      # Step 7: Deploy to server
+      # Step 8: Deploy to server (only runs if all previous steps pass)
       - name: Deploy build folder to server
         uses: appleboy/ssh-action@v0.1.7
         with:
@@ -58,6 +58,7 @@ jobs:
                 rm -rf ../var/www/html/*  # Clear the existing files
                 mkdir -p ../var/www/html  # Ensure the target directory exists
                 exit
+      
       - name: Upload build folder
         uses: appleboy/scp-action@v0.1.7
         with:
@@ -67,6 +68,7 @@ jobs:
             source: dist/**
             target: ../var/www/html/
             strip_components: 1
+      
       - name: Restart Apache
         uses: appleboy/ssh-action@v0.1.7
         with:
