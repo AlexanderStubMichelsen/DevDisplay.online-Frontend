@@ -6,5 +6,10 @@ export default defineConfig({
   plugins: [
     react(),
     removeConsole()
-  ]
+  ],
+  test: {
+    environment: 'jsdom',
+    setupFiles: ['./src/setupTests.js'],
+    globals: true,
+  }
 });

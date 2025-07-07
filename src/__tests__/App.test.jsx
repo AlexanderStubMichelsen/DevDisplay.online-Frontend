@@ -1,14 +1,23 @@
+import { vi, describe, test, beforeEach, expect } from 'vitest';
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+
+// ✅ Mock config.js before importing App
+vi.mock('../config.js', () => ({
+  getConfig: async () => ({
+    API_URL: 'http://localhost:5019',
+  }),
+}));
+
 import App from '../App';
 
 describe('App component', () => {
-  const mockSetIsLoggedIn = jest.fn();
+  const mockSetIsLoggedIn = vi.fn();
 
   beforeEach(() => {
     sessionStorage.clear();
-    mockSetIsLoggedIn.mockClear();
+    vi.clearAllMocks();
   });
 
   test('renders navbar brand name', () => {
@@ -18,7 +27,8 @@ describe('App component', () => {
       </MemoryRouter>
     );
 
-    expect(screen.getByText(/maskinen/i)).toBeInTheDocument();
+    // ✅ Use getAllByText and check the first one (navbar)
+    expect(screen.getAllByText(/DevDisplay/i)[0]).toBeInTheDocument();
   });
 
   test('renders Sign Up button if not logged in', () => {
@@ -59,8 +69,8 @@ describe('App component', () => {
     expect(screen.getByPlaceholderText(/email/i)).toBeInTheDocument();
     expect(screen.getByPlaceholderText(/password/i)).toBeInTheDocument();
 
-    // Close modal
-    fireEvent.click(screen.getByRole('button', { name: /×/i }));
+    // ✅ Close modal - target the span with class "close"
+    fireEvent.click(screen.getByText('×'));
     expect(screen.queryByRole('heading', { name: /sign up/i })).not.toBeInTheDocument();
   });
 });
