@@ -3,6 +3,7 @@ import { useState, useEffect, useCallback } from "react";
 import "../../css/Youtube.css";
 import NavBar from "../NavBar";
 import Footer from "../Footer";
+import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
 
 function Youtube() {
   const [searchQuery, setSearchQuery] = useState("trending music"); // ✅ Default query to load initial videos
@@ -54,6 +55,19 @@ function Youtube() {
       <NavBar />
       <div className="youtube-wrapper">
         <div className="youtube-container">
+          <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="video-bg"
+            onLoadStart={() => console.log("Video loading started")}
+            onCanPlay={() => console.log("Video can play")}
+            onError={(e) => console.log("Video error:", e)}
+          >
+            <source src={abstractbackground} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
           <h1 className="youtube-title"></h1>
 
           <form onSubmit={handleSearch} className="search-form">

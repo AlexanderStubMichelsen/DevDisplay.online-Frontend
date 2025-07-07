@@ -1,5 +1,4 @@
 .youtube-container {
-  background-image: url("../assets/6NxGsO.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -69,7 +68,7 @@
   text-align: center;
   font-size: 16px;
   font-weight: bold;
-  color: #bdb0b0;
+  color: black;
   margin: 8px 0;
   border-radius: 5px;
   padding: 10px;
@@ -107,6 +106,7 @@
   border: 1px solid #FFFFFF;
   border-radius: 5px;
   transition: background-color 0.3s ease;
+  z-index: 1;
 }
 
 .load-more:hover,
@@ -134,6 +134,7 @@
   justify-content: center;
   align-items: center; /* ✅ Ensures vertical centering */
   margin: 0 auto 20px auto; /* ✅ Centers horizontally */
+  z-index: 1;
 }
 
 .youtube-title {

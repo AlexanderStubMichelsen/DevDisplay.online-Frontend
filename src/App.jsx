@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/NavBar.jsx";
-import retroBikeVideo from "./assets/28531-370317126.mp4";
+import abstractbackground from "./assets/0_Abstract_Background_3840x2160.mp4";
 import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
 import Footer from "./components/Footer.jsx"; // ✅ Import Footer
@@ -86,7 +86,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
           {/* ✅ Video Background */}
           <div className="video-container">
             <video autoPlay loop muted playsInline className="video-bg">
-              <source src={retroBikeVideo} type="video/mp4" />
+              <source src={abstractbackground} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
             <WeatherWidget apiKey={apiKey} />

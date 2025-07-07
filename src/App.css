@@ -101,6 +101,7 @@ footer {
   display: flex;
   gap: 20px;
   width: 300px;
+  z-index: 2;
 }
 
 .auth-buttons button {

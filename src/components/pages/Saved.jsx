@@ -4,6 +4,7 @@ import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../NavBar.jsx";
 import "../../css/Images.css";
 import Footer from "../Footer.jsx";
+import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
 
 const SavedImages = () => {
   const [savedImages, setSavedImages] = useState([]);
@@ -56,6 +57,19 @@ const SavedImages = () => {
       {sessionStorage.getItem("isLoggedIn") === "true" ? (
         <div className="images-wrapper">
           <div className="images-container">
+            <video
+              autoPlay
+              loop
+              muted
+              playsInline
+              className="video-bg"
+              onLoadStart={() => console.log("Video loading started")}
+              onCanPlay={() => console.log("Video can play")}
+              onError={(e) => console.log("Video error:", e)}
+            >
+              <source src={abstractbackground} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
             <h1 className="images-title"></h1>
             <form
               onSubmit={(e) => e.preventDefault()}
@@ -84,9 +98,11 @@ const SavedImages = () => {
                 .filter(
                   (image) =>
                     image.title?.toLowerCase().includes(search.toLowerCase()) ||
-                    image.photographer?.toLowerCase().includes(search.toLowerCase())
+                    image.photographer
+                      ?.toLowerCase()
+                      .includes(search.toLowerCase())
                 )
-                .sort((a, b) => (b.height / b.width) - (a.height / a.width)) // Sort by height/width ratio, highest first
+                .sort((a, b) => b.height / b.width - a.height / a.width) // Sort by height/width ratio, highest first
                 .map((image) => (
                   <div key={image.id} className="image-card">
                     <a

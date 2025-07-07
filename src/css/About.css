@@ -7,10 +7,10 @@
     opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
     align-items: center;
     justify-content: center;
+    z-index: 2;
   }
 
 .about {
-    background-image: url("../assets/6NxGsO.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

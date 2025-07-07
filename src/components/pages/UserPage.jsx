@@ -6,6 +6,7 @@ import apiFacade from "../../util/api/UserFacade";
 import Footer from "../Footer";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
 
 const UserPage = () => {
   const [user, setUser] = useState({
@@ -64,6 +65,12 @@ const UserPage = () => {
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">
+          <div className="video-container">
+            <video autoPlay loop muted playsInline className="video-bg">
+              <source src={abstractbackground} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <div className="user-page">
             <h1>User Information</h1>
             {message && <p className="feedback">{message}</p>}
@@ -113,7 +120,7 @@ const UserPage = () => {
                     <Button variant="outline-secondary">Return</Button>
                   </LinkContainer>
                 </Col>
-                <Col xs={12} md={6} className="mb-3 d-flex flex-column gap-2">  
+                <Col xs={12} md={6} className="mb-3 d-flex flex-column gap-2">
                   <LinkContainer to="/deleteuser">
                     <Button variant="outline-danger">Delete User</Button>
                   </LinkContainer>

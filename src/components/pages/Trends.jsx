@@ -12,6 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "../../css/YoutubeTrends.css"; // Import your CSS file
+import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
 import NavBar from "../NavBar";
 import Footer from "../Footer";
 
@@ -73,70 +74,76 @@ export default function YouTubeTrends() {
 
   return (
     <>
-    <div className="youtube-trends-bg">
-      <NavBar />
-      <div className="youtube-trends-wrapper">
-      <div className="youtube-trends">
-        <h1 className="text-2xl font-bold mb-4">YouTube Trends Analyzer</h1>
+      <div className="youtube-trends-bg">
+        <NavBar />
+        <div className="youtube-trends-wrapper">
+          <div className="youtube-trends">
+            <div className="video-container">
+              <video autoPlay loop muted playsInline className="video-bg">
+                <source src={abstractbackground} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+            <h1 className="text-2xl font-bold mb-4">YouTube Trends Analyzer</h1>
 
-        <div className="flex gap-4 mb-6 flex-wrap">
-          <select
-            className="border p-2 rounded"
-            value={selectedCountry}
-            onChange={(e) => setSelectedCountry(e.target.value)}
-          >
-            {countries.map((c) => (
-              <option key={c.code} value={c.code}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+            <div className="flex gap-4 mb-6 flex-wrap">
+              <select
+                className="border p-2 rounded"
+                value={selectedCountry}
+                onChange={(e) => setSelectedCountry(e.target.value)}
+              >
+                {countries.map((c) => (
+                  <option key={c.code} value={c.code}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
 
-          <select
-            className="border p-2 rounded"
-            value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
-          >
-            {categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.name}
-              </option>
-            ))}
-          </select>
+              <select
+                className="border p-2 rounded"
+                value={selectedCategory}
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                {categories.map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <ResponsiveContainer width="100%" height={300}>
+              <LineChart data={videos}>
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis dataKey="date" />
+                <YAxis />
+                <Tooltip
+                  contentStyle={{
+                    background: "rgba(0,0,0,0.0)",
+                    border: "none",
+                    color: "#fff",
+                  }}
+                  itemStyle={{
+                    color: "#fff",
+                  }}
+                  formatter={(value) => [
+                    `${value.toLocaleString()} views`,
+                    "Views",
+                  ]}
+                  labelFormatter={(label, payload) => {
+                    if (payload && payload.length > 0) {
+                      return `${label} — ${payload[0].payload.title}`;
+                    }
+                    return label;
+                  }}
+                />
+                <Line type="monotone" dataKey="views" stroke="#8884d8" />
+              </LineChart>
+            </ResponsiveContainer>
+          </div>
         </div>
-
-        <ResponsiveContainer width="100%" height={300}>
-          <LineChart data={videos}>
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="date" />
-            <YAxis />
-            <Tooltip
-              contentStyle={{
-                background: "rgba(0,0,0,0.0)",
-                border: "none",
-                color: "#fff",
-              }}
-              itemStyle={{
-                color: "#fff",
-              }}
-              formatter={(value) => [
-                `${value.toLocaleString()} views`,
-                "Views",
-              ]}
-              labelFormatter={(label, payload) => {
-                if (payload && payload.length > 0) {
-                  return `${label} — ${payload[0].payload.title}`;
-                }
-                return label;
-              }}
-            />
-            <Line type="monotone" dataKey="views" stroke="#8884d8" />
-          </LineChart>
-        </ResponsiveContainer>
       </div>
-    </div>
-    </div>
-    <Footer />
+      <Footer />
     </>
   );
 }

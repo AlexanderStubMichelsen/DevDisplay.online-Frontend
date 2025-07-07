@@ -6,6 +6,7 @@ import NavBar from "../NavBar";
 import Footer from "../Footer";
 import { Container, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
+import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -48,6 +49,12 @@ const ChangePassword = () => {
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">
+          <div className="video-container">
+            <video autoPlay loop muted playsInline className="video-bg">
+              <source src={abstractbackground} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <div className="user-page">
             <h1>Change Password</h1>
             {message && <p className="feedback">{message}</p>}

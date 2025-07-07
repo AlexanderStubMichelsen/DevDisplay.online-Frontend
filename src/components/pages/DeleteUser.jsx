@@ -5,6 +5,7 @@ import NavBar from "../NavBar";
 import Footer from "../Footer";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button } from "react-bootstrap";
+import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
 
 const DeleteUser = () => {
   const [email, setEmail] = useState("");
@@ -46,6 +47,12 @@ const DeleteUser = () => {
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">
+          <div className="video-container">
+            <video autoPlay loop muted playsInline className="video-bg">
+              <source src={abstractbackground} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
           <div className="user-page">
             <h1>Delete User Account</h1>
             {message && <p className="feedback">{message}</p>}
