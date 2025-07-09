@@ -92,10 +92,21 @@ footer {
   z-index: -1;
 }
 
+.video-container {
+  margin-top: 60px; /* Adjust based on your navbar height */
+}
+
+.weather-widget {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+}
+
 /* Auth Buttons */
 .auth-buttons {
   position: absolute;
-  top: 50%;
+  top: 30%;
   left: 50%;
   transform: translate(-85%, -50%);
   display: flex;
