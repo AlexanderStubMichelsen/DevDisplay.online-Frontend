@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NavBar from "../NavBar";
-import Footer from "../Footer";
-import "../../css/NoMatch.css";
+import NavBar from "../modules/NavBar";
+import Footer from "../modules/Footer";
+import "../../css/pages/NoMatch.css";
 import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4";
 
 const NoMatch = () => {

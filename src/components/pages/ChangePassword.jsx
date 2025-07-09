@@ -2,8 +2,8 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import apiFacade from "../../util/api/UserFacade";
-import NavBar from "../NavBar";
-import Footer from "../Footer";
+import NavBar from "../modules/NavBar";
+import Footer from "../modules/Footer";
 import { Container, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file

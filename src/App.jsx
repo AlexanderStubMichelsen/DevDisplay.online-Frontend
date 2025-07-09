@@ -2,13 +2,13 @@ import React from "react"; // ✅ Required for testing
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
-import NavBar from "./components/NavBar.jsx";
+import NavBar from "./components/modules/NavBar.jsx";
 import abstractbackground from "./assets/0_Abstract_Background_3840x2160.mp4";
 import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
-import Footer from "./components/Footer.jsx"; // ✅ Import Footer
-import WeatherWidget from "./components/WeatherWidget.jsx"; // ✅ Add this at the top
-import ScrollIndicator from "./components/ScrollIndicator.jsx"; // ✅ Import ScrollIndicator
+import Footer from "./components/modules/Footer.jsx"; // ✅ Import Footer
+import WeatherWidget from "./components/modules/WeatherWidget.jsx"; // ✅ Add this at the top
+import ScrollIndicator from "./components/modules/ScrollIndicator.jsx"; // ✅ Import ScrollIndicator
 
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
@@ -133,7 +133,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
                 <input
                   type="email"
                   name="email"
-                  placeholder="Email"
+                  placeholder="Email(Does not have to be valid)"
                   value={signupData.email}
                   onChange={(e) =>
                     setSignupData({

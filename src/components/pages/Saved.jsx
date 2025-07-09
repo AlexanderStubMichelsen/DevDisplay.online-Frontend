@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import ImageFacade from "../../util/api/ImageFacade.js";
-import NavBar from "../NavBar.jsx";
-import "../../css/Images.css";
-import Footer from "../Footer.jsx";
+import NavBar from "../modules/NavBar.jsx";
+import "../../css/pages/Images.css";
+import Footer from "../modules/Footer.jsx";
 import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
 
 const SavedImages = () => {

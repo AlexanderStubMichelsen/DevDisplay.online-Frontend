@@ -5,8 +5,8 @@ import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
-import "../css/NavBar.css";
-import apiFacade from "../util/api/UserFacade.js";
+import "../../css/modules/NavBar.css";
+import apiFacade from "../../util/api/UserFacade.js";
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);

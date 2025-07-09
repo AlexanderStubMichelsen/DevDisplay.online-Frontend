@@ -1,7 +1,7 @@
 import React from "react";
-import "../../css/Help.css";
-import NavBar from "../NavBar";
-import Footer from "../Footer";
+import "../../css/pages/Help.css";
+import NavBar from "../modules/NavBar";
+import Footer from "../modules/Footer";
 import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4";
 
 function Help() {

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "../css/ScrollIndicator.css"; // 👈 We'll define styles next
+import "../../css/modules/ScrollIndicator.css"; // 👈 We'll define styles next
 
 const ScrollIndicator = () => {
   const [hidden, setHidden] = useState(false);

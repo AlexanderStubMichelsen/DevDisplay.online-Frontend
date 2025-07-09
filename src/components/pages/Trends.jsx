@@ -11,10 +11,10 @@ import {
   Tooltip,
   ResponsiveContainer,
 } from "recharts";
-import "../../css/YoutubeTrends.css"; // Import your CSS file
+import "../../css/pages/YoutubeTrends.css"; // Import your CSS file
 import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
-import NavBar from "../NavBar";
-import Footer from "../Footer";
+import NavBar from "../modules/NavBar";
+import Footer from "../modules/Footer";
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
