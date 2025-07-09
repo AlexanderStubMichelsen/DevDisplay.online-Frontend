@@ -46,6 +46,7 @@ body {
   gap: 15px;
   justify-content: center;
   margin: 0 auto; /* ✅ Centers the grid */;
+  color: #753f3f !important; /* Changed from white to #753f3f */
 }
 
 .image-grid img {

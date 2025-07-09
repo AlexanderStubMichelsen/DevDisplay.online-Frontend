@@ -114,15 +114,15 @@ const UserPage = () => {
               <Row>
                 <Col xs={12} md={6} className="mb-3 d-flex flex-column gap-2">
                   <LinkContainer to="/changepassword">
-                    <Button variant="outline-primary">Change Password</Button>
+                    <Button className="highlight-button" variant="outline-primary">Change Password</Button>
                   </LinkContainer>
                   <LinkContainer to="/">
-                    <Button variant="outline-secondary">Return</Button>
+                    <Button className="highlight-button" variant="outline-secondary">Return</Button>
                   </LinkContainer>
                 </Col>
                 <Col xs={12} md={6} className="mb-3 d-flex flex-column gap-2">
                   <LinkContainer to="/deleteuser">
-                    <Button variant="outline-danger">Delete User</Button>
+                    <Button className="highlight-button" variant="outline-danger">Delete User</Button>
                   </LinkContainer>
                 </Col>
               </Row>

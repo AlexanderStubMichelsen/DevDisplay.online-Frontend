@@ -7,6 +7,7 @@ import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
 import "../css/NavBar.css";
 import apiFacade from "../util/api/UserFacade.js";
+import logo from "../assets/logo.svg"; // Import your SVG logo
 
 function NavBar() {
   const [expanded, setExpanded] = useState(false);
@@ -95,7 +96,17 @@ function NavBar() {
         expand="md"
         className="sticky-top-navbar"
       >
-        <Navbar.Brand href="/">DevDisplay</Navbar.Brand>
+        {/* Replace the text brand with SVG logo */}
+        <Navbar.Brand href="/">
+          <img
+            src={logo}
+            alt="DevDisplay"
+            width="120"
+            height="120"
+            style={{ cursor: 'pointer' }}
+          />
+        </Navbar.Brand>
+        
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={handleNavToggle}

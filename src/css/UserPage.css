@@ -20,6 +20,8 @@
     color: white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
+    background-color: #dabe4f;
+
 
   }
   
@@ -30,18 +32,22 @@
   
   .user-form .form-group {
     margin-bottom: 15px;
+    background-color: #dabe4f;
+
   }
   
   .user-form .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: #753f3f !important;
+    background-color: #dabe4f;
   }
   
   .user-form .form-control {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #753f3f;
     border-radius: 4px;
   }
   
@@ -54,6 +60,7 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    border: 1px solid #753f3f;
   }
   
   .user-form .btn:hover {
@@ -66,4 +73,8 @@
     font-weight: bold;
     margin-top: 10px;
     display: inline-block;
+  }
+
+  .highlight-button {
+    width: 123%;
   }
