@@ -19,7 +19,7 @@
   position: sticky;   /* Make it sticky */
   top: 0;             /* Stick to the top */
   width: 100%;
-  background-color: #52514D !important; /* Use hex or rgb, no quotes */
+  background-color: #dabe4f !important; /* Use hex or rgb, no quotes */
   border-bottom: 1px solid #dee2e6; /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
 }
@@ -47,7 +47,7 @@
 
 .sticky-top-navbar .navbar-brand,
 .sticky-top-navbar .nav-link {
-  color: #fff !important;
+  color: #753f3f !important;
 }
 
 .sticky-top-navbar .navbar-brand:hover,
@@ -70,7 +70,7 @@
   justify-content: center;
   align-items: center;
   z-index: 2000;
-  color: #fff; /* white text */
+  color: #753f3f; /* white text */
 }
 
 .modal-content {
