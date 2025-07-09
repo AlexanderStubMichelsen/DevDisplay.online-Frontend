@@ -1,12 +1,12 @@
 .footer {
   width: 100%;
-  color: white;
+  color: #753f3f; /* Dark text color */
   padding: 2rem 1rem;
   font-size: 0.9rem;
   margin-top: auto;
   z-index: 2;
   border-top: 1px solid #dee2e6; /* Light border color */
-  background-color: #52514D; /* Dark background color */
+  background-color: #dabe4f; /* Dark background color */
 }
 
 .footer-container {
@@ -27,7 +27,7 @@
 
 .footer-heading {
   margin-bottom: 0.5rem;
-  color: #00bfff;
+  color: #753f3f;
 }
 
 .footer-list {
@@ -37,7 +37,7 @@
 }
 
 .footer-link {
-  color: #ffffff;
+  color: #753f3f;
   text-decoration: none;
   transition: color 0.2s;
 }
