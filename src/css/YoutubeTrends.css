@@ -50,6 +50,8 @@
   
   .p-2 {
     padding: 0.5rem;
+    background-color: #dabe4f !important; /* Changed from blue to #dabe4f */
+    color: #753f3f !important; /* Changed from white to #753f3f */
   }
   
   .rounded {

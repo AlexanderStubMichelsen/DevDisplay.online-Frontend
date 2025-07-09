@@ -45,7 +45,7 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* ✅ Proper grid */
   gap: 15px;
   justify-content: center;
-  margin: 0 auto; /* ✅ Centers the grid */
+  margin: 0 auto; /* ✅ Centers the grid */;
 }
 
 .image-grid img {
@@ -125,14 +125,19 @@ body {
 }
 
 .load-more-btn {
-  background-color: blue;
-  color: #ffffff;
+  background-color: #dabe4f !important;
+  color: #ffffff !important;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.2s;
+}
+
+.load-more-btn:hover {
+  background-color: #753f3f !important;
+  color: #dabe4f !important; /* Change to a lighter shade on hover */
 }
 
 .action-button {
