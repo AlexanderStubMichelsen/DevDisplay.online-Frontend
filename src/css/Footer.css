@@ -5,7 +5,7 @@
   font-size: 0.9rem;
   margin-top: auto;
   z-index: 2;
-  border-top: 1px solid #dee2e6; /* Light border color */
+  border-top: 1px solid #753f3f; /* Light border color */
   background-color: #dabe4f; /* Dark background color */
 }
 
@@ -43,7 +43,7 @@
 }
 
 .footer-link:hover {
-  color: #00bfff;
+  color: black;
   text-decoration: underline;
 }
 
@@ -52,4 +52,14 @@
   margin-top: 2rem;
   font-size: 0.85rem;
   color: #753f3f;
+}
+
+.footer-text:hover {
+  color: rgb(175, 140, 140); /* Dark text color */
+  margin: 0.5rem 0;
+}
+
+.footer-text a:hover {
+  color: #82808d !important;
+  text-decoration: none;
 }

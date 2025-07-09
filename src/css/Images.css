@@ -104,14 +104,14 @@ body {
   font-size: 1.1rem;
   outline: none;
   transition: border-color 0.2s;
-  background: #222;
-  color: #fff;
+  background: #dabe4f !important;
+  color: #753f3f !important; /* Changed from white to #753f3f */
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .search-input::placeholder {
   margin-bottom: 20px;
-  color: white;
+  color: #753f3f;
 }
 
 .search-input:focus {
@@ -126,7 +126,7 @@ body {
 
 .load-more-btn {
   background-color: #dabe4f !important;
-  color: #ffffff !important;
+  color: #753f3f !important;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;

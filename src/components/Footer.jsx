@@ -9,7 +9,9 @@ const Footer = () => {
         <div className="footer-section footer-about">
           <h4 className="footer-heading">About</h4>
           <p className="footer-text">
-            <strong>DevDisplay.online</strong> helps me as a developer showcase
+            <strong>
+              <a href="/" className="footer-link">DevDisplay.online</a>
+            </strong> helps me as a developer showcase<br />
             projects..
           </p>
         </div>
