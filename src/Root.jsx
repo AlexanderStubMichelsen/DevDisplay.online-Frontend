@@ -14,6 +14,7 @@ import About from "./components/pages/About.jsx";
 import PrivacyPolicyTetris from "./components/google_play_console/PrivacyPolicyTetris.jsx"; // Import Privacy Policy component
 import PrivacyPolicyOrganizedNotes from "./components/google_play_console/PrivacyPolicyOrganized.jsx";
 import DeleteUser from "./components/pages/DeleteUser.jsx";
+import Board from "./components/pages/Board.jsx";
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -23,6 +24,7 @@ const Root = () => {
       <Route>
         <Route path="/" element={<App setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
         <>
+          <Route path="board" element={<Board />} />
           <Route path="images" element={<Images />} />
           <Route path="youtube" element={<Youtube />} />
           <Route path="trends" element={<Trends />} />
