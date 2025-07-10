@@ -184,16 +184,16 @@ class BoardPostFacade {
   }
 
   // Helper method to check if board post exists
-  async boardPostExists(id) {
-    try {
-      return true;
-    } catch (error) {
-      if (error.message.includes("not found")) {
-        return false;
-      }
-      throw error;
-    }
-  }
+//   async boardPostExists(id) {
+//     try {
+//       return true;
+//     } catch (error) {
+//       if (error.message.includes("not found")) {
+//         return false;
+//       }
+//       throw error;
+//     }
+//   }
 }
 
 // Export a singleton instance

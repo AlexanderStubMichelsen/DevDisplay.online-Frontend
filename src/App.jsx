@@ -9,7 +9,6 @@ import PropTypes from "prop-types";
 import Footer from "./components/modules/Footer.jsx"; // ✅ Import Footer
 import WeatherWidget from "./components/modules/WeatherWidget.jsx"; // ✅ Add this at the top
 import ScrollIndicator from "./components/modules/ScrollIndicator.jsx"; // ✅ Import ScrollIndicator
-import Board from "./components/pages/Board.jsx";
 
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
