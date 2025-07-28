@@ -6,7 +6,8 @@ import apiFacade from "../../util/api/UserFacade";
 import Footer from "../modules/Footer";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
+import ScrollIndicator from "../modules/ScrollIndicator";
 
 const UserPage = () => {
   const [user, setUser] = useState({
@@ -131,6 +132,7 @@ const UserPage = () => {
         </div>
       </div>
       <Footer />
+      <ScrollIndicator />
     </>
   );
 };

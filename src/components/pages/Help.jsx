@@ -2,7 +2,8 @@ import React from "react";
 import "../../css/pages/Help.css";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4";
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
+import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 function Help() {
   return (
@@ -135,6 +136,7 @@ function Help() {
         </div>
         <Footer />
       </div>
+      <ScrollIndicator />
     </>
   );
 }

@@ -12,9 +12,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "../../css/pages/YoutubeTrends.css"; // Import your CSS file
-import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
+import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 const API_KEY = import.meta.env.VITE_YOUTUBE_API_KEY;
 
@@ -144,6 +145,7 @@ export default function YouTubeTrends() {
         </div>
       </div>
       <Footer />
+      <ScrollIndicator />
     </>
   );
 }

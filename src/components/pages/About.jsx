@@ -3,7 +3,8 @@ import "../../css/pages/About.css"; // Optional: Add a CSS file for styling
 import NavBar from "../modules/NavBar"; // Import NavBar component
 import animationVideo from "../../assets/animation.mp4"; // Import the video file
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4"; // Import the video file
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
+import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 const About = () => {
   return (
@@ -37,6 +38,7 @@ const About = () => {
         </div>
       </div>
       <Footer />
+      <ScrollIndicator />
     </>
   );
 };

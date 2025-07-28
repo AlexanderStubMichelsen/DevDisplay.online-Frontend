@@ -1,6 +1,7 @@
 // src/components/Footer.jsx
 import React from "react";
 import "../../css/modules/Footer.css";
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Add video import
 
 const Footer = () => {
   return (

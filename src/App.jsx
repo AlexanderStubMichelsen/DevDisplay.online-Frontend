@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/modules/NavBar.jsx";
-import abstractbackground from "./assets/0_Abstract_Background_3840x2160.mp4";
+import abstractbackground from "./assets/202582-918431489_small.mp4";
 import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
 import Footer from "./components/modules/Footer.jsx"; // ✅ Import Footer

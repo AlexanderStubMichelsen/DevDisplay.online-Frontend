@@ -7,7 +7,9 @@
   z-index: 2;
   border-top: 1px solid #753f3f; /* Light border color */
   background-color: #dabe4f; /* Dark background color */
+  
 }
+
 
 .footer-container {
   display: flex;

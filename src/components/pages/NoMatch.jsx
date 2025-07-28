@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import "../../css/pages/NoMatch.css";
-import abstractbackground from "../../assets/0_Abstract_Background_3840x2160.mp4";
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
+import ScrollIndicator from "../modules/ScrollIndicator";
 
 const NoMatch = () => {
   return (
@@ -65,6 +66,7 @@ const NoMatch = () => {
         </div>
         <Footer />
       </div>
+      <ScrollIndicator />
     </>
   );
 };
