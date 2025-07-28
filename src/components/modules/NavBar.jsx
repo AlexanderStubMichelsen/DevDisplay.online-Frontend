@@ -100,7 +100,7 @@ function NavBar() {
           aria-controls="responsive-navbar-nav"
           onClick={handleNavToggle}
         >
-          <FontAwesomeIcon icon={faBars} />
+          
         </Navbar.Toggle>
         <Navbar.Collapse
           id="responsive-navbar-nav"
