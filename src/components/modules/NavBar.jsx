@@ -55,6 +55,7 @@ function NavBar() {
     setIsLoggedIn(false);
     setUserEmail("");
     window.dispatchEvent(new Event("storage"));
+    window.location.reload();
   };
 
   const handleLoginSubmit = async (e) => {
@@ -70,6 +71,7 @@ function NavBar() {
           name: response.userDto.name,
           token: response.token,
         })
+
       );
 
       setIsLoggedIn(true);
@@ -77,6 +79,8 @@ function NavBar() {
       setUserEmail(response.userDto.email);
       closeLoginModal();
       window.dispatchEvent(new Event("storage"));
+        window.location.reload();
+
     } catch (error) {
       alert("Login failed. Please check your email and password.");
     }

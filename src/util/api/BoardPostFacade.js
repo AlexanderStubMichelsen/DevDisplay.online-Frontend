@@ -3,7 +3,6 @@ import { getConfig } from "../../config.js";
 const API_URL_ENDPOINT = "boardposts";
 
 class BoardPostFacade {
-  
   // Get all board posts
   async getAllBoardPosts() {
     try {
@@ -58,11 +57,15 @@ class BoardPostFacade {
   // Create a new board post
   async createBoardPost(boardPost) {
     try {
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+      if (!token) throw new Error("Not authenticated");
+
       const config = await getConfig();
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
       const headers = {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       };
 
       const response = await fetch(API_URL, {
@@ -93,11 +96,15 @@ class BoardPostFacade {
   // Update an existing board post
   async updateBoardPost(id, boardPost) {
     try {
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+      if (!token) throw new Error("Not authenticated");
+      
       const config = await getConfig();
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
       const headers = {
         "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       };
 
       const response = await fetch(`${API_URL}/${id}`, {
@@ -131,6 +138,9 @@ class BoardPostFacade {
   // Delete a specific board post
   async deleteBoardPost(id) {
     try {
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+      if (!token) throw new Error("Not authenticated");
+
       const config = await getConfig();
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
@@ -156,44 +166,6 @@ class BoardPostFacade {
       throw error;
     }
   }
-
-  // Delete all board posts
-  async deleteAllBoardPosts() {
-    try {
-      const config = await getConfig();
-      const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
-
-      const headers = {
-        "Content-Type": "application/json",
-      };
-
-      const response = await fetch(API_URL, {
-        method: "DELETE",
-        headers,
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return true;
-    } catch (error) {
-      console.error("Error deleting all board posts:", error);
-      throw error;
-    }
-  }
-
-  // Helper method to check if board post exists
-//   async boardPostExists(id) {
-//     try {
-//       return true;
-//     } catch (error) {
-//       if (error.message.includes("not found")) {
-//         return false;
-//       }
-//       throw error;
-//     }
-//   }
 }
 
 // Export a singleton instance

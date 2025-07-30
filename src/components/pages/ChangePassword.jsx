@@ -6,7 +6,7 @@ import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import { Container, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/153813-806526698_small.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 const ChangePassword = () => {
