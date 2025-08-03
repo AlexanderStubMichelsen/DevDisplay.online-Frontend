@@ -141,7 +141,7 @@ body {
 }
 
 .action-button {
-  background-color: rgba(85, 75, 75, 0.6);
+  background-color: #dabe4f !important;
   box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
   position: absolute;
   top: 8px;
@@ -157,10 +157,15 @@ body {
   border-radius: 5px; /* Rounded corners for the button */
 }
 
+.image-stats {
+  color:  #dabe4f; /* Dark background color */
+
+}
+
 .action-button:hover {
-  background-color: rgb(46, 13, 134);
+  background-color: red !important; /* Add !important to override */
   color: white;
-  border: 1px solid black(104, 100, 100);
+  border: 1px solid black; /* Fix: removed "black(104, 100, 100)" - invalid syntax */
   box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
 }
 
@@ -185,7 +190,7 @@ body {
 .image-card p {
   font-size: 14px;
   margin: 8px 0;
-  color: #444;
+  color: #dabe4f; /* Dark background color */
 }
 
 .image-card a {
