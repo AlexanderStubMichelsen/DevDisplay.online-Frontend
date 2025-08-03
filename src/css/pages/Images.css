@@ -163,7 +163,7 @@ body {
 }
 
 .action-button:hover {
-  background-color: red !important; /* Add !important to override */
+  background-color: #753f3f !important; /* Add !important to override */
   color: white;
   border: 1px solid black; /* Fix: removed "black(104, 100, 100)" - invalid syntax */
   box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
