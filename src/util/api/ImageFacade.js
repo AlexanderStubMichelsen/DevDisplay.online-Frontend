@@ -80,16 +80,14 @@ const ImageFacade = {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
       if (!token) throw new Error("Not authenticated");
 
-      // Encode the imageUrl to handle special characters
-      const encodedImageUrl = encodeURIComponent(imageUrl);
-
-      // Use GET method to match your backend endpoint
-      const response = await fetch(`${API_URL}/image-user-count/${encodedImageUrl}`, {
-        method: "GET",
+      // Use POST with body - much more reliable for complex URLs
+      const response = await fetch(`${API_URL}/image-user-count`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify({ imageUrl: imageUrl }),
       });
 
       if (!response.ok) {
