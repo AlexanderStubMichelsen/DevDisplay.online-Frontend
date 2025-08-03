@@ -129,6 +129,12 @@ const SavedImages = () => {
                       />
                     </a>
                     
+                    <div className="image-stats">
+                      <span className="user-count">
+                        👥 {userCounts[image.imageUrl] || 0} users saved this
+                      </span>
+                    </div>
+                    
                     <button
                       type="button"
                       className="action-button"
