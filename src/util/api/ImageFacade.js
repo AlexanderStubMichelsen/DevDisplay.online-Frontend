@@ -77,14 +77,18 @@ const ImageFacade = {
       const config = await getConfig();
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+      if (!token) throw new Error("Not authenticated");
+
       // Encode the imageUrl to handle special characters
       const encodedImageUrl = encodeURIComponent(imageUrl);
 
-      // No authentication needed - this endpoint is [AllowAnonymous]
+      // Add authentication - this endpoint requires authorization
       const response = await fetch(`${API_URL}/image-user-count/${encodedImageUrl}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
         },
       });
 
