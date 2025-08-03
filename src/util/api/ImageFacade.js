@@ -80,29 +80,27 @@ const ImageFacade = {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
       if (!token) throw new Error("Not authenticated");
 
-      // Encode the imageUrl to handle special characters
-      const encodedImageUrl = encodeURIComponent(imageUrl);
-
-      // Add authentication - this endpoint requires authorization
-      const response = await fetch(`${API_URL}/image-user-count/${encodedImageUrl}`, {
-        method: "GET",
+      // Try POST instead of GET with URL parameter
+      const response = await fetch(`${API_URL}/image-user-count`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
+        body: JSON.stringify({ imageUrl: imageUrl })
       });
 
       if (!response.ok) {
         const errorText = await response.text();
         console.warn(`Failed to fetch user count for image ${imageUrl}:`, errorText);
-        return 0; // Return 0 if we can't get the count
+        return 0;
       }
 
       const count = await response.json();
       return count || 0;
     } catch (error) {
       console.error("Get User Count Error:", error);
-      return 0; // Return 0 on error
+      return 0;
     }
   },
 
