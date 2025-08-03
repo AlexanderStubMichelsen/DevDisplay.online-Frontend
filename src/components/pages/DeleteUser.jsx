@@ -5,7 +5,7 @@ import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import { LinkContainer } from "react-router-bootstrap";
 import { Button } from "react-bootstrap";
-import abstractbackground from "../../assets/153813-806526698_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/223661_medium.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 const DeleteUser = () => {

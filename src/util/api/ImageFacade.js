@@ -72,6 +72,36 @@ const ImageFacade = {
     return await response.json();
   },
 
+  getUserCountForImage: async (imageUrl) => {
+    try {
+      const config = await getConfig();
+      const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
+      // Encode the imageUrl to handle special characters
+      const encodedImageUrl = encodeURIComponent(imageUrl);
+
+      // No authentication needed - this endpoint is [AllowAnonymous]
+      const response = await fetch(`${API_URL}/image-user-count/${encodedImageUrl}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.warn(`Failed to fetch user count for image ${imageUrl}:`, errorText);
+        return 0; // Return 0 if we can't get the count
+      }
+
+      const count = await response.json();
+      return count || 0;
+    } catch (error) {
+      console.error("Get User Count Error:", error);
+      return 0; // Return 0 on error
+    }
+  },
+
   deleteSavedImage: async (imageId) => {
     try {
       const config = await getConfig(); // Must be inside an async function

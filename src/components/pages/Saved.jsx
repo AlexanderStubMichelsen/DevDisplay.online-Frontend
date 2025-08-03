@@ -4,7 +4,7 @@ import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../modules/NavBar.jsx";
 import "../../css/pages/Images.css";
 import Footer from "../modules/Footer.jsx";
-import abstractbackground from "../../assets/153813-806526698_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator.jsx";
 
 const SavedImages = () => {
@@ -12,6 +12,7 @@ const SavedImages = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
+  const [userCounts, setUserCounts] = useState({}); // Add state for user counts
 
   useEffect(() => {
     const fetchImages = async () => {
@@ -27,6 +28,23 @@ const SavedImages = () => {
               : 0,
         }));
         setSavedImages(imagesWithThumb);
+
+        // Fetch user counts for each image
+        const counts = {};
+        for (const image of imagesWithThumb) {
+          try {
+            const count = await ImageFacade.getUserCountForImage(image.imageUrl);
+            counts[image.imageUrl] = count;
+          } catch (err) {
+            console.error(
+              `Failed to fetch user count for image ${image.imageUrl}:`,
+              err
+            );
+            counts[image.imageUrl] = 0;
+          }
+        }
+        setUserCounts(counts);
+
         if (data.length === 0) {
           setError("No saved images found.");
         }
@@ -110,6 +128,7 @@ const SavedImages = () => {
                         className="saved-image-item"
                       />
                     </a>
+                    
                     <button
                       type="button"
                       className="action-button"

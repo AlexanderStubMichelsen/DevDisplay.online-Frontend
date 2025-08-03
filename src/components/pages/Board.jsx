@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/153813-806526698_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/202582-918431489_small.mp4"; // Import the video file
 import "../../css/pages/Board.css";
 import facade from "../../util/api/BoardPostFacade.js";
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
