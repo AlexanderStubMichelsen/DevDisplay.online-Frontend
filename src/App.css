@@ -98,7 +98,7 @@ footer {
 
 .weather-widget {
   position: absolute;
-  top: 250px;
+  top: 150px;
   right: 20px;
   z-index: 10;
 }
