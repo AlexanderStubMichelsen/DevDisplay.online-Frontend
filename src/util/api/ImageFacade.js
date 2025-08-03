@@ -80,14 +80,16 @@ const ImageFacade = {
       const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
       if (!token) throw new Error("Not authenticated");
 
-      // Try POST instead of GET with URL parameter
-      const response = await fetch(`${API_URL}/image-user-count`, {
-        method: "POST",
+      // Encode the imageUrl to handle special characters
+      const encodedImageUrl = encodeURIComponent(imageUrl);
+
+      // Use GET method to match your backend endpoint
+      const response = await fetch(`${API_URL}/image-user-count/${encodedImageUrl}`, {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ imageUrl: imageUrl })
       });
 
       if (!response.ok) {
@@ -129,6 +131,34 @@ const ImageFacade = {
     } catch (error) {
       console.error("Delete Image Error:", error);
       throw error;
+    }
+  },
+
+  getUsersWithImagesCount: async () => {
+    try {
+      const config = await getConfig();
+      const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
+
+      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
+      if (!token) throw new Error("Not authenticated");
+
+      const response = await fetch(`${API_URL}/users-with-images-count`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Failed to fetch users count");
+      }
+
+      return await response.json();
+    } catch (error) {
+      console.error("Get Users Count Error:", error);
+      return 0;
     }
   },
 };
