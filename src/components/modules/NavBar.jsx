@@ -113,13 +113,21 @@ function NavBar() {
         >
           <Nav className="ml-auto">
             <Nav.Link
-              href="https://skraafoto.devdisplay.online"
+              href="https://shop.devdisplay.online"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setExpanded(false)}
             >
-              Skraafoto
+              shop
             </Nav.Link>
+          <Nav.Link
+            href="https://skraafoto.devdisplay.online"
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={() => setExpanded(false)}
+          >
+            Skraafoto
+          </Nav.Link>
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
