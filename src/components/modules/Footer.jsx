@@ -84,6 +84,16 @@ const Footer = () => {
             </li>
             <li>
               <a
+                href="https://github.com/AlexanderStubMichelsen/WebShop"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                WebShop
+              </a>
+            </li>
+            <li>
+              <a
                 href="https://github.com/AlexanderStubMichelsen/DevDisplay.online-Frontend"
                 target="_blank"
                 rel="noopener noreferrer"

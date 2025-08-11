@@ -71,7 +71,6 @@ function NavBar() {
           name: response.userDto.name,
           token: response.token,
         })
-
       );
 
       setIsLoggedIn(true);
@@ -79,8 +78,7 @@ function NavBar() {
       setUserEmail(response.userDto.email);
       closeLoginModal();
       window.dispatchEvent(new Event("storage"));
-        window.location.reload();
-
+      window.location.reload();
     } catch (error) {
       alert("Login failed. Please check your email and password.");
     }
@@ -118,16 +116,16 @@ function NavBar() {
               rel="noopener noreferrer"
               onClick={() => setExpanded(false)}
             >
-              shop
+              Web Shop
             </Nav.Link>
-          <Nav.Link
-            href="https://skraafoto.devdisplay.online"
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={() => setExpanded(false)}
-          >
-            Skraafoto
-          </Nav.Link>
+            <Nav.Link
+              href="https://skraafoto.devdisplay.online"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setExpanded(false)}
+            >
+              Skraafoto
+            </Nav.Link>
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
