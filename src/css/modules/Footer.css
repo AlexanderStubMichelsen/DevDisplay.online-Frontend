@@ -41,12 +41,14 @@
 .footer-link {
   color: #753f3f;
   text-decoration: none;
-  transition: color 0.2s;
+  font-weight: inherit; /* Prevent font weight jump */
+  transition: color 0.2s, text-decoration 0.2s;
 }
 
 .footer-link:hover {
-  color: black;
+  color: #222;
   text-decoration: underline;
+  font-weight: inherit; /* Prevent font weight jump */
 }
 
 .footer-bottom {
@@ -58,7 +60,6 @@
 
 .footer-text:hover {
   color: rgb(175, 140, 140); /* Dark text color */
-  margin: 0.5rem 0;
 }
 
 .footer-text a:hover {

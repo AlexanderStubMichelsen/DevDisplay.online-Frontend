@@ -149,6 +149,9 @@ function NavBar() {
             <LinkContainer to="/about" onClick={() => setExpanded(false)}>
               <Nav.Link>About</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/contact" onClick={() => setExpanded(false)}>
+              <Nav.Link>Contact</Nav.Link>
+            </LinkContainer>
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>

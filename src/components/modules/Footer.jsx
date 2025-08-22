@@ -11,8 +11,11 @@ const Footer = () => {
           <p className="footer-text">
             <strong>
               <a href="/" className="footer-link">DevDisplay.online</a>
-            </strong> helps me as a developer showcase<br />
-            projects..
+            </strong>{" "}
+            helps me as a developer showcase projects.
+          </p>
+          <p className="footer-text">
+            If you want an offer for developing a website, please contact me.
           </p>
         </div>
 
