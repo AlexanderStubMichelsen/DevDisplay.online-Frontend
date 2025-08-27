@@ -75,16 +75,6 @@ const Footer = () => {
         <div className="footer-section footer-connect">
             <h4 className="footer-heading">Code</h4>
             <ul className="footer-list">
-              <li>
-              <a
-                href="https://github.com/AlexanderStubMichelsen/skraafoto.devdisplay"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="footer-link"
-              >
-                Skraafoto
-              </a>
-            </li>
             <li>
               <a
                 href="https://github.com/AlexanderStubMichelsen/WebShop"
@@ -93,6 +83,16 @@ const Footer = () => {
                 className="footer-link"
               >
                 WebShop
+              </a>
+            </li>
+             <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/skraafoto.devdisplay"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="footer-link"
+              >
+                Skraafoto
               </a>
             </li>
             <li>
