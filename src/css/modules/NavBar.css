@@ -130,3 +130,55 @@
   color: #fff;
 }
 
+/* Ensure the navbar links stack vertically under the brand when collapsed */
+.sticky-top-navbar .navbar-collapse {
+  width: 100%;
+}
+
+.sticky-top-navbar .navbar-collapse.collapse:not(.show) {
+  display: none;
+}
+
+.navbar-collapse.show {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;      /* Center items horizontally */
+  justify-content: flex-start;
+  width: 100%;
+  background: #dabe4f;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 1000;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+}
+
+.sticky-top-navbar .navbar-nav {
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* When collapsed (mobile), stack links in a column */
+.navbar-collapse.show .navbar-nav {
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.sticky-top-navbar .nav-link,
+.sticky-top-navbar .dropdown {
+  width: auto;              /* Let links size to content */
+  text-align: center;       /* Center text inside links */
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* Optional: Make sure the brand stays at the top */
+.sticky-top-navbar .navbar-brand {
+  margin-bottom: 0.5rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
