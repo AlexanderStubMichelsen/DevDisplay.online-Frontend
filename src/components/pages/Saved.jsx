@@ -4,7 +4,7 @@ import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../modules/NavBar.jsx";
 import "../../css/pages/Images.css";
 import Footer from "../modules/Footer.jsx";
-import abstractbackground from "../../assets/153450-805374052_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator.jsx";
 
 const SavedImages = () => {

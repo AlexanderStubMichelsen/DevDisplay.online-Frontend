@@ -4,7 +4,7 @@ import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
 import emailjs from "emailjs-com";
 import "../../css/pages/Contact.css";
-import abstractbackground from "../../assets/153450-805374052_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;

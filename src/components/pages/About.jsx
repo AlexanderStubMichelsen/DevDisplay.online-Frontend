@@ -5,7 +5,7 @@ import animationVideo from "../../assets/animation/animation.mp4"; // Import the
 import animationVideo2 from "../../assets/animation/invideo-ai-1080.mp4"; // Import the video file
 import animationVideo3 from "../../assets/animation/DevDisplay.online_free.mp4"; // Import the video file
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/153450-805374052_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 const About = () => {

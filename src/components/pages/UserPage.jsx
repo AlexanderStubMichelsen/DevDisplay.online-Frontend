@@ -6,7 +6,7 @@ import apiFacade from "../../util/api/UserFacade";
 import Footer from "../modules/Footer";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import abstractbackground from "../../assets/153450-805374052_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator";
 
 const UserPage = () => {

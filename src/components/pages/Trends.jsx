@@ -12,7 +12,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import "../../css/pages/YoutubeTrends.css"; // Import your CSS file
-import abstractbackground from "../../assets/153450-805374052_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component

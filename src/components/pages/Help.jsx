@@ -2,7 +2,7 @@ import React from "react";
 import "../../css/pages/Help.css";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/153450-805374052_small.mp4"; // Import the video file
+import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 function Help() {
