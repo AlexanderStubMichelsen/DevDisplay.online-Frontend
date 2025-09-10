@@ -155,6 +155,9 @@ function NavBar() {
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/art" onClick={() => setExpanded(false)}>
+              <Nav.Link>Art</Nav.Link>
+            </LinkContainer>
 
             {isLoggedIn ? (
               <Dropdown align="end">

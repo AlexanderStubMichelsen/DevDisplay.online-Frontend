@@ -16,6 +16,7 @@ import PrivacyPolicyOrganizedNotes from "./components/google_play_console/Privac
 import DeleteUser from "./components/pages/DeleteUser.jsx";
 import Board from "./components/pages/Board.jsx";
 import Contact from "./components/pages/Contact.jsx"; // Import Contact component
+import Art from "./components/pages/Art.jsx"; // Import Art component
 
 const Root = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,6 +37,7 @@ const Root = () => {
           <Route path="deleteuser" element={<DeleteUser />} />
           <Route path="about" element={<About />} />
           <Route path="contact" element={<Contact />} />
+          <Route path="art" element={<Art />} />
           <Route path="*" element={<NoMatch />} />
           <Route path="PrivacyPolicy" element={<PrivacyPolicyTetris />} />
           <Route path="privacyPolicyOrganizedNotes" element={<PrivacyPolicyOrganizedNotes />} />

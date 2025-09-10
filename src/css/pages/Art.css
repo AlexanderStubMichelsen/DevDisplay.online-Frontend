@@ -1,0 +1,182 @@
+/* Background video styles */
+.page-bg {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page-bg-video {
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  opacity: 0.22;
+  filter: blur(2px);
+  pointer-events: none;
+}
+
+/* Foreground content wrapper */
+.site-root {
+  position: relative;
+  z-index: 1;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+/* Main art page layout */
+.art-page-wrapper {
+  min-height: 100vh;
+  padding-bottom: 120px;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+/* Art container styles */
+
+
+/* Header styles */
+.art-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.art-title {
+  font-size: 2.2rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.art-subtitle {
+  font-size: 1.1rem;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+/* Gallery grid */
+.cad-art-gallery {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columns per row */
+  gap: 15px;
+  justify-items: center;
+  margin: 0 auto;
+}
+
+/* Responsive: 2 columns on medium screens, 1 on small screens */
+@media (max-width: 900px) {
+  .cad-art-gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .cad-art-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cad-art-item {
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 10px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 12px;
+  text-align: center;
+  max-width: 220px;
+  transition: box-shadow 0.2s;
+  position: relative;
+  z-index: 2;
+}
+
+.cad-art-item:hover {
+  box-shadow: 0 4px 24px rgba(0,0,0,0.15);
+}
+
+.cad-art-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 8px;
+  background: #eee;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+  cursor: pointer; /* Add pointer for modal click */
+}
+
+.cad-art-title {
+  font-weight: 500;
+  color: white;
+  font-size: 1rem;
+  margin-top: 4px;
+}
+
+/* Modal styles for full image view */
+.art-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.art-modal-content {
+  position: relative;
+  max-width: 90vw;
+  max-height: 90vh;
+  background: transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.art-modal-img {
+  max-width: 90vw;
+  max-height: 80vh;
+  border-radius: 12px;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.4);
+  background: #fff;
+}
+
+.art-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.art-modal-caption {
+  margin-top: 12px;
+  color: #fff;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Empty state */
+.art-empty {
+  text-align: center;
+  color: #753f3f;
+  font-size: 1.1rem;
+  margin: 2rem 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .art-container {
+    padding: 18px 8px;
+    max-width: 98vw;
+  }
+  .art-page-wrapper {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  .cad-art-gallery {
+    gap: 12px;
+  }
+}
