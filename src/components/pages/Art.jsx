@@ -68,7 +68,7 @@ const cadArtImages = [
 // ).map(([path, mod]) => ({ src: mod.default, alt: path.split("/").pop(), title: path.split("/").pop() }));
 // const images = autoImported.length ? autoImported : cadArtImages;
 
-const images = cadArtImages; // switch to the autoImported line above if you enable it
+// const images = cadArtImages; // switch to the autoImported line above if you enable it
 
 const Art = () => {
   const [modalImg, setModalImg] = useState(null);
