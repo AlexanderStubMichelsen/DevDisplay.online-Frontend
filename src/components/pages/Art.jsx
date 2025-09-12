@@ -32,7 +32,7 @@ const cadArtImages = [
   {
     src: New_truck_base,
     alt: "New Truck Base",
-    title: "3D Product Visualization — New Truck Base - Alex",
+    title: "3D Product Visualization — Truck Base - Alex",
   },
   {
     src: Velo_Snus,
@@ -42,12 +42,12 @@ const cadArtImages = [
   {
     src: Bicycle_assembly,
     alt: "Bicycle Assembly",
-    title: "3D Product Visualization — Bicycle Assembly - Alex",
+    title: "3D Product Visualization — Bicycle - Alex",
   },
   {
     src: fourTwo,
-    alt: "Tagv2",
-    title: "3D Product Visualization — Tagv2 - Alex",
+    alt: "4,2 drop through",
+    title: "3D Product Visualization — 4,2 drop through - Alex",
   },
   {
     src: signatureRawRender,
