@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
@@ -100,6 +101,13 @@ const ContactForm = () => {
 const Contact = () => {
   return (
     <>
+      <Helmet>
+        <title>Contact DevDisplay | Get in Touch with the Developer</title>
+        <meta
+          name="description"
+          content="Reach out to the DevDisplay creator via email or form to ask questions or share feedback."
+        />
+      </Helmet>
       <NavBar />
       <div className="contact-page-wrapper">
         <ContactForm />

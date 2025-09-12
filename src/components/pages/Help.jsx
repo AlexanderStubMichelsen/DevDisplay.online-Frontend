@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import "../../css/pages/Help.css";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
@@ -8,6 +9,13 @@ import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndica
 function Help() {
   return (
     <>
+      <Helmet>
+        <title>DevDisplay Help Center | User Guide & Skraafoto Tips</title>
+        <meta
+          name="description"
+          content="Find step-by-step guidance for using DevDisplay, including image search, saving content, and Zone Kort integration."
+        />
+      </Helmet>
       <NavBar />
       <div className="help-wrapper">
         <div className="help">

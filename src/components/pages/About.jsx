@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import "../../css/pages/About.css"; // Optional: Add a CSS file for styling
 import NavBar from "../modules/NavBar"; // Import NavBar component
 import animationVideo from "../../assets/animation/animation.mp4"; // Import the video file
@@ -11,6 +12,13 @@ import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndica
 const About = () => {
   return (
     <>
+      <Helmet>
+        <title>About DevDisplay | Developer Showcase Overview</title>
+        <meta
+          name="description"
+          content="Explore DevDisplay's purpose, features, and the story behind this developer portfolio platform."
+        />
+      </Helmet>
       <NavBar />
       <div className="about-wrapper">
         <div className="about">

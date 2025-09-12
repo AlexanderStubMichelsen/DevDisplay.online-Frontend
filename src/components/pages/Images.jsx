@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import "../../css/pages/Images.css";
 import NavBar from "../modules/NavBar.jsx";
 import ImageFacade from "../../util/api/ImageFacade.js";
@@ -83,6 +84,13 @@ function Images() {
 
   return (
     <>
+      <Helmet>
+        <title>Image Search | Discover High-Resolution Photos</title>
+        <meta
+          name="description"
+          content="Search and explore high-quality images from Unsplash, save favorites, and view photographer details."
+        />
+      </Helmet>
       <NavBar />
       <div className="images-wrapper">
         <div className="images-container">

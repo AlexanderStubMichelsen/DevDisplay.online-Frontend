@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useEffect, useState } from "react";
 import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../modules/NavBar.jsx";
@@ -72,6 +73,13 @@ const SavedImages = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Saved Images | Manage Your DevDisplay Collection</title>
+        <meta
+          name="description"
+          content="Review and organize images you've saved on DevDisplay, see user stats, and delete items easily."
+        />
+      </Helmet>
       <NavBar />
       {sessionStorage.getItem("isLoggedIn") === "true" ? (
         <div className="images-wrapper">

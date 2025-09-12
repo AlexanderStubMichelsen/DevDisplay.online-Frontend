@@ -1,5 +1,6 @@
 // YouTubeTrends.jsx
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import {
@@ -75,6 +76,13 @@ export default function YouTubeTrends() {
 
   return (
     <>
+      <Helmet>
+        <title>YouTube Trends Analyzer | Track Popular Videos</title>
+        <meta
+          name="description"
+          content="Visualize trending YouTube videos by country and category with DevDisplay's interactive charts."
+        />
+      </Helmet>
       <div className="youtube-trends-bg">
         <NavBar />
         <div className="youtube-trends-wrapper">
