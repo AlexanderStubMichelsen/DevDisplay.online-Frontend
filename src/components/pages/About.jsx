@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"
 import "../../css/pages/About.css"; // Optional: Add a CSS file for styling
 import NavBar from "../modules/NavBar"; // Import NavBar component
 import animationVideo from "../../assets/animation/animation.mp4"; // Import the video file

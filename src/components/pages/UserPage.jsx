@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"
 import "../../css/pages/UserPage.css";
 import NavBar from "../modules/NavBar";
 import apiFacade from "../../util/api/UserFacade";

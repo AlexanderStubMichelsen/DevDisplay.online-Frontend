@@ -1,6 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"
 import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../modules/NavBar.jsx";
 import "../../css/pages/Images.css";

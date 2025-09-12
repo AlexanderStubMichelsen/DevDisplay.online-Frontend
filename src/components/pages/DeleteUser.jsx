@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import apiFacade from "../../util/api/UserFacade";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import { LinkContainer } from "react-router-bootstrap";

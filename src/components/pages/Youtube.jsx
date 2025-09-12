@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useCallback } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"
 import "../../css/pages/Youtube.css";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet-async"
 import "../../css/pages/Images.css";
 import NavBar from "../modules/NavBar.jsx";
 import ImageFacade from "../../util/api/ImageFacade.js";
