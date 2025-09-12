@@ -215,6 +215,7 @@ const Board = () => {
         />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
+    
     <div className="board-wrapper">
       <NavBar />
       <div className="board-container">

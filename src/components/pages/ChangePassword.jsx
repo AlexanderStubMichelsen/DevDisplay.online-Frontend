@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
@@ -72,6 +73,7 @@ const ChangePassword = () => {
         />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
+    
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">
