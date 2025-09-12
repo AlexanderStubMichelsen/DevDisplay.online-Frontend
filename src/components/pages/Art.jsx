@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Helmet } from "react-helmet-async";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
@@ -78,6 +79,13 @@ const Art = () => {
 
   return (
     <>
+      <Helmet>
+        <title>CAD Art Gallery | 3D Visualizations by Alex</title>
+        <meta
+          name="description"
+          content="Browse a curated collection of CAD art and 3D product visualizations crafted by developer Alex."
+        />
+      </Helmet>
       {/* Fixed background video */}
       <div className="page-bg">
         <video autoPlay loop muted playsInline className="video-bg">

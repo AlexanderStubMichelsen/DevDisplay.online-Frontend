@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import apiFacade from "../../util/api/UserFacade";
 import NavBar from "../modules/NavBar";
@@ -45,6 +46,13 @@ const DeleteUser = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Delete User Account | Remove Your DevDisplay Profile</title>
+        <meta
+          name="description"
+          content="Permanently delete your DevDisplay account and associated data with this confirmation form."
+        />
+      </Helmet>
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">

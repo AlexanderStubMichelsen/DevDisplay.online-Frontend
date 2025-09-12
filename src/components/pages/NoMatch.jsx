@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
@@ -9,6 +10,13 @@ import ScrollIndicator from "../modules/ScrollIndicator";
 const NoMatch = () => {
   return (
     <>
+      <Helmet>
+        <title>404 - Page Not Found | DevDisplay Navigation Error</title>
+        <meta
+          name="description"
+          content="The page you requested could not be found. Use these links to return to popular sections of DevDisplay."
+        />
+      </Helmet>
       <NavBar />
       <div className="nomatch-wrapper">
         <div className="nomatch-container">

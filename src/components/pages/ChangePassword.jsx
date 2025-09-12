@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import apiFacade from "../../util/api/UserFacade";
@@ -47,6 +48,13 @@ const ChangePassword = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Change Password | Secure Your DevDisplay Account</title>
+        <meta
+          name="description"
+          content="Update your DevDisplay login credentials to keep your account secure with a new password."
+        />
+      </Helmet>
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">

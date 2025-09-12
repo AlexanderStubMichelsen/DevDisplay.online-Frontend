@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
@@ -143,6 +144,13 @@ const Board = () => {
   if (isLoading) {
     return (
       <>
+        <Helmet>
+          <title>Community Message Board | Share Your Thoughts on DevDisplay</title>
+          <meta
+            name="description"
+            content="Join the DevDisplay message board to post, view, and manage community messages in real time."
+          />
+        </Helmet>
         <NavBar />
         <div className="board-container">
           <div className="board-content">
@@ -160,8 +168,15 @@ const Board = () => {
 
   return (
     <>
-    <div className="board-wrapper">
-      <NavBar />
+      <Helmet>
+        <title>Community Message Board | Share Your Thoughts on DevDisplay</title>
+        <meta
+          name="description"
+          content="Join the DevDisplay message board to post, view, and manage community messages in real time."
+        />
+      </Helmet>
+      <div className="board-wrapper">
+        <NavBar />
       <div className="board-container">
         <div className="board-content">
           <video autoPlay loop muted playsInline className="video-bg">

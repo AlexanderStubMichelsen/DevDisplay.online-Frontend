@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import "../../css/pages/UserPage.css";
 import NavBar from "../modules/NavBar";
@@ -63,6 +64,13 @@ const UserPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>User Dashboard | Manage Your DevDisplay Profile</title>
+        <meta
+          name="description"
+          content="View and update your DevDisplay user information, change password, or delete your account."
+        />
+      </Helmet>
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">

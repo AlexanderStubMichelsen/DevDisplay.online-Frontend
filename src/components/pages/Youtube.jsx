@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useCallback } from "react";
 import "../../css/pages/Youtube.css";
 import NavBar from "../modules/NavBar";
@@ -58,6 +59,13 @@ function Youtube() {
 
   return (
     <>
+      <Helmet>
+        <title>YouTube Video Search | Discover Trending Clips</title>
+        <meta
+          name="description"
+          content="Search YouTube through DevDisplay to explore trending videos, load more results, and watch clips instantly."
+        />
+      </Helmet>
       <NavBar />
       <div className="youtube-wrapper">
         <div className="youtube-container">
