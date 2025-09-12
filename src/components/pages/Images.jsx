@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import "../../css/pages/Images.css";
 import NavBar from "../modules/NavBar.jsx";
 import ImageFacade from "../../util/api/ImageFacade.js";
@@ -85,11 +85,28 @@ function Images() {
   return (
     <>
       <Helmet>
-        <title>Image Search | Discover High-Resolution Photos</title>
+        <title>Image Search | DevDisplay</title>
+        <meta property="og:title" content="Image Search | DevDisplay" />
         <meta
-          name="description"
-          content="Search and explore high-quality images from Unsplash, save favorites, and view photographer details."
+          property="og:description"
+          content="Search high-quality images powered by Unsplash on DevDisplay."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/images" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Image Search | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Search high-quality images powered by Unsplash on DevDisplay."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
       <div className="images-wrapper">

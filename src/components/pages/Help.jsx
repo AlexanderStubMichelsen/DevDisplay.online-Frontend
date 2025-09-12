@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import "../../css/pages/Help.css";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
@@ -10,11 +10,28 @@ function Help() {
   return (
     <>
       <Helmet>
-        <title>DevDisplay Help Center | User Guide & Skraafoto Tips</title>
+        <title>Help & User Guide | DevDisplay</title>
+        <meta property="og:title" content="Help & User Guide | DevDisplay" />
         <meta
-          name="description"
-          content="Find step-by-step guidance for using DevDisplay, including image search, saving content, and Zone Kort integration."
+          property="og:description"
+          content="Discover how to navigate DevDisplay and use its features effectively."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/help" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Help & User Guide | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Discover how to navigate DevDisplay and use its features effectively."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
       <div className="help-wrapper">

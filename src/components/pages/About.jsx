@@ -1,5 +1,5 @@
 import React from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import "../../css/pages/About.css"; // Optional: Add a CSS file for styling
 import NavBar from "../modules/NavBar"; // Import NavBar component
 import animationVideo from "../../assets/animation/animation.mp4"; // Import the video file
@@ -14,10 +14,27 @@ const About = () => {
     <>
       <Helmet>
         <title>About DevDisplay | Developer Showcase Overview</title>
+        <meta property="og:title" content="About DevDisplay | Developer Showcase Overview" />
         <meta
-          name="description"
-          content="Explore DevDisplay's purpose, features, and the story behind this developer portfolio platform."
+          property="og:description"
+          content="Learn about DevDisplay's mission and the developer behind the showcase."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/about" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="About DevDisplay | Developer Showcase Overview" />
+        <meta
+          name="twitter:description"
+          content="Learn about DevDisplay's mission and the developer behind the showcase."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
       <div className="about-wrapper">

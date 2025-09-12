@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async";
+import { Helmet } from "react-helmet";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
@@ -102,11 +102,28 @@ const Contact = () => {
   return (
     <>
       <Helmet>
-        <title>Contact DevDisplay | Get in Touch with the Developer</title>
+        <title>Contact DevDisplay | Get in Touch</title>
+        <meta property="og:title" content="Contact DevDisplay | Get in Touch" />
         <meta
-          name="description"
-          content="Reach out to the DevDisplay creator via email or form to ask questions or share feedback."
+          property="og:description"
+          content="Reach out to DevDisplay with questions or feedback through the contact form."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/contact" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1581291519195-ef11498d1cf8?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Contact DevDisplay | Get in Touch" />
+        <meta
+          name="twitter:description"
+          content="Reach out to DevDisplay with questions or feedback through the contact form."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1581291519195-ef11498d1cf8?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
       <div className="contact-page-wrapper">

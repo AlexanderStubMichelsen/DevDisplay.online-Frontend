@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async";
 import { useNavigate } from "react-router-dom";
 import apiFacade from "../../util/api/UserFacade";
+import { Helmet } from "react-helmet";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import { LinkContainer } from "react-router-bootstrap";
@@ -47,11 +48,28 @@ const DeleteUser = () => {
   return (
     <>
       <Helmet>
-        <title>Delete User Account | Remove Your DevDisplay Profile</title>
+        <title>Delete Account | DevDisplay</title>
+        <meta property="og:title" content="Delete Account | DevDisplay" />
         <meta
-          name="description"
-          content="Permanently delete your DevDisplay account and associated data with this confirmation form."
+          property="og:description"
+          content="Permanently remove your DevDisplay user account."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/deleteuser" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Delete Account | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Permanently remove your DevDisplay user account."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
       <div className="user-page-wrapper">

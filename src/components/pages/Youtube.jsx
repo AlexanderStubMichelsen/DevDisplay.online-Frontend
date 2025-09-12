@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect, useCallback } from "react";
+import { Helmet } from "react-helmet";
 import "../../css/pages/Youtube.css";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
@@ -60,11 +61,28 @@ function Youtube() {
   return (
     <>
       <Helmet>
-        <title>YouTube Video Search | Discover Trending Clips</title>
+        <title>YouTube Search | DevDisplay</title>
+        <meta property="og:title" content="YouTube Search | DevDisplay" />
         <meta
-          name="description"
-          content="Search YouTube through DevDisplay to explore trending videos, load more results, and watch clips instantly."
+          property="og:description"
+          content="Find and watch YouTube videos directly through DevDisplay's search interface."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/youtube" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1512028180093-07fb88f63dc1?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="YouTube Search | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Find and watch YouTube videos directly through DevDisplay's search interface."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1512028180093-07fb88f63dc1?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
       <div className="youtube-wrapper">

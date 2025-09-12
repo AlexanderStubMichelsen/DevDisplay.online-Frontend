@@ -1,7 +1,7 @@
 // YouTubeTrends.jsx
 import React from "react";
-import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import axios from "axios";
 import {
   LineChart,
@@ -77,11 +77,28 @@ export default function YouTubeTrends() {
   return (
     <>
       <Helmet>
-        <title>YouTube Trends Analyzer | Track Popular Videos</title>
+        <title>YouTube Trends Analyzer | DevDisplay</title>
+        <meta property="og:title" content="YouTube Trends Analyzer | DevDisplay" />
         <meta
-          name="description"
-          content="Visualize trending YouTube videos by country and category with DevDisplay's interactive charts."
+          property="og:description"
+          content="Explore trending YouTube videos across categories and countries."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/trends" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="YouTube Trends Analyzer | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Explore trending YouTube videos across categories and countries."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <div className="youtube-trends-bg">
         <NavBar />

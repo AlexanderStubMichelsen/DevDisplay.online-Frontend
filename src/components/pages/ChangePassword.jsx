@@ -1,6 +1,7 @@
 import React from "react";
 import { Helmet } from "react-helmet-async";
 import { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import apiFacade from "../../util/api/UserFacade";
 import NavBar from "../modules/NavBar";
@@ -49,12 +50,30 @@ const ChangePassword = () => {
   return (
     <>
       <Helmet>
-        <title>Change Password | Secure Your DevDisplay Account</title>
+        <title>Change Password | DevDisplay</title>
+        <meta property="og:title" content="Change Password | DevDisplay" />
         <meta
-          name="description"
-          content="Update your DevDisplay login credentials to keep your account secure with a new password."
+          property="og:description"
+          content="Update your DevDisplay account password securely."
         />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/changepassword" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Change Password | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Update your DevDisplay account password securely."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
+    
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">
