@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
@@ -9,6 +10,30 @@ import ScrollIndicator from "../modules/ScrollIndicator";
 const NoMatch = () => {
   return (
     <>
+      <Helmet>
+        <title>Page Not Found | DevDisplay</title>
+        <meta property="og:title" content="Page Not Found | DevDisplay" />
+        <meta
+          property="og:description"
+          content="The page you're looking for doesn't exist. Find your way back to DevDisplay's main sections."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/404" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Page Not Found | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="The page you're looking for doesn't exist. Find your way back to DevDisplay's main sections."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <NavBar />
       <div className="nomatch-wrapper">
         <div className="nomatch-container">

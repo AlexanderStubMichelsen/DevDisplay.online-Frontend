@@ -1,5 +1,6 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../modules/NavBar.jsx";
 import "../../css/pages/Images.css";
@@ -72,6 +73,30 @@ const SavedImages = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Saved Images | DevDisplay</title>
+        <meta property="og:title" content="Saved Images | DevDisplay" />
+        <meta
+          property="og:description"
+          content="View and manage images you've saved on DevDisplay."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/saved" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1517817748490-0bfa04a8a8a4?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Saved Images | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="View and manage images you've saved on DevDisplay."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1517817748490-0bfa04a8a8a4?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <NavBar />
       {sessionStorage.getItem("isLoggedIn") === "true" ? (
         <div className="images-wrapper">

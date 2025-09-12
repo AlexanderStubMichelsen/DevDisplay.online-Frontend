@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
@@ -143,6 +144,36 @@ const Board = () => {
   if (isLoading) {
     return (
       <>
+        <Helmet>
+          <title>Community Message Board | DevDisplay</title>
+          <meta
+            property="og:title"
+            content="Community Message Board | DevDisplay"
+          />
+          <meta
+            property="og:description"
+            content="Share and view messages from the DevDisplay community."
+          />
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content="https://devdisplay.online/board" />
+          <meta
+            property="og:image"
+            content="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&h=630&q=80"
+          />
+          <meta
+            name="twitter:title"
+            content="Community Message Board | DevDisplay"
+          />
+          <meta
+            name="twitter:description"
+            content="Share and view messages from the DevDisplay community."
+          />
+          <meta
+            name="twitter:image"
+            content="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&h=630&q=80"
+          />
+          <meta name="twitter:card" content="summary_large_image" />
+        </Helmet>
         <NavBar />
         <div className="board-container">
           <div className="board-content">
@@ -160,6 +191,30 @@ const Board = () => {
 
   return (
     <>
+      <Helmet>
+        <title>Community Message Board | DevDisplay</title>
+        <meta property="og:title" content="Community Message Board | DevDisplay" />
+        <meta
+          property="og:description"
+          content="Share and view messages from the DevDisplay community."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/board" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="Community Message Board | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Share and view messages from the DevDisplay community."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1492724441997-5dc865305da7?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
     <div className="board-wrapper">
       <NavBar />
       <div className="board-container">

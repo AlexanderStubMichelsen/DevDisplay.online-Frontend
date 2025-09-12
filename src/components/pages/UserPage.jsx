@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import "../../css/pages/UserPage.css";
 import NavBar from "../modules/NavBar";
 import apiFacade from "../../util/api/UserFacade";
@@ -63,6 +64,30 @@ const UserPage = () => {
 
   return (
     <>
+      <Helmet>
+        <title>User Dashboard | DevDisplay</title>
+        <meta property="og:title" content="User Dashboard | DevDisplay" />
+        <meta
+          property="og:description"
+          content="Manage your DevDisplay profile and account settings."
+        />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://devdisplay.online/userpage" />
+        <meta
+          property="og:image"
+          content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:title" content="User Dashboard | DevDisplay" />
+        <meta
+          name="twitter:description"
+          content="Manage your DevDisplay profile and account settings."
+        />
+        <meta
+          name="twitter:image"
+          content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80"
+        />
+        <meta name="twitter:card" content="summary_large_image" />
+      </Helmet>
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">
