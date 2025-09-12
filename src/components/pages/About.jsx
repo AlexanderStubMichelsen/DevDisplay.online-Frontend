@@ -21,19 +21,16 @@ const About = () => {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://devdisplay.online/about" />
-        <meta
-          property="og:image"
-          content="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1200&h=630&q=80"
-        />
+        <meta property="og:image" content="https://devdisplay.online/og/about-page.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta name="twitter:title" content="About DevDisplay | Developer Showcase Overview" />
         <meta
           name="twitter:description"
           content="Learn about DevDisplay's mission and the developer behind the showcase."
         />
-        <meta
-          name="twitter:image"
-          content="https://images.unsplash.com/photo-1522199710521-72d69614c702?auto=format&fit=crop&w=1200&h=630&q=80"
-        />
+        <meta name="twitter:image" content="https://devdisplay.online/og/about-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />

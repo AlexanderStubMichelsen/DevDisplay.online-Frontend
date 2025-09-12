@@ -18,19 +18,16 @@ function Help() {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://devdisplay.online/help" />
-        <meta
-          property="og:image"
-          content="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&h=630&q=80"
-        />
+        <meta property="og:image" content="https://devdisplay.online/og/help-page.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta name="twitter:title" content="Help & User Guide | DevDisplay" />
         <meta
           name="twitter:description"
           content="Discover how to navigate DevDisplay and use its features effectively."
         />
-        <meta
-          name="twitter:image"
-          content="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=1200&h=630&q=80"
-        />
+        <meta name="twitter:image" content="https://devdisplay.online/og/help-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />

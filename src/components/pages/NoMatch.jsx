@@ -19,19 +19,16 @@ const NoMatch = () => {
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://devdisplay.online/404" />
-        <meta
-          property="og:image"
-          content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&h=630&q=80"
-        />
+        <meta property="og:image" content="https://devdisplay.online/og/404-page.jpg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/jpeg" />
         <meta name="twitter:title" content="Page Not Found | DevDisplay" />
         <meta
           name="twitter:description"
           content="The page you're looking for doesn't exist. Find your way back to DevDisplay's main sections."
         />
-        <meta
-          name="twitter:image"
-          content="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1200&h=630&q=80"
-        />
+        <meta name="twitter:image" content="https://devdisplay.online/og/404-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
