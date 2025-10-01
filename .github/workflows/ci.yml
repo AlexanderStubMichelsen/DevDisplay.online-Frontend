@@ -63,7 +63,7 @@ jobs:
   deploy:
     needs: test  # Wait for test job to complete successfully
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'  # Only deploy on main branch pushes
+    if: github.ref == 'refs/heads/Linode' && github.event_name == 'push'  # Only deploy on Linode branch pushes
     
     steps:
       # Step 1: Download build artifacts
