@@ -39,6 +39,7 @@ jobs:
       # Step 6: Inject .env.production from GitHub secrets
       - name: Create .env.production file
         run: |
+          echo "VITE_API_URL=${{ secrets.LINODE_API_URL }}" >> .env.production
           echo "VITE_RAPIDAPI_KEY=${{ secrets.VITE_RAPIDAPI_KEY }}" >> .env.production
           echo "VITE_UNSPLASH_ACCESS_KEY=${{ secrets.VITE_UNSPLASH_ACCESS_KEY }}" >> .env.production
           echo "VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }}" >> .env.production
