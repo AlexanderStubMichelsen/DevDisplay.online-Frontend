@@ -24,6 +24,18 @@ jobs:
         with:
           submodules: true
           lfs: false
+      - name: Create .env.production file
+        run: |
+          cat <<EOF > .env.production
+          VITE_API_URL=${{ secrets.AZURE_API_URL }}
+          VITE_RAPIDAPI_KEY=${{ secrets.VITE_RAPIDAPI_KEY }}
+          VITE_UNSPLASH_ACCESS_KEY=${{ secrets.VITE_UNSPLASH_ACCESS_KEY }}
+          VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }}
+          VITE_WEATHER_API_KEY=${{ secrets.VITE_WEATHER_API_KEY }}
+          VITE_EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}
+          VITE_EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}
+          EOF
       - name: Install OIDC Client from Core Package
         run: npm install @actions/core@1.6.0 @actions/http-client
       - name: Get Id Token
