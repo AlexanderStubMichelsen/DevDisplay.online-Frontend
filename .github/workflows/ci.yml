@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main
+      - Linode
   pull_request:
     branches:
-      - main
+      - Linode
 
 jobs:
   # Job 1: Test and Build
