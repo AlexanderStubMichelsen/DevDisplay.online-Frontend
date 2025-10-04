@@ -173,41 +173,11 @@ const Art = () => {
               <h1 className="art-title">My CAD Art</h1>
               <p className="art-subtitle">
                 A small collection of CAD (Computer‑Aided Design) visuals and
-                mechanical design experiment assemblies.
+                mechanical design experiment assemblies.</p>
+                <p className="art-description"> <br />
+                You can select a model below, drag, drop and rotate it.
               </p>
             </header>
-
-            {FEATURE_MODELS.length > 0 && (
-              <section
-                className="cad-model-gallery"
-                aria-label="Interactive 3D model previews"
-              >
-                {FEATURE_MODELS.map((model) => (
-                  <figure className="cad-model-item" key={model.url}>
-                    <model-viewer
-                      className="cad-model-viewer"
-                      src={model.url}
-                      alt={`3D model preview of ${model.label}`}
-                      camera-controls
-                      touch-action="pan-y"
-                      autoplay
-                      auto-rotate
-                      interaction-prompt="none"
-                      exposure="1"
-                      shadow-intensity="0.85"
-                    />
-                    <figcaption className="cad-model-caption">
-                      <strong>{model.label}</strong>
-                      <div className="cad-model-links">
-                        <a href={model.url} download>
-                          Download GLB
-                        </a>
-                      </div>
-                    </figcaption>
-                  </figure>
-                ))}
-              </section>
-            )}
 
             <section
               className="feature-model-section"
@@ -243,16 +213,7 @@ const Art = () => {
                         </select>
                       </label>
                     )}
-                    <a
-                      className="feature-model-download"
-                      href={activeModel.url}
-                      download={activeModel.filename}
-                    >
-                      Download GLB
-                    </a>
-                    <span className="feature-model-hosting">
-                      Files served from <code>src/assets/art/3dmodels</code>.
-                    </span>
+                    
                   </div>
                 </>
               ) : (

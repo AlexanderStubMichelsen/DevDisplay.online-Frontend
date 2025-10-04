@@ -136,6 +136,12 @@
   margin-bottom: 0.5rem;
 }
 
+.art-description {
+  font-size: 0.7rem;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.6;
+}
+
 /* Featured 3D model */
 .feature-model-section {
   margin: 0 auto 2.5rem;
