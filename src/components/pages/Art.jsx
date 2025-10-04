@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet-async";
 import "@google/model-viewer";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
@@ -148,7 +148,10 @@ const Art = () => {
           />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://devdisplay.online/art" />
-          <meta property="og:image" content="https://devdisplay.online/og/art-page.jpg" />
+          <meta
+            property="og:image"
+            content="https://devdisplay.online/og/art-page.jpg"
+          />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
           <meta property="og:image:type" content="image/jpeg" />
@@ -157,7 +160,10 @@ const Art = () => {
             name="twitter:description"
             content="View a curated gallery of CAD art and mechanical design renders."
           />
-          <meta name="twitter:image" content="https://devdisplay.online/og/art-page.jpg" />
+          <meta
+            name="twitter:image"
+            content="https://devdisplay.online/og/art-page.jpg"
+          />
           <meta name="twitter:card" content="summary_large_image" />
         </Helmet>
         <main className="art-page-wrapper">
@@ -170,17 +176,17 @@ const Art = () => {
               </p>
             </header>
 
-            {cadModels.length > 0 && (
+            {FEATURE_MODELS.length > 0 && (
               <section
                 className="cad-model-gallery"
                 aria-label="Interactive 3D model previews"
               >
-                {cadModels.map((model) => (
-                  <figure className="cad-model-item" key={model.src}>
+                {FEATURE_MODELS.map((model) => (
+                  <figure className="cad-model-item" key={model.url}>
                     <model-viewer
                       className="cad-model-viewer"
-                      src={model.src}
-                      alt={`3D model preview of ${model.title}`}
+                      src={model.url}
+                      alt={`3D model preview of ${model.label}`}
                       camera-controls
                       touch-action="pan-y"
                       autoplay
@@ -190,21 +196,11 @@ const Art = () => {
                       shadow-intensity="0.85"
                     />
                     <figcaption className="cad-model-caption">
-                      <strong>{model.title}</strong>
-                      {model.description && <span>{model.description}</span>}
+                      <strong>{model.label}</strong>
                       <div className="cad-model-links">
-                        <a href={model.src} download>
+                        <a href={model.url} download>
                           Download GLB
                         </a>
-                        {model.creditUrl && (
-                          <a
-                            href={model.creditUrl}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Model credits
-                          </a>
-                        )}
                       </div>
                     </figcaption>
                   </figure>
@@ -212,7 +208,10 @@ const Art = () => {
               </section>
             )}
 
-            <section className="feature-model-section" aria-label="Featured 3D model preview">
+            <section
+              className="feature-model-section"
+              aria-label="Featured 3D model preview"
+            >
               {activeModel ? (
                 <>
                   <model-viewer
@@ -257,8 +256,8 @@ const Art = () => {
                 </>
               ) : (
                 <p className="feature-model-empty">
-                  Add <code>.glb</code> files under <code>src/assets/art/3dmodels</code> to
-                  display them here.
+                  Add <code>.glb</code> files under{" "}
+                  <code>src/assets/art/3dmodels</code> to display them here.
                 </p>
               )}
             </section>
