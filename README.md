@@ -11,11 +11,8 @@ You can access the api swagger site on https://devdisplay.online/swagger/index.h
 
 ## 3D Art Page Model Hosting
 
-The `/art` page includes a carousel-like grid of interactive 3D viewers powered by
-[`<model-viewer>`](https://modelviewer.dev/). To showcase your own models, update the
-`cadModels` array near the top of `src/components/pages/Art.jsx` with publicly reachable
-`.glb` URLs.
+Place any `.glb` assets you want to feature on the `/art` page in `src/assets/art/3dmodels`.
 
-- Each entry can provide a `title`, optional `description`, and credit link shown below the viewer.
-- Files are streamed directly from their source, so make sure the host supports cross-origin requests.
-- A download button is generated automatically, allowing visitors to save the underlying GLB.
+- The viewer automatically discovers files in that folder at build time via Vite's `import.meta.glob`.
+- If more than one model exists, a dropdown lets you choose which one to preview.
+- The download button links directly to the bundled asset so visitors can save the currently previewed file.
