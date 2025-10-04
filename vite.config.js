@@ -7,9 +7,10 @@ export default defineConfig({
     react(),
     removeConsole()
   ],
+  assetsInclude: ['**/*.glb'], // 👈 ADD THIS LINE
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/setupTests.js'],
     globals: true,
-  }
+  },
 });
