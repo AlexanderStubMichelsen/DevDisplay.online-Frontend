@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet-async";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
 import "../../css/pages/Art.css"; // ← import the CSS file
+import "@google/model-viewer";
 
 // Background video
 import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4";
@@ -17,6 +18,9 @@ import New_truck_base from "../../assets/art/New_truck_base.png";
 import Bicycle_assembly from "../../assets/art/Bicycle_assembly.png";
 import signatureImg from "../../assets/art/signature.png";
 import signatureRawRender from "../../assets/art/Tagv2.png";
+
+const FEATURE_MODEL_SRC =
+  "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
 
 // --- Manual list (works anywhere) ---
 const cadArtImages = [
@@ -127,6 +131,39 @@ const Art = () => {
                 mechanical design experiment assemblies.
               </p>
             </header>
+
+            <section className="art-3d-section" aria-label="Interactive 3D model showcase">
+              <div className="art-3d-copy">
+                <h2 className="art-3d-title">Interactive 3D Showcase</h2>
+                <p className="art-3d-description">
+                  Explore one of my CAD renders in real-time. Drag to orbit, scroll to zoom,
+                  and tap the AR button on supported devices to view it in your space.
+                </p>
+              </div>
+              <div className="art-3d-viewer-wrapper">
+                <model-viewer
+                  src={FEATURE_MODEL_SRC}
+                  alt="Interactive CAD render of an astronaut in a space suit"
+                  camera-controls
+                  auto-rotate
+                  auto-rotate-delay="4000"
+                  rotation-per-second="20deg"
+                  shadow-intensity="0.75"
+                  exposure="1.05"
+                  ar
+                  ar-modes="webxr scene-viewer quick-look"
+                  tone-mapping="neutral"
+                >
+                  <div className="art-3d-fallback" slot="poster">
+                    Loading interactive model…
+                  </div>
+                </model-viewer>
+              </div>
+              <p className="art-3d-hint">
+                Having trouble? Download the{" "}
+                <a href={FEATURE_MODEL_SRC}>GLB file</a> directly.
+              </p>
+            </section>
 
             {cadArtImages.length === 0 ? (
               <p className="art-empty">
