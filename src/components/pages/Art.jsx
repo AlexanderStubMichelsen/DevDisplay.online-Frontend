@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async";
+import "@google/model-viewer";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
@@ -19,8 +20,37 @@ import Bicycle_assembly from "../../assets/art/Bicycle_assembly.png";
 import signatureImg from "../../assets/art/signature.png";
 import signatureRawRender from "../../assets/art/Tagv2.png";
 
-const FEATURE_MODEL_SRC =
-  "https://modelviewer.dev/shared-assets/models/Astronaut.glb";
+const featureModelModules = import.meta.glob(
+  "../../assets/art/3dmodels/*.glb",
+  {
+    eager: true,
+  }
+);
+
+const FEATURE_MODELS = Object.entries(featureModelModules)
+  .map(([path, mod]) => {
+    const url = typeof mod === "string" ? mod : mod?.default;
+
+    if (!url) {
+      return null;
+    }
+
+    const filename = path.split("/").pop() || "model.glb";
+    const label = filename
+      .replace(/\.glb$/i, "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
+    return {
+      url,
+      filename,
+      label,
+    };
+  })
+  .filter(Boolean)
+  .sort((a, b) => a.filename.localeCompare(b.filename));
+
+const FEATURE_MODEL = FEATURE_MODELS[0] ?? null;
 
 // --- Manual list (works anywhere) ---
 const cadArtImages = [
@@ -77,9 +107,18 @@ const cadArtImages = [
 
 const Art = () => {
   const [modalImg, setModalImg] = useState(null);
+  const [activeModel, setActiveModel] = useState(FEATURE_MODEL);
 
   const openModal = (img) => setModalImg(img);
   const closeModal = () => setModalImg(null);
+
+  const handleModelChange = (event) => {
+    const nextModel = FEATURE_MODELS.find(
+      (model) => model.filename === event.target.value
+    );
+
+    setActiveModel(nextModel ?? null);
+  };
 
   return (
     <>
@@ -110,7 +149,10 @@ const Art = () => {
           />
           <meta property="og:type" content="website" />
           <meta property="og:url" content="https://devdisplay.online/art" />
-          <meta property="og:image" content="https://devdisplay.online/og/art-page.jpg" />
+          <meta
+            property="og:image"
+            content="https://devdisplay.online/og/art-page.jpg"
+          />
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
           <meta property="og:image:type" content="image/jpeg" />
@@ -119,7 +161,10 @@ const Art = () => {
             name="twitter:description"
             content="View a curated gallery of CAD art and mechanical design renders."
           />
-          <meta name="twitter:image" content="https://devdisplay.online/og/art-page.jpg" />
+          <meta
+            name="twitter:image"
+            content="https://devdisplay.online/og/art-page.jpg"
+          />
           <meta name="twitter:card" content="summary_large_image" />
         </Helmet>
         <main className="art-page-wrapper">
@@ -132,37 +177,90 @@ const Art = () => {
               </p>
             </header>
 
-            <section className="art-3d-section" aria-label="Interactive 3D model showcase">
-              <div className="art-3d-copy">
-                <h2 className="art-3d-title">Interactive 3D Showcase</h2>
-                <p className="art-3d-description">
-                  Explore one of my CAD renders in real-time. Drag to orbit, scroll to zoom,
-                  and tap the AR button on supported devices to view it in your space.
-                </p>
-              </div>
-              <div className="art-3d-viewer-wrapper">
-                <model-viewer
-                  src={FEATURE_MODEL_SRC}
-                  alt="Interactive CAD render of an astronaut in a space suit"
-                  camera-controls
-                  auto-rotate
-                  auto-rotate-delay="4000"
-                  rotation-per-second="20deg"
-                  shadow-intensity="0.75"
-                  exposure="1.05"
-                  ar
-                  ar-modes="webxr scene-viewer quick-look"
-                  tone-mapping="neutral"
-                >
-                  <div className="art-3d-fallback" slot="poster">
-                    Loading interactive model…
+            {FEATURE_MODELS.length > 0 && (
+              <section
+                className="cad-model-gallery"
+                aria-label="Interactive 3D model previews"
+              >
+                {FEATURE_MODELS.map((model) => (
+                  <figure className="cad-model-item" key={model.url}>
+                    <model-viewer
+                      className="cad-model-viewer"
+                      src={model.url}
+                      alt={`3D model preview of ${model.label}`}
+                      camera-controls
+                      touch-action="pan-y"
+                      autoplay
+                      auto-rotate
+                      interaction-prompt="none"
+                      exposure="1"
+                      shadow-intensity="0.85"
+                    />
+                    <figcaption className="cad-model-caption">
+                      <strong>{model.label}</strong>
+                      <div className="cad-model-links">
+                        <a href={model.url} download>
+                          Download GLB
+                        </a>
+                      </div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </section>
+            )}
+
+            <section
+              className="feature-model-section"
+              aria-label="Featured 3D model preview"
+            >
+              {activeModel ? (
+                <>
+                  <model-viewer
+                    className="feature-model-viewer"
+                    src={activeModel.url}
+                    alt={`3D model preview of ${activeModel.label}`}
+                    camera-controls
+                    auto-rotate
+                    autoplay
+                    interaction-prompt="none"
+                    shadow-intensity="1"
+                    exposure="0.9"
+                  />
+                  <div className="feature-model-actions">
+                    {FEATURE_MODELS.length > 1 && (
+                      <label className="feature-model-select">
+                        <span className="sr-only">Choose a model</span>
+                        <select
+                          aria-label="Choose a featured model"
+                          value={activeModel.filename}
+                          onChange={handleModelChange}
+                        >
+                          {FEATURE_MODELS.map((model) => (
+                            <option key={model.filename} value={model.filename}>
+                              {model.label}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    )}
+                    <a
+                      className="feature-model-download"
+                      href={activeModel.url}
+                      download={activeModel.filename}
+                    >
+                      Download GLB
+                    </a>
+                    <span className="feature-model-hosting">
+                      Files served from <code>src/assets/art/3dmodels</code>.
+                    </span>
                   </div>
-                </model-viewer>
-              </div>
-              <p className="art-3d-hint">
-                Having trouble? Download the{" "}
-                <a href={FEATURE_MODEL_SRC}>GLB file</a> directly.
-              </p>
+                </>
+              ) : (
+                <p className="feature-model-empty">
+                  Add <code>.glb</code> files under{" "}
+                  <code>src/assets/art/3dmodels</code> to display them here.
+                </p>
+              )}
             </section>
 
             {cadArtImages.length === 0 ? (
