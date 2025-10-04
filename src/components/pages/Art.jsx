@@ -19,6 +19,7 @@ import New_truck_base from "../../assets/art/New_truck_base.png";
 import Bicycle_assembly from "../../assets/art/Bicycle_assembly.png";
 import signatureImg from "../../assets/art/signature.png";
 import signatureRawRender from "../../assets/art/Tagv2.png";
+import Sword from "../../assets/art/Sword_v1_2025-Oct-04_11-27-03AM-000_CustomizedView3854553728.png";
 
 const featureModelModules = import.meta.glob(
   "../../assets/art/3dmodels/*.glb",
@@ -93,6 +94,11 @@ const cadArtImages = [
     src: signatureImg,
     alt: "Signature",
     title: "3D Product Visualization Edit — Signature - Alex",
+  },
+  {
+    src: Sword,
+    alt: "Sword",
+    title: "3D Product Visualization Edit — Sword - Alex",
   },
   // Add more: { src: someImg, alt: "CAD Art 2", title: "Mechanical Design 2" },
 ];
