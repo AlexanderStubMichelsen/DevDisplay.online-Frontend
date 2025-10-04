@@ -5,6 +5,7 @@ import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
 import "../../css/pages/Art.css"; // ← import the CSS file
+import "@google/model-viewer";
 
 // Background video
 import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4";

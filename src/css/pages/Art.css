@@ -34,7 +34,89 @@
 }
 
 /* Art container styles */
+.art-container {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 48px 24px 64px;
+  backdrop-filter: blur(4px);
+}
 
+/* 3D model showcase */
+.art-3d-section {
+  background: rgba(12, 12, 18, 0.65);
+  border-radius: 16px;
+  padding: 32px;
+  margin: 0 auto 48px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.art-3d-copy {
+  max-width: 720px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.art-3d-title {
+  font-size: 1.8rem;
+  color: #f8f9fc;
+  margin-bottom: 12px;
+}
+
+.art-3d-description {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.art-3d-viewer-wrapper {
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 720px;
+  aspect-ratio: 16 / 10;
+  border-radius: 16px;
+  overflow: hidden;
+  background: radial-gradient(circle at top, rgba(255, 255, 255, 0.08), rgba(0, 0, 0, 0.85));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.art-3d-viewer-wrapper model-viewer {
+  width: 100%;
+  height: 100%;
+  --progress-bar-height: 6px;
+  --progress-bar-color: #f97316;
+  --poster-color: rgba(0, 0, 0, 0);
+}
+
+.art-3d-fallback {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 1rem;
+  background: linear-gradient(135deg, rgba(31, 31, 46, 0.9), rgba(15, 15, 22, 0.9));
+}
+
+.art-3d-hint {
+  margin-top: 18px;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.art-3d-hint a {
+  color: #f9a826;
+  text-decoration: underline;
+}
+
+.art-3d-hint a:hover,
+.art-3d-hint a:focus {
+  text-decoration: none;
+  color: #ffd166;
+}
 
 /* Header styles */
 .art-header {
@@ -286,6 +368,19 @@
   .art-container {
     padding: 18px 8px;
     max-width: 98vw;
+  }
+  .art-3d-section {
+    padding: 24px 16px;
+    margin-bottom: 32px;
+  }
+  .art-3d-title {
+    font-size: 1.5rem;
+  }
+  .art-3d-description {
+    font-size: 0.95rem;
+  }
+  .art-3d-viewer-wrapper {
+    aspect-ratio: 3 / 2;
   }
   .art-page-wrapper {
     padding-top: 20px;
