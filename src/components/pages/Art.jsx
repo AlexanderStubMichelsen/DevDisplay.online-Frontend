@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Helmet } from "react-helmet-async"
+import "@google/model-viewer";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
@@ -17,6 +18,38 @@ import New_truck_base from "../../assets/art/New_truck_base.png";
 import Bicycle_assembly from "../../assets/art/Bicycle_assembly.png";
 import signatureImg from "../../assets/art/signature.png";
 import signatureRawRender from "../../assets/art/Tagv2.png";
+
+const featureModelModules = import.meta.glob(
+  "../../assets/art/3dmodels/*.glb",
+  {
+    eager: true,
+  }
+);
+
+const FEATURE_MODELS = Object.entries(featureModelModules)
+  .map(([path, mod]) => {
+    const url = typeof mod === "string" ? mod : mod?.default;
+
+    if (!url) {
+      return null;
+    }
+
+    const filename = path.split("/").pop() || "model.glb";
+    const label = filename
+      .replace(/\.glb$/i, "")
+      .replace(/[-_]+/g, " ")
+      .replace(/\b\w/g, (char) => char.toUpperCase());
+
+    return {
+      url,
+      filename,
+      label,
+    };
+  })
+  .filter(Boolean)
+  .sort((a, b) => a.filename.localeCompare(b.filename));
+
+const FEATURE_MODEL = FEATURE_MODELS[0] ?? null;
 
 // --- Manual list (works anywhere) ---
 const cadArtImages = [
@@ -73,9 +106,18 @@ const cadArtImages = [
 
 const Art = () => {
   const [modalImg, setModalImg] = useState(null);
+  const [activeModel, setActiveModel] = useState(FEATURE_MODEL);
 
   const openModal = (img) => setModalImg(img);
   const closeModal = () => setModalImg(null);
+
+  const handleModelChange = (event) => {
+    const nextModel = FEATURE_MODELS.find(
+      (model) => model.filename === event.target.value
+    );
+
+    setActiveModel(nextModel ?? null);
+  };
 
   return (
     <>
@@ -127,6 +169,57 @@ const Art = () => {
                 mechanical design experiment assemblies.
               </p>
             </header>
+
+            <section className="feature-model-section" aria-label="Featured 3D model preview">
+              {activeModel ? (
+                <>
+                  <model-viewer
+                    className="feature-model-viewer"
+                    src={activeModel.url}
+                    alt={`3D model preview of ${activeModel.label}`}
+                    camera-controls
+                    auto-rotate
+                    autoplay
+                    interaction-prompt="none"
+                    shadow-intensity="1"
+                    exposure="0.9"
+                  />
+                  <div className="feature-model-actions">
+                    {FEATURE_MODELS.length > 1 && (
+                      <label className="feature-model-select">
+                        <span className="sr-only">Choose a model</span>
+                        <select
+                          aria-label="Choose a featured model"
+                          value={activeModel.filename}
+                          onChange={handleModelChange}
+                        >
+                          {FEATURE_MODELS.map((model) => (
+                            <option key={model.filename} value={model.filename}>
+                              {model.label}
+                            </option>
+                          ))}
+                        </select>
+                      </label>
+                    )}
+                    <a
+                      className="feature-model-download"
+                      href={activeModel.url}
+                      download={activeModel.filename}
+                    >
+                      Download GLB
+                    </a>
+                    <span className="feature-model-hosting">
+                      Files served from <code>src/assets/art/3dmodels</code>.
+                    </span>
+                  </div>
+                </>
+              ) : (
+                <p className="feature-model-empty">
+                  Add <code>.glb</code> files under <code>src/assets/art/3dmodels</code> to
+                  display them here.
+                </p>
+              )}
+            </section>
 
             {cadArtImages.length === 0 ? (
               <p className="art-empty">
