@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Helmet } from "react-helmet-async"
+import { Helmet } from "react-helmet-async";
+import "@google/model-viewer";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
@@ -17,6 +18,27 @@ import New_truck_base from "../../assets/art/New_truck_base.png";
 import Bicycle_assembly from "../../assets/art/Bicycle_assembly.png";
 import signatureImg from "../../assets/art/signature.png";
 import signatureRawRender from "../../assets/art/Tagv2.png";
+
+const cadModels = [
+  {
+    src: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/DamagedHelmet/glTF-Binary/DamagedHelmet.glb",
+    title: "Damaged Helmet",
+    description: "Sample glTF from the Khronos Group",
+    creditUrl: "https://github.com/KhronosGroup/glTF-Sample-Models",
+  },
+  {
+    src: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/BarramundiFish/glTF-Binary/BarramundiFish.glb",
+    title: "Barramundi Fish",
+    description: "Physically based render test model",
+    creditUrl: "https://github.com/KhronosGroup/glTF-Sample-Models",
+  },
+  {
+    src: "https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Models/master/2.0/WaterBottle/glTF-Binary/WaterBottle.glb",
+    title: "Water Bottle",
+    description: "Compact product visualisation",
+    creditUrl: "https://github.com/KhronosGroup/glTF-Sample-Models",
+  },
+];
 
 // --- Manual list (works anywhere) ---
 const cadArtImages = [
@@ -127,6 +149,48 @@ const Art = () => {
                 mechanical design experiment assemblies.
               </p>
             </header>
+
+            {cadModels.length > 0 && (
+              <section
+                className="cad-model-gallery"
+                aria-label="Interactive 3D model previews"
+              >
+                {cadModels.map((model) => (
+                  <figure className="cad-model-item" key={model.src}>
+                    <model-viewer
+                      className="cad-model-viewer"
+                      src={model.src}
+                      alt={`3D model preview of ${model.title}`}
+                      camera-controls
+                      touch-action="pan-y"
+                      autoplay
+                      auto-rotate
+                      interaction-prompt="none"
+                      exposure="1"
+                      shadow-intensity="0.85"
+                    />
+                    <figcaption className="cad-model-caption">
+                      <strong>{model.title}</strong>
+                      {model.description && <span>{model.description}</span>}
+                      <div className="cad-model-links">
+                        <a href={model.src} download>
+                          Download GLB
+                        </a>
+                        {model.creditUrl && (
+                          <a
+                            href={model.creditUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Model credits
+                          </a>
+                        )}
+                      </div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </section>
+            )}
 
             {cadArtImages.length === 0 ? (
               <p className="art-empty">
