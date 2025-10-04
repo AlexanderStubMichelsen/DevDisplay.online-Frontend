@@ -170,6 +170,48 @@ const Art = () => {
               </p>
             </header>
 
+            {cadModels.length > 0 && (
+              <section
+                className="cad-model-gallery"
+                aria-label="Interactive 3D model previews"
+              >
+                {cadModels.map((model) => (
+                  <figure className="cad-model-item" key={model.src}>
+                    <model-viewer
+                      className="cad-model-viewer"
+                      src={model.src}
+                      alt={`3D model preview of ${model.title}`}
+                      camera-controls
+                      touch-action="pan-y"
+                      autoplay
+                      auto-rotate
+                      interaction-prompt="none"
+                      exposure="1"
+                      shadow-intensity="0.85"
+                    />
+                    <figcaption className="cad-model-caption">
+                      <strong>{model.title}</strong>
+                      {model.description && <span>{model.description}</span>}
+                      <div className="cad-model-links">
+                        <a href={model.src} download>
+                          Download GLB
+                        </a>
+                        {model.creditUrl && (
+                          <a
+                            href={model.creditUrl}
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Model credits
+                          </a>
+                        )}
+                      </div>
+                    </figcaption>
+                  </figure>
+                ))}
+              </section>
+            )}
+
             <section className="feature-model-section" aria-label="Featured 3D model preview">
               {activeModel ? (
                 <>
