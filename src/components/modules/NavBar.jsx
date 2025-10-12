@@ -119,7 +119,7 @@ function NavBar() {
               Web Shop
             </Nav.Link>
             <Nav.Link
-              href="https://skraafoto.devdisplay.online"
+              href="https://skraafoto-plandata-ckardphtehdjc5ar.westeurope-01.azurewebsites.net"
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setExpanded(false)}
