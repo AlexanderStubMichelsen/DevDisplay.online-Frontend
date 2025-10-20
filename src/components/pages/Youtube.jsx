@@ -8,7 +8,7 @@ import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-re
 import ScrollIndicator from "../modules/ScrollIndicator";
 
 function Youtube() {
-  const [searchQuery, setSearchQuery] = useState("trending music"); // ✅ Default query to load initial videos
+  const [searchQuery, setSearchQuery] = useState("Best new videos"); // ✅ Default query to load initial videos
   const [searchResults, setSearchResults] = useState([]);
   const [nextPageToken, setNextPageToken] = useState(null);
   const [error, setError] = useState(null);
@@ -94,7 +94,7 @@ function Youtube() {
           <form onSubmit={handleSearch} className="search-form">
             <input
               type="text"
-              placeholder="Search YouTube videos..."
+              placeholder="Search videos..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               className="search-input"

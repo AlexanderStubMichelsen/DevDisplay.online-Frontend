@@ -118,8 +118,8 @@ footer {
 .auth-buttons button {
   padding: 12px 30px;
   background: #dabe4f;
-  color: #753f3f;
-  border: none;
+  color: blue;
+  border: 1px solid blue;
   border-radius: 12px;
   cursor: pointer;
   font-size: 20px;

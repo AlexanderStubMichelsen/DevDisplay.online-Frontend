@@ -20,7 +20,7 @@
   top: 0;             /* Stick to the top */
   width: 100%;
   background-color: #dabe4f !important; /* Use hex or rgb, no quotes */
-  border-bottom: 3px solid #753f3f; /* Light border color */
+  border-bottom: 1px solid blue; /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
 }
 
@@ -30,6 +30,10 @@
 
 .sticky-top-navbar .navbar-toggler {
   border: none;
+}
+.nav-link {
+  color: blue !important;
+  font-size: 14px;
 }
 
 .sticky-top-navbar .nav-link {
@@ -42,17 +46,17 @@
 }
 
 .sticky-top-navbar .navbar-nav .nav-link.active {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .sticky-top-navbar .navbar-brand,
 .sticky-top-navbar .nav-link {
-  color: #753f3f !important;
+  color: blue !important;
 }
 
 .sticky-top-navbar .navbar-brand:hover,
 .sticky-top-navbar .nav-link:hover {
-  color: #f0f0f0 !important;
+  color: white !important;
 }
 
 #dropdown-basic {

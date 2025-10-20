@@ -60,11 +60,7 @@ const cadArtImages = [
     alt: "6,2 Curve",
     title: "3D Product Visualization — 6,2 Curve - Alex",
   },
-  {
-    src: ornament,
-    alt: "Ornament",
-    title: "3D Product Visualization — Ornament - Alex",
-  },
+  
   {
     src: New_truck_base,
     alt: "New Truck Base",
@@ -89,11 +85,6 @@ const cadArtImages = [
     src: signatureRawRender,
     alt: "Tagv2",
     title: "3D Product Visualization — Tagv2 - Alex",
-  },
-  {
-    src: signatureImg,
-    alt: "Signature",
-    title: "3D Product Visualization Edit — Signature - Alex",
   },
   {
     src: Sword,
@@ -178,10 +169,10 @@ const Art = () => {
             <header className="art-header">
               <h1 className="art-title">My CAD Art</h1>
               <p className="art-subtitle">
-                A small collection of CAD (Computer‑Aided Design) visuals and
+                A collection of CAD (Computer‑Aided Design) visuals and
                 mechanical design experiment assemblies.</p>
                 <p className="art-description"> <br />
-                You can select a model below, drag, drop and rotate it.
+                You can select a model below, drag(right click), zoom(scroll) and rotate(left click) it.
               </p>
             </header>
 

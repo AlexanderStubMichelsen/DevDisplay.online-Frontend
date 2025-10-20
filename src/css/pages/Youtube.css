@@ -66,9 +66,8 @@
 .video-title {
   width: 100%;
   text-align: center;
-  font-size: 16px;
-  font-weight: bold;
-  color: black;
+  font-size: 14px;
+  color: blue;
   margin: 8px 0;
   border-radius: 5px;
   padding: 10px;
@@ -131,6 +130,7 @@
 .search-form {
   width: 700px;
   display: flex;
+  color: blue;
   justify-content: center;
   align-items: center; /* ✅ Ensures vertical centering */
   margin: 0 auto 20px auto; /* ✅ Centers horizontally */
@@ -146,8 +146,8 @@
 }
 
 .search-input {
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-  color: white; /* Text color */
+  background-color: blue(0, 0, 0, 0.5); /* Semi-transparent background */
+  color: blue; /* Text color */
 }
 
 .video-container {
