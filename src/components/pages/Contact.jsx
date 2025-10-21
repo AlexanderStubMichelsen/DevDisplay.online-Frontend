@@ -42,8 +42,9 @@ const ContactForm = () => {
                 <div className="overlay">
       <h1>Contact</h1>
       <p>
-        Have a question or want to get in touch? Fill out the form below or email me at{" "}
-        <a href="mailto:AlexanderStubMichelsen@gmail.com">AlexanderStubMichelsen@gmail.com</a>
+        Have a question or want to get in touch? <br></br> Fill out the form below 
+        {/*  or email me at{" "}
+        <a href="mailto:AlexanderStubMichelsen@gmail.com">AlexanderStubMichelsen@gmail.com</a>*/}
       </p>
       {submitted ? (
         <div className="contact-success">

@@ -75,24 +75,25 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <>
-      {/* ✅ Navbar */}
-      <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <div className="app-container">
-        {" "}
-        {/* ⬅️ This was missing */}
-        <div className="page-content">
-          {" "}
-          {/* Add this wrapper */}
-          {/* ✅ Video Background */}
-          <div className="video-container">
-            <video autoPlay loop muted playsInline className="video-bg">
-              <source src={abstractbackground} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+      {/* Background video - outside all containers */}
+      <div className="video-bg-wrapper">
+        <video autoPlay loop muted playsInline className="video-bg">
+          <source src={abstractbackground} type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+      </div>
+
+      {/* All content above the video */}
+      <div className="site-wrapper">
+        <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+        
+        <div className="app-container">
+          <div className="page-content">
             <div className="weather-widget">
-            <WeatherWidget apiKey={apiKey} />
+              <WeatherWidget apiKey={apiKey} />
             </div>
-            {/* ✅ Show Sign-Up Button if Not Logged In */}
+            
+            {/* Show Sign-Up Button if Not Logged In */}
             {!sessionStorage.getItem("isLoggedIn") && (
               <div className="auth-buttons">
                 <button type="button" onClick={() => setShowSignup(true)}>
@@ -102,7 +103,8 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
             )}
           </div>
         </div>
-        {/* ✅ Sign-Up Modal */}
+
+        {/* Sign-Up Modal */}
         {showSignup && (
           <div className="modal" role="dialog" aria-modal="true">
             <div className="modal-content">
@@ -163,9 +165,10 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
             </div>
           </div>
         )}
+
+        <Footer className="footer" />
+        <ScrollIndicator />
       </div>
-      <ScrollIndicator />
-      <Footer className="footer" /> {/* <-- Add Footer here */}
     </>
   );
 };

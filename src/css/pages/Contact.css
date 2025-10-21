@@ -17,17 +17,22 @@
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
+  color: blue;
 }
 
 .contact-container h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #753f3f;
+  color: blue;
 }
 
 .contact-container p {
   margin-bottom: 1.5rem;
-  color: #333;
+  color: blue;
+}
+
+.contact-container a {
+  color: blue;
 }
 
 .contact-form .form-group {
@@ -38,7 +43,7 @@
   display: block;
   margin-bottom: 0.4rem;
   font-weight: 500;
-  color: #753f3f;
+  color: blue;
 }
 
 .contact-form input,
@@ -64,8 +69,8 @@
 }
 
 .btn.btn-primary {
-  background: #bec5be;
-  color: #753f3f;
+  background: blue;
+  color: #dabe4f;
   border: none;
   padding: 0.7rem 1.5rem;
   border-radius: 6px;
@@ -75,7 +80,7 @@
 }
 
 .btn.btn-primary:hover {
-  background: #753f3f;
+  background: black;
   color: #fff;
 }
 
@@ -111,6 +116,7 @@
   transform: translate(-50%, -50%);
   padding: 32px 24px;
   border-radius: 16px;
+  color: blue;
 }
 
 @media (max-width: 600px) {
