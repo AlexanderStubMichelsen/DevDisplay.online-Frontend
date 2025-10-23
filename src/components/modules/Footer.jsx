@@ -72,7 +72,7 @@ const Footer = () => {
             </li>
             </ul>
         </div>
-        <div className="footer-section footer-connect">
+        {/* <div className="footer-section footer-connect">
             <h4 className="footer-heading">Code</h4>
             <ul className="footer-list">
             <li>
@@ -156,7 +156,7 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
 
         {/* <div className="footer-section footer-legal">
           <h4 className="footer-heading">Legal</h4>

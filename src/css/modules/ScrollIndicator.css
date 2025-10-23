@@ -8,7 +8,7 @@
   z-index: 999;
   pointer-events: auto;
   text-align: center;
-  color: blue;
+  color: rgb(131, 97, 97);
 }
 
 .scroll-down-indicator.hidden {
@@ -20,8 +20,8 @@
 .scroll-down-indicator .arrow {
   width: 20px;
   height: 20px;
-  border-bottom: 2px solid #dabe4f;
-  border-right: 2px solid blue;
+  border-bottom: 2px solid white;
+  border-right: 2px solid rgb(131, 97, 97);
   transform: rotate(45deg);
   margin: 0 auto;
   margin-top: 8px;

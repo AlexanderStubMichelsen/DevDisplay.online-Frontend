@@ -7,11 +7,10 @@
   z-index: 10;
   background: rgba(247, 243, 243, 0.5);
   border-radius: 10px;
-  border: 1px solid blue;
+  border: 1px solid rgb(131, 97, 97);;
   padding: 0.8rem 1rem;
   font-family: sans-serif;
   font-size: 0.9rem;
-  box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
   max-width: 300px;
   text-align: center;
 }

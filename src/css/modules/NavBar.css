@@ -19,8 +19,8 @@
   position: sticky;   /* Make it sticky */
   top: 0;             /* Stick to the top */
   width: 100%;
-  background-color: #dabe4f !important; /* Use hex or rgb, no quotes */
-  border-bottom: 1px solid blue; /* Light border color */
+  background-color: #302f2d !important; /* Use hex or rgb, no quotes */
+  border-bottom: 1px solid rgb(131, 97, 97); /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
 }
 
@@ -32,7 +32,7 @@
   border: none;
 }
 .nav-link {
-  color: blue !important;
+  color: rgb(131, 97, 97) !important;
   font-size: 14px;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .sticky-top-navbar .nav-link:hover {
-  color: #007bff; /* Primary hover color */
+  color: rgb(131, 97, 97) !important; /* Primary hover color */
 }
 
 .sticky-top-navbar .navbar-nav .nav-link.active {
@@ -51,7 +51,7 @@
 
 .sticky-top-navbar .navbar-brand,
 .sticky-top-navbar .nav-link {
-  color: blue !important;
+  color: rgb(131, 97, 97) !important;
 }
 
 .sticky-top-navbar .navbar-brand:hover,

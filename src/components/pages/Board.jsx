@@ -174,10 +174,10 @@ const Board = () => {
         <NavBar />
         <div className="board-container">
           <div className="board-content">
-            <video autoPlay loop muted playsInline className="video-bg">
+            {/* <video autoPlay loop muted playsInline className="video-bg">
               <source src={abstractbackground} type="video/mp4" />
               Your browser does not support the video tag.
-            </video>
+            </video> */}
             <div className="loading">Loading messages...</div>
           </div>
         </div>

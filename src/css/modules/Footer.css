@@ -1,13 +1,12 @@
 .footer {
   width: 100%;
-  color: blue; /* Dark text color */
+  color: rgb(131, 97, 97) !important; /* Dark text color */
   padding: 2rem 1rem;
   font-size: 0.9rem;
   margin-top: auto;
   z-index: 2;
-  border-top: 1px solid blue; /* Light border color */
-  background-color: #dabe4f; /* Dark background color */
-  
+  border-top: 1px solid rgb(131, 97, 97); /* Light border color */
+  background-color: #302f2d !important; /* Use hex or rgb, no quotes */  
 }
 
 
@@ -29,7 +28,7 @@
 
 .footer-heading {
   margin-bottom: 0.5rem;
-  color: blue;
+  color: rgb(131, 97, 97) !important;
   font-size: 1.1rem;
 }
 
@@ -40,7 +39,7 @@
 }
 
 .footer-link {
-  color: blue;
+  color: rgb(131, 97, 97) !important; /* Dark text color */
   text-decoration: none;
   font-weight: inherit; /* Prevent font weight jump */
   transition: color 0.2s, text-decoration 0.2s;
@@ -57,5 +56,5 @@
   text-align: center;
   margin-top: 2rem;
   font-size: 0.85rem;
-  color: blue;
+  color: rgb(131, 97, 97) !important; /* Dark text color */
 }

@@ -34,7 +34,7 @@ body {
 .images-title {
   font-size: 28px;
   margin-bottom: 20px;
-  color: blue;
+  color: rgb(131, 97, 97);
   opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 }
 
@@ -72,7 +72,6 @@ body {
   opacity: 1;
 }
 
-
 .image-card:hover {
   transform: scale(1.05); /* Scale up slightly on hover */
 }
@@ -105,30 +104,30 @@ body {
   outline: none;
   transition: border-color 0.2s;
   background: black !important;
-  color: blue !important; /* Changed from white to #753f3f */
+  color: rgb(131, 97, 97) !important; /* Dark text color */
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .search-input::placeholder {
   margin-bottom: 20px;
-  color: #753f3f;
+  color: rgb(131, 97, 97) !important; /* Dark text color */
 }
 
 .search-input:focus {
-  border-color: #007bff;
+  border-color: rgb(131, 97, 97);
   background: #333;
 }
 
 .search-input {
   color: white;
   background-color: blue; /* Set background color to black */
-  border: 1px solid blue; /* Set border color to blue */
+  border: 1px solid rgb(131, 97, 97); /* Set border color to blue */
 }
 
 .load-more-btn {
   background-color: black !important;
-  color: blue !important;
-  border: solid blue 1px !important;
+  color: rgb(131, 97, 97) !important;
+  border: solid rgb(131, 97, 97) 1px !important;
   border-radius: 5px;
   padding: 10px 20px;
   font-size: 16px;
@@ -138,7 +137,7 @@ body {
 
 .load-more-btn:hover {
   background-color: #753f3f !important;
-  color: blue !important; /* Change to a lighter shade on hover */
+  color: rgb(131, 97, 97) !important; /* Change to a lighter shade on hover */
 }
 
 .action-button {
@@ -159,7 +158,7 @@ body {
 }
 
 .image-stats {
-  color:  blue; /* Dark background color */
+  color:  rgb(131, 97, 97); /* Dark background color */
 
 }
 
@@ -175,7 +174,7 @@ body {
   font-size: 28px;
   margin-top: 40px;
   margin-bottom: 20px;
-  color: blue;
+  color: rgb(131, 97, 97);
   opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 }
 
@@ -191,11 +190,11 @@ body {
 .image-card p {
   font-size: 14px;
   margin: 8px 0;
-  color: blue; /* Dark background color */
+  color: rgb(131, 97, 97); /* Dark background color */
 }
 
 .image-card a {
-  color: blue;
+  color: rgb(131, 97, 97);
   text-decoration: underline;
 }
 
@@ -214,7 +213,7 @@ body {
   font-size: 28px;
   margin-top: 40px;
   margin-bottom: 20px;
-  color: blue;
+  color: rgb(131, 97, 97);
   opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
   float: left;
 }

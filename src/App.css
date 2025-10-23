@@ -10,6 +10,10 @@ html, body {
   min-height: 100vh;
 }
 
+.site-wrapper {
+    background-color: #555;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
@@ -117,14 +121,13 @@ footer {
 
 .auth-buttons button {
   padding: 12px 30px;
-  background: #dabe4f;
-  color: blue;
-  border: 1px solid blue;
+  background: #302f2d;
+  color: rgb(131, 97, 97);
+  border: 1px solid rgb(131, 97, 97);
   border-radius: 12px;
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
-  box-shadow: 0 8px 30px rgba(133, 219, 20, 0.6);
   transition: background 0.4s ease, box-shadow 0.3s ease;
 }
 

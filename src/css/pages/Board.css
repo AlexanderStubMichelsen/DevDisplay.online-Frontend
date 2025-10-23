@@ -15,6 +15,7 @@
   z-index: 1;
   position: relative;
   overflow: hidden;
+  background-color: #555;
 }
 
 /* Video background for board */
@@ -71,12 +72,12 @@
   padding: 40px;
   font-size: 18px;
   color: #dabe4f;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgb(131, 97, 97);
   border-radius: 10px;
 }
 
 .error-message {
-  background: rgba(220, 53, 69, 0.8);
+  background: rgb(131, 97, 97);
   color: #ffffff;
   padding: 15px;
   border-radius: 8px;
@@ -86,8 +87,8 @@
 }
 
 .retry-btn {
-  background: #dabe4f;
-  color: #753f3f;
+  background: rgb(187, 24, 24);
+  color: #ffffff;
   border: none;
   padding: 6px 12px;
   border-radius: 4px;
@@ -99,18 +100,18 @@
 }
 
 .retry-btn:hover {
-  background: #753f3f;
+  background: rgb(131, 97, 97);
   color: #dabe4f;
   transform: translateY(-2px);
 }
 
 /* Message Form Styles */
 .message-form {
-  background: #dabe4f;
+  background: rgb(131, 97, 97);
   padding: 25px;
   border-radius: 10px;
   margin-bottom: 30px;
-  border: 2px solid #dabe4f;
+  border: 2px solid rgb(131, 97, 97);
   backdrop-filter: blur(10px);
 }
 
@@ -122,7 +123,7 @@
   display: block;
   margin-bottom: 8px;
   font-weight: bold;
-  color: #753f3f;
+  color: rgb(131, 97, 97);
 }
 
 .form-group input,
@@ -145,7 +146,7 @@
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: #dabe4f;
+  border-color: rgb(131, 97, 97);
   box-shadow: 0 0 0 3px rgba(218, 190, 79, 0.3);
 }
 
@@ -156,7 +157,7 @@
 
 .submit-btn {
   background: #753f3f;
-  color: #dabe4f;
+  color: rgb(131, 97, 97);
   
   border: none;
   padding: 12px 30px;
