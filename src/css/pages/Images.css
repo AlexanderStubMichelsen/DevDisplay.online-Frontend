@@ -12,6 +12,7 @@ body {
   display: flex !important;
   flex-direction: column !important;
   min-height: 100vh !important;
+  
 }
 
 .images-container {
@@ -29,12 +30,14 @@ body {
   position: relative;
   min-height: auto !important; /* Override any min-height */
   z-index: 1;
+  background-color: #555;
+  color: #302f2d;
 }
 
 .images-title {
   font-size: 28px;
   margin-bottom: 20px;
-  color: rgb(131, 97, 97);
+  color: #302f2d !important; /* Use hex or rgb, no quotes */
   opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 }
 
@@ -58,7 +61,7 @@ body {
 
 .loading-message {
   font-size: 18px;
-  color: #666;
+  color: #302f2d !important; /* Use hex or rgb, no quotes */
 }
 
 /* Styling for each image */
@@ -104,13 +107,13 @@ body {
   outline: none;
   transition: border-color 0.2s;
   background: black !important;
-  color: rgb(131, 97, 97) !important; /* Dark text color */
+  color: #302f2d !important; /* Use hex or rgb, no quotes */
   box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .search-input::placeholder {
   margin-bottom: 20px;
-  color: rgb(131, 97, 97) !important; /* Dark text color */
+  color: #302f2d !important; /* Use hex or rgb, no quotes */
 }
 
 .search-input:focus {
@@ -125,8 +128,8 @@ body {
 }
 
 .load-more-btn {
-  background-color: black !important;
-  color: rgb(131, 97, 97) !important;
+  background-color: #753f3f !important;
+  color: #302f2d !important; /* Use hex or rgb, no quotes */
   border: solid rgb(131, 97, 97) 1px !important;
   border-radius: 5px;
   padding: 10px 20px;
@@ -137,7 +140,7 @@ body {
 
 .load-more-btn:hover {
   background-color: #753f3f !important;
-  color: rgb(131, 97, 97) !important; /* Change to a lighter shade on hover */
+  color: #302f2d !important; /* Change to a lighter shade on hover */
 }
 
 .action-button {

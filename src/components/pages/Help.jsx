@@ -33,10 +33,10 @@ function Help() {
       <NavBar />
       <div className="help-wrapper">
         <div className="help">
-          <video autoPlay loop muted playsInline className="video-bg">
+          {/* <video autoPlay loop muted playsInline className="video-bg">
             <source src={abstractbackground} type="video/mp4" />
             Your browser does not support the video tag.
-          </video>
+          </video> */}
 
           <div className="text-container">
             <h1 className="help-title">Help & User Guide</h1>

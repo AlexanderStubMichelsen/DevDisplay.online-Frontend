@@ -36,12 +36,12 @@ const About = () => {
       <NavBar />
       <div className="about-wrapper">
         <div className="about">
-          <div className="video-container">
+          {/* <div className="video-container">
             <video autoPlay loop muted playsInline className="video-bg">
               <source src={abstractbackground} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-          </div>
+          </div> */}
           <div className="content-container">
             <video controls className="video">
               <source src={animationVideo} type="video/mp4" />

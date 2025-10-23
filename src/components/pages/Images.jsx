@@ -108,12 +108,12 @@ function Images() {
       <NavBar />
       <div className="images-wrapper">
         <div className="images-container">
-          <div className="video-container">
+          {/* <div className="video-container">
             <video autoPlay loop muted playsInline className="video-bg">
               <source src={abstractbackground} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-          </div>
+          </div> */}
           <h1 className="images-title"></h1>
 
           <form onSubmit={handleSearch} className="search-form">

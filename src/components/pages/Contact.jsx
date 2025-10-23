@@ -35,10 +35,10 @@ const ContactForm = () => {
 
   return (
     <div className="contact-container">
-      <video autoPlay loop muted playsInline className="video-bg">
+      {/* <video autoPlay loop muted playsInline className="video-bg">
                   <source src={abstractbackground} type="video/mp4" />
                   Your browser does not support the video tag.
-                </video>
+                </video> */}
                 <div className="overlay">
       <h1>Contact</h1>
       <p>

@@ -76,12 +76,12 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
   return (
     <>
       {/* Background video - outside all containers */}
-      <div className="video-bg-wrapper">
+      {/* <div className="video-bg-wrapper">
         <video autoPlay loop muted playsInline className="video-bg">
           <source src={abstractbackground} type="video/mp4" />
           Your browser does not support the video tag.
         </video>
-      </div>
+      </div> */}
 
       {/* All content above the video */}
       <div className="site-wrapper">

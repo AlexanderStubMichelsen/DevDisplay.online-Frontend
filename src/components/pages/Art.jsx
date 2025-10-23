@@ -128,10 +128,10 @@ const Art = () => {
       </Helmet>
       {/* Fixed background video */}
       <div className="page-bg">
-        <video autoPlay loop muted playsInline className="video-bg">
+        {/* <video autoPlay loop muted playsInline className="video-bg">
           <source src={abstractbackground} type="video/mp4" />
           Your browser does not support the video tag.
-        </video>
+        </video> */}
       </div>
 
       {/* Foreground content */}

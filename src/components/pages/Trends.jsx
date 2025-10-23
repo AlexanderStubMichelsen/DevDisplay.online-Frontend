@@ -104,12 +104,12 @@ export default function YouTubeTrends() {
         <NavBar />
         <div className="youtube-trends-wrapper">
           <div className="youtube-trends">
-            <div className="video-container">
+            {/* <div className="video-container">
               <video autoPlay loop muted playsInline className="video-bg">
                 <source src={abstractbackground} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
-            </div>
+            </div> */}
             <h1 className="text-2xl font-bold mb-4">YouTube Trends Analyzer</h1>
 
             <div className="flex gap-4 mb-6 flex-wrap">

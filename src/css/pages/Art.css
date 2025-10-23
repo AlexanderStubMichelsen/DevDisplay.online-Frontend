@@ -6,6 +6,7 @@
   height: 100vh;
   z-index: 0;
   pointer-events: none;
+  background-color: #555;
 }
 
 .page-bg-video {
@@ -306,7 +307,7 @@
 
 .cad-art-title {
   font-weight: 500;
-  color: blue;
+  color: #302f2d;
   font-size: 1rem;
   margin-top: 4px;
 }

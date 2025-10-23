@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center; /* Center vertically */
-  background: rgba(218, 190, 79, 0.07);
+  background-color: #555;
   padding-top: 60px;
   padding-bottom: 60px;
 }
@@ -17,22 +17,22 @@
   max-width: 480px;
   width: 100%;
   margin: 0 auto;
-  color: blue;
+  color: #302f2d;
 }
 
 .contact-container h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: blue;
+  color: #302f2d;
 }
 
 .contact-container p {
   margin-bottom: 1.5rem;
-  color: blue;
+  color: #302f2d;
 }
 
 .contact-container a {
-  color: blue;
+  color: #302f2d;
 }
 
 .contact-form .form-group {
@@ -43,7 +43,7 @@
   display: block;
   margin-bottom: 0.4rem;
   font-weight: 500;
-  color: blue;
+  color: #302f2d;
 }
 
 .contact-form input,
@@ -54,7 +54,7 @@
   border-radius: 6px;
   font-size: 1rem;
   background: #fff;
-  color: #222;
+  color: #302f2d;
   transition: border-color 0.2s;
 }
 
@@ -69,8 +69,8 @@
 }
 
 .btn.btn-primary {
-  background: blue;
-  color: #dabe4f;
+  background: #666060;
+  color: #302f2d;
   border: none;
   padding: 0.7rem 1.5rem;
   border-radius: 6px;
@@ -111,12 +111,13 @@
   left: 50%;
   width: 100%; /* or set a max-width if needed */
   max-width: 480px;
-  background: #dabe4f;
+  background: #635757;
   z-index: 1;
   transform: translate(-50%, -50%);
   padding: 32px 24px;
   border-radius: 16px;
-  color: blue;
+  border-color: #fff;
+  color: #302f2d;
 }
 
 @media (max-width: 600px) {
