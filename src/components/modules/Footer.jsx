@@ -27,7 +27,6 @@ const Footer = () => {
             <li><a href="/images" className="footer-link">Images</a></li>
             <li><a href="/saved" className="footer-link">Saved</a></li>
             <li><a href="/youtube" className="footer-link">Youtube</a></li>
-            <li><a href="/trends" className="footer-link">Trends</a></li>
             <li><a href="/about" className="footer-link">About</a></li>
             <li><a href="/help" className="footer-link">Help</a></li>
           </ul>
