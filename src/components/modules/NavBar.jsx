@@ -110,22 +110,6 @@ function NavBar() {
           in={expanded}
         >
           <Nav className="ml-auto">
-            <Nav.Link
-              href="https://shop.devdisplay.online"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setExpanded(false)}
-            >
-              Web Shop
-            </Nav.Link>
-            <Nav.Link
-              href="https://skraafoto-plandata-ckardphtehdjc5ar.westeurope-01.azurewebsites.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setExpanded(false)}
-            >
-              Skraafoto
-            </Nav.Link>
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
@@ -143,9 +127,6 @@ function NavBar() {
             <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/trends" onClick={() => setExpanded(false)}>
-              <Nav.Link>Trends</Nav.Link>
-            </LinkContainer>
             <LinkContainer to="/about" onClick={() => setExpanded(false)}>
               <Nav.Link>About</Nav.Link>
             </LinkContainer>
@@ -154,9 +135,6 @@ function NavBar() {
             </LinkContainer>
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
               <Nav.Link>Help</Nav.Link>
-            </LinkContainer>
-            <LinkContainer to="/art" onClick={() => setExpanded(false)}>
-              <Nav.Link>Art</Nav.Link>
             </LinkContainer>
 
             {isLoggedIn ? (

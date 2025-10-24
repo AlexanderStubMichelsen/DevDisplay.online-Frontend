@@ -71,7 +71,7 @@ footer {
 }
 
 .btn:hover {
-  background-color: #0056b3;
+  background-color: #302f2d;
 }
 
 /* Logo */
@@ -128,13 +128,10 @@ footer {
   cursor: pointer;
   font-size: 20px;
   font-weight: bold;
-  transition: background 0.4s ease, box-shadow 0.3s ease;
 }
 
 .auth-buttons button:hover {
-  background: #753f3f;
-  color: #dabe4f;
-  box-shadow: 0 6px 20px rgba(0, 13, 255, 0.9);
+  background: #302f2d;
 }
 
 .scroll-down-indicator {
