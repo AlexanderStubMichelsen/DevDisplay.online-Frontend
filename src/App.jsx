@@ -3,11 +3,9 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./App.css";
 import NavBar from "./components/modules/NavBar.jsx";
-import abstractbackground from "./assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import apiFacade from "./util/api/UserFacade.js"; // ✅ Import API facade
 import PropTypes from "prop-types";
 import Footer from "./components/modules/Footer.jsx"; // ✅ Import Footer
-import WeatherWidget from "./components/modules/WeatherWidget.jsx"; // ✅ Add this at the top
 import ScrollIndicator from "./components/modules/ScrollIndicator.jsx"; // ✅ Import ScrollIndicator
 
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
@@ -89,9 +87,7 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
         
         <div className="app-container">
           <div className="page-content">
-            <div className="weather-widget">
-              <WeatherWidget apiKey={apiKey} />
-            </div>
+            
             
             {/* Show Sign-Up Button if Not Logged In */}
             {!sessionStorage.getItem("isLoggedIn") && (
