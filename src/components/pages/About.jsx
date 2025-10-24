@@ -6,7 +6,6 @@ import animationVideo from "../../assets/animation/animation.mp4"; // Import the
 import animationVideo2 from "../../assets/animation/invideo-ai-1080.mp4"; // Import the video file
 import animationVideo3 from "../../assets/animation/DevDisplay.online_free.mp4"; // Import the video file
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 
 const About = () => {
@@ -36,12 +35,6 @@ const About = () => {
       <NavBar />
       <div className="about-wrapper">
         <div className="about">
-          {/* <div className="video-container">
-            <video autoPlay loop muted playsInline className="video-bg">
-              <source src={abstractbackground} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div> */}
           <div className="content-container">
             <video controls className="video">
               <source src={animationVideo} type="video/mp4" />
@@ -57,17 +50,6 @@ const About = () => {
               <source src={animationVideo3} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-
-            {/* Add a button for playing an MP3 file */}
-            {/* <div className="audio-container">
-          <iframe
-            width="110"
-            height="186"
-            src="https://www.myinstants.com/instant/south-park-they-took-our-job/embed/"
-            title="South Park They Took Our Job Sound"
-            style={{ border: "none", overflow: "hidden" }}
-          />
-        </div> */}
           </div>
         </div>
       </div>

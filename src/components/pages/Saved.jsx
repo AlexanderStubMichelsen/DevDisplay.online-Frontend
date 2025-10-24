@@ -1,24 +1,40 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import { Helmet } from "react-helmet-async"
+import React, { useEffect, useState } from "react";
+import { Helmet } from "react-helmet-async";
 import ImageFacade from "../../util/api/ImageFacade.js";
 import NavBar from "../modules/NavBar.jsx";
-import "../../css/pages/Images.css";
 import Footer from "../modules/Footer.jsx";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator.jsx";
+import "../../css/pages/Images.css";
 
 const SavedImages = () => {
   const [savedImages, setSavedImages] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
-  const [userCounts, setUserCounts] = useState({}); // Add state for user counts
+  const [userCounts, setUserCounts] = useState({});
+  const [deleting, setDeleting] = useState(null);
+
+  const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
 
   useEffect(() => {
+    if (!isLoggedIn) {
+      setLoading(false);
+      return;
+    }
+
     const fetchImages = async () => {
       try {
+        setLoading(true);
+        setError("");
+        
         const data = await ImageFacade.getSavedImages();
+        
+        if (!data || data.length === 0) {
+          setSavedImages([]);
+          setError("No saved images found.");
+          return;
+        }
+
         // Calculate thumbHeight for each image
         const thumbWidth = 500;
         const imagesWithThumb = data.map((img) => ({
@@ -26,32 +42,30 @@ const SavedImages = () => {
           thumbHeight:
             img.width && img.height
               ? Math.round(thumbWidth * (img.height / img.width))
-              : 0,
+              : 300, // Default height if dimensions not available
         }));
+        
         setSavedImages(imagesWithThumb);
 
         // Fetch user counts for each image
         const counts = {};
-        for (const image of imagesWithThumb) {
-          try {
-            const count = await ImageFacade.getUserCountForImage(image.imageUrl);
-            counts[image.imageUrl] = count;
-          } catch (err) {
-            console.error(
-              `Failed to fetch user count for image ${image.imageUrl}:`,
-              err
-            );
-            counts[image.imageUrl] = 0;
-          }
-        }
+        await Promise.all(
+          imagesWithThumb.map(async (image) => {
+            try {
+              const count = await ImageFacade.getUserCountForImage(image.imageUrl);
+              counts[image.imageUrl] = count;
+            } catch (err) {
+              console.error(`Failed to fetch user count for image ${image.imageUrl}:`, err);
+              counts[image.imageUrl] = 0;
+            }
+          })
+        );
         setUserCounts(counts);
 
-        if (data.length === 0) {
-          setError("No saved images found.");
-        }
       } catch (err) {
+        console.error("Failed to load saved images:", err);
         setError(
-          "Failed to load saved images. <br /> Please try to log in again. <br /> A session expires after 30 minutes."
+          "Failed to load saved images. Please try logging in again. Sessions expire after 30 minutes."
         );
       } finally {
         setLoading(false);
@@ -59,17 +73,59 @@ const SavedImages = () => {
     };
 
     fetchImages();
-  }, []);
+  }, [isLoggedIn]);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, imageUrl) => {
+    if (!window.confirm("Are you sure you want to delete this saved image?")) {
+      return;
+    }
+
     try {
+      setDeleting(id);
       await ImageFacade.deleteSavedImage(id);
       setSavedImages((prev) => prev.filter((img) => img.id !== id));
-      console.log("Image deleted successfully");
+      
+      // Remove from user counts
+      setUserCounts((prev) => {
+        const updated = { ...prev };
+        delete updated[imageUrl];
+        return updated;
+      });
+      
     } catch (err) {
-      alert("Failed to delete image.");
+      console.error("Failed to delete image:", err);
+      alert("Failed to delete image. Please try again.");
+    } finally {
+      setDeleting(null);
     }
   };
+
+  const filteredImages = savedImages.filter(
+    (image) =>
+      image.title?.toLowerCase().includes(search.toLowerCase()) ||
+      image.photographer?.toLowerCase().includes(search.toLowerCase())
+  );
+
+  if (!isLoggedIn) {
+    return (
+      <>
+        <Helmet>
+          <title>Login Required | DevDisplay</title>
+        </Helmet>
+        <NavBar />
+        <div className="images-wrapper">
+          <div className="images-container">
+            <div className="login-required">
+              <h1>Please Log In</h1>
+              <p>You need to log in to view your saved images.</p>
+            </div>
+          </div>
+          <Footer />
+        </div>
+        <ScrollIndicator />
+      </>
+    );
+  }
 
   return (
     <>
@@ -97,110 +153,91 @@ const SavedImages = () => {
         />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
+      
       <NavBar />
-      {sessionStorage.getItem("isLoggedIn") === "true" ? (
-        <div className="images-wrapper">
-          <div className="images-container">
-            <div className="video-container">
-              <video autoPlay loop muted playsInline className="video-bg">
-                <source src={abstractbackground} type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
+      
+      <div className="images-wrapper">
+        <div className="images-container">
+          <h1 className="images-title">My Saved Images</h1>
+          <input
+            type="text"
+            placeholder="Search saved images..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="search-input"
+          />
+
+          {loading && (
+            <div className="loading-message">
+              <p>Loading saved images...</p>
             </div>
-            <h1 className="images-title"></h1>
-            <form
-              onSubmit={(e) => e.preventDefault()}
-              className="search-form"
-              style={{ marginBottom: "2rem" }}
-            >
-              <input
-                type="text"
-                placeholder="Search saved images..."
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                className="search-input"
-              />
-            </form>
+          )}
 
-            {loading && <p>Loading saved images...</p>}
-            {error && (
-              <p
-                className="error-message"
-                dangerouslySetInnerHTML={{ __html: error }}
-              ></p>
-            )}
-
+          {!loading && filteredImages.length > 0 && (
             <div className="image-grid">
-              {savedImages
-                .filter(
-                  (image) =>
-                    image.title?.toLowerCase().includes(search.toLowerCase()) ||
-                    image.photographer
-                      ?.toLowerCase()
-                      .includes(search.toLowerCase())
-                )
-                .sort((a, b) => b.height / b.width - a.height / a.width) // Sort by height/width ratio, highest first
+              {filteredImages
+                .sort((a, b) => b.height / b.width - a.height / a.width)
                 .map((image) => (
-                  <div key={image.id} className="image-card">
-                    <a
-                      href={image.imageUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <img
-                        src={image.imageUrl}
-                        alt={image.title}
-                        className="saved-image-item"
-                      />
-                    </a>
-                    
-                    <div className="image-stats">
-                      <span className="user-count">
-                        👥 {userCounts[image.imageUrl] || 0} users saved this
-                      </span>
-                    </div>
-                    
-                    <button
-                      type="button"
-                      className="action-button"
-                      onClick={() => handleDelete(image.id)}
-                    >
-                      Delete
-                    </button>
-                    <p>
-                      <strong>{image.title}</strong>
-                    </p>
-                    <p>
-                      Saved from{" "}
+                  <div key={image.id} className="image-item">
+                    <div className="image-wrapper">
                       <a
-                        href={image.sourceLink}
+                        href={image.imageUrl}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="image-link"
                       >
-                        {image.photographer}
+                        <img
+                          src={image.imageUrl}
+                          alt={image.title || 'Saved image'}
+                          className="image"
+                          loading="lazy"
+                        />
                       </a>
-                    </p>
+                    </div>
+                    
+                    <div className="image-content">
+                      <div className="image-info">
+                        <h3 className="image-title">
+                          {image.title || 'Untitled'}
+                        </h3>
+                        {image.photographer && (
+                          <p className="image-photographer">
+                            by{' '}
+                            <a
+                              href={image.sourceLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="photographer-link"
+                            >
+                              {image.photographer}
+                            </a>
+                          </p>
+                        )}
+                      </div>
+
+                      <div className="image-stats">
+                        <span className="user-count">
+                          👥 {userCounts[image.imageUrl] || 0} users
+                        </span>
+                      </div>
+
+                      <button
+                        type="button"
+                        className={`delete-button ${deleting === image.id ? 'deleting' : ''}`}
+                        onClick={() => handleDelete(image.id, image.imageUrl)}
+                        disabled={deleting === image.id}
+                      >
+                        {deleting === image.id ? 'Deleting...' : '🗑️ Delete'}
+                      </button>
+                    </div>
                   </div>
                 ))}
-              {!loading && savedImages.length === 0 && (
-                <p className="no-images" style={{ color: "white" }}>
-                  You haven’t saved any images yet.
-                </p>
-              )}
             </div>
-          </div>
-          <Footer />
+          )}
         </div>
-      ) : (
-        <div className="images-wrapper">
-          <div className="images-container">
-            <h1 className="images-title">
-              Please log in to view your saved images.
-            </h1>
-          </div>
-        </div>
-      )}
-     <ScrollIndicator />
+        <Footer />
+      </div>
+      <ScrollIndicator />
     </>
   );
 };

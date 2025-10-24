@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet-async"
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import "../../css/pages/Board.css";
 import facade from "../../util/api/BoardPostFacade.js";
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
@@ -174,10 +173,6 @@ const Board = () => {
         <NavBar />
         <div className="board-container">
           <div className="board-content">
-            {/* <video autoPlay loop muted playsInline className="video-bg">
-              <source src={abstractbackground} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video> */}
             <div className="loading">Loading messages...</div>
           </div>
         </div>

@@ -7,7 +7,6 @@ import apiFacade from "../../util/api/UserFacade";
 import Footer from "../modules/Footer";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator";
 
 const UserPage = () => {
@@ -91,12 +90,6 @@ const UserPage = () => {
       <NavBar />
       <div className="user-page-wrapper">
         <div className="user-page-container">
-          <div className="video-container">
-            <video autoPlay loop muted playsInline className="video-bg">
-              <source src={abstractbackground} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
           <div className="user-page">
             <h1>User Information</h1>
             {message && <p className="feedback">{message}</p>}

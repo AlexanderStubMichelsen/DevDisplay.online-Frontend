@@ -4,7 +4,6 @@ import "../../css/pages/Images.css";
 import NavBar from "../modules/NavBar.jsx";
 import ImageFacade from "../../util/api/ImageFacade.js";
 import Footer from "../modules/Footer.jsx";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator.jsx";
 
 function Images() {
@@ -108,12 +107,6 @@ function Images() {
       <NavBar />
       <div className="images-wrapper">
         <div className="images-container">
-          {/* <div className="video-container">
-            <video autoPlay loop muted playsInline className="video-bg">
-              <source src={abstractbackground} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div> */}
           <h1 className="images-title"></h1>
 
           <form onSubmit={handleSearch} className="search-form">

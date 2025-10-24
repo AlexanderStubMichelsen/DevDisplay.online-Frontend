@@ -80,7 +80,8 @@ body {
 }
 
 .image-item {
-  width: 130px;
+  position: relative;
+  width: 300px;
   height: auto;
   border-radius: 5px;
   cursor: pointer;
@@ -99,32 +100,26 @@ body {
 
 .search-input {
   width: 100%;
-  max-width: 400px;
-  padding: 1.2rem 1.2rem;   /* Increased vertical padding */
-  height: 3.2rem;           /* Explicitly set a taller height */
-  border-radius: 25px;
-  font-size: 1.1rem;
-  outline: none;
-  transition: border-color 0.2s;
-  background: black !important;
-  color: #302f2d !important; /* Use hex or rgb, no quotes */
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  max-width: 500px;
+  margin: 0 auto 20px;
+  padding: 12px 16px;
+  border: 1px solid #8d6464;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #555 !important; /* Changed from #555 to white */
+  color: #333 !important;
+  display: block;
 }
 
 .search-input::placeholder {
-  margin-bottom: 20px;
-  color: #302f2d !important; /* Use hex or rgb, no quotes */
+  color: #666 !important; /* Visible placeholder text */
 }
 
 .search-input:focus {
-  border-color: rgb(131, 97, 97);
-  background: #333;
-}
-
-.search-input {
-  color: white;
-  background-color: blue; /* Set background color to black */
-  border: 1px solid rgb(131, 97, 97); /* Set border color to blue */
+  outline: none;
+  border-color: #753f3f;
+  box-shadow: 0 0 0 2px rgba(117, 63, 63, 0.1);
+  background-color: #fff !important; /* Keep white on focus */
 }
 
 .load-more-btn {
@@ -225,14 +220,6 @@ body {
   flex: 1;
 }
 
-/* Add spacing before footer */
-.images-wrapper::after {
-  content: '';
-  height: 150px; /* Increased spacing before footer */
-  width: 100%;
-  display: block;
-}
-
 /* Force footer to bottom with !important */
 .footer {
   margin-top: auto !important;
@@ -252,6 +239,120 @@ body {
   overflow: hidden;
   object-fit: cover;
   z-index: 0;
+}
+
+/* Add styles for saved images to match regular images */
+.image-item {
+  position: relative;
+  background-color: transparent;
+  border-radius: 5px;
+  overflow: hidden;
+  transition: transform 0.2s ease-in-out;
+}
+
+.image-item:hover {
+  transform: scale(1.05);
+}
+
+.image-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.image-link {
+  display: block;
+  width: 100%;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  opacity: 1;
+}
+
+.image-content {
+  padding: 8px;
+  background-color: rgba555;
+  margin-top: 8px;
+  border-radius: 5px;
+}
+
+.image-info {
+  margin-bottom: 8px;
+}
+
+.image-title {
+  font-size: 14px;
+  font-weight: bold;
+  color: #302f2d;
+  margin: 0 0 4px 0;
+}
+
+.image-photographer {
+  font-size: 12px;
+  color: rgb(131, 97, 97);
+  margin: 0;
+}
+
+.photographer-link {
+  color: rgb(131, 97, 97);
+  text-decoration: underline;
+}
+
+.photographer-link:hover {
+  color: #753f3f;
+}
+
+.user-count {
+  font-size: 12px;
+  color: rgb(131, 97, 97);
+}
+
+.delete-button {
+  width: 100%;
+  padding: 6px 12px;
+  background-color: #615e5e;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 8px;
+}
+
+.delete-button:hover:not(:disabled) {
+  background-color: #c82333;
+}
+
+.delete-button:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+}
+
+.delete-button.deleting {
+  background-color: #6c757d;
+}
+
+/* Style for empty states and messages */
+.empty-state,
+.no-results,
+.login-required {
+  text-align: center;
+  padding: 2rem;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 8px;
+  margin: 2rem auto;
+  max-width: 500px;
+  color: #302f2d;
+}
+
+.empty-state h2,
+.login-required h1 {
+  color: #753f3f;
+  margin-bottom: 1rem;
 }
 
 

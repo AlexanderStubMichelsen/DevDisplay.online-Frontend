@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import "../../css/pages/NoMatch.css";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator";
 
 const NoMatch = () => {
@@ -34,13 +33,6 @@ const NoMatch = () => {
       <NavBar />
       <div className="nomatch-wrapper">
         <div className="nomatch-container">
-          <div className="video-container">
-            <video autoPlay loop muted playsInline className="video-bg">
-              <source src={abstractbackground} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div>
-
           <div className="error-content">
             <div className="error-number">404</div>
             <h1 className="error-title">Page Not Found</h1>

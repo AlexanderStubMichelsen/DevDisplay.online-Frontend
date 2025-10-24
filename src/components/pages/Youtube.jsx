@@ -4,7 +4,6 @@ import { Helmet } from "react-helmet-async"
 import "../../css/pages/Youtube.css";
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
 import ScrollIndicator from "../modules/ScrollIndicator";
 
 function Youtube() {
@@ -83,12 +82,6 @@ function Youtube() {
       <NavBar />
       <div className="youtube-wrapper">
         <div className="youtube-container">
-          {/* <div className="video-container">
-            <video autoPlay loop muted playsInline className="video-bg">
-              <source src={abstractbackground} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
-          </div> */}
           <h1 className="youtube-title"></h1>
 
           <form onSubmit={handleSearch} className="search-form">

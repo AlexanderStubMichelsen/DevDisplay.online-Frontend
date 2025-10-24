@@ -5,8 +5,6 @@ import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
 import emailjs from "emailjs-com";
 import "../../css/pages/Contact.css";
-import abstractbackground from "../../assets/153450-805374052_small-ezgif.com-reverse-video.mp4"; // Import the video file
-
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
 const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
@@ -35,11 +33,7 @@ const ContactForm = () => {
 
   return (
     <div className="contact-container">
-      {/* <video autoPlay loop muted playsInline className="video-bg">
-                  <source src={abstractbackground} type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video> */}
-                <div className="overlay">
+      <div className="overlay">
       <h1>Contact</h1>
       <p>
         Have a question or want to get in touch? <br></br> Fill out the form below 
