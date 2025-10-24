@@ -113,9 +113,6 @@ function NavBar() {
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
-            <LinkContainer to="/board" onClick={() => setExpanded(false)}>
-              <Nav.Link>Board</Nav.Link>
-            </LinkContainer>
             <LinkContainer to="/images" onClick={() => setExpanded(false)}>
               <Nav.Link>Images</Nav.Link>
             </LinkContainer>

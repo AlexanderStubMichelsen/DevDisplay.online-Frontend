@@ -133,7 +133,7 @@ const UserPage = () => {
               <Row>
                 <Col xs={12} md={6} className="mb-3 d-flex flex-column gap-2">
                   <LinkContainer to="/changepassword">
-                    <Button variant="outline-primary">Change Password</Button>
+                    <Button variant="outline-primary">Change Pass</Button>
                   </LinkContainer>
                   <LinkContainer to="/">
                     <Button variant="outline-secondary">Return</Button>

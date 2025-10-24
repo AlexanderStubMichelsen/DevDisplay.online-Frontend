@@ -9,15 +9,17 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  background-color: #555;
+  color: rgb(134, 125, 125);
 }
 
 .user-page {
     max-width: 600px;
     margin: 0 auto;
     padding: 20px;
-    background-color: black;
+    background-color: rgb(92, 87, 87);
     border-radius: 8px;
-    color: white;
+    color: rgb(134, 125, 125);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
 
@@ -26,16 +28,19 @@
   .user-page h1 {
     text-align: center;
     margin-bottom: 20px;
+    color: rgb(134, 125, 125);
   }
   
   .user-form .form-group {
     margin-bottom: 15px;
+    color: rgb(134, 125, 125);
   }
   
   .user-form .form-group label {
     display: block;
     margin-bottom: 5px;
     font-weight: bold;
+    color: rgb(134, 125, 125);
   }
   
   .user-form .form-control {
@@ -43,27 +48,138 @@
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    background-color: #555;
+    color: rgb(134, 125, 125);
   }
   
   .user-form .btn {
     display: block;
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
-    color: white;
+    background-color: #302f2d;
+    color: rgb(134, 125, 125);
     border: none;
     border-radius: 4px;
     cursor: pointer;
   }
   
   .user-form .btn:hover {
-    background-color: #0056b3;
+    background-color: #302f2d;
+    color: rgb(134, 125, 125);
   }
 
   .navlinkuserpage {
-    color: white;
+    color: rgb(134, 125, 125);
     text-decoration: none;
     font-weight: bold;
     margin-top: 10px;
     display: inline-block;
+  }
+
+  .btn-container {
+    color: rgb(134, 125, 125);
+  }
+
+  /* Custom button text color */
+  .btn-outline-primary,
+  .btn-outline-secondary,
+  .btn-outline-danger {
+    color: rgb(134, 125, 125) !important;
+  }
+
+  .btn-outline-primary:hover,
+  .btn-outline-secondary:hover,
+  .btn-outline-danger:hover {
+    color: rgb(134, 125, 125) !important;
+  }
+
+  .btn-outline-primary:focus,
+  .btn-outline-secondary:focus,
+  .btn-outline-danger:focus {
+    color: rgb(134, 125, 125) !important;
+  }
+
+  /* Custom styling for the Update button */
+  .btn-primary {
+    background-color: #302f2d;
+    border-color: #302f2d;
+    color: rgb(134, 125, 125) !important;
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(134, 125, 125) !important;
+    border-color: rgb(134, 125, 125) !important;
+    color: #555 !important; /* Dark text on the colored background */
+  }
+
+  .btn-primary:focus {
+    background-color: rgb(134, 125, 125) !important;
+    border-color: rgb(134, 125, 125) !important;
+    color: #555 !important;
+    box-shadow: none !important; /* Remove the blue glow */
+  }
+
+  .btn-primary:active {
+    background-color: rgb(134, 125, 125) !important;
+    border-color: rgb(134, 125, 125) !important;
+    color: #555 !important;
+    box-shadow: none !important;
+  }
+
+  /* Remove all blue glows and focus effects */
+  .btn-primary:focus,
+  .btn-primary:focus-visible,
+  .btn-primary.focus,
+  .btn-primary:not(:disabled):not(.disabled):active:focus,
+  .btn-primary:not(:disabled):not(.disabled).active:focus {
+    background-color: rgb(134, 125, 125) !important;
+    border-color: rgb(134, 125, 125) !important;
+    color: #555 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  /* Also remove focus for all buttons globally if needed */
+  .btn:focus,
+  .btn:focus-visible,
+  .btn.focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  /* Target the specific form and button to override Bootstrap */
+  .user-form .btn-primary,
+  .user-form .btn-primary:hover,
+  .user-form .btn-primary:focus,
+  .user-form .btn-primary:focus-visible,
+  .user-form .btn-primary.focus,
+  .user-form .btn-primary:active,
+  .user-form .btn-primary:not(:disabled):not(.disabled):active,
+  .user-form .btn-primary:not(:disabled):not(.disabled):active:focus,
+  .user-form .btn-primary:not(:disabled):not(.disabled).active:focus {
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .user-form .btn-primary:hover {
+    background-color: rgb(109, 101, 101) !important;
+    border-color: rgb(134, 125, 125) !important;
+    color: #857f7f !important;
+  }
+
+  .user-form .btn-primary:focus,
+  .user-form .btn-primary:focus-visible {
+    background-color: rgb(134, 125, 125) !important;
+    border-color: rgb(134, 125, 125) !important;
+    color: #555 !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+
+  .user-form .btn-primary:active {
+    background-color: rgb(134, 125, 125) !important;
+    border-color: rgb(134, 125, 125) !important;
+    color: #555 !important;
+    box-shadow: none !important;
+    outline: none !important;
   }
