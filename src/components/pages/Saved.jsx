@@ -76,7 +76,7 @@ const SavedImages = () => {
   }, [isLoggedIn]);
 
   const handleDelete = async (id, imageUrl) => {
-    {
+    if (deleting) {
       return;
     }
 
