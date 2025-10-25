@@ -76,7 +76,7 @@ const SavedImages = () => {
   }, [isLoggedIn]);
 
   const handleDelete = async (id, imageUrl) => {
-    if (!window.confirm("Are you sure you want to delete this saved image?")) {
+    {
       return;
     }
 

@@ -11,7 +11,6 @@ import ScrollIndicator from "./components/modules/ScrollIndicator.jsx"; // ✅ I
 const App = ({ isLoggedIn, setIsLoggedIn }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const apiKey = import.meta.env.VITE_WEATHER_API_KEY;
 
   // Modal state
   const [showSignup, setShowSignup] = useState(false);
@@ -73,94 +72,16 @@ const App = ({ isLoggedIn, setIsLoggedIn }) => {
 
   return (
     <>
-      {/* Background video - outside all containers */}
-      {/* <div className="video-bg-wrapper">
-        <video autoPlay loop muted playsInline className="video-bg">
-          <source src={abstractbackground} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </div> */}
-
       {/* All content above the video */}
       <div className="site-wrapper">
         <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
         
         <div className="app-container">
           <div className="page-content">
-            
-            
-            {/* Show Sign-Up Button if Not Logged In */}
-            {!sessionStorage.getItem("isLoggedIn") && (
-              <div className="auth-buttons">
-                <button type="button" onClick={() => setShowSignup(true)}>
-                  Sign Up
-                </button>
-              </div>
-            )}
+          
+
           </div>
         </div>
-
-        {/* Sign-Up Modal */}
-        {showSignup && (
-          <div className="modal" role="dialog" aria-modal="true">
-            <div className="modal-content">
-              <span
-                type="button"
-                className="close"
-                onClick={() => setShowSignup(false)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter") setShowSignup(false);
-                }}
-                tabIndex="0"
-              >
-                &times;
-              </span>
-              <h2>Sign Up</h2>
-              <form onSubmit={handleSignupSubmit}>
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  value={signupData.name}
-                  onChange={(e) =>
-                    setSignupData({
-                      ...signupData,
-                      [e.target.name]: e.target.value,
-                    })
-                  }
-                  required
-                />
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Email(Does not have to be valid)"
-                  value={signupData.email}
-                  onChange={(e) =>
-                    setSignupData({
-                      ...signupData,
-                      [e.target.name]: e.target.value,
-                    })
-                  }
-                  required
-                />
-                <input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={signupData.password}
-                  onChange={(e) =>
-                    setSignupData({
-                      ...signupData,
-                      [e.target.name]: e.target.value,
-                    })
-                  }
-                  required
-                />
-                <button type="submit">Sign Up</button>
-              </form>
-            </div>
-          </div>
-        )}
 
         <Footer className="footer" />
         <ScrollIndicator />

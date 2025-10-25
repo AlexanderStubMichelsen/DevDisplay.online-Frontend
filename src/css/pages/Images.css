@@ -139,7 +139,7 @@ body {
 }
 
 .action-button {
-  background-color: #dabe4f !important;
+  background-color: #555 !important;
   box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
   position: absolute;
   top: 8px;

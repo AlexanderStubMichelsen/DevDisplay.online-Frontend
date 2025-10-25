@@ -13,7 +13,13 @@ function NavBar() {
   const [userEmail, setUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  const [showSignup, setShowSignup] = useState(false); // Added missing state
   const [loginDataForm, setLoginDataForm] = useState({
+    email: "",
+    password: "",
+  });
+  const [signupData, setSignupData] = useState({ // Added missing state
+    name: "",
     email: "",
     password: "",
   });
@@ -34,7 +40,10 @@ function NavBar() {
 
     const handleStorageChange = () => checkLoginStatus();
     const handleKeyDown = (e) => {
-      if (e.key === "Escape") closeLoginModal();
+      if (e.key === "Escape") {
+        closeLoginModal();
+        setShowSignup(false);
+      }
     };
 
     window.addEventListener("storage", handleStorageChange);
@@ -52,6 +61,7 @@ function NavBar() {
   const handleLogout = () => {
     apiFacade.logout();
     sessionStorage.removeItem("loginData");
+    sessionStorage.removeItem("isLoggedIn");
     setIsLoggedIn(false);
     setUserEmail("");
     window.dispatchEvent(new Event("storage"));
@@ -89,6 +99,50 @@ function NavBar() {
     setLoginDataForm({ email: "", password: "" });
   };
 
+  const handleSignupSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      // Sign up the user
+      await apiFacade.signUp(signupData);
+
+      // Log in the user right after sign-up
+      const response = await apiFacade.login({
+        email: signupData.email,
+        password: signupData.password,
+      });
+
+      console.log("Response:", response);
+
+      setShowSignup(false);
+      setIsLoggedIn(true);
+
+      // Store login data including ID
+      sessionStorage.setItem("isLoggedIn", "true");
+      sessionStorage.setItem(
+        "loginData",
+        JSON.stringify({
+          id: response.userDto.id,
+          email: response.userDto.email,
+          name: response.userDto.name,
+          token: response.token,
+        })
+      );
+
+      // Clear signup form
+      setSignupData({ name: "", email: "", password: "" });
+      setUserEmail(response.userDto.email);
+      window.dispatchEvent(new Event("storage"));
+      window.location.reload();
+    } catch (error) {
+      // Check if the error is a 409 Conflict (email already taken)
+      if (error.response?.status === 409) {
+        alert("The email is already taken. Please use a different email.");
+      } else {
+        alert("Sign-Up Failed. Please try again.");
+      }
+    }
+  };
+
   return (
     <>
       <Navbar
@@ -96,6 +150,7 @@ function NavBar() {
         variant="dark"
         expand="md"
         className="sticky-top-navbar"
+        expanded={expanded}
       >
         <Navbar.Brand href="/">DevDisplay</Navbar.Brand>
         <Navbar.Toggle
@@ -107,7 +162,6 @@ function NavBar() {
         <Navbar.Collapse
           id="responsive-navbar-nav"
           className="justify-content-end"
-          in={expanded}
         >
           <Nav className="ml-auto">
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
@@ -134,6 +188,13 @@ function NavBar() {
               <Nav.Link>Help</Nav.Link>
             </LinkContainer>
 
+            {/* Authentication Section */}
+            {!isLoggedIn && (
+              <Nav.Link onClick={() => setShowSignup(true)}>
+                Sign Up
+              </Nav.Link>
+            )}
+
             {isLoggedIn ? (
               <Dropdown align="end">
                 <Dropdown.Toggle variant="light" id="dropdown-basic">
@@ -156,6 +217,7 @@ function NavBar() {
         </Navbar.Collapse>
       </Navbar>
 
+      {/* Login Modal */}
       {showLogin && (
         <div className="modal" role="dialog" aria-modal="true">
           <div className="modal-content">
@@ -191,6 +253,67 @@ function NavBar() {
                 required
               />
               <button type="submit">Login</button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* Sign-Up Modal */}
+      {showSignup && (
+        <div className="modal" role="dialog" aria-modal="true">
+          <div className="modal-content">
+            <span
+              className="close"
+              onClick={() => setShowSignup(false)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") setShowSignup(false);
+              }}
+              tabIndex="0"
+            >
+              &times;
+            </span>
+            <h2>Sign Up</h2>
+            <form onSubmit={handleSignupSubmit}>
+              <input
+                type="text"
+                name="name"
+                placeholder="Name"
+                value={signupData.name}
+                onChange={(e) =>
+                  setSignupData({
+                    ...signupData,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+                required
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email (Does not have to be valid)"
+                value={signupData.email}
+                onChange={(e) =>
+                  setSignupData({
+                    ...signupData,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+                required
+              />
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={signupData.password}
+                onChange={(e) =>
+                  setSignupData({
+                    ...signupData,
+                    [e.target.name]: e.target.value,
+                  })
+                }
+                required
+              />
+              <button type="submit">Sign Up</button>
             </form>
           </div>
         </div>
