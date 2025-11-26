@@ -7,8 +7,14 @@ import animationVideo2 from "../../assets/animation/invideo-ai-1080.mp4"; // Imp
 import animationVideo3 from "../../assets/animation/DevDisplay.online_free.mp4"; // Import the video file
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
+import { YAxis } from "recharts";
 
 const About = () => {
+
+  const HandleLinkClick = () => {
+    window.location.href = "https://alexstub.devdisplay.online";
+  };
+
   return (
     <>
       <Helmet>
@@ -35,7 +41,8 @@ const About = () => {
       <NavBar />
       <div className="about-wrapper">
         <div className="about">
-          <div className="content-container">
+          <h4 className="link"><a onClick={HandleLinkClick}>CV</a></h4>
+          {/* <div className="content-container">
             <video controls className="video">
               <source src={animationVideo} type="video/mp4" />
               Your browser does not support the video tag.
@@ -50,7 +57,7 @@ const About = () => {
               <source src={animationVideo3} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
-          </div>
+          </div> */}
         </div>
       </div>
       <Footer />

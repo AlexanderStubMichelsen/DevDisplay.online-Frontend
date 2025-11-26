@@ -7,7 +7,8 @@ import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
 
 function Youtube() {
-  const [searchQuery, setSearchQuery] = useState("Best new videos"); // ✅ Default query to load initial videos
+  const [searchQuery, setSearchQuery] = useState("Best new videos"); // Default value
+  const [displayValue, setDisplayValue] = useState("Best new videos");
   const [searchResults, setSearchResults] = useState([]);
   const [nextPageToken, setNextPageToken] = useState(null);
   const [error, setError] = useState(null);
@@ -48,12 +49,28 @@ function Youtube() {
   );
 
   useEffect(() => {
-    fetchVideos(); // Call fetchVideos on mount
+    fetchVideos();
   }, [fetchVideos]);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    fetchVideos();
+    setSearchQuery(displayValue);
+  };
+
+  const handleInputFocus = () => {
+    // Clear the input when focused (placeholder shows automatically)
+    setDisplayValue("");
+  };
+
+  const handleInputBlur = () => {
+    // If user didn't enter anything, restore default value
+    if (displayValue.trim() === "") {
+      setDisplayValue("Best new videos");
+    }
+  };
+
+  const handleInputChange = (e) => {
+    setDisplayValue(e.target.value);
   };
 
   return (
@@ -82,14 +99,16 @@ function Youtube() {
       <NavBar />
       <div className="youtube-wrapper">
         <div className="youtube-container">
-          <h1 className="youtube-title"></h1>
+          <h1 className="youtube-title">YouTube Search</h1>
 
           <form onSubmit={handleSearch} className="search-form">
             <input
               type="text"
               placeholder="Search videos..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              value={displayValue}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
               className="search-input"
             />
           </form>

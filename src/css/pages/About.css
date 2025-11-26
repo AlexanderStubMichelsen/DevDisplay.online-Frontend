@@ -40,6 +40,17 @@
   opacity: 0.75; /* Set the opacity to 1 (fully opaque) */
 }
 
+.link {
+  color: #4da6ff;
+  text-decoration: underline;
+  cursor: pointer;
+  float: right;
+}
+
+.link:hover {
+  text-decoration: none;
+} 
+
 .content-container {
   display: flex;
   flex-direction: column;

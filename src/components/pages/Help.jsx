@@ -35,8 +35,7 @@ function Help() {
           <div className="text-container">
             <h1 className="help-title">Help & User Guide</h1>
             <p className="help-description">
-              Welcome to DevDisplay! This platform helps me showcase my projects
-              with powerful search capabilities for images, videos, and trending
+              Welcome to DevDisplay! Search capabilities for images and videos.
               content.
             </p>
 
@@ -59,10 +58,10 @@ function Help() {
                   <strong>Manage Collection:</strong> View and organize your
                   saved images in the &quot;Saved Images&quot; section.
                 </li>
-                <li>
+                {/* <li>
                   <strong>Explore Zone Kort:</strong> Use Skraafoto to access
                   Danish zoning maps and planning information.
-                </li>
+                </li> */}
               </ol>
             </section>
 
@@ -71,17 +70,17 @@ function Help() {
               <ul className="help-features">
                 <li>🖼️ High-quality image search powered by Unsplash</li>
                 <li>📺 YouTube video integration and trending content</li>
-                <li>☁️ Real-time weather information</li>
-                <li>👤 User account management and personalization</li>
+                {/* <li>☁️ Real-time weather information</li>
+                <li>👤 User account management and personalization</li> */}
                 <li>📱 Responsive design for all devices</li>
-                <li>
+                {/* <li>
                   🛰️ Skraafoto - Aerial photography with Zone Kort integration
                 </li>
-                <li>📋 Danish zoning data through Zone Kort system</li>
+                <li>📋 Danish zoning data through Zone Kort system</li> */}
               </ul>
             </section>
 
-            <section className="help-section">
+            {/* <section className="help-section">
               <h2 className="help-subtitle">Featured Project: Skraafoto</h2>
               <p className="help-description">
                 <strong>Skraafoto</strong> is my specialized aerial photography
@@ -123,7 +122,7 @@ function Help() {
                 </a>{" "}
                 to explore this Zone Kort integration.
               </p>
-            </section>
+            </section> */}
 
             <section className="help-section">
               <h2 className="help-subtitle">Need More Help?</h2>
