@@ -1,6 +1,6 @@
 .contact-page-wrapper {
   position: relative;
-  min-height: 80vh;
+  min-height: 120vh;
   display: flex;
   justify-content: center;
   align-items: center; /* Center vertically */

@@ -41,7 +41,6 @@ const About = () => {
       <NavBar />
       <div className="about-wrapper">
         <div className="about">
-          <h4 className="link"><a onClick={HandleLinkClick}>CV</a></h4>
           {/* <div className="content-container">
             <video controls className="video">
               <source src={animationVideo} type="video/mp4" />
