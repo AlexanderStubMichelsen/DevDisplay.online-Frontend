@@ -10,13 +10,11 @@ const Footer = () => {
           <h4 className="footer-heading">About</h4>
           <p className="footer-text">
             <strong>
-              <a href="/" className="footer-link">DevDisplay.online</a>
+              {/* <a href="/" className="footer-link">DevDisplay.online</a> */}
             </strong>{" "}
-            helps me as a developer showcase projects.
           </p>
-          <p className="footer-text">
-            If you want an offer for developing an webapp, website or have a job opportunity, please contact me.
-          </p>
+          <p className="footer-text"> <br/>a small corner of the internet<br/> </p>
+          <a href="https://skraafoto-plandata-ckardphtehdjc5ar.westeurope-01.azurewebsites.net/" target="_blank" rel="noopener noreferrer" className="footer-link">skraafoto-plandata</a>
         </div>
 
         <div className="footer-section footer-navigation">
