@@ -35,7 +35,7 @@ function Help() {
           <div className="text-container">
             <h1 className="help-title">Help & User Guide</h1>
             <p className="help-description">
-              Welcome to DevDisplay! Search capabilities for images and videos.
+               Welcome to DevDisplay! Search capabilities for images{/* and videos*/}. 
               content.
             </p>
 
@@ -65,20 +65,20 @@ function Help() {
               </ol>
             </section>
 
-            <section className="help-section">
+             {/* <section className="help-section">
               <h2 className="help-subtitle">Features</h2>
               <ul className="help-features">
                 <li>🖼️ High-quality image search powered by Unsplash</li>
                 <li>📺 YouTube video integration and trending content</li>
-                {/* <li>☁️ Real-time weather information</li>
-                <li>👤 User account management and personalization</li> */}
+                 <li>☁️ Real-time weather information</li>
+                <li>👤 User account management and personalization</li> 
                 <li>📱 Responsive design for all devices</li>
-                {/* <li>
+                 <li>
                   🛰️ Skraafoto - Aerial photography with Zone Kort integration
                 </li>
-                <li>📋 Danish zoning data through Zone Kort system</li> */}
+                <li>📋 Danish zoning data through Zone Kort system</li> 
               </ul>
-            </section>
+            </section>  */}
 
             {/* <section className="help-section">
               <h2 className="help-subtitle">Featured Project: Skraafoto</h2>
@@ -124,7 +124,7 @@ function Help() {
               </p>
             </section> */}
 
-            <section className="help-section">
+            {/* <section className="help-section">
               <h2 className="help-subtitle">Need More Help?</h2>
               <p className="help-contact">
                 If you encounter any issues or have questions, feel free to{" "}
@@ -146,7 +146,7 @@ function Help() {
                   project on GitHub
                 </a>
               </p>
-            </section>
+            </section> */}
           </div>
         </div>
         <Footer />
