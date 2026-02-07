@@ -13,7 +13,7 @@ const Footer = () => {
               {/* <a href="/" className="footer-link">DevDisplay.online</a> */}
             </strong>{" "}
           </p>
-          <p className="footer-text"> <br/>a small corner of the internet<br/> </p>
+          <p className="footer-text"> <br/>a corner of the internet<br/> </p>
           <a href="https://skraafoto-plandata-ckardphtehdjc5ar.westeurope-01.azurewebsites.net/" target="_blank" rel="noopener noreferrer" className="footer-link">skraafoto-plandata</a>
         </div>
 
