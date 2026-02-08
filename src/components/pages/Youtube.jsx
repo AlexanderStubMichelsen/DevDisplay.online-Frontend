@@ -76,7 +76,7 @@ function Youtube() {
   return (
     <>
       <Helmet>
-        <title>YouTube Search | DevDisplay</title>
+        {/* <title>YouTube Search | DevDisplay</title>
         <meta property="og:title" content="YouTube Search | DevDisplay" />
         <meta
           property="og:description"
@@ -94,11 +94,11 @@ function Youtube() {
           content="Find and watch YouTube videos directly through DevDisplay's search interface."
         />
         <meta name="twitter:image" content="https://devdisplay.online/og/youtube-page.jpg" />
-        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:card" content="summary_large_image" /> */}
       </Helmet>
       <NavBar />
-      <div className="youtube-wrapper">
-        <div className="youtube-container">
+       <div className="youtube-wrapper">
+       {/* <div className="youtube-container">
           <h1 className="youtube-title">YouTube Search</h1>
 
           <form onSubmit={handleSearch} className="search-form">
@@ -145,8 +145,8 @@ function Youtube() {
               Load More
             </button>
           )}
-        </div>
-      </div>
+        </div>*/}
+      </div> 
       <Footer />
       <ScrollIndicator />
     </>

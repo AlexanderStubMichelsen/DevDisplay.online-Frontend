@@ -97,6 +97,7 @@ const Contact = () => {
   return (
     <>
       <Helmet>
+        {/*
         <title>Contact DevDisplay | Get in Touch</title>
         <meta property="og:title" content="Contact DevDisplay | Get in Touch" />
         <meta
@@ -116,11 +117,12 @@ const Contact = () => {
         />
         <meta name="twitter:image" content="https://devdisplay.online/og/contact-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
+        */}
       </Helmet>
       <NavBar />
       <div className="contact-page-wrapper">
-        <ContactForm />
-      </div>
+        {/* <ContactForm /> */}
+      </div> 
       <Footer />
       <ScrollIndicator />
     </>
