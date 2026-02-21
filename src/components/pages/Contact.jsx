@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async"
 import NavBar from "../modules/NavBar";
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator";
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
 import "../../css/pages/Contact.css";
 const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
 const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
