@@ -176,7 +176,7 @@ const SavedImages = () => {
           {!loading && filteredImages.length > 0 && (
             <div className="image-grid">
               {filteredImages
-                .sort((a, b) => b.height / b.width - a.height / a.width)
+                .sort((a, b) => b.thumbHeight - a.thumbHeight)
                 .map((image) => (
                   <div key={image.id} className="image-item">
                     <div className="image-wrapper">
