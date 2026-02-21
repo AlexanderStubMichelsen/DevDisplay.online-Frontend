@@ -18,7 +18,7 @@ function NavBar() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false); // Added missing state
   const [stickX, setStickX] = useState(0);
-  const [stickVisible, setStickVisible] = useState(false);
+  const [stickVisible, setStickVisible] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
   const [loginDataForm, setLoginDataForm] = useState({
     email: "",
@@ -59,18 +59,30 @@ function NavBar() {
   const getActiveElement = useCallback((activeKey, navElement) => {
     if (!navElement || !activeKey) return null;
 
-    const selectorByKey = {
-      home: 'a[href="/"]',
-      images: 'a[href="/images"]',
-      saved: 'a[href="/saved"]',
-      about: 'a[href="/about"]',
-      contact: 'a[href="/contact"]',
-      help: 'a[href="/help"]',
-      account: "#dropdown-basic",
+    if (activeKey === "account") {
+      return navElement.querySelector("#dropdown-basic");
+    }
+
+    const routeByKey = {
+      home: "/",
+      images: "/images",
+      saved: "/saved",
+      about: "/about",
+      contact: "/contact",
+      help: "/help",
     };
 
-    const selector = selectorByKey[activeKey];
-    return selector ? navElement.querySelector(selector) : null;
+    const route = routeByKey[activeKey];
+    if (!route) return null;
+
+    // Match both exact and absolute href variants in production.
+    const links = Array.from(navElement.querySelectorAll("a[href]"));
+    return (
+      links.find((el) => {
+        const href = el.getAttribute("href") || "";
+        return href === route || href.endsWith(route);
+      }) || null
+    );
   }, []);
 
   const syncStickmanPosition = useCallback(() => {
@@ -78,8 +90,13 @@ function NavBar() {
     const navElement = navRef.current;
     const activeElement = getActiveElement(activeKey, navElement);
 
-    if (!navElement || !activeElement) {
-      setStickVisible(false);
+    if (!navElement) {
+      setStickVisible(true);
+      return;
+    }
+
+    if (!activeElement) {
+      setStickVisible(true);
       return;
     }
 
@@ -321,40 +338,38 @@ function NavBar() {
               <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
             )}
 
-            {stickVisible && (
-              <motion.div
-                className={`nav-stickman ${isRunning ? "running" : "sitting"}`}
-                initial={false}
-                animate={
-                  isRunning
-                    ? {
-                        x: stickX,
-                        y: [0, -10, 0],
-                        rotate: [0, -6, 6, 0],
-                      }
-                    : {
-                        x: stickX,
-                        y: 2,
-                        rotate: 4,
-                      }
-                }
-                transition={{
-                  x: { type: "spring", stiffness: 300, damping: 30, mass: 0.8 },
-                  y: { duration: 0.6, ease: "easeInOut" },
-                  rotate: { duration: 0.6, ease: "easeInOut" },
-                }}
-                aria-hidden="true"
-              >
-                <svg viewBox="0 0 24 24" role="img">
-                  <circle cx="12" cy="4" r="2.5" />
-                  <line x1="12" y1="7" x2="12" y2="14" />
-                  <line className="arm arm-left" x1="12" y1="9" x2="8" y2="12" />
-                  <line className="arm arm-right" x1="12" y1="9" x2="16" y2="12" />
-                  <line className="leg leg-left" x1="12" y1="14" x2="8.5" y2="20" />
-                  <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
-                </svg>
-              </motion.div>
-            )}
+            <motion.div
+              className={`nav-stickman ${isRunning ? "running" : "sitting"} ${stickVisible ? "is-visible" : ""}`}
+              initial={false}
+              animate={
+                isRunning
+                  ? {
+                      x: stickX,
+                      y: [0, -10, 0],
+                      rotate: [0, -6, 6, 0],
+                    }
+                  : {
+                      x: stickX,
+                      y: 2,
+                      rotate: 4,
+                    }
+              }
+              transition={{
+                x: { type: "spring", stiffness: 300, damping: 30, mass: 0.8 },
+                y: { duration: 0.6, ease: "easeInOut" },
+                rotate: { duration: 0.6, ease: "easeInOut" },
+              }}
+              aria-hidden="true"
+            >
+              <svg viewBox="0 0 24 24" role="img">
+                <circle cx="12" cy="4" r="2.5" />
+                <line x1="12" y1="7" x2="12" y2="14" />
+                <line className="arm arm-left" x1="12" y1="9" x2="8" y2="12" />
+                <line className="arm arm-right" x1="12" y1="9" x2="16" y2="12" />
+                <line className="leg leg-left" x1="12" y1="14" x2="8.5" y2="20" />
+                <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
+              </svg>
+            </motion.div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>

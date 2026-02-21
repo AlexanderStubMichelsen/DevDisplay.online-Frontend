@@ -137,6 +137,7 @@
 /* Ensure the navbar links stack vertically under the brand when collapsed */
 .sticky-top-navbar .navbar-collapse {
   width: 100%;
+  overflow: visible;
 }
 
 .sticky-top-navbar .navbar-collapse.collapse:not(.show) {
@@ -162,11 +163,13 @@
   width: 100%;
   align-items: center;
   justify-content: flex-end;
+  overflow: visible;
 }
 
 .nav-links-track {
   position: relative;
   padding-bottom: 0;
+  overflow: visible;
 }
 
 .nav-stickman {
@@ -177,7 +180,12 @@
   height: 26px;
   pointer-events: none;
   transform-origin: center bottom;
-  z-index: 2;
+  z-index: 2001;
+  opacity: 1;
+}
+
+.nav-stickman.is-visible {
+  opacity: 1;
 }
 
 .nav-stickman svg {
