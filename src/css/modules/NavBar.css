@@ -169,7 +169,8 @@
 .nav-links-track {
   position: relative;
   padding-bottom: 0;
-  overflow: visible;
+  overflow: visible !important;
+  min-height: 34px;
 }
 
 .nav-stickman {
@@ -178,10 +179,12 @@
   bottom: 16px;
   width: 26px;
   height: 26px;
-  pointer-events: none;
+  pointer-events: none !important;
   transform-origin: center bottom;
-  z-index: 2001;
-  opacity: 1;
+  z-index: 99999 !important;
+  opacity: 1 !important;
+  display: block !important;
+  visibility: visible !important;
 }
 
 .nav-stickman.is-visible {
@@ -196,7 +199,7 @@
 
 .nav-stickman circle,
 .nav-stickman line {
-  stroke: rgb(131, 97, 97);
+  stroke: rgb(235, 210, 120);
   fill: none;
   stroke-width: 1.8;
   stroke-linecap: round;
