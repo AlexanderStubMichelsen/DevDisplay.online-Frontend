@@ -25,8 +25,6 @@ function NavBar() {
     password: "",
   });
   const navRef = useRef(null);
-  const linkRefs = useRef({});
-  const accountToggleRef = useRef(null);
   const previousXRef = useRef(0);
   const runTimeoutRef = useRef(null);
   const [signupData, setSignupData] = useState({ // Added missing state
@@ -34,17 +32,6 @@ function NavBar() {
     email: "",
     password: "",
   });
-
-  const setLinkRef = useCallback(
-    (key) => (el) => {
-      if (el) {
-        linkRefs.current[key] = el;
-      } else {
-        delete linkRefs.current[key];
-      }
-    },
-    []
-  );
 
   const getActiveNavKey = useCallback(
     (pathname) => {
@@ -69,15 +56,27 @@ function NavBar() {
     [isLoggedIn]
   );
 
+  const getActiveElement = useCallback((activeKey, navElement) => {
+    if (!navElement || !activeKey) return null;
+
+    const selectorByKey = {
+      home: 'a[href="/"]',
+      images: 'a[href="/images"]',
+      saved: 'a[href="/saved"]',
+      about: 'a[href="/about"]',
+      contact: 'a[href="/contact"]',
+      help: 'a[href="/help"]',
+      account: "#dropdown-basic",
+    };
+
+    const selector = selectorByKey[activeKey];
+    return selector ? navElement.querySelector(selector) : null;
+  }, []);
+
   const syncStickmanPosition = useCallback(() => {
     const activeKey = getActiveNavKey(location.pathname);
     const navElement = navRef.current;
-    const activeElement =
-      activeKey === "account"
-        ? accountToggleRef.current
-        : activeKey
-          ? linkRefs.current[activeKey]
-          : null;
+    const activeElement = getActiveElement(activeKey, navElement);
 
     if (!navElement || !activeElement) {
       setStickVisible(false);
@@ -90,7 +89,7 @@ function NavBar() {
 
     setStickX(Math.max(0, x));
     setStickVisible(true);
-  }, [expanded, getActiveNavKey, location.pathname]);
+  }, [getActiveElement, getActiveNavKey, location.pathname]);
 
   const checkLoginStatus = () => {
     const storedUser = JSON.parse(sessionStorage.getItem("loginData"));
@@ -273,27 +272,27 @@ function NavBar() {
         >
           <Nav ref={navRef} className="ml-auto nav-links-track">
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
-              <Nav.Link ref={setLinkRef("home")}>Home</Nav.Link>
+              <Nav.Link>Home</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/images" onClick={() => setExpanded(false)}>
-              <Nav.Link ref={setLinkRef("images")}>Images</Nav.Link>
+              <Nav.Link>Images</Nav.Link>
             </LinkContainer>
             {isLoggedIn && (
               <LinkContainer to="/saved" onClick={() => setExpanded(false)}>
-                <Nav.Link ref={setLinkRef("saved")}>Saved</Nav.Link>
+                <Nav.Link>Saved</Nav.Link>
               </LinkContainer>
             )}
             {/* <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link> 
             </LinkContainer> */}
             <LinkContainer to="/about" onClick={() => setExpanded(false)}>
-              <Nav.Link ref={setLinkRef("about")}>About</Nav.Link>
+              <Nav.Link>About</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/contact" onClick={() => setExpanded(false)}>
-              <Nav.Link ref={setLinkRef("contact")}>Contact</Nav.Link>
+              <Nav.Link>Contact</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
-              <Nav.Link ref={setLinkRef("help")}>Help</Nav.Link>
+              <Nav.Link>Help</Nav.Link>
             </LinkContainer>
 
             {/* Authentication Section */}
@@ -305,7 +304,7 @@ function NavBar() {
 
             {isLoggedIn ? (
               <Dropdown align="end">
-                <Dropdown.Toggle ref={accountToggleRef} variant="light" id="dropdown-basic">
+                <Dropdown.Toggle variant="light" id="dropdown-basic">
                   {userEmail}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
