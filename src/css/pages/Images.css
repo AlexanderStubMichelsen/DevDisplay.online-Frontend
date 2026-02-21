@@ -1,6 +1,5 @@
-/* Images.css */
+/* Images and Saved pages */
 
-/* Overall page layout and styling */
 body {
   font-family: Arial, sans-serif;
   background-color: #f0f0f0;
@@ -9,26 +8,20 @@ body {
 }
 
 .images-wrapper {
-  display: flex !important;
-  flex-direction: column !important;
-  min-height: 100vh !important;
-  
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 .images-container {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
   width: 100%;
-  flex: 1 !important;
-  display: flex !important;
-  flex-direction: column !important;
-  align-items: center !important;
-  justify-content: flex-start !important; /* Force to start at top */
-  padding: 2rem 0 !important;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 0;
   position: relative;
-  min-height: auto !important; /* Override any min-height */
   z-index: 1;
   background-color: #555;
   color: #302f2d;
@@ -37,158 +30,67 @@ body {
 .images-title {
   font-size: 28px;
   margin-bottom: 20px;
-  color: #302f2d !important; /* Use hex or rgb, no quotes */
-  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
+  color: #302f2d;
+  opacity: 0.8;
 }
 
 .image-grid {
-  width: 100%; /* ✅ Ensures full width */
-  max-width: 1200px; /* ✅ Optional: Prevents it from being too wide */
+  width: 100%;
+  max-width: 1200px;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* ✅ Proper grid */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 15px;
-  justify-content: center;
-  margin: 0 auto; /* ✅ Centers the grid */;
+  margin: 0 auto;
+  align-items: start;
 }
 
-.image-grid img {
-  width: 100%; /* Ensures images take full width of their container */
-  height: auto; /* Maintains aspect ratio */
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  opacity: 1;
+.image-grid {
+  --thumb-ratio: 4 / 3;
 }
 
 .loading-message {
   font-size: 18px;
-  color: #302f2d !important; /* Use hex or rgb, no quotes */
+  color: #302f2d;
 }
 
-/* Styling for each image */
+/* Images.jsx cards */
 .image-card {
-  position: relative; /* Allows absolutely positioned buttons */
+  width: 100%;
+  position: relative;
   border: none;
   padding: 0;
   margin: 0;
   background-color: transparent;
   box-shadow: none;
-  opacity: 1;
 }
 
-.image-card:hover {
-  transform: scale(1.05); /* Scale up slightly on hover */
-}
-
-.image-item {
-  position: relative;
-  width: 300px;
-  height: auto;
+.image-card .image-item {
+  width: 100%;
+  height: 100%;
+  display: block;
   border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  object-fit: cover;
   transition: transform 0.2s ease-in-out;
 }
 
-.image-item:hover {
-  transform: scale(1.05); /* Scale up slightly on hover */
-}
-
-.search-form {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.search-input {
-  width: 100%;
-  max-width: 500px;
-  margin: 0 auto 20px;
-  padding: 12px 16px;
-  border: 1px solid #8d6464;
-  border-radius: 8px;
-  font-size: 1rem;
-  background-color: #555 !important; /* Changed from #555 to white */
-  color: #333 !important;
+.image-card > a {
   display: block;
-}
-
-.search-input::placeholder {
-  color: #666 !important; /* Visible placeholder text */
-}
-
-.search-input:focus {
-  outline: none;
-  border-color: #753f3f;
-  box-shadow: 0 0 0 2px rgba(117, 63, 63, 0.1);
-  background-color: #fff !important; /* Keep white on focus */
-}
-
-.load-more-btn {
-  background-color: #753f3f !important;
-  color: #302f2d !important; /* Use hex or rgb, no quotes */
-  border: solid rgb(131, 97, 97) 1px !important;
-  border-radius: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.2s;
-}
-
-.load-more-btn:hover {
-  background-color: #753f3f !important;
-  color: #302f2d !important; /* Change to a lighter shade on hover */
-}
-
-.action-button {
-  background-color: #555 !important;
-  box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
-  position: absolute;
-  top: 8px;
-  left: 8px;
-  background-color: rgba(0, 123, 255, 0.0); /* Semi-transparent blue */
-  color: black;
-  padding: 6px 12px;
-  border: 1px solid rgb(0, 0, 0); /* Semi-transparent red border */
-  cursor: pointer;
-  font-size: 12px;
-  transition: background-color 0.2s ease;
-  z-index: 2;
-  border-radius: 5px; /* Rounded corners for the button */
-}
-
-.image-stats {
-  color:  rgb(131, 97, 97); /* Dark background color */
-
-}
-
-.action-button:hover {
-  background-color: #753f3f !important; /* Add !important to override */
-  color: white;
-  border: 1px solid black; /* Fix: removed "black(104, 100, 100)" - invalid syntax */
-  box-shadow: 0 4px 15px rgba(143, 175, 223, 0.6);
-}
-
-/* Section heading for saved images */
-.saved-title {
-  font-size: 28px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  color: rgb(131, 97, 97);
-  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
-}
-
-/* Override image-item size for saved view (optional) */
-.saved-image-item {
   width: 100%;
-  height: auto;
+  aspect-ratio: var(--thumb-ratio);
+  overflow: hidden;
   border-radius: 5px;
-  object-fit: cover;
 }
 
-/* Text info below saved image */
+.image-card .image-item:hover {
+  transform: scale(1.03);
+}
+
 .image-card p {
   font-size: 14px;
   margin: 8px 0;
-  color: rgb(131, 97, 97); /* Dark background color */
+  color: rgb(131, 97, 97);
 }
 
 .image-card a {
@@ -200,49 +102,9 @@ body {
   color: white;
 }
 
-/* Optional error message styling */
-.error-message {
-  color: red;
-  font-weight: bold;
-  margin-top: 1rem;
-}
-
-.non_saved {
-  font-size: 28px;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  color: rgb(131, 97, 97);
-  opacity: 0.8; /* Set the opacity to 1 (fully opaque) */
-  float: left;
-}
-
-.page-content {
-  flex: 1;
-}
-
-/* Force footer to bottom with !important */
-.footer {
-  margin-top: auto !important;
-  position: relative !important;
-  bottom: auto !important;
-  left: auto !important;
-  right: auto !important;
-  width: 100% !important;
-}
-
-.video-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  overflow: hidden;
-  object-fit: cover;
-  z-index: 0;
-}
-
-/* Add styles for saved images to match regular images */
-.image-item {
+/* Saved.jsx cards */
+.image-grid > .image-item {
+  width: 100%;
   position: relative;
   background-color: transparent;
   border-radius: 5px;
@@ -250,13 +112,16 @@ body {
   transition: transform 0.2s ease-in-out;
 }
 
-.image-item:hover {
-  transform: scale(1.05);
+.image-grid > .image-item:hover {
+  transform: scale(1.03);
 }
 
 .image-wrapper {
   position: relative;
   width: 100%;
+  aspect-ratio: var(--thumb-ratio);
+  overflow: hidden;
+  border-radius: 5px;
 }
 
 .image-link {
@@ -266,15 +131,16 @@ body {
 
 .image {
   width: 100%;
-  height: auto;
+  height: 100%;
+  display: block;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  opacity: 1;
+  object-fit: cover;
 }
 
 .image-content {
   padding: 8px;
-  background-color: rgba555;
+  background-color: transparent;
   margin-top: 8px;
   border-radius: 5px;
 }
@@ -305,9 +171,56 @@ body {
   color: #753f3f;
 }
 
+.image-stats,
 .user-count {
   font-size: 12px;
   color: rgb(131, 97, 97);
+}
+
+.search-form {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 500px;
+  margin: 0 auto 20px;
+  padding: 12px 16px;
+  border: 1px solid #8d6464;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #555;
+  color: #333;
+  display: block;
+}
+
+.search-input::placeholder {
+  color: #666;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #753f3f;
+  box-shadow: 0 0 0 2px rgba(117, 63, 63, 0.1);
+  background-color: #fff;
+}
+
+.load-more-btn {
+  background-color: #753f3f;
+  color: #302f2d;
+  border: solid rgb(131, 97, 97) 1px;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.load-more-btn:hover {
+  background-color: #753f3f;
+  color: #302f2d;
 }
 
 .delete-button {
@@ -327,16 +240,18 @@ body {
   background-color: #c82333;
 }
 
-.delete-button:disabled {
+.delete-button:disabled,
+.delete-button.deleting {
   background-color: #6c757d;
   cursor: not-allowed;
 }
 
-.delete-button.deleting {
-  background-color: #6c757d;
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 1rem;
 }
 
-/* Style for empty states and messages */
 .empty-state,
 .no-results,
 .login-required {
@@ -355,4 +270,7 @@ body {
   margin-bottom: 1rem;
 }
 
-
+.footer {
+  margin-top: auto;
+  width: 100%;
+}
