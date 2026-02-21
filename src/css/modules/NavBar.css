@@ -265,10 +265,6 @@
   padding-bottom: 0;
 }
 
-.navbar-collapse.show .nav-stickman {
-  display: none;
-}
-
 .sticky-top-navbar .nav-link,
 .sticky-top-navbar .dropdown {
   width: auto;              /* Let links size to content */
@@ -284,9 +280,4 @@
   padding-right: 1.5rem;
 }
 
-@media (max-width: 767px) {
-  .nav-stickman {
-    display: none;
-  }
-}
 

@@ -26,6 +26,7 @@ function NavBar() {
   });
   const navRef = useRef(null);
   const linkRefs = useRef({});
+  const accountToggleRef = useRef(null);
   const previousXRef = useRef(0);
   const runTimeoutRef = useRef(null);
   const [signupData, setSignupData] = useState({ // Added missing state
@@ -50,6 +51,16 @@ function NavBar() {
       if (pathname === "/") return "home";
       if (pathname.startsWith("/images")) return "images";
       if (pathname.startsWith("/saved") && isLoggedIn) return "saved";
+      if (
+        isLoggedIn &&
+        (
+          pathname.startsWith("/userpage") ||
+          pathname.startsWith("/changepassword") ||
+          pathname.startsWith("/deleteuser")
+        )
+      ) {
+        return "account";
+      }
       if (pathname.startsWith("/about")) return "about";
       if (pathname.startsWith("/contact")) return "contact";
       if (pathname.startsWith("/help")) return "help";
@@ -61,9 +72,14 @@ function NavBar() {
   const syncStickmanPosition = useCallback(() => {
     const activeKey = getActiveNavKey(location.pathname);
     const navElement = navRef.current;
-    const activeElement = activeKey ? linkRefs.current[activeKey] : null;
+    const activeElement =
+      activeKey === "account"
+        ? accountToggleRef.current
+        : activeKey
+          ? linkRefs.current[activeKey]
+          : null;
 
-    if (!navElement || !activeElement || expanded) {
+    if (!navElement || !activeElement) {
       setStickVisible(false);
       return;
     }
@@ -289,7 +305,7 @@ function NavBar() {
 
             {isLoggedIn ? (
               <Dropdown align="end">
-                <Dropdown.Toggle variant="light" id="dropdown-basic">
+                <Dropdown.Toggle ref={accountToggleRef} variant="light" id="dropdown-basic">
                   {userEmail}
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
