@@ -370,6 +370,9 @@ function NavBar() {
                 <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
               </svg>
             </motion.div>
+            <div className="nav-stickman-debug" aria-hidden="true">
+              STK
+            </div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
