@@ -46,5 +46,11 @@ jobs:
       - name: Build app
         run: npm run build
 
+      - name: Write build fingerprint
+        run: |
+          echo "commit=${GITHUB_SHA}" > dist/version.txt
+          echo "run_id=${GITHUB_RUN_ID}" >> dist/version.txt
+          echo "built_utc=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> dist/version.txt
+
       - name: Deploy with SWA CLI
-        run: npx @azure/static-web-apps-cli@latest deploy ./dist --deployment-token "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_SAND_0AEF9A403 }}" --env production
+        run: npx @azure/static-web-apps-cli@latest deploy ./dist --deployment-token "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_SAND_0AEF9A403 }}" --env production --verbose
