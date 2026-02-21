@@ -357,6 +357,7 @@ function NavBar() {
                 type="email"
                 name="email"
                 placeholder="Email"
+                autoComplete="email"
                 value={loginDataForm.email}
                 onChange={(e) =>
                   setLoginDataForm((prev) => ({
@@ -370,6 +371,7 @@ function NavBar() {
                 type="password"
                 name="password"
                 placeholder="Password"
+                autoComplete="current-password"
                 value={loginDataForm.password}
                 onChange={(e) =>
                   setLoginDataForm((prev) => ({
@@ -405,6 +407,7 @@ function NavBar() {
                 type="text"
                 name="name"
                 placeholder="Name"
+                autoComplete="name"
                 value={signupData.name}
                 onChange={(e) =>
                   setSignupData({
@@ -418,6 +421,7 @@ function NavBar() {
                 type="email"
                 name="email"
                 placeholder="Email (Does not have to be valid)"
+                autoComplete="email"
                 value={signupData.email}
                 onChange={(e) =>
                   setSignupData({
@@ -431,6 +435,7 @@ function NavBar() {
                 type="password"
                 name="password"
                 placeholder="Password"
+                autoComplete="new-password"
                 value={signupData.password}
                 onChange={(e) =>
                   setSignupData({

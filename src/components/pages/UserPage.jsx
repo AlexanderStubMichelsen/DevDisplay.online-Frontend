@@ -100,6 +100,7 @@ const UserPage = () => {
                   type="text"
                   name="name"
                   value={user.name}
+                  autoComplete="name"
                   onChange={handleChange}
                   className="form-control"
                 />
@@ -110,6 +111,7 @@ const UserPage = () => {
                   type="email"
                   name="email"
                   value={user.email}
+                  autoComplete="email"
                   readOnly
                   className="form-control"
                 />
@@ -120,6 +122,7 @@ const UserPage = () => {
                   type="password"
                   name="password"
                   value={user.password}
+                  autoComplete="current-password"
                   onChange={handleChange}
                   className="form-control"
                 />

@@ -81,6 +81,7 @@ const DeleteUser = () => {
                   type="email"
                   name="email"
                   value={email}
+                  autoComplete="email"
                   className="form-control"
                   readOnly
                 />
@@ -91,6 +92,7 @@ const DeleteUser = () => {
                   type="password"
                   name="password"
                   value={password}
+                  autoComplete="current-password"
                   onChange={(e) => setPassword(e.target.value)}
                   className="form-control"
                   required

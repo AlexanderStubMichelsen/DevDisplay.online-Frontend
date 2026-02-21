@@ -84,6 +84,7 @@ const ChangePassword = () => {
                 <input
                   type="password"
                   name="oldPassword"
+                  autoComplete="current-password"
                   value={oldPassword}
                   onChange={(e) => setOldPassword(e.target.value)}
                   className="form-control"
@@ -95,6 +96,7 @@ const ChangePassword = () => {
                 <input
                   type="password"
                   name="newPassword"
+                  autoComplete="new-password"
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   className="form-control"
@@ -106,6 +108,7 @@ const ChangePassword = () => {
                 <input
                   type="password"
                   name="rePassword"
+                  autoComplete="new-password"
                   value={rePassword}
                   onChange={(e) => setRePassword(e.target.value)}
                   className="form-control"
