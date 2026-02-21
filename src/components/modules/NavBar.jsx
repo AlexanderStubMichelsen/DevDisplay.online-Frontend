@@ -175,9 +175,9 @@ function NavBar() {
                 <Nav.Link>Saved</Nav.Link>
               </LinkContainer>
             )}
-            <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
+            {/* <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link> 
-            </LinkContainer>
+            </LinkContainer> */}
             <LinkContainer to="/about" onClick={() => setExpanded(false)}>
               <Nav.Link>About</Nav.Link>
             </LinkContainer>

@@ -24,6 +24,16 @@ html, body {
   flex: 1;
   position: relative;
   z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.CADimg {
+  width: min(50vw, 1000px);
+  height: auto;
+  display: block;
 }
 
 /* Footer styling */

@@ -6,9 +6,8 @@
   margin-top: auto;
   z-index: 2;
   border-top: 1px solid rgb(131, 97, 97); /* Light border color */
-  background-color: #302f2d !important; /* Use hex or rgb, no quotes */  
+  background-color: #302f2d !important; /* Use hex or rgb, no quotes */ 
 }
-
 
 .footer-container {
   display: flex;

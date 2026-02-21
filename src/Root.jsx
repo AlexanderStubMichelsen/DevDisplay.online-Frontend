@@ -1,6 +1,14 @@
 // filepath: c:\Projekter\Maskinen\src\Root.jsx
-import React, { useState } from "react";
-import { RouterProvider, createBrowserRouter, createRoutesFromElements, Route } from "react-router-dom";
+import React from "react";
+import {
+  RouterProvider,
+  createBrowserRouter,
+  createRoutesFromElements,
+  Route,
+  Outlet,
+  useLocation,
+} from "react-router-dom";
+import { motion, AnimatePresence } from "framer-motion";
 import App from "./App.jsx";
 import Images from "./components/pages/Images.jsx";
 import NoMatch from "./components/pages/NoMatch.jsx";
@@ -15,27 +23,41 @@ import PrivacyPolicyOrganizedNotes from "./components/google_play_console/Privac
 import DeleteUser from "./components/pages/DeleteUser.jsx";
 import Contact from "./components/pages/Contact.jsx"; // Import Contact component
 
-const Root = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const PageTransitionLayout = () => {
+  const location = useLocation();
 
+  return (
+    <AnimatePresence mode="wait" initial={true}>
+      <motion.main
+        key={`${location.pathname}${location.search}${location.hash}`}
+        initial={{ opacity: 0, y: 18, scale: 0.99 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: -10, scale: 0.995 }}
+        transition={{ duration: 0.45, ease: "easeOut" }}
+      >
+        <Outlet />
+      </motion.main>
+    </AnimatePresence>
+  );
+};
+
+const Root = () => {
   const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route>
-        <Route path="/" element={<App setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />} />
-        <>
-          <Route path="images" element={<Images />} />
-          <Route path="youtube" element={<Youtube />} />
-          <Route path="help" element={<Help />} />
-          <Route path="userpage" element={<UserPage />} />
-          <Route path="saved" element={<Saved />} />
-          <Route path="changepassword" element={<ChangePassword />} />
-          <Route path="deleteuser" element={<DeleteUser />} />
-          <Route path="about" element={<About />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="*" element={<NoMatch />} />
-          <Route path="PrivacyPolicy" element={<PrivacyPolicyTetris />} />
-          <Route path="privacyPolicyOrganizedNotes" element={<PrivacyPolicyOrganizedNotes />} />
-        </>
+      <Route element={<PageTransitionLayout />}>
+        <Route path="/" element={<App />} />
+        <Route path="images" element={<Images />} />
+        <Route path="youtube" element={<Youtube />} />
+        <Route path="help" element={<Help />} />
+        <Route path="userpage" element={<UserPage />} />
+        <Route path="saved" element={<Saved />} />
+        <Route path="changepassword" element={<ChangePassword />} />
+        <Route path="deleteuser" element={<DeleteUser />} />
+        <Route path="about" element={<About />} />
+        <Route path="contact" element={<Contact />} />
+        <Route path="*" element={<NoMatch />} />
+        <Route path="PrivacyPolicy" element={<PrivacyPolicyTetris />} />
+        <Route path="privacyPolicyOrganizedNotes" element={<PrivacyPolicyOrganizedNotes />} />
       </Route>
     )
   );

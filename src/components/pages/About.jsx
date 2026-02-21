@@ -2,9 +2,6 @@ import React from "react";
 import { Helmet } from "react-helmet-async"
 import "../../css/pages/About.css"; // Optional: Add a CSS file for styling
 import NavBar from "../modules/NavBar"; // Import NavBar component
-import animationVideo from "../../assets/animation/animation.mp4"; // Import the video file
-import animationVideo2 from "../../assets/animation/invideo-ai-1080.mp4"; // Import the video file
-import animationVideo3 from "../../assets/animation/DevDisplay.online_free.mp4"; // Import the video file
 import Footer from "../modules/Footer";
 import ScrollIndicator from "../modules/ScrollIndicator"; // Import ScrollIndicator component
 import { YAxis } from "recharts";
