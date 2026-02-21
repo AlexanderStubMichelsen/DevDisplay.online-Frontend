@@ -164,11 +164,109 @@
   justify-content: flex-end;
 }
 
+.nav-links-track {
+  position: relative;
+  padding-bottom: 0;
+}
+
+.nav-stickman {
+  position: absolute;
+  left: 0;
+  bottom: 16px;
+  width: 26px;
+  height: 26px;
+  pointer-events: none;
+  transform-origin: center bottom;
+  z-index: 2;
+}
+
+.nav-stickman svg {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-stickman circle,
+.nav-stickman line {
+  stroke: rgb(131, 97, 97);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav-stickman .arm,
+.nav-stickman .leg {
+  transform-box: fill-box;
+  transform-origin: center top;
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-stickman.sitting .arm-left {
+  transform: rotate(34deg);
+}
+
+.nav-stickman.sitting .arm-right {
+  transform: rotate(-36deg);
+}
+
+.nav-stickman.sitting .leg-left {
+  transform: rotate(92deg) translate(2px, 2px);
+}
+
+.nav-stickman.sitting .leg-right {
+  transform: rotate(58deg) translate(1px, 2px);
+}
+
+.nav-stickman.sitting svg {
+  transform: rotate(8deg) translateY(1px);
+}
+
+.nav-stickman.running svg {
+  transform: rotate(0deg) translateY(0);
+}
+
+.nav-stickman.running .arm-left,
+.nav-stickman.running .leg-right {
+  animation: limb-swing-forward 0.18s ease-in-out infinite alternate;
+}
+
+.nav-stickman.running .arm-right,
+.nav-stickman.running .leg-left {
+  animation: limb-swing-backward 0.18s ease-in-out infinite alternate;
+}
+
+@keyframes limb-swing-forward {
+  from {
+    transform: rotate(-22deg);
+  }
+  to {
+    transform: rotate(22deg);
+  }
+}
+
+@keyframes limb-swing-backward {
+  from {
+    transform: rotate(22deg);
+  }
+  to {
+    transform: rotate(-22deg);
+  }
+}
+
 /* When collapsed (mobile), stack links in a column */
 .navbar-collapse.show .navbar-nav {
   flex-direction: column;
   align-items: center;
   width: 100%;
+}
+
+.navbar-collapse.show .nav-links-track {
+  padding-bottom: 0;
+}
+
+.navbar-collapse.show .nav-stickman {
+  display: none;
 }
 
 .sticky-top-navbar .nav-link,
@@ -184,5 +282,11 @@
   margin-bottom: 0.5rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+}
+
+@media (max-width: 767px) {
+  .nav-stickman {
+    display: none;
+  }
 }
 

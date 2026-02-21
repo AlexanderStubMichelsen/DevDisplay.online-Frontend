@@ -1,28 +1,80 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
+import { motion } from "framer-motion";
+import { useLocation } from "react-router-dom";
 import "../../css/modules/NavBar.css";
 import apiFacade from "../../util/api/UserFacade.js";
 
 function NavBar() {
+  const location = useLocation();
   const [expanded, setExpanded] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false); // Added missing state
+  const [stickX, setStickX] = useState(0);
+  const [stickVisible, setStickVisible] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
   const [loginDataForm, setLoginDataForm] = useState({
     email: "",
     password: "",
   });
+  const navRef = useRef(null);
+  const linkRefs = useRef({});
+  const previousXRef = useRef(0);
+  const runTimeoutRef = useRef(null);
   const [signupData, setSignupData] = useState({ // Added missing state
     name: "",
     email: "",
     password: "",
   });
+
+  const setLinkRef = useCallback(
+    (key) => (el) => {
+      if (el) {
+        linkRefs.current[key] = el;
+      } else {
+        delete linkRefs.current[key];
+      }
+    },
+    []
+  );
+
+  const getActiveNavKey = useCallback(
+    (pathname) => {
+      if (pathname === "/") return "home";
+      if (pathname.startsWith("/images")) return "images";
+      if (pathname.startsWith("/saved") && isLoggedIn) return "saved";
+      if (pathname.startsWith("/about")) return "about";
+      if (pathname.startsWith("/contact")) return "contact";
+      if (pathname.startsWith("/help")) return "help";
+      return null;
+    },
+    [isLoggedIn]
+  );
+
+  const syncStickmanPosition = useCallback(() => {
+    const activeKey = getActiveNavKey(location.pathname);
+    const navElement = navRef.current;
+    const activeElement = activeKey ? linkRefs.current[activeKey] : null;
+
+    if (!navElement || !activeElement || expanded) {
+      setStickVisible(false);
+      return;
+    }
+
+    const navRect = navElement.getBoundingClientRect();
+    const linkRect = activeElement.getBoundingClientRect();
+    const x = linkRect.left - navRect.left + linkRect.width / 2 - 13;
+
+    setStickX(Math.max(0, x));
+    setStickVisible(true);
+  }, [expanded, getActiveNavKey, location.pathname]);
 
   const checkLoginStatus = () => {
     const storedUser = JSON.parse(sessionStorage.getItem("loginData"));
@@ -51,6 +103,46 @@ function NavBar() {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
+
+  useEffect(() => {
+    const frame = requestAnimationFrame(syncStickmanPosition);
+    window.addEventListener("resize", syncStickmanPosition);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener("resize", syncStickmanPosition);
+    };
+  }, [syncStickmanPosition]);
+
+  useEffect(() => {
+    if (!stickVisible) return;
+
+    const distance = Math.abs(stickX - previousXRef.current);
+    previousXRef.current = stickX;
+
+    if (distance < 2) return;
+
+    setIsRunning(true);
+    if (runTimeoutRef.current) {
+      clearTimeout(runTimeoutRef.current);
+    }
+    runTimeoutRef.current = setTimeout(() => {
+      setIsRunning(false);
+    }, 2000);
+
+    return () => {
+      if (runTimeoutRef.current) {
+        clearTimeout(runTimeoutRef.current);
+      }
+    };
+  }, [stickVisible, stickX]);
+
+  useEffect(() => {
+    return () => {
+      if (runTimeoutRef.current) {
+        clearTimeout(runTimeoutRef.current);
+      }
     };
   }, []);
 
@@ -163,29 +255,29 @@ function NavBar() {
           id="responsive-navbar-nav"
           className="justify-content-end"
         >
-          <Nav className="ml-auto">
+          <Nav ref={navRef} className="ml-auto nav-links-track">
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
-              <Nav.Link>Home</Nav.Link>
+              <Nav.Link ref={setLinkRef("home")}>Home</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/images" onClick={() => setExpanded(false)}>
-              <Nav.Link>Images</Nav.Link>
+              <Nav.Link ref={setLinkRef("images")}>Images</Nav.Link>
             </LinkContainer>
             {isLoggedIn && (
               <LinkContainer to="/saved" onClick={() => setExpanded(false)}>
-                <Nav.Link>Saved</Nav.Link>
+                <Nav.Link ref={setLinkRef("saved")}>Saved</Nav.Link>
               </LinkContainer>
             )}
             {/* <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link> 
             </LinkContainer> */}
             <LinkContainer to="/about" onClick={() => setExpanded(false)}>
-              <Nav.Link>About</Nav.Link>
+              <Nav.Link ref={setLinkRef("about")}>About</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/contact" onClick={() => setExpanded(false)}>
-              <Nav.Link>Contact</Nav.Link>
+              <Nav.Link ref={setLinkRef("contact")}>Contact</Nav.Link>
             </LinkContainer>
             <LinkContainer to="/help" onClick={() => setExpanded(false)}>
-              <Nav.Link>Help</Nav.Link>
+              <Nav.Link ref={setLinkRef("help")}>Help</Nav.Link>
             </LinkContainer>
 
             {/* Authentication Section */}
@@ -212,6 +304,41 @@ function NavBar() {
               </Dropdown>
             ) : (
               <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
+            )}
+
+            {stickVisible && (
+              <motion.div
+                className={`nav-stickman ${isRunning ? "running" : "sitting"}`}
+                initial={false}
+                animate={
+                  isRunning
+                    ? {
+                        x: stickX,
+                        y: [0, -10, 0],
+                        rotate: [0, -6, 6, 0],
+                      }
+                    : {
+                        x: stickX,
+                        y: 2,
+                        rotate: 4,
+                      }
+                }
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30, mass: 0.8 },
+                  y: { duration: 0.6, ease: "easeInOut" },
+                  rotate: { duration: 0.6, ease: "easeInOut" },
+                }}
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24" role="img">
+                  <circle cx="12" cy="4" r="2.5" />
+                  <line x1="12" y1="7" x2="12" y2="14" />
+                  <line className="arm arm-left" x1="12" y1="9" x2="8" y2="12" />
+                  <line className="arm arm-right" x1="12" y1="9" x2="16" y2="12" />
+                  <line className="leg leg-left" x1="12" y1="14" x2="8.5" y2="20" />
+                  <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
+                </svg>
+              </motion.div>
             )}
           </Nav>
         </Navbar.Collapse>

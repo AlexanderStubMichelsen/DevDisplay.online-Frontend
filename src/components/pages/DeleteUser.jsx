@@ -31,9 +31,8 @@ const DeleteUser = () => {
     e.preventDefault();
 
     try {
-      await apiFacade.deleteUser(email, password);
+      await apiFacade.deleteUser(password);
       setMessage("User deleted successfully.");
-      setEmail("");
       setPassword("");
       // Redirect after short delay
       setTimeout(() => navigate("/"), 1500);
@@ -77,15 +76,13 @@ const DeleteUser = () => {
             {message && <p className="feedback">{message}</p>}
             <form onSubmit={handleDelete} className="user-form">
               <div className="form-group">
-                <label htmlFor="email">Email:</label>
+                <label htmlFor="email">Account:</label>
                 <input
                   type="email"
                   name="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
                   className="form-control"
-                  required
-                  disabled // Disable if pulled from session
+                  readOnly
                 />
               </div>
               <div className="form-group">

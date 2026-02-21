@@ -149,8 +149,8 @@ const apiFacade = {
     }
   },
 
-  // Make a delete request to the API for a user and prompt them for email and password
-  deleteUser: async (email, password) => {
+  // Delete current authenticated user; backend resolves user from JWT token.
+  deleteUser: async (password) => {
     const config = await getConfig(); // Must be inside an async function
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
@@ -162,7 +162,7 @@ const apiFacade = {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({ email, password }),
+        body: JSON.stringify({ password }),
       });
       if (response.ok) {
         // Clear session storage if delete is successful
