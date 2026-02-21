@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - Azure
+  workflow_dispatch:
   pull_request:
     types: [opened, synchronize, reopened]
     branches:
@@ -43,15 +44,26 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Write build fingerprint source file
+        run: |
+          echo "commit=${GITHUB_SHA}" > public/version.txt
+          echo "run_id=${GITHUB_RUN_ID}" >> public/version.txt
+          echo "built_utc=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> public/version.txt
+
       - name: Build app
         run: npm run build
 
-      - name: Write build fingerprint
+      - name: Copy static web app config
         run: |
-          echo "commit=${GITHUB_SHA}" > dist/version.txt
-          echo "run_id=${GITHUB_RUN_ID}" >> dist/version.txt
-          echo "built_utc=$(date -u +"%Y-%m-%dT%H:%M:%SZ")" >> dist/version.txt
           cp staticwebapp.config.json dist/staticwebapp.config.json
+          ls -la dist
+          echo "----- version.txt -----"
+          cat dist/version.txt
 
-      - name: Deploy with SWA CLI
-        run: npx @azure/static-web-apps-cli@latest deploy ./dist --deployment-token "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_SAND_0AEF9A403 }}" --env production --verbose
+      - name: Deploy to Azure Static Web Apps
+        uses: Azure/static-web-apps-deploy@v1
+        with:
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_WITTY_SAND_0AEF9A403 }}
+          action: "upload"
+          app_location: "dist"
+          skip_app_build: true
