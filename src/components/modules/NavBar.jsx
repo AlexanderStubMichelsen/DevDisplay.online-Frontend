@@ -10,6 +10,8 @@ import { useLocation } from "react-router-dom";
 import "../../css/modules/NavBar.css";
 import apiFacade from "../../util/api/UserFacade.js";
 
+const STICKMAN_X_STORAGE_KEY = "navStickmanX";
+
 function NavBar() {
   const location = useLocation();
   const [expanded, setExpanded] = useState(false);
@@ -17,14 +19,19 @@ function NavBar() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false); // Added missing state
-  const [stickX, setStickX] = useState(0);
+  const [stickX, setStickX] = useState(() => {
+    const saved = Number.parseFloat(sessionStorage.getItem(STICKMAN_X_STORAGE_KEY));
+    return Number.isFinite(saved) ? saved : null;
+  });
   const [isRunning, setIsRunning] = useState(false);
+  const [moveDuration, setMoveDuration] = useState(0.45);
   const [loginDataForm, setLoginDataForm] = useState({
     email: "",
     password: "",
   });
   const navRef = useRef(null);
-  const previousXRef = useRef(0);
+  const previousXRef = useRef(stickX);
+  const hasPlacedStickRef = useRef(stickX != null);
   const runTimeoutRef = useRef(null);
   const [signupData, setSignupData] = useState({ // Added missing state
     name: "",
@@ -97,7 +104,31 @@ function NavBar() {
     const linkRect = activeElement.getBoundingClientRect();
     const x = linkRect.left - navRect.left + linkRect.width / 2 - 13;
 
-    setStickX(Math.max(0, x));
+    const nextX = Math.max(0, x);
+    if (!hasPlacedStickRef.current) {
+      // Place instantly on first render so it doesn't fly in from the left edge.
+      hasPlacedStickRef.current = true;
+      previousXRef.current = nextX;
+      setStickX(nextX);
+      return;
+    }
+
+    const currentX = previousXRef.current == null ? nextX : previousXRef.current;
+    const distance = Math.abs(nextX - currentX);
+    if (distance >= 2) {
+      const duration = Math.min(1.1, Math.max(0.55, distance / 260));
+      setMoveDuration(duration);
+      setIsRunning(true);
+      if (runTimeoutRef.current) {
+        clearTimeout(runTimeoutRef.current);
+      }
+      runTimeoutRef.current = setTimeout(() => {
+        setIsRunning(false);
+      }, duration * 1000 + 280);
+    }
+
+    previousXRef.current = nextX;
+    setStickX(nextX);
   }, [getActiveElement, getActiveNavKey, location.pathname]);
 
   const checkLoginStatus = () => {
@@ -140,24 +171,8 @@ function NavBar() {
   }, [syncStickmanPosition]);
 
   useEffect(() => {
-    const distance = Math.abs(stickX - previousXRef.current);
-    previousXRef.current = stickX;
-
-    if (distance < 2) return;
-
-    setIsRunning(true);
-    if (runTimeoutRef.current) {
-      clearTimeout(runTimeoutRef.current);
-    }
-    runTimeoutRef.current = setTimeout(() => {
-      setIsRunning(false);
-    }, 700);
-
-    return () => {
-      if (runTimeoutRef.current) {
-        clearTimeout(runTimeoutRef.current);
-      }
-    };
+    if (stickX == null) return;
+    sessionStorage.setItem(STICKMAN_X_STORAGE_KEY, String(stickX));
   }, [stickX]);
 
   useEffect(() => {
@@ -328,38 +343,40 @@ function NavBar() {
               <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
             )}
 
-            <motion.div
-              className={`nav-stickman ${isRunning ? "running" : "sitting"}`}
-              initial={false}
-              animate={
-                isRunning
-                  ? {
-                      x: stickX,
-                      y: [0, -10, 0],
-                      rotate: [0, -6, 6, 0],
-                    }
-                  : {
-                      x: stickX,
-                      y: 2,
-                      rotate: 4,
-                    }
-              }
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30, mass: 0.8 },
-                y: { duration: 0.6, ease: "easeInOut" },
-                rotate: { duration: 0.6, ease: "easeInOut" },
-              }}
-              aria-hidden="true"
-            >
-              <svg viewBox="0 0 24 24" role="img">
-                <circle cx="12" cy="4" r="2.5" />
-                <line x1="12" y1="7" x2="12" y2="14" />
-                <line className="arm arm-left" x1="12" y1="9" x2="8" y2="12" />
-                <line className="arm arm-right" x1="12" y1="9" x2="16" y2="12" />
-                <line className="leg leg-left" x1="12" y1="14" x2="8.5" y2="20" />
-                <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
-              </svg>
-            </motion.div>
+            {stickX != null && (
+              <motion.div
+                className={`nav-stickman ${isRunning ? "running" : "sitting"}`}
+                initial={false}
+                animate={
+                  isRunning
+                    ? {
+                        x: stickX,
+                        y: [0, -10, 0],
+                        rotate: [0, -6, 6, 0],
+                      }
+                    : {
+                        x: stickX,
+                        y: 2,
+                        rotate: 4,
+                      }
+                }
+                transition={{
+                  x: { type: "tween", ease: "easeInOut", duration: moveDuration },
+                  y: { duration: 0.6, ease: "easeInOut" },
+                  rotate: { duration: 0.6, ease: "easeInOut" },
+                }}
+                aria-hidden="true"
+              >
+                <svg viewBox="0 0 24 24" role="img">
+                  <circle cx="12" cy="4" r="2.5" />
+                  <line x1="12" y1="7" x2="12" y2="14" />
+                  <line className="arm arm-left" x1="12" y1="9" x2="8" y2="12" />
+                  <line className="arm arm-right" x1="12" y1="9" x2="16" y2="12" />
+                  <line className="leg leg-left" x1="12" y1="14" x2="8.5" y2="20" />
+                  <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
+                </svg>
+              </motion.div>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>

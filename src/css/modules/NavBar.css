@@ -229,6 +229,7 @@
 
 .nav-stickman.running svg {
   transform: rotate(0deg) translateY(0);
+  animation: stickman-run-bob 0.16s ease-in-out infinite alternate;
 }
 
 .nav-stickman.running .arm-left,
@@ -256,6 +257,15 @@
   }
   to {
     transform: rotate(-22deg);
+  }
+}
+
+@keyframes stickman-run-bob {
+  from {
+    transform: rotate(-3deg) translateY(0);
+  }
+  to {
+    transform: rotate(3deg) translateY(-2px);
   }
 }
 
