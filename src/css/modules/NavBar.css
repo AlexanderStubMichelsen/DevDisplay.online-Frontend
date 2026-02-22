@@ -169,7 +169,7 @@
 .nav-links-track {
   position: relative;
   padding-bottom: 0;
-  overflow: visible !important;
+  overflow: visible;
   min-height: 34px;
 }
 
@@ -179,31 +179,10 @@
   bottom: 16px;
   width: 26px;
   height: 26px;
-  pointer-events: none !important;
+  pointer-events: none;
   transform-origin: center bottom;
-  z-index: 99999 !important;
-  opacity: 1 !important;
-  display: block !important;
-  visibility: visible !important;
-}
-
-.nav-stickman.is-visible {
+  z-index: 2001;
   opacity: 1;
-}
-
-.nav-stickman-debug {
-  position: absolute;
-  right: 8px;
-  top: -6px;
-  z-index: 100000;
-  background: #ff3b30;
-  color: #fff;
-  font-size: 10px;
-  line-height: 1;
-  padding: 4px 6px;
-  border-radius: 4px;
-  font-weight: 700;
-  letter-spacing: 0.5px;
 }
 
 .nav-stickman svg {
@@ -214,7 +193,7 @@
 
 .nav-stickman circle,
 .nav-stickman line {
-  stroke: rgb(235, 210, 120);
+  stroke: rgb(131, 97, 97);
   fill: none;
   stroke-width: 1.8;
   stroke-linecap: round;

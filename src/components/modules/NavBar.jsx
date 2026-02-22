@@ -18,7 +18,6 @@ function NavBar() {
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false); // Added missing state
   const [stickX, setStickX] = useState(0);
-  const [stickVisible, setStickVisible] = useState(true);
   const [isRunning, setIsRunning] = useState(false);
   const [loginDataForm, setLoginDataForm] = useState({
     email: "",
@@ -90,13 +89,7 @@ function NavBar() {
     const navElement = navRef.current;
     const activeElement = getActiveElement(activeKey, navElement);
 
-    if (!navElement) {
-      setStickVisible(true);
-      return;
-    }
-
-    if (!activeElement) {
-      setStickVisible(true);
+    if (!navElement || !activeElement) {
       return;
     }
 
@@ -105,7 +98,6 @@ function NavBar() {
     const x = linkRect.left - navRect.left + linkRect.width / 2 - 13;
 
     setStickX(Math.max(0, x));
-    setStickVisible(true);
   }, [getActiveElement, getActiveNavKey, location.pathname]);
 
   const checkLoginStatus = () => {
@@ -148,8 +140,6 @@ function NavBar() {
   }, [syncStickmanPosition]);
 
   useEffect(() => {
-    if (!stickVisible) return;
-
     const distance = Math.abs(stickX - previousXRef.current);
     previousXRef.current = stickX;
 
@@ -161,14 +151,14 @@ function NavBar() {
     }
     runTimeoutRef.current = setTimeout(() => {
       setIsRunning(false);
-    }, 2000);
+    }, 700);
 
     return () => {
       if (runTimeoutRef.current) {
         clearTimeout(runTimeoutRef.current);
       }
     };
-  }, [stickVisible, stickX]);
+  }, [stickX]);
 
   useEffect(() => {
     return () => {
@@ -339,7 +329,7 @@ function NavBar() {
             )}
 
             <motion.div
-              className={`nav-stickman ${isRunning ? "running" : "sitting"} ${stickVisible ? "is-visible" : ""}`}
+              className={`nav-stickman ${isRunning ? "running" : "sitting"}`}
               initial={false}
               animate={
                 isRunning
@@ -370,9 +360,6 @@ function NavBar() {
                 <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
               </svg>
             </motion.div>
-            <div className="nav-stickman-debug" aria-hidden="true">
-              STK
-            </div>
           </Nav>
         </Navbar.Collapse>
       </Navbar>
