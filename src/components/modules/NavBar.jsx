@@ -232,13 +232,7 @@ function NavBar() {
     e.preventDefault();
     try {
       // Sign up the user
-      await apiFacade.signUp(signupData);
-
-      // Log in the user right after sign-up
-      const response = await apiFacade.login({
-        email: signupData.email,
-        password: signupData.password,
-      });
+      const response = await apiFacade.signUp(signupData);
 
       console.log("Response:", response);
 
@@ -264,10 +258,12 @@ function NavBar() {
       window.location.reload();
     } catch (error) {
       // Check if the error is a 409 Conflict (email already taken)
-      if (error.response?.status === 409) {
+      if (error.status === 409) {
         alert("The email is already taken. Please use a different email.");
+      } else if (error.status === 500) {
+        alert(`Server error during sign-up: ${error.message}`);
       } else {
-        alert("Sign-Up Failed. Please try again.");
+        alert(error.message || "Sign-Up Failed. Please try again.");
       }
     }
   };

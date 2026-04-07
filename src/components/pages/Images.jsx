@@ -14,9 +14,14 @@ function Images() {
   const [query, setQuery] = useState("");
 
   const fetchImages = (pageNum, searchQuery = "") => {
-    const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY;
+    setError(null);
+    setLoading(true);
+
+    const accessKey = import.meta.env.VITE_UNSPLASH_ACCESS_KEY?.trim();
     if (!accessKey) {
-      setError("Missing API Key. Please check your .env file.");
+      setError(
+        "Missing Unsplash API key. Add VITE_UNSPLASH_ACCESS_KEY to .env and restart the Vite server."
+      );
       setLoading(false);
       return;
     }
@@ -27,7 +32,12 @@ function Images() {
 
     fetch(apiUrl)
       .then((response) => {
-        if (!response.ok) throw new Error("Failed to fetch images");
+        if (!response.ok) {
+          if (response.status === 401 || response.status === 403) {
+            throw new Error("Unsplash API key is invalid or unauthorized.");
+          }
+          throw new Error("Failed to fetch images");
+        }
         return response.json();
       })
       .then((data) => {

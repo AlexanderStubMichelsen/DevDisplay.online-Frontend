@@ -2,6 +2,26 @@ import { getConfig } from '../../config.js';
 
 const API_URL_ENDPOINT = "users";
 
+const buildHttpError = async (response, fallbackMessage) => {
+  let message = fallbackMessage;
+  try {
+    const contentType = response.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      const data = await response.json();
+      message = data?.message || data?.title || fallbackMessage;
+    } else {
+      const text = await response.text();
+      if (text) message = text;
+    }
+  } catch {
+    // Keep fallback if parsing fails.
+  }
+
+  const error = new Error(message);
+  error.status = response.status;
+  return error;
+};
+
 const apiFacade = {
   signUp: async (signupData) => {
     const config = await getConfig(); // Must be inside an async function
@@ -15,11 +35,10 @@ const apiFacade = {
       });
   
       if (!response.ok) {
-        // Check if it's a conflict error (409)
         if (response.status === 409) {
-          const responseData = await response.json();  // Now this will be a valid JSON response
-          throw new Error(responseData.message || "A user with this email already exists.");
+          throw await buildHttpError(response, "A user with this email already exists.");
         }
+        throw await buildHttpError(response, `Sign-up failed (${response.status})`);
       }
   
       // Proceed with login if sign-up is successful
@@ -58,7 +77,12 @@ const apiFacade = {
         body: JSON.stringify(loginData),
       });
 
-      if (!response.ok) throw new Error("Invalid email or password");
+      if (!response.ok) {
+        if (response.status === 401) {
+          throw await buildHttpError(response, "Invalid email or password");
+        }
+        throw await buildHttpError(response, `Login failed (${response.status})`);
+      }
       return await response.json();
     } catch (error) {
       console.error("Login Error:", error);
@@ -96,7 +120,7 @@ const apiFacade = {
         body: JSON.stringify(user),
       });
 
-      if (!response.ok) throw new Error("Update failed");
+      if (!response.ok) throw await buildHttpError(response, `Update failed (${response.status})`);
       return await response.json();
     } catch (error) {
       console.error("Update User Error:", error);
@@ -119,7 +143,7 @@ const apiFacade = {
         body: JSON.stringify({ oldPassword, newPassword }),
       });
 
-      if (!response.ok) throw new Error("Password change failed");
+      if (!response.ok) throw await buildHttpError(response, `Password change failed (${response.status})`);
       return await response.json();
     } catch (error) {
       console.error("Change Password Error:", error);
@@ -141,7 +165,7 @@ const apiFacade = {
         },
       });
 
-      if (!response.ok) throw new Error("Failed to fetch protected data");
+      if (!response.ok) throw await buildHttpError(response, `Failed to fetch protected data (${response.status})`);
       return await response.json();
     } catch (error) {
       console.error("Protected Data Error:", error);
@@ -171,7 +195,7 @@ const apiFacade = {
         window.dispatchEvent(new Event("storage"));
         return { message: "User deleted successfully" };
       }
-      if (!response.ok) throw new Error("Delete failed");
+      if (!response.ok) throw await buildHttpError(response, `Delete failed (${response.status})`);
       return await response.json();
     } catch (error) {
       console.error("Delete User Error:", error);
