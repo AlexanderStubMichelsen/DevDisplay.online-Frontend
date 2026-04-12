@@ -10,6 +10,8 @@ import {
 } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import App from "./App.jsx";
+import BackgroundLoop from "./components/modules/BackgroundLoop.jsx";
+import flowersLoop from "./assets/flowersloop.mp4";
 import Images from "./components/pages/Images.jsx";
 import NoMatch from "./components/pages/NoMatch.jsx";
 import Youtube from "./components/pages/Youtube.jsx";
@@ -27,17 +29,28 @@ const PageTransitionLayout = () => {
   const location = useLocation();
 
   return (
-    <AnimatePresence mode="wait" initial={true}>
-      <motion.main
-        key={`${location.pathname}${location.search}${location.hash}`}
-        initial={{ opacity: 0, y: 18, scale: 0.99 }}
-        animate={{ opacity: 1, y: 0, scale: 1 }}
-        exit={{ opacity: 0, y: -10, scale: 0.995 }}
-        transition={{ duration: 0.45, ease: "easeOut" }}
-      >
-        <Outlet />
-      </motion.main>
-    </AnimatePresence>
+    <div style={{ position: "relative", minHeight: "100vh", overflowX: "hidden" }}>
+      <BackgroundLoop
+        src={flowersLoop}
+        className="video-bg"
+        showOverlay
+        overlayOpacity={0.3}
+        zIndex={0}
+        position="fixed"
+      />
+      <AnimatePresence mode="wait" initial={true}>
+        <motion.main
+          key={`${location.pathname}${location.search}${location.hash}`}
+          initial={{ opacity: 0, y: 18, scale: 0.99 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          exit={{ opacity: 0, y: -10, scale: 0.995 }}
+          transition={{ duration: 0.45, ease: "easeOut" }}
+          style={{ position: "relative", zIndex: 1 }}
+        >
+          <Outlet />
+        </motion.main>
+      </AnimatePresence>
+    </div>
   );
 };
 

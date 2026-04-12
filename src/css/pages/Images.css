@@ -2,7 +2,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #f0f0f0;
+  background-color: transparent;
   margin: 0;
   padding: 0;
 }
@@ -23,7 +23,7 @@ body {
   padding: 2rem 0;
   position: relative;
   z-index: 1;
-  background-color: #555;
+  background-color: transparent;
   color: #302f2d;
 }
 

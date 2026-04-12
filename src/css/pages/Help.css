@@ -18,7 +18,7 @@
   color: #e2dfda;
   overflow: visible; /* Allow content to grow */
   min-height: auto; /* Let height grow with content */
-  background-color: #555;
+  background-color: transparent;
 }
 
 /* Background video */

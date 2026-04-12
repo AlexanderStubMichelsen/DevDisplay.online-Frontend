@@ -12,6 +12,7 @@ function BackgroundLoop({
   objectFit = "cover",
   zoom = 1,
   zIndex = -1,
+  position = "absolute",
   preload = "metadata",
   ...videoProps
 }) {
@@ -23,7 +24,7 @@ function BackgroundLoop({
     <div
       className={className}
       style={{
-        position: "absolute",
+        position,
         inset: 0,
         overflow: "hidden",
         zIndex,
