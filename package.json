@@ -8,6 +8,7 @@
     "backend": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"& \\\"$env:ProgramFiles\\dotnet\\dotnet.exe\\\" run --project ../MyPostgresApi\"",
     "frontend": "cd /d %USERPROFILE%\\Documents\\GitHub\\DevDisplay.online-Frontend && vite",
     "build": "cd /d %USERPROFILE%\\Documents\\GitHub\\DevDisplay.online-Frontend && vite build",
+    "build:azure": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "cd /d %USERPROFILE%\\Documents\\GitHub\\DevDisplay.online-Frontend && vite preview",
     "start": "cd /d %USERPROFILE%\\Documents\\GitHub\\DevDisplay.online-Frontend && vite",
