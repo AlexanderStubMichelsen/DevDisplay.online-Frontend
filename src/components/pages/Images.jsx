@@ -119,13 +119,13 @@ function Images() {
         <div className="images-container">
           <h1 className="images-title"></h1>
 
-          <form onSubmit={handleSearch} className="search-form">
+          <form onSubmit={handleSearch} className="images-search-form">
             <input
               type="text"
               placeholder="Search images..."
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="search-input"
+              className="images-search-input"
             />
           </form>
 

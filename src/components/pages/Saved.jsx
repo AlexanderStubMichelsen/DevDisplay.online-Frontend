@@ -164,7 +164,7 @@ const SavedImages = () => {
             placeholder="Search saved images..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="search-input"
+            className="saved-search-input"
           />
 
           {loading && (

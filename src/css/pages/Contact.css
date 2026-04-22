@@ -23,12 +23,12 @@
 .contact-container h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  color: #302f2d;
+  color: #e4e1db;
 }
 
 .contact-container p {
   margin-bottom: 1.5rem;
-  color: #302f2d;
+  color: #f1efeb;
 }
 
 .contact-container a {
@@ -43,7 +43,7 @@
   display: block;
   margin-bottom: 0.4rem;
   font-weight: 500;
-  color: #302f2d;
+  color: #ffffff;
 }
 
 .contact-form input,
@@ -70,7 +70,7 @@
 
 .btn.btn-primary {
   background: #666060;
-  color: #302f2d;
+  color: #fff !important;
   border: none;
   padding: 0.7rem 1.5rem;
   border-radius: 6px;
@@ -81,7 +81,13 @@
 
 .btn.btn-primary:hover {
   background: black;
-  color: #fff;
+  color: #fff !important;
+}
+
+.btn.btn-primary:focus,
+.btn.btn-primary:active,
+.btn.btn-primary:focus-visible {
+  color: #fff !important;
 }
 
 .contact-success {
@@ -111,12 +117,12 @@
   left: 50%;
   width: 100%; /* or set a max-width if needed */
   max-width: 480px;
-  background: #635757;
+  background: rgba(75, 66, 66, 0.6);
   z-index: 1;
   transform: translate(-50%, -50%);
   padding: 32px 24px;
   border-radius: 16px;
-  border-color: #fff;
+  border-color: #7c5858;
   color: #302f2d;
 }
 
