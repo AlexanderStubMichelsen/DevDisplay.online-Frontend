@@ -277,7 +277,7 @@ function NavBar() {
         className="sticky-top-navbar"
         expanded={expanded}
       >
-        <Navbar.Brand href="/">DevDisplay</Navbar.Brand>
+        <Navbar.Brand href="/">MachineMal</Navbar.Brand>
         <Navbar.Toggle
           aria-controls="responsive-navbar-nav"
           onClick={handleNavToggle}

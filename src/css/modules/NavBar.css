@@ -19,7 +19,7 @@
   position: sticky;   /* Make it sticky */
   top: 0;             /* Stick to the top */
   width: 100%;
-  background-color: red !important;
+  background-color: #302f2d !important;
   border-bottom: 1px solid rgb(131, 97, 97); /* Light border color */
   z-index: 1000; /* Ensure navbar stays on top */
 }
@@ -150,7 +150,7 @@
   align-items: center;      /* Center items horizontally */
   justify-content: flex-start;
   width: 100%;
-  background: #e22c2c;
+  background: #302f2d;
   position: absolute;
   left: 0;
   top: 100%;
