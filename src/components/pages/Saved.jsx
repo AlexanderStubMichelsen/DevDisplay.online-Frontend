@@ -14,14 +14,7 @@ const SavedImages = () => {
   const [userCounts, setUserCounts] = useState({});
   const [deleting, setDeleting] = useState(null);
 
-  const isLoggedIn = sessionStorage.getItem("isLoggedIn") === "true";
-
   useEffect(() => {
-    if (!isLoggedIn) {
-      setLoading(false);
-      return;
-    }
-
     const fetchImages = async () => {
       try {
         setLoading(true);
@@ -64,16 +57,14 @@ const SavedImages = () => {
 
       } catch (err) {
         console.error("Failed to load saved images:", err);
-        setError(
-          "Failed to load saved images. Please try logging in again. Sessions expire after 30 minutes."
-        );
+        setError("Failed to load saved images. Please try again.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchImages();
-  }, [isLoggedIn]);
+  }, []);
 
   const handleDelete = async (id, imageUrl) => {
     if (deleting) {
@@ -105,27 +96,6 @@ const SavedImages = () => {
       image.title?.toLowerCase().includes(search.toLowerCase()) ||
       image.photographer?.toLowerCase().includes(search.toLowerCase())
   );
-
-  if (!isLoggedIn) {
-    return (
-      <>
-        <Helmet>
-          <title>Login Required | DevDisplay</title>
-        </Helmet>
-        <NavBar />
-        <div className="images-wrapper">
-          <div className="images-container">
-            <div className="login-required">
-              <h1>Please Log In</h1>
-              <p>You need to log in to view your saved images.</p>
-            </div>
-          </div>
-          <Footer />
-        </div>
-        <ScrollIndicator />
-      </>
-    );
-  }
 
   return (
     <>
@@ -172,6 +142,8 @@ const SavedImages = () => {
               <p>Loading saved images...</p>
             </div>
           )}
+
+          {!loading && error && <p className="error-message">{error}</p>}
 
           {!loading && filteredImages.length > 0 && (
             <div className="image-grid">

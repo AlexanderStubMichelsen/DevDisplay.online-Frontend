@@ -27,6 +27,7 @@ const Footer = () => {
             <li><a href="/youtube" className="footer-link">Youtube</a></li>
             <li><a href="/about" className="footer-link">About</a></li>
             <li><a href="/help" className="footer-link">Help</a></li>
+            <li><a href="/cookie-policy" className="footer-link">Cookie Policy</a></li>
           </ul>
         </div>
           <div className="footer-section footer-navigation">

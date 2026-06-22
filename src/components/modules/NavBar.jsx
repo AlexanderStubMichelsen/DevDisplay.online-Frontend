@@ -43,7 +43,7 @@ function NavBar() {
     (pathname) => {
       if (pathname === "/") return "home";
       if (pathname.startsWith("/images")) return "images";
-      if (pathname.startsWith("/saved") && isLoggedIn) return "saved";
+      if (pathname.startsWith("/saved")) return "saved";
       if (
         isLoggedIn &&
         (
@@ -295,11 +295,10 @@ function NavBar() {
             <LinkContainer to="/images" onClick={() => setExpanded(false)}>
               <Nav.Link>Images</Nav.Link>
             </LinkContainer>
-            {isLoggedIn && (
-              <LinkContainer to="/saved" onClick={() => setExpanded(false)}>
-                <Nav.Link>Saved</Nav.Link>
-              </LinkContainer>
-            )}
+            <LinkContainer to="/saved" onClick={() => setExpanded(false)}>
+              <Nav.Link>Saved</Nav.Link>
+            </LinkContainer>
+
             {/* <LinkContainer to="/youtube" onClick={() => setExpanded(false)}>
               <Nav.Link>Youtube</Nav.Link> 
             </LinkContainer> */}

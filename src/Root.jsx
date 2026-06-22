@@ -24,6 +24,8 @@ import PrivacyPolicyTetris from "./components/google_play_console/PrivacyPolicyT
 import PrivacyPolicyOrganizedNotes from "./components/google_play_console/PrivacyPolicyOrganized.jsx";
 import DeleteUser from "./components/pages/DeleteUser.jsx";
 import Contact from "./components/pages/Contact.jsx"; // Import Contact component
+import CookieConsent from "./components/modules/CookieConsent.jsx";
+import CookiePolicy from "./components/pages/CookiePolicy.jsx";
 
 const PageTransitionLayout = () => {
   const location = useLocation();
@@ -50,6 +52,7 @@ const PageTransitionLayout = () => {
           <Outlet />
         </motion.main>
       </AnimatePresence>
+      <CookieConsent />
     </div>
   );
 };
@@ -68,6 +71,7 @@ const Root = () => {
         <Route path="deleteuser" element={<DeleteUser />} />
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
+        <Route path="cookie-policy" element={<CookiePolicy />} />
         <Route path="*" element={<NoMatch />} />
         <Route path="PrivacyPolicy" element={<PrivacyPolicyTetris />} />
         <Route path="privacyPolicyOrganizedNotes" element={<PrivacyPolicyOrganizedNotes />} />

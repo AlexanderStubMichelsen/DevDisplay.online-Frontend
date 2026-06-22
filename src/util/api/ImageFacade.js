@@ -2,32 +2,38 @@ import { getConfig } from '../../config.js';
 
 const API_URL_ENDPOINT = "images";
 
+const getLoginData = () => JSON.parse(sessionStorage.getItem("loginData") || "null");
+
+const getJsonHeaders = () => {
+  const token = getLoginData()?.token;
+  return {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
+};
+
 const ImageFacade = {
   saveImage: async (image) => {
     try {
       const config = await getConfig(); // Must be inside an async function
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
-      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-      if (!token) throw new Error("Not authenticated");
+      const loginData = getLoginData();
 
       const payload = {
         imageUrl: image.url,
         title: image.alt || "Untitled",
         photographer: image.photographer,
         sourceLink: image.profileLink,
-        // Ensure userId is included if required by the backend
-        userId: JSON.parse(sessionStorage.getItem("loginData"))?.id,
+        ...(loginData?.id ? { userId: loginData.id } : {}),
       };
 
       console.log("Saving image with payload:", payload);
 
       const response = await fetch(`${API_URL}/save`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: "include",
+        headers: getJsonHeaders(),
         body: JSON.stringify(payload),
       });
 
@@ -47,19 +53,14 @@ const ImageFacade = {
     const config = await getConfig();
     const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
-    const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-    if (!token) throw new Error("Not authenticated. Token expired. Login again.");
-
     const response = await fetch(`${API_URL}/mine`, {
       method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
+      credentials: "include",
+      headers: getJsonHeaders(),
     });
 
     if (!response.ok) {
-      if (response.status === 401) {
+      if (response.status === 401 && getLoginData()?.token) {
         // Handle token expiration
         sessionStorage.clear(); // Clear session storage
         throw new Error("Session expired. Please log in again.");
@@ -77,16 +78,10 @@ const ImageFacade = {
       const config = await getConfig();
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
-      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-      if (!token) throw new Error("Not authenticated");
-
       // Use POST with body - much more reliable for complex URLs
       const response = await fetch(`${API_URL}/image-user-count`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        headers: getJsonHeaders(),
         body: JSON.stringify({ imageUrl: imageUrl }),
       });
 
@@ -109,15 +104,10 @@ const ImageFacade = {
       const config = await getConfig(); // Must be inside an async function
       const API_URL = `${config.API_URL}/${API_URL_ENDPOINT}`;
 
-      const token = JSON.parse(sessionStorage.getItem("loginData"))?.token;
-      if (!token) throw new Error("Not authenticated");
-
       const response = await fetch(`${API_URL}/${imageId}`, {
         method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
+        credentials: "include",
+        headers: getJsonHeaders(),
       });
 
       if (!response.ok) {
