@@ -9,7 +9,7 @@ import { YAxis } from "recharts";
 const About = () => {
 
   const HandleLinkClick = () => {
-    window.location.href = "https://alexstub.devdisplay.online";
+    window.location.href = "https://cv.machinemal.eu";
   };
 
   return (
