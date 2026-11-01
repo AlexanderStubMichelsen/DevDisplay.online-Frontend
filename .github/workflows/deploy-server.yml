@@ -1,0 +1,53 @@
+name: Deploy frontend to server
+
+on:
+  push:
+    branches: [server]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-frontend
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      # The API is served from the same domain (Caddy forwards /api to the .NET app).
+      # These VITE_ keys end up in the public bundle by design; restrict them to
+      # machinemal.eu in each provider's dashboard.
+      - name: Create .env.production
+        run: |
+          cat > .env.production <<EOF
+          VITE_API_URL=https://machinemal.eu/api
+          VITE_RAPIDAPI_KEY=${{ secrets.VITE_RAPIDAPI_KEY }}
+          VITE_UNSPLASH_ACCESS_KEY=${{ secrets.VITE_UNSPLASH_ACCESS_KEY }}
+          VITE_YOUTUBE_API_KEY=${{ secrets.VITE_YOUTUBE_API_KEY }}
+          VITE_WEATHER_API_KEY=${{ secrets.VITE_WEATHER_API_KEY }}
+          VITE_EMAILJS_SERVICE_ID=${{ secrets.EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID=${{ secrets.EMAILJS_TEMPLATE_ID }}
+          VITE_EMAILJS_PUBLIC_KEY=${{ secrets.EMAILJS_PUBLIC_KEY }}
+          EOF
+
+      - name: Build
+        run: |
+          npm ci --no-audit --no-fund
+          npm run build:azure   # plain `vite build` (the `build` script is Windows-only)
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SERVER_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H "${{ secrets.SERVER_HOST }}" >> ~/.ssh/known_hosts
+
+      - name: Upload site
+        run: |
+          rsync -az --delete -e "ssh -i ~/.ssh/deploy_key" \
+            dist/ "deploy@${{ secrets.SERVER_HOST }}:/var/www/machinemal/"
