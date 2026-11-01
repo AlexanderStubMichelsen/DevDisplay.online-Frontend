@@ -1,135 +1,28 @@
-import React, { useState, useEffect, useRef, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
-import { motion } from "framer-motion";
-import { useLocation } from "react-router-dom";
 import "../../css/modules/NavBar.css";
 import apiFacade from "../../util/api/UserFacade.js";
 
-const STICKMAN_X_STORAGE_KEY = "navStickmanX";
-
 function NavBar() {
-  const location = useLocation();
   const [expanded, setExpanded] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   const [showSignup, setShowSignup] = useState(false); // Added missing state
-  const [stickX, setStickX] = useState(() => {
-    const saved = Number.parseFloat(sessionStorage.getItem(STICKMAN_X_STORAGE_KEY));
-    return Number.isFinite(saved) ? saved : null;
-  });
-  const [isRunning, setIsRunning] = useState(false);
-  const [moveDuration, setMoveDuration] = useState(0.45);
   const [loginDataForm, setLoginDataForm] = useState({
     email: "",
     password: "",
   });
-  const navRef = useRef(null);
-  const previousXRef = useRef(stickX);
-  const hasPlacedStickRef = useRef(stickX != null);
-  const runTimeoutRef = useRef(null);
   const [signupData, setSignupData] = useState({ // Added missing state
     name: "",
     email: "",
     password: "",
   });
-
-  const getActiveNavKey = useCallback(
-    (pathname) => {
-      if (pathname === "/") return "home";
-      if (pathname.startsWith("/images")) return "images";
-      if (pathname.startsWith("/saved")) return "saved";
-      if (
-        isLoggedIn &&
-        (
-          pathname.startsWith("/userpage") ||
-          pathname.startsWith("/changepassword") ||
-          pathname.startsWith("/deleteuser")
-        )
-      ) {
-        return "account";
-      }
-      if (pathname.startsWith("/about")) return "about";
-      if (pathname.startsWith("/contact")) return "contact";
-      if (pathname.startsWith("/help")) return "help";
-      return null;
-    },
-    [isLoggedIn]
-  );
-
-  const getActiveElement = useCallback((activeKey, navElement) => {
-    if (!navElement || !activeKey) return null;
-
-    if (activeKey === "account") {
-      return navElement.querySelector("#dropdown-basic");
-    }
-
-    const routeByKey = {
-      home: "/",
-      images: "/images",
-      saved: "/saved",
-      about: "/about",
-      contact: "/contact",
-      help: "/help",
-    };
-
-    const route = routeByKey[activeKey];
-    if (!route) return null;
-
-    // Match both exact and absolute href variants in production.
-    const links = Array.from(navElement.querySelectorAll("a[href]"));
-    return (
-      links.find((el) => {
-        const href = el.getAttribute("href") || "";
-        return href === route || href.endsWith(route);
-      }) || null
-    );
-  }, []);
-
-  const syncStickmanPosition = useCallback(() => {
-    const activeKey = getActiveNavKey(location.pathname);
-    const navElement = navRef.current;
-    const activeElement = getActiveElement(activeKey, navElement);
-
-    if (!navElement || !activeElement) {
-      return;
-    }
-
-    const navRect = navElement.getBoundingClientRect();
-    const linkRect = activeElement.getBoundingClientRect();
-    const x = linkRect.left - navRect.left + linkRect.width / 2 - 13;
-
-    const nextX = Math.max(0, x);
-    if (!hasPlacedStickRef.current) {
-      // Place instantly on first render so it doesn't fly in from the left edge.
-      hasPlacedStickRef.current = true;
-      previousXRef.current = nextX;
-      setStickX(nextX);
-      return;
-    }
-
-    const currentX = previousXRef.current == null ? nextX : previousXRef.current;
-    const distance = Math.abs(nextX - currentX);
-    if (distance >= 2) {
-      const duration = Math.min(1.1, Math.max(0.55, distance / 260));
-      setMoveDuration(duration);
-      setIsRunning(true);
-      if (runTimeoutRef.current) {
-        clearTimeout(runTimeoutRef.current);
-      }
-      runTimeoutRef.current = setTimeout(() => {
-        setIsRunning(false);
-      }, duration * 1000 + 280);
-    }
-
-    previousXRef.current = nextX;
-    setStickX(nextX);
-  }, [getActiveElement, getActiveNavKey, location.pathname]);
 
   const checkLoginStatus = () => {
     const storedUser = JSON.parse(sessionStorage.getItem("loginData"));
@@ -158,28 +51,6 @@ function NavBar() {
     return () => {
       window.removeEventListener("storage", handleStorageChange);
       window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
-
-  useEffect(() => {
-    const frame = requestAnimationFrame(syncStickmanPosition);
-    window.addEventListener("resize", syncStickmanPosition);
-    return () => {
-      cancelAnimationFrame(frame);
-      window.removeEventListener("resize", syncStickmanPosition);
-    };
-  }, [syncStickmanPosition]);
-
-  useEffect(() => {
-    if (stickX == null) return;
-    sessionStorage.setItem(STICKMAN_X_STORAGE_KEY, String(stickX));
-  }, [stickX]);
-
-  useEffect(() => {
-    return () => {
-      if (runTimeoutRef.current) {
-        clearTimeout(runTimeoutRef.current);
-      }
     };
   }, []);
 
@@ -288,7 +159,7 @@ function NavBar() {
           id="responsive-navbar-nav"
           className="justify-content-end"
         >
-          <Nav ref={navRef} className="ml-auto nav-links-track">
+          <Nav className="ml-auto">
             <LinkContainer to="/" onClick={() => setExpanded(false)}>
               <Nav.Link>Home</Nav.Link>
             </LinkContainer>
@@ -338,40 +209,6 @@ function NavBar() {
               <Nav.Link onClick={() => setShowLogin(true)}>Login</Nav.Link>
             )}
 
-            {stickX != null && (
-              <motion.div
-                className={`nav-stickman ${isRunning ? "running" : "sitting"}`}
-                initial={false}
-                animate={
-                  isRunning
-                    ? {
-                        x: stickX,
-                        y: [0, -10, 0],
-                        rotate: [0, -6, 6, 0],
-                      }
-                    : {
-                        x: stickX,
-                        y: 2,
-                        rotate: 4,
-                      }
-                }
-                transition={{
-                  x: { type: "tween", ease: "easeInOut", duration: moveDuration },
-                  y: { duration: 0.6, ease: "easeInOut" },
-                  rotate: { duration: 0.6, ease: "easeInOut" },
-                }}
-                aria-hidden="true"
-              >
-                <svg viewBox="0 0 24 24" role="img">
-                  <circle cx="12" cy="4" r="2.5" />
-                  <line x1="12" y1="7" x2="12" y2="14" />
-                  <line className="arm arm-left" x1="12" y1="9" x2="8" y2="12" />
-                  <line className="arm arm-right" x1="12" y1="9" x2="16" y2="12" />
-                  <line className="leg leg-left" x1="12" y1="14" x2="8.5" y2="20" />
-                  <line className="leg leg-right" x1="12" y1="14" x2="15.5" y2="20" />
-                </svg>
-              </motion.div>
-            )}
           </Nav>
         </Navbar.Collapse>
       </Navbar>
@@ -440,6 +277,7 @@ function NavBar() {
                 name="name"
                 placeholder="Name"
                 autoComplete="name"
+                maxLength={100}
                 value={signupData.name}
                 onChange={(e) =>
                   setSignupData({
@@ -452,8 +290,9 @@ function NavBar() {
               <input
                 type="email"
                 name="email"
-                placeholder="Email (Does not have to be valid)"
+                placeholder="Email"
                 autoComplete="email"
+                maxLength={100}
                 value={signupData.email}
                 onChange={(e) =>
                   setSignupData({
@@ -466,8 +305,10 @@ function NavBar() {
               <input
                 type="password"
                 name="password"
-                placeholder="Password"
+                placeholder="Password (at least 8 characters)"
                 autoComplete="new-password"
+                minLength={8}
+                maxLength={72}
                 value={signupData.password}
                 onChange={(e) =>
                   setSignupData({
