@@ -30,6 +30,10 @@ const ChangePassword = () => {
       setMessage("Passwords do not match.");
       return;
     }
+    if (newPassword.length < 8) {
+      setMessage("The new password must be at least 8 characters.");
+      return;
+    }
     try {
       await apiFacade.changePassword({
         oldPassword,
@@ -41,7 +45,8 @@ const ChangePassword = () => {
       setRePassword("");
     } catch (error) {
       console.error("Update Password Error:", error);
-      setMessage("Failed to update password.");
+      // The API explains what was wrong (e.g. old password incorrect)
+      setMessage(error.message || "Failed to update password.");
     }
   };
 
@@ -100,8 +105,12 @@ const ChangePassword = () => {
                   value={newPassword}
                   onChange={(e) => setNewPassword(e.target.value)}
                   className="form-control"
+                  minLength={8}
+                  maxLength={72}
+                  aria-describedby="newPasswordHint"
                   required
                 />
+                <small id="newPasswordHint" className="form-text">At least 8 characters.</small>
               </div>
               <div className="form-group">
                 <label htmlFor="rePassword">Re-enter New Password:</label>

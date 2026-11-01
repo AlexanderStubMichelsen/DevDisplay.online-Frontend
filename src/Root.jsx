@@ -6,9 +6,7 @@ import {
   createRoutesFromElements,
   Route,
   Outlet,
-  useLocation,
 } from "react-router-dom";
-import { motion, AnimatePresence } from "framer-motion";
 import App from "./App.jsx";
 import BackgroundLoop from "./components/modules/BackgroundLoop.jsx";
 import flowersLoop from "./assets/flowersloop.mp4";
@@ -27,40 +25,29 @@ import Contact from "./components/pages/Contact.jsx"; // Import Contact componen
 import CookieConsent from "./components/modules/CookieConsent.jsx";
 import CookiePolicy from "./components/pages/CookiePolicy.jsx";
 
-const PageTransitionLayout = () => {
-  const location = useLocation();
+// Shared layout: looping background video behind every page
+const PageLayout = () => (
+  <div style={{ position: "relative", minHeight: "100vh", overflowX: "hidden" }}>
+    <BackgroundLoop
+      src={flowersLoop}
+      className="video-bg"
+      showOverlay
+      overlayOpacity={0.3}
+      zIndex={0}
+      position="fixed"
+    />
+    <main style={{ position: "relative", zIndex: 1 }}>
+      <Outlet />
+    </main>
+    <CookieConsent />
+  </div>
+);
 
-  return (
-    <div style={{ position: "relative", minHeight: "100vh", overflowX: "hidden" }}>
-      <BackgroundLoop
-        src={flowersLoop}
-        className="video-bg"
-        showOverlay
-        overlayOpacity={0.3}
-        zIndex={0}
-        position="fixed"
-      />
-      <AnimatePresence mode="wait" initial={true}>
-        <motion.main
-          key={`${location.pathname}${location.search}${location.hash}`}
-          initial={{ opacity: 0, y: 18, scale: 0.99 }}
-          animate={{ opacity: 1, y: 0, scale: 1 }}
-          exit={{ opacity: 0, y: -10, scale: 0.995 }}
-          transition={{ duration: 0.45, ease: "easeOut" }}
-          style={{ position: "relative", zIndex: 1 }}
-        >
-          <Outlet />
-        </motion.main>
-      </AnimatePresence>
-      <CookieConsent />
-    </div>
-  );
-};
-
-const Root = () => {
-  const router = createBrowserRouter(
+// Created once at module load; creating it inside the component would rebuild
+// the whole router (and reset navigation state) whenever Root re-rendered.
+const router = createBrowserRouter(
     createRoutesFromElements(
-      <Route element={<PageTransitionLayout />}>
+      <Route element={<PageLayout />}>
         <Route path="/" element={<App />} />
         <Route path="images" element={<Images />} />
         <Route path="youtube" element={<Youtube />} />
@@ -79,7 +66,6 @@ const Root = () => {
     )
   );
 
-  return <RouterProvider router={router} />;
-};
+const Root = () => <RouterProvider router={router} />;
 
 export default Root;
