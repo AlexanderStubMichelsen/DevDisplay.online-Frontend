@@ -16,8 +16,8 @@ function Help() {
           content="Discover how to navigate DevDisplay and use its features effectively."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devdisplay.online/help" />
-        <meta property="og:image" content="https://devdisplay.online/og/help-page.jpg" />
+        <meta property="og:url" content="https://machinemal.eu/help" />
+        <meta property="og:image" content="https://machinemal.eu/og/help-page.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
@@ -26,7 +26,7 @@ function Help() {
           name="twitter:description"
           content="Discover how to navigate DevDisplay and use its features effectively."
         />
-        <meta name="twitter:image" content="https://devdisplay.online/og/help-page.jpg" />
+        <meta name="twitter:image" content="https://machinemal.eu/og/help-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />
@@ -112,7 +112,7 @@ function Help() {
               <p className="help-description">
                 Visit{" "}
                 <a
-                  href="https://skraafoto.devdisplay.online"
+                  href="https://skraafoto.machinemal.eu"
                   className="help-link"
                   target="_blank"
                   rel="noopener noreferrer"

@@ -60,7 +60,7 @@ const ChangePassword = () => {
           content="Update your DevDisplay account password securely."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devdisplay.online/changepassword" />
+        <meta property="og:url" content="https://machinemal.eu/changepassword" />
         <meta
           property="og:image"
           content="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&h=630&q=80"

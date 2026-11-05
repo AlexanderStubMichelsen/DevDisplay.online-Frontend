@@ -22,8 +22,8 @@ const About = () => {
           content="Learn about DevDisplay's mission and the developer behind the showcase."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devdisplay.online/about" />
-        <meta property="og:image" content="https://devdisplay.online/og/about-page.jpg" />
+        <meta property="og:url" content="https://machinemal.eu/about" />
+        <meta property="og:image" content="https://machinemal.eu/og/about-page.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
@@ -32,7 +32,7 @@ const About = () => {
           name="twitter:description"
           content="Learn about DevDisplay's mission and the developer behind the showcase."
         />
-        <meta name="twitter:image" content="https://devdisplay.online/og/about-page.jpg" />
+        <meta name="twitter:image" content="https://machinemal.eu/og/about-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
       </Helmet>
       <NavBar />

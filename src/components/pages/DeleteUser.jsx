@@ -52,7 +52,7 @@ const DeleteUser = () => {
           content="Permanently remove your DevDisplay user account."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devdisplay.online/deleteuser" />
+        <meta property="og:url" content="https://machinemal.eu/deleteuser" />
         <meta
           property="og:image"
           content="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&h=630&q=80"

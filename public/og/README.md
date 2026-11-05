@@ -13,5 +13,5 @@ Suggested filenames used in the app:
 
 Notes:
 - Keep under ~1MB; JPG is recommended.
-- Use absolute URLs in meta tags (production domain): https://devdisplay.online/og/<file>.
+- Use absolute URLs in meta tags (production domain): https://machinemal.eu/og/<file>.
 - Many crawlers don’t execute JavaScript; index.html includes a default fallback.

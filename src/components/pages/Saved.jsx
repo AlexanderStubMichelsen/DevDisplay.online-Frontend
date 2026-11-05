@@ -107,7 +107,7 @@ const SavedImages = () => {
           content="View and manage images you've saved on DevDisplay."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devdisplay.online/saved" />
+        <meta property="og:url" content="https://machinemal.eu/saved" />
         <meta
           property="og:image"
           content="https://images.unsplash.com/photo-1517817748490-0bfa04a8a8a4?auto=format&fit=crop&w=1200&h=630&q=80"

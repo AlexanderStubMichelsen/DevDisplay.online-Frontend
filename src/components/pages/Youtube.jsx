@@ -83,8 +83,8 @@ function Youtube() {
           content="Find and watch YouTube videos directly through DevDisplay's search interface."
         />
         <meta property="og:type" content="website" />
-        <meta property="og:url" content="https://devdisplay.online/youtube" />
-        <meta property="og:image" content="https://devdisplay.online/og/youtube-page.jpg" />
+        <meta property="og:url" content="https://machinemal.eu/youtube" />
+        <meta property="og:image" content="https://machinemal.eu/og/youtube-page.jpg" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
@@ -93,7 +93,7 @@ function Youtube() {
           name="twitter:description"
           content="Find and watch YouTube videos directly through DevDisplay's search interface."
         />
-        <meta name="twitter:image" content="https://devdisplay.online/og/youtube-page.jpg" />
+        <meta name="twitter:image" content="https://machinemal.eu/og/youtube-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" /> */}
       </Helmet>
       <NavBar />
