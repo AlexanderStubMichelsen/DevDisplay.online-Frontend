@@ -10,11 +10,11 @@ const NoMatch = () => {
   return (
     <>
       <Helmet>
-        <title>Page Not Found | DevDisplay</title>
-        <meta property="og:title" content="Page Not Found | DevDisplay" />
+        <title>Page Not Found | MachineMal</title>
+        <meta property="og:title" content="Page Not Found | MachineMal" />
         <meta
           property="og:description"
-          content="The page you're looking for doesn't exist. Find your way back to DevDisplay's main sections."
+          content="The page you're looking for doesn't exist. Find your way back to MachineMal's main sections."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/404" />
@@ -22,10 +22,10 @@ const NoMatch = () => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:title" content="Page Not Found | DevDisplay" />
+        <meta name="twitter:title" content="Page Not Found | MachineMal" />
         <meta
           name="twitter:description"
-          content="The page you're looking for doesn't exist. Find your way back to DevDisplay's main sections."
+          content="The page you're looking for doesn't exist. Find your way back to MachineMal's main sections."
         />
         <meta name="twitter:image" content="https://machinemal.eu/og/404-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />

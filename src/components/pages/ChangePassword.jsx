@@ -53,11 +53,11 @@ const ChangePassword = () => {
   return (
     <>
       <Helmet>
-        <title>Change Password | DevDisplay</title>
-        <meta property="og:title" content="Change Password | DevDisplay" />
+        <title>Change Password | MachineMal</title>
+        <meta property="og:title" content="Change Password | MachineMal" />
         <meta
           property="og:description"
-          content="Update your DevDisplay account password securely."
+          content="Update your MachineMal account password securely."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/changepassword" />
@@ -65,10 +65,10 @@ const ChangePassword = () => {
           property="og:image"
           content="https://images.unsplash.com/photo-1607746882042-944635dfe10e?auto=format&fit=crop&w=1200&h=630&q=80"
         />
-        <meta name="twitter:title" content="Change Password | DevDisplay" />
+        <meta name="twitter:title" content="Change Password | MachineMal" />
         <meta
           name="twitter:description"
-          content="Update your DevDisplay account password securely."
+          content="Update your MachineMal account password securely."
         />
         <meta
           name="twitter:image"

@@ -100,11 +100,11 @@ const SavedImages = () => {
   return (
     <>
       <Helmet>
-        <title>Saved Images | DevDisplay</title>
-        <meta property="og:title" content="Saved Images | DevDisplay" />
+        <title>Saved Images | MachineMal</title>
+        <meta property="og:title" content="Saved Images | MachineMal" />
         <meta
           property="og:description"
-          content="View and manage images you've saved on DevDisplay."
+          content="View and manage images you've saved on MachineMal."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/saved" />
@@ -112,10 +112,10 @@ const SavedImages = () => {
           property="og:image"
           content="https://images.unsplash.com/photo-1517817748490-0bfa04a8a8a4?auto=format&fit=crop&w=1200&h=630&q=80"
         />
-        <meta name="twitter:title" content="Saved Images | DevDisplay" />
+        <meta name="twitter:title" content="Saved Images | MachineMal" />
         <meta
           name="twitter:description"
-          content="View and manage images you've saved on DevDisplay."
+          content="View and manage images you've saved on MachineMal."
         />
         <meta
           name="twitter:image"

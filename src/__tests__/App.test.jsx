@@ -28,7 +28,7 @@ describe('App component', () => {
     );
 
     // ✅ Use getAllByText and check the first one (navbar)
-    expect(screen.getAllByText(/DevDisplay/i)[0]).toBeInTheDocument();
+    expect(screen.getAllByText(/MachineMal/i)[0]).toBeInTheDocument();
   });
 
   test('renders Sign Up button if not logged in', () => {

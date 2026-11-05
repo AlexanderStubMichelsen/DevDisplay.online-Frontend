@@ -26,7 +26,7 @@ const CookieConsent = () => {
       <div className="cookie-consent__content">
         <p className="cookie-consent__title">Cookies and local storage</p>
         <p className="cookie-consent__text">
-          DevDisplay uses necessary browser storage for login, navigation, and guest saved images.
+          MachineMal uses necessary browser storage for login, navigation, and guest saved images.
           The images feature can use a guest cookie so saved images stay tied to this browser.
         </p>
 

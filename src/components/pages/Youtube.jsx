@@ -76,11 +76,11 @@ function Youtube() {
   return (
     <>
       <Helmet>
-        {/* <title>YouTube Search | DevDisplay</title>
-        <meta property="og:title" content="YouTube Search | DevDisplay" />
+        {/* <title>YouTube Search | MachineMal</title>
+        <meta property="og:title" content="YouTube Search | MachineMal" />
         <meta
           property="og:description"
-          content="Find and watch YouTube videos directly through DevDisplay's search interface."
+          content="Find and watch YouTube videos directly through MachineMal's search interface."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/youtube" />
@@ -88,10 +88,10 @@ function Youtube() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:title" content="YouTube Search | DevDisplay" />
+        <meta name="twitter:title" content="YouTube Search | MachineMal" />
         <meta
           name="twitter:description"
-          content="Find and watch YouTube videos directly through DevDisplay's search interface."
+          content="Find and watch YouTube videos directly through MachineMal's search interface."
         />
         <meta name="twitter:image" content="https://machinemal.eu/og/youtube-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" /> */}

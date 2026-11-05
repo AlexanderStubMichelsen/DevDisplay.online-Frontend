@@ -9,10 +9,10 @@ const CookiePolicy = () => {
   return (
     <>
       <Helmet>
-        <title>Cookie Policy | DevDisplay</title>
+        <title>Cookie Policy | MachineMal</title>
         <meta
           name="description"
-          content="Cookie and browser storage policy for DevDisplay."
+          content="Cookie and browser storage policy for MachineMal."
         />
       </Helmet>
 
@@ -22,12 +22,12 @@ const CookiePolicy = () => {
           <section className="cookie-policy__panel">
             <h1>Cookie Policy</h1>
             <p className="cookie-policy__intro">
-              This page explains how DevDisplay uses cookies and browser storage to keep the site working.
+              This page explains how MachineMal uses cookies and browser storage to keep the site working.
             </p>
 
             <h2>Necessary Storage</h2>
             <p>
-              DevDisplay uses necessary browser storage for login state, navigation state, and saved-image features.
+              MachineMal uses necessary browser storage for login state, navigation state, and saved-image features.
               These items support core site behavior and are not used for advertising.
             </p>
 
@@ -40,7 +40,7 @@ const CookiePolicy = () => {
 
             <h2>Session Storage</h2>
             <p>
-              When you log in, DevDisplay stores login information in session storage so authenticated requests can
+              When you log in, MachineMal stores login information in session storage so authenticated requests can
               include your access token. The navigation also stores a small visual position value for the active link.
             </p>
 

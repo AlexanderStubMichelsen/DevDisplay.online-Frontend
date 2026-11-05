@@ -15,11 +15,11 @@ const About = () => {
   return (
     <>
       <Helmet>
-        <title>About DevDisplay | Developer Showcase Overview</title>
-        <meta property="og:title" content="About DevDisplay | Developer Showcase Overview" />
+        <title>About MachineMal | Developer Showcase Overview</title>
+        <meta property="og:title" content="About MachineMal | Developer Showcase Overview" />
         <meta
           property="og:description"
-          content="Learn about DevDisplay's mission and the developer behind the showcase."
+          content="Learn about MachineMal's mission and the developer behind the showcase."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/about" />
@@ -27,10 +27,10 @@ const About = () => {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:title" content="About DevDisplay | Developer Showcase Overview" />
+        <meta name="twitter:title" content="About MachineMal | Developer Showcase Overview" />
         <meta
           name="twitter:description"
-          content="Learn about DevDisplay's mission and the developer behind the showcase."
+          content="Learn about MachineMal's mission and the developer behind the showcase."
         />
         <meta name="twitter:image" content="https://machinemal.eu/og/about-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />

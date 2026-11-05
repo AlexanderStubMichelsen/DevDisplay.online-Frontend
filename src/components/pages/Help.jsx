@@ -9,11 +9,11 @@ function Help() {
   return (
     <>
       <Helmet>
-        <title>Help & User Guide | DevDisplay</title>
-        <meta property="og:title" content="Help & User Guide | DevDisplay" />
+        <title>Help & User Guide | MachineMal</title>
+        <meta property="og:title" content="Help & User Guide | MachineMal" />
         <meta
           property="og:description"
-          content="Discover how to navigate DevDisplay and use its features effectively."
+          content="Discover how to navigate MachineMal and use its features effectively."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/help" />
@@ -21,10 +21,10 @@ function Help() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:title" content="Help & User Guide | DevDisplay" />
+        <meta name="twitter:title" content="Help & User Guide | MachineMal" />
         <meta
           name="twitter:description"
-          content="Discover how to navigate DevDisplay and use its features effectively."
+          content="Discover how to navigate MachineMal and use its features effectively."
         />
         <meta name="twitter:image" content="https://machinemal.eu/og/help-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />
@@ -35,7 +35,7 @@ function Help() {
           <div className="text-container">
             <h1 className="help-title">Help & User Guide</h1>
             <p className="help-description">
-               Welcome to DevDisplay! Search capabilities for images{/* and videos*/}. 
+               Welcome to MachineMal! Search capabilities for images{/* and videos*/}. 
               content.
             </p>
 
@@ -141,7 +141,7 @@ function Help() {
                   className="help-link"
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="View DevDisplay source code on GitHub"
+                  aria-label="View MachineMal source code on GitHub"
                 >
                   project on GitHub
                 </a>

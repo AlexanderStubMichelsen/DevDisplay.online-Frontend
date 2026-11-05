@@ -45,11 +45,11 @@ const DeleteUser = () => {
   return (
     <>
       <Helmet>
-        <title>Delete Account | DevDisplay</title>
-        <meta property="og:title" content="Delete Account | DevDisplay" />
+        <title>Delete Account | MachineMal</title>
+        <meta property="og:title" content="Delete Account | MachineMal" />
         <meta
           property="og:description"
-          content="Permanently remove your DevDisplay user account."
+          content="Permanently remove your MachineMal user account."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/deleteuser" />
@@ -57,10 +57,10 @@ const DeleteUser = () => {
           property="og:image"
           content="https://images.unsplash.com/photo-1521791136064-7986c2920216?auto=format&fit=crop&w=1200&h=630&q=80"
         />
-        <meta name="twitter:title" content="Delete Account | DevDisplay" />
+        <meta name="twitter:title" content="Delete Account | MachineMal" />
         <meta
           name="twitter:description"
-          content="Permanently remove your DevDisplay user account."
+          content="Permanently remove your MachineMal user account."
         />
         <meta
           name="twitter:image"

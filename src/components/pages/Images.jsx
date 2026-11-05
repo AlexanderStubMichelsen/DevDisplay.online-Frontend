@@ -94,11 +94,11 @@ function Images() {
   return (
     <>
       <Helmet>
-        <title>Image Search | DevDisplay</title>
-        <meta property="og:title" content="Image Search | DevDisplay" />
+        <title>Image Search | MachineMal</title>
+        <meta property="og:title" content="Image Search | MachineMal" />
         <meta
           property="og:description"
-          content="Search high-quality images powered by Unsplash on DevDisplay."
+          content="Search high-quality images powered by Unsplash on MachineMal."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/images" />
@@ -106,10 +106,10 @@ function Images() {
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
         <meta property="og:image:type" content="image/jpeg" />
-        <meta name="twitter:title" content="Image Search | DevDisplay" />
+        <meta name="twitter:title" content="Image Search | MachineMal" />
         <meta
           name="twitter:description"
-          content="Search high-quality images powered by Unsplash on DevDisplay."
+          content="Search high-quality images powered by Unsplash on MachineMal."
         />
         <meta name="twitter:image" content="https://machinemal.eu/og/images-page.jpg" />
         <meta name="twitter:card" content="summary_large_image" />

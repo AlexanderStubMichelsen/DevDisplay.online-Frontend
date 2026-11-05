@@ -64,11 +64,11 @@ const UserPage = () => {
   return (
     <>
       <Helmet>
-        <title>User Dashboard | DevDisplay</title>
-        <meta property="og:title" content="User Dashboard | DevDisplay" />
+        <title>User Dashboard | MachineMal</title>
+        <meta property="og:title" content="User Dashboard | MachineMal" />
         <meta
           property="og:description"
-          content="Manage your DevDisplay profile and account settings."
+          content="Manage your MachineMal profile and account settings."
         />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://machinemal.eu/userpage" />
@@ -76,10 +76,10 @@ const UserPage = () => {
           property="og:image"
           content="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1200&h=630&q=80"
         />
-        <meta name="twitter:title" content="User Dashboard | DevDisplay" />
+        <meta name="twitter:title" content="User Dashboard | MachineMal" />
         <meta
           name="twitter:description"
-          content="Manage your DevDisplay profile and account settings."
+          content="Manage your MachineMal profile and account settings."
         />
         <meta
           name="twitter:image"

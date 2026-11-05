@@ -10,7 +10,7 @@ const Footer = () => {
           <h4 className="footer-heading">About</h4>
           <p className="footer-text">
             <strong>
-              {/* <a href="/" className="footer-link">DevDisplay.online</a> */}
+              {/* <a href="/" className="footer-link">MachineMal</a> */}
             </strong>{" "}
           </p>
           <p className="footer-text"> <br/>a corner of the internet<br/> </p>
@@ -166,7 +166,7 @@ const Footer = () => {
       </div>
 
       <div className="footer-bottom">
-        <p>© {new Date().getFullYear()} DevDisplay.online. Built by Alexander Stub Michelsen.</p>
+        <p>© {new Date().getFullYear()} MachineMal. Built by Alexander Stub Michelsen.</p>
       </div>
     </footer>
   );
