@@ -163,6 +163,27 @@ const Footer = () => {
             <li><a href="/privacy" className="footer-link">Privacy</a></li>
           </ul>
         </div> */}
+        <div className="footer-section footer-connect">
+          <h4 className="footer-heading">Android Apps</h4>
+          <ul className="footer-list">
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/Tetris/releases/latest/download/Tetris.apk"
+                className="footer-link"
+              >
+                Tetris (download APK)
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://github.com/AlexanderStubMichelsen/ONotes/releases/latest/download/ONotes.apk"
+                className="footer-link"
+              >
+                ONotes (download APK)
+              </a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       <div className="footer-bottom">
